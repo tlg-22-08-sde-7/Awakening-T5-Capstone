@@ -17,7 +17,7 @@ class UI {
                 "you get up and start trying to find a way out.\n");
     }
     public static void splashScreen() throws IOException {
-        String welcome = Files.readString(Path.of("resources/banner"));
+        String welcome = Files.readString(Path.of("resources/banner.txt"));
         System.out.println(welcome);
     }
 
