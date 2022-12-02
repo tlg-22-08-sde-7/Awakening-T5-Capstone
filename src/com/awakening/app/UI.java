@@ -1,5 +1,9 @@
 package com.awakening.app;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 class UI {
     public void displayGameInfo() {
         System.out.println("You wake up on the floor in a dark place. \n" +
@@ -12,8 +16,14 @@ class UI {
         System.out.println("Not wanting to be here any longer,\n" +
                 "you get up and start trying to find a way out.\n");
     }
+    public static void splashScreen() throws IOException {
+        String welcome = Files.readString(Path.of("resources/banner"));
+        System.out.println(welcome);
+    }
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws IOException {
+        UI ui = new UI();
+        ui.splashScreen();
+        ui.displayGameInfo();
     }
 }
