@@ -11,13 +11,11 @@ public class Game {
     }
 
     public void initGame(){
-
-            String level = "1";
             boolean quit = false;
             while (!quit) {
-                String selectLevel = prompter.prompt("Do you want to play Awakening? [Y/N]");
+                String playGame = prompter.prompt("Do you want to play Awakening? [Y/N]");
                 System.out.println();
-                switch (selectLevel) {
+                switch (playGame) {
                     case ("Y"):
                         startGame();
                         quit = true;
