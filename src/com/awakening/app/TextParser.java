@@ -24,9 +24,9 @@ public class TextParser {
         else if (result.size() == 2) {
             verb = result.get(0);
             noun = result.get(1);
-            if (!allowedCommands.contains(verb)) {
-                return new ArrayList<String>();
-            }
+//            if (!allowedCommands.contains(verb)) {
+//                return new ArrayList<String>();
+//            }
         }
         return result;
     }
