@@ -16,8 +16,18 @@ class UI {
         System.out.println("Not wanting to be here any longer,\n" +
                 "you get up and start trying to find a way out.\n");
     }
+    public void displayGamePlayOptions() {
+        System.out.println("Your gameplay options are:\n" +
+                "'map' to display an ascii map of the game\n" +
+                "'look' to examine the room's contents,\n" +
+                "'move (north, south, east, west)' to move to a room *if a room is in that direction,\n" +
+                "'get' an item,\n" +
+                "'use' an item,\n" +
+                "'quit' to exit the game\n");
+
+    }
     public static void splashScreen() throws IOException {
-        String welcome = Files.readString(Path.of("resources/banner.txt"));
+        String welcome = Files.readString(Path.of("resources/ASCII/banner.txt"));
         System.out.println(welcome);
     }
 
