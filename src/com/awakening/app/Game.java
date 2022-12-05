@@ -19,30 +19,38 @@ public class Game {
 
     public void initGame() throws IOException {
         boolean gameOver = false;
+        boolean gameStart = false;
 
         ui.splashScreen();
 
+        //TODO:  Hency - check with team if ok to remove these commented lines of code
+        //String playGame = prompter.prompt("Do you want to play Awakening? [Y/N]").toLowerCase();
+        // The purpose her is to capture correct/incorrect responses and manage them accordingly
+//        if (!"y".equals(playGame)) {
+//            gameOver = true;
+//        }
 
-        String playGame = prompter.prompt("Do you want to play Awakening? [Y/N]").toLowerCase();
-
-        if (!"y".equals(playGame)) {
-            gameOver = true;
+        while (!gameStart){
+            String playGame = prompter.prompt("Do you want to play Awakening? [Y/N]").toLowerCase().trim();
+            switch (playGame) {
+                case ("y"): case("yes"):
+                    //startGame(); TODO: Hency check with team if ok to remove this line.
+                    gameStart = true;
+                    break;
+                case ("n"): case("no"):
+                    gameOver = true;
+                    gameStart = true;
+                    break;
+                default:
+                    System.out.println("Invalid input, please provide [Y] for Yes, [N] for No.");
+                    System.out.println();
+            }
+            //This is to add a line, with the intention of spacing out the text fields of U/I and game text
+            System.out.println();
         }
-        //                System.out.println();
-//
-//                switch (playGame) {
-//                    case ("Y"):
-//                        startGame();
-//                        gameOver = true;
-//                        break;
-//                    case ("N"):
-//                        quitGame();
-//                        gameOver = true;
-//                        break;
-//                    default:
-//                        System.out.println("Invalid input, please provide [Y] for Yes, [N] for No.");
-//                        System.out.println();
-//                }
+
+
+
 
         while (!gameOver) {
             ui.displayGameInfo();
