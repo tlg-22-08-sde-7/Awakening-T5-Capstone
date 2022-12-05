@@ -1,0 +1,15 @@
+{
+  "items":{
+    "Front Door Key":"Key to the front door. Hopefully now I can get out of here.",
+    "Batteries":"Old batteries... Hope they have some juice left.",
+    "Patient File":"You read the file... Patient is Jessica Smith. Held for mental health examination. Room 103. Door code is ####. The rest is illegible. Maybe her room willl have an answer?",
+    "Bandages":"Old Bandages... Hope I won't have to use these.",
+    "Press Pass":"This belonged to Jessica S... The picture is of me? I'm Jessica? I need to get out of here.",
+    "Paper Clip":"Paper clip. All I need to open simple locks... How do I know this?",
+    "Camera":"My camera. No pictures on it. I use its light to see around me. Hope it doesn't run out of batteries..."
+  },
+  "story": {
+    "start text": "You wake up on the floor in a dark place. You feel disoriented  and  cannot recall how you got here. As you look around, you see a few rays light filtering through an opening."
+  }
+
+}
