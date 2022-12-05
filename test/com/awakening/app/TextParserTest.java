@@ -14,7 +14,7 @@ public class TextParserTest {
     }
 
     @Test
-    public void parseInput() {
+    public void parseInput_should_split_words_when_valid_input() {
         String example = "Go west";
 
         String[] expected = { "Go", "west"};
