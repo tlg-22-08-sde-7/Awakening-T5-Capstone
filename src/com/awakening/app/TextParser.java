@@ -1,10 +1,7 @@
 package com.awakening.app;
 
 public class TextParser {
-
-    public String[] parseInput(String input) {
-        String[] result = input.split(" ");
-
-        return result;
+    public String parseInput(String response) {
+        return response;
     }
 }
