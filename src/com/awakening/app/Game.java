@@ -55,6 +55,7 @@ public class Game {
 
         while (!gameOver) {
             ui.displayGameInfo();
+            ui.displayGamePlayOptions();
             String response = prompter.prompt("What do you want to do?");
             List<String> move = textParser.parseInput(response);
             if ("quit".equals(move.indexOf(0))) {
