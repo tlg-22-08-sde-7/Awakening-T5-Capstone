@@ -9,11 +9,8 @@ public class Main {
 
         Game game = new Game();
 
-        try {
-            game.initGame();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        game.initGame();
+
 
     }
 }
