@@ -3,6 +3,7 @@ package com.awakening.app;
 import com.apps.util.Prompter;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -47,8 +48,8 @@ public class Game {
         while (!gameOver) {
             ui.displayGameInfo();
             String response = prompter.prompt("What do you want to do?");
-            String move = textParser.parseInput(response);
-            if ("quit".equals(move)) {
+            List<String> move = textParser.parseInput(response);
+            if ("quit".equals(move.indexOf(0))) {
                 gameOver = true;
             }
             else {
