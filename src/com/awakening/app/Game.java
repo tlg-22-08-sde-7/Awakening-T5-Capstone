@@ -1,6 +1,7 @@
 package com.awakening.app;
 
 import com.apps.util.Prompter;
+import com.awakening.app.game.Player;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,12 +14,13 @@ public class Game {
     private static final Prompter prompter = new Prompter(new Scanner(System.in));
     private UI ui = new UI();
     private TextParser textParser = new TextParser();
+    private Player player = new Player();
 
 
     public Game() {
     }
 
-    public void initGame() throws IOException {
+    public void initGame() {
         boolean gameOver = false;
         boolean gameStart = false;
 
@@ -54,18 +56,17 @@ public class Game {
 
 
         while (!gameOver) {
-            ui.displayGameInfo();
+            ui.displayGameInfo(player);
             ui.displayGamePlayOptions();
             String response = prompter.prompt("What do you want to do?");
             List<String> move = textParser.parseInput(response);
-            if ("quit".equals(move.indexOf(0))) {
+            if ("quit".equals(move.get(0))) {
                 gameOver = true;
             }
             else {
                 // something else
             }
         }
-
     }
 
     private void startGame() {
