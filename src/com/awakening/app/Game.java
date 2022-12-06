@@ -67,7 +67,6 @@ public class Game {
                 // something else
             }
         }
-
     }
 
     private void startGame() {
