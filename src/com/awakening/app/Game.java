@@ -27,12 +27,6 @@ public class Game {
 
         ui.splashScreen();
 
-        //TODO:  Hency - check with team if ok to remove these commented lines of code
-        //String playGame = prompter.prompt("Do you want to play Awakening? [Y/N]").toLowerCase();
-        // The purpose her is to capture correct/incorrect responses and manage them accordingly
-//        if (!"y".equals(playGame)) {
-//            gameOver = true;
-//        }
 
         while (!gameStart){
             String playGame = prompter.prompt("Do you want to play Awakening? [Y/N]").toLowerCase().trim();
@@ -77,9 +71,7 @@ public class Game {
                         break;
 
                 }
-//                if(!"n".equals(confirmation)){
-//                gameOver = true;
-//                }
+
             }
             else {
                 // something else
