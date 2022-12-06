@@ -6,14 +6,13 @@ package com.awakening.app.game;
 // Importing input output classes
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 // Main class
-class GFG {
+public class GSON {
 
     // Main driver method
     public static void main(String[] args)
@@ -26,7 +25,7 @@ class GFG {
         Gson roomGson = new GsonBuilder().setPrettyPrinting().create();
         Room rm = createRoomObject();
 
-        Room roomArr[] ;
+
 
         String json = gson.toJson(rm);
 
@@ -37,10 +36,20 @@ class GFG {
             e.printStackTrace();
         }
 
+        //create an array of JSON objects
+
+        List<Room> rooms = new ArrayList<>();
+
         //read JSON from a file
         try(Reader reader = new FileReader("resources/JSON/rooms.json")){
-           Room rm2 = gson.fromJson(reader, Room.class);
-            System.out.println(rm2);
+
+            Room room = gson.fromJson(reader, Room.class);
+//          for(Room room : rm2) {
+//              System.out.println(room.getName());
+//              System.out.println(room.getDescription());
+//          }
+
+            System.out.println(room);
         } catch (IOException e){
             e.printStackTrace();
         }
