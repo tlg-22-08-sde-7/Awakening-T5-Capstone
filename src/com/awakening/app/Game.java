@@ -68,9 +68,18 @@ public class Game {
             List<String> move = textParser.parseInput(response);
             if ("quit".equals(move.get(0))) {
                 confirmation = prompter.prompt("Are you sure? [Y/N]").toLowerCase().trim();
-                if(!"n".equals(confirmation)){
-                gameOver = true;
+                switch (confirmation){
+                    case ("y"): case ("yes"):
+                        gameOver = true;
+                        break;
+
+                    case ("n"): case("no"):
+                        break;
+
                 }
+//                if(!"n".equals(confirmation)){
+//                gameOver = true;
+//                }
             }
             else {
                 // something else
