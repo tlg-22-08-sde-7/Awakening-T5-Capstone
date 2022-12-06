@@ -23,24 +23,24 @@ public class Game {
     public void initGame() {
         boolean gameOver = false;
         boolean gameStart = false;
+        String confirmation;
 
         ui.splashScreen();
 
-        //TODO:  Hency - check with team if ok to remove these commented lines of code
-        //String playGame = prompter.prompt("Do you want to play Awakening? [Y/N]").toLowerCase();
-        // The purpose her is to capture correct/incorrect responses and manage them accordingly
-//        if (!"y".equals(playGame)) {
-//            gameOver = true;
-//        }
 
         while (!gameStart){
             String playGame = prompter.prompt("Do you want to play Awakening? [Y/N]").toLowerCase().trim();
+
+
             switch (playGame) {
                 case ("y"): case("yes"):
-                    //startGame(); TODO: Hency check with team if ok to remove this line.
                     gameStart = true;
                     break;
                 case ("n"): case("no"):
+                    confirmation = prompter.prompt("Are you sure? [Y/N]").toLowerCase().trim();
+                    if(!"y".equals(confirmation)){
+                        break;
+                    }
                     gameOver = true;
                     gameStart = true;
                     break;
@@ -61,7 +61,17 @@ public class Game {
             String response = prompter.prompt("What do you want to do?");
             List<String> move = textParser.parseInput(response);
             if ("quit".equals(move.get(0))) {
-                gameOver = true;
+                confirmation = prompter.prompt("Are you sure? [Y/N]").toLowerCase().trim();
+                switch (confirmation){
+                    case ("y"): case ("yes"):
+                        gameOver = true;
+                        break;
+
+                    case ("n"): case("no"):
+                        break;
+
+                }
+
             }
             else {
                 // something else
