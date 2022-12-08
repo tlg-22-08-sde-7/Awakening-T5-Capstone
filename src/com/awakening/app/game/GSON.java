@@ -82,6 +82,16 @@ public class GSON {
             e.printStackTrace();
         }
 
+        //GENERATE item
+        Item item = new Item();
+        try (Reader reader = new FileReader("resources/JSON/Items.json")) {
+            item = new Gson().fromJson(reader, Item.class);
+            Item2.CellPhone cellPhone = item.getCellPhone();
+            System.out.println(cellPhone.getName());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 }

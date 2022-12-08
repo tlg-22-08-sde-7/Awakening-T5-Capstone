@@ -1,0 +1,74 @@
+{
+  "camera": {
+    "name": "Camera",
+    "description": "My camera. No pictures on it. I use its light to see around me. Hope it doesn't run out of batteries...Ω",
+    "startLocation": "Basement",
+    "specialItemFlag": "false",
+    "charge": "50",
+    "attackPoints": "75"
+  },
+  "cellPhone": {
+    "name": "Cellphone",
+    "description": "Dead phone, needs charge.",
+    "startLocation": "Basement",
+    "specialItemFlag": "false",
+    "charge": "0",
+    "attackPoints": "20"
+  },
+  "frontDoorKey": {
+    "name": "Frond Door Key",
+    "description": "Key to the front door. Hopefully now I can get out of here.",
+    "startLocation": "Side Table",
+    "specialItemFlag": "true",
+    "charge": "0",
+    "attackPoints": "0"
+  },
+  "journal": {
+    "name": "Journal",
+    "description": "This is my journal... I read it and remember going to the hospital to confront the doctor... About what though?",
+    "startLocation": "",
+    "specialItemFlag": "false",
+    "charge": "0",
+    "attackPoints": "0"
+  },
+  "batteries": {
+    "name": "Batteries",
+    "description": "Old batteries... Hope they have some juice left.",
+    "startLocation": "Desk",
+    "specialItemFlag": "false",
+    "charge": "100",
+    "attackPoints": "0"
+  },
+  "patientFile": {
+    "name": "Patient File",
+    "description": "You read the file... Patient is Jessica Smith. Held for mental health examination. Room 103. Door code is ####. The rest is illegible. Maybe her room will have an answer?",
+    "startLocation": "Filing Cabinet",
+    "specialItemFlag": "false",
+    "charge": "0",
+    "attackPoints": "0"
+  },
+  "bandages": {
+    "name": "Bandages",
+    "description": "Old Bandages... Hope I won't have to use these.",
+    "startLocation": "Emergency Room",
+    "specialItemFlag": "false",
+    "charge": "0",
+    "attackPoints": "0"
+  },
+  "pressPass": {
+    "name": "Press Pass",
+    "description": "This belonged to Jessica S... The picture is of me? I'm Jessica? I need to get out of here.",
+    "startLocation": "Side Table",
+    "specialItemFlag": "false",
+    "charge": "0",
+    "attackPoints": "0"
+  },
+  "paperClip": {
+    "name": "Paper Clip",
+    "description": "Paper clip. All I need to open simple locks... How do I know this?",
+    "startLocation": "Desk",
+    "specialItemFlag": "true",
+    "charge": "0",
+    "attackPoints": "0"
+  }
+}
