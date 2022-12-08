@@ -5,6 +5,17 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TextParser {
+    private List<String> allowedCommands = new ArrayList<>(Arrays.asList("go", "get", "look", "quit"));
+
+    public List<String> getAllowedCommands() {
+        return allowedCommands;
+    }
+
+    public List<String> getAllowedNouns() {
+        return allowedNouns;
+    }
+
+    private List<String> allowedNouns = new ArrayList<>(Arrays.asList("map", "north", "south", "east", "west"));
 
     public List<String> parseInput(String input) {
         List<String> result = new ArrayList<>(Arrays.asList(input.toLowerCase().split(" ")));
@@ -12,8 +23,6 @@ public class TextParser {
 
         String verb = result.get(0);
         String noun;
-        List<String> allowedCommands = new ArrayList<>(Arrays.asList("go", "get", "look", "quit"));
-        List<String> allowedNouns = new ArrayList<>(Arrays.asList("map", "north", "south", "east", "west", "game"));
 
         if (result.size() == 1 && "quit".equals(verb)) {
             return result;
