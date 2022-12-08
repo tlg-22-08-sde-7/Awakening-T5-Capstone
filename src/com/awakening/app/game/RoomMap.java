@@ -95,7 +95,7 @@ public class RoomMap {
         this.patientRoom = patientRoom;
     }
 
-    private static class RoomLayout {
+    public static class RoomLayout {
         private String name;
         private Directions directions;
         private String description;
@@ -145,7 +145,7 @@ public class RoomMap {
             this.items = items;
         }
 
-        private static class Directions {
+        public static class Directions {
             private String north;
             private String south;
             private String east;

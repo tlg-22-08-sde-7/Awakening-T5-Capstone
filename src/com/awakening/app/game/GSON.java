@@ -21,33 +21,33 @@ public class GSON {
         //read JSON from a file
 
         //GENERATE ITEM LIST
-        try (Reader reader = new FileReader("resources/JSON/items.json")) {
-            Map<String, String> itemMap = null;
-            itemMap = new Gson().fromJson(reader, Map.class);
-            for (Map.Entry<String, String> entry : itemMap.entrySet()) {
-                System.out.println(entry.getKey() + "=" + entry.getValue());
-
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println("\n");
-        System.out.println("\n");
+//        try (Reader reader = new FileReader("resources/JSON/items.json")) {
+//            Map<String, String> itemMap = null;
+//            itemMap = new Gson().fromJson(reader, Map.class);
+//            for (Map.Entry<String, String> entry : itemMap.entrySet()) {
+//                System.out.println(entry.getKey() + "=" + entry.getValue());
+//
+//            }
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println("\n");
+//        System.out.println("\n");
 
         //GENERATE ROOM LIST
-        ArrayList<Room> roomList = null;
-        try (Reader reader = new FileReader("resources/JSON/roomsList.json")) {
-
-            roomList = new Gson().fromJson(reader, new TypeToken<List<Room>>() {
-            }.getType());
-            roomList.forEach(System.out::println);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println("\n");
-        System.out.println("\n");
+//        ArrayList<Room> roomList = null;
+//        try (Reader reader = new FileReader("resources/JSON/roomsList.json")) {
+//
+//            roomList = new Gson().fromJson(reader, new TypeToken<List<Room>>() {
+//            }.getType());
+//            roomList.forEach(System.out::println);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println("\n");
+//        System.out.println("\n");
 
         //GENERATE ROOMMAP
         RoomMap roomMap = new RoomMap();
@@ -58,8 +58,6 @@ public class GSON {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 }
 

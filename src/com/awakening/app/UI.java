@@ -1,16 +1,18 @@
 package com.awakening.app;
 
 import com.awakening.app.game.Player;
+import com.awakening.app.game.Room;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+
 class UI {
     public void displayGameInfo(Player player) {
-        System.out.println("You are in the basement.");
-        System.out.println("Your items are [camera, batteries]");
-        System.out.println("You can go [East, North, South]");
+        System.out.println("You are in the " + player.getCurrentRoom().getName() + ".");
+        System.out.println("Your items are " + player.getInventory());
+        System.out.println("You can go South: " + player.getCurrentRoom().getDirections().getSouth());
     }
     public void displayGamePlayOptions() {
         System.out.println("Your gameplay options are:\n" +
@@ -31,4 +33,16 @@ class UI {
             e.printStackTrace();
         }
     }
+
+    public void loadRooms(String locations) {
+        
+    }
+
+    public static void main(String[] args) {
+        UI ui = new UI();
+
+
+        ui.loadRooms("Basement");
+    }
+
 }
