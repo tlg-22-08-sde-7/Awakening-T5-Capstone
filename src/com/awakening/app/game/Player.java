@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Player {
     private String name = "";
-    private Room currentRoom;
+    private RoomMap.RoomLayout currentRoom;
     private List<Item> inventory = new ArrayList<>();
 
 
@@ -13,11 +13,11 @@ public class Player {
         inventory.add(item);
     }
 
-    public Room getCurrentRoom() {
+    public RoomMap.RoomLayout getCurrentRoom() {
         return currentRoom;
     }
 
-    public void setCurrentRoom(Room currentRoom) {
+    public void setCurrentRoom(RoomMap.RoomLayout currentRoom) {
         this.currentRoom = currentRoom;
     }
 

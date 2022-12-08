@@ -2,8 +2,14 @@ package com.awakening.app;
 
 import com.apps.util.Prompter;
 import com.awakening.app.game.Player;
+import com.awakening.app.game.Room;
+import com.awakening.app.game.RoomMap;
+import com.google.gson.Gson;
 
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -11,11 +17,12 @@ import java.util.Scanner;
 //Class that will control gameplay
 public class Game {
 
+    public static RoomMap world;
+    public static Player player = new Player();
     private static final Prompter prompter = new Prompter(new Scanner(System.in));
     private UI ui = new UI();
     private TextParser textParser = new TextParser();
-    private Player player = new Player();
-
+    private List<Room> rooms = new ArrayList<>();
 
     public Game() {
     }
@@ -52,8 +59,7 @@ public class Game {
             System.out.println();
         }
 
-
-
+        generateWorld();
 
         while (!gameOver) {
             ui.displayGameInfo(player);
@@ -76,6 +82,15 @@ public class Game {
             else {
                 // something else
             }
+        }
+    }
+
+    private void generateWorld() {
+        try (Reader reader = new FileReader("resources/JSON/roomsListNew.json")) {
+            world = new Gson().fromJson(reader, RoomMap.class);
+            player.setCurrentRoom(world.getBasement());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
