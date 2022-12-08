@@ -20,7 +20,7 @@ public class GSON {
         //create an array of JSON objects
         //read JSON from a file
 
-        //GENERATE ITEM LIST
+//        //GENERATE ITEM LIST
 //        try (Reader reader = new FileReader("resources/JSON/items.json")) {
 //            Map<String, String> itemMap = null;
 //            itemMap = new Gson().fromJson(reader, Map.class);
@@ -32,22 +32,22 @@ public class GSON {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
-//        System.out.println("\n");
-//        System.out.println("\n");
+        System.out.println("\n");
+        System.out.println("\n");
 
         //GENERATE ROOM LIST
-//        ArrayList<Room> roomList = null;
-//        try (Reader reader = new FileReader("resources/JSON/roomsList.json")) {
-//
-//            roomList = new Gson().fromJson(reader, new TypeToken<List<Room>>() {
-//            }.getType());
-//            roomList.forEach(System.out::println);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println("\n");
-//        System.out.println("\n");
+        ArrayList<Room> roomList = null;
+        try (Reader reader = new FileReader("resources/JSON/roomsList.json")) {
+
+            roomList = new Gson().fromJson(reader, new TypeToken<List<Room>>() {
+            }.getType());
+            roomList.forEach(System.out::println);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("\n");
+        System.out.println("\n");
 
         //GENERATE ROOMMAP
         RoomMap roomMap = new RoomMap();
@@ -58,6 +58,20 @@ public class GSON {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("\n");
+        System.out.println("\n");
+
+        //GENERATE GAME TEXT
+        GameText gameText = new GameText();
+        try (Reader reader = new FileReader("resources/JSON/GameText.json")) {
+            gameText = new Gson().fromJson(reader, GameText.class);
+            GameText.BasementText basement = gameText.getBasementText();
+            System.out.println(basement.getText());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }
 
