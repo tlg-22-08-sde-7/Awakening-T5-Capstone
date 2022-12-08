@@ -2,6 +2,8 @@ package com.awakening.app;
 
 import com.awakening.app.game.Player;
 import com.awakening.app.game.Room;
+import com.awakening.app.TextParser;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,12 +18,9 @@ class UI {
     }
     public void displayGamePlayOptions() {
         System.out.println("Your gameplay options are:\n" +
-                "'map' to display an ascii map of the game\n" +
-                "'look' to examine the room's contents,\n" +
-                "'move (north, south, east, west)' to move to a room *if a room is in that direction,\n" +
-                "'get' an item,\n" +
-                "'use' an item,\n" +
-                "'quit' to exit the game\n");
+                "A two two word command is expected: 'verb + noun'\n" +
+                "Verb: [go, get, look, use, quit]\n" +
+                "Noun: [north, south, east, west, map]\n");
 
     }
     public static void splashScreen() {
