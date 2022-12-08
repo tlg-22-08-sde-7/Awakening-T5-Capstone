@@ -1,15 +1,26 @@
 {
-  "items":{
-    "Front Door Key":"Key to the front door. Hopefully now I can get out of here.",
-    "Batteries":"Old batteries... Hope they have some juice left.",
-    "Patient File":"You read the file... Patient is Jessica Smith. Held for mental health examination. Room 103. Door code is ####. The rest is illegible. Maybe her room willl have an answer?",
-    "Bandages":"Old Bandages... Hope I won't have to use these.",
-    "Press Pass":"This belonged to Jessica S... The picture is of me? I'm Jessica? I need to get out of here.",
-    "Paper Clip":"Paper clip. All I need to open simple locks... How do I know this?",
-    "Camera":"My camera. No pictures on it. I use its light to see around me. Hope it doesn't run out of batteries..."
-  },
-  "story": {
-    "start text": "You wake up on the floor in a dark place. You feel disoriented  and  cannot recall how you got here. As you look around, you see a few rays light filtering through an opening."
+    "startText" : {
+        "text": "You wake up on the floor in a dark place. You feel disoriented  and  cannot recall how you got here. As you look around, you see a few rays light filtering through an opening."
+    },
+    "morgueText" : {
+        "text": "The room is pitch dark, except for a ray of light that filters through some opening. It is difficult to tell where the light is coming from, but it allows you to see  outlines of shapes. Next to you you observe two rectangular items. Your hand hovers over the one nearest to you."
+    },
+    "officeText" : {
+        "text": "You enter an office. Mostly empty besides a couple of supplies on a desk."
+    },
+    "frontDeskText" : {
+        "text" : "You get to the front desk area. The front door catches your eye. All the windows are boarded up."
+    },
+    "emergencyRoomText" : {
+        "text" : "You enter the emergency room. Everything is mostly stripped away besides a couple of supplies on the floor."
+    },
+    "patientRoomText" : {
+        "text":"You enter a medium size room, it contains a bed, some health monitoring equipment and a side table."
+    },
+    "hallwayText" : {
+        "text": "You are in a hallway, there are several doors, all are locked, however you notice that one of the doors is different. This door has a mechanical keypad; you need a combination in order to open this door."
+    },
+    "basementText" : {
+        "text" : "You enter the room, it feels colder in here. There are a few items scattered around the room: rusted surgical equipment on a tray, an operating table, old dirty gowns and towels. You notice 10 large cabinet door in the far wall, and a locked filing cabinet by the corner of the room."
+    }
   }
-
-}
