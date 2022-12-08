@@ -36,18 +36,18 @@ public class GSON {
 //        System.out.println("\n");
 
         //GENERATE ROOM LIST
-//        ArrayList<Room> roomList = null;
-//        try (Reader reader = new FileReader("resources/JSON/roomsList.json")) {
-//
-//            roomList = new Gson().fromJson(reader, new TypeToken<List<Room>>() {
-//            }.getType());
-//            roomList.forEach(System.out::println);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println("\n");
-//        System.out.println("\n");
+        ArrayList<Room> roomList = null;
+        try (Reader reader = new FileReader("resources/JSON/roomsList.json")) {
+
+            roomList = new Gson().fromJson(reader, new TypeToken<List<Room>>() {
+            }.getType());
+            roomList.forEach(System.out::println);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("\n");
+        System.out.println("\n");
 
         //GENERATE ROOMMAP
         RoomMap roomMap = new RoomMap();
@@ -55,6 +55,17 @@ public class GSON {
             roomMap = new Gson().fromJson(reader, RoomMap.class);
             RoomMap.Basement basement = roomMap.getBasement();
             System.out.println(basement.getName());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        //GENERATE item
+        Item item = new Item();
+        try (Reader reader = new FileReader("resources/JSON/Items.json")) {
+            item = new Gson().fromJson(reader, Item.class);
+            Item2.CellPhone cellPhone = item.getCellPhone();
+            System.out.println(cellPhone.getName());
         } catch (IOException e) {
             e.printStackTrace();
         }
