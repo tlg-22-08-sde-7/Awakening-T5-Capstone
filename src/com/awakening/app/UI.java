@@ -2,6 +2,8 @@ package com.awakening.app;
 
 import com.awakening.app.game.Player;
 import com.awakening.app.game.Room;
+import com.awakening.app.TextParser;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,6 +11,7 @@ import java.nio.file.Path;
 
 
 class UI {
+    private TextParser textParser = new TextParser();
     public void displayGameInfo(Player player) {
         System.out.println("You are in the " + player.getCurrentRoom().getName() + ".");
         System.out.println("Your items are " + player.getInventory());
@@ -16,12 +19,9 @@ class UI {
     }
     public void displayGamePlayOptions() {
         System.out.println("Your gameplay options are:\n" +
-                "'map' to display an ascii map of the game\n" +
-                "'look' to examine the room's contents,\n" +
-                "'move (north, south, east, west)' to move to a room *if a room is in that direction,\n" +
-                "'get' an item,\n" +
-                "'use' an item,\n" +
-                "'quit' to exit the game\n");
+                "A two two word command is expected: 'Verb + Noun'\n" +
+                "Verb:" + textParser.getAllowedCommands() +
+                "\nNoun:" + textParser.getAllowedNouns());
 
     }
     public static void splashScreen() {

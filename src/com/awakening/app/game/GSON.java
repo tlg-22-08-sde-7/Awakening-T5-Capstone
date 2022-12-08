@@ -20,7 +20,7 @@ public class GSON {
         //create an array of JSON objects
         //read JSON from a file
 
-        //GENERATE ITEM LIST
+//        //GENERATE ITEM LIST
 //        try (Reader reader = new FileReader("resources/JSON/items.json")) {
 //            Map<String, String> itemMap = null;
 //            itemMap = new Gson().fromJson(reader, Map.class);
@@ -32,8 +32,8 @@ public class GSON {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
-//        System.out.println("\n");
-//        System.out.println("\n");
+        System.out.println("\n");
+        System.out.println("\n");
 
         //GENERATE ROOM LIST
         ArrayList<Room> roomList = null;
@@ -58,17 +58,31 @@ public class GSON {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("\n");
+        System.out.println("\n");
 
-
-        //GENERATE item
-        Item item = new Item();
-        try (Reader reader = new FileReader("resources/JSON/Items.json")) {
-            item = new Gson().fromJson(reader, Item.class);
-            Item2.CellPhone cellPhone = item.getCellPhone();
-            System.out.println(cellPhone.getName());
+        //GENERATE GAME TEXT
+        GameText gameText = new GameText();
+        try (Reader reader = new FileReader("resources/JSON/GameText.json")) {
+            gameText = new Gson().fromJson(reader, GameText.class);
+            GameText.BasementText basement = gameText.getBasementText();
+            System.out.println(basement.getText());
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("\n");
+
+        //GENERATE NPC TEXT
+        NPC npc = new NPC();
+        try (Reader reader = new FileReader("resources/JSON/NPC.json")) {
+            npc = new Gson().fromJson(reader, NPC.class);
+            NPC.Ghost1 ghost1 = npc.getGhost1();
+            System.out.println(ghost1.getAttack());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }
 

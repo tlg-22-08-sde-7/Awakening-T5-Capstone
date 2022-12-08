@@ -35,17 +35,19 @@ public class Game {
         ui.splashScreen();
 
 
-        while (!gameStart){
+        while (!gameStart) {
             String playGame = prompter.prompt("Do you want to play Awakening? [Y/N]").toLowerCase().trim();
 
 
             switch (playGame) {
-                case ("y"): case("yes"):
+                case ("y"):
+                case ("yes"):
                     gameStart = true;
                     break;
-                case ("n"): case("no"):
+                case ("n"):
+                case ("no"):
                     confirmation = prompter.prompt("Are you sure? [Y/N]").toLowerCase().trim();
-                    if(!"y".equals(confirmation)){
+                    if (!"y".equals(confirmation)) {
                         break;
                     }
                     gameOver = true;
@@ -64,22 +66,28 @@ public class Game {
         while (!gameOver) {
             ui.displayGameInfo(player);
             ui.displayGamePlayOptions();
+
             String response = prompter.prompt("What do you want to do?");
             List<String> move = textParser.parseInput(response);
+            while ("invalid".equals(move.get(0))) {
+                response = prompter.prompt("What do you want to do?");
+                move = textParser.parseInput(response);
+            }
+
             if ("quit".equals(move.get(0))) {
                 confirmation = prompter.prompt("Are you sure? [Y/N]").toLowerCase().trim();
-                switch (confirmation){
-                    case ("y"): case ("yes"):
+                switch (confirmation) {
+                    case ("y"):
+                    case ("yes"):
                         gameOver = true;
                         break;
 
-                    case ("n"): case("no"):
+                    case ("n"):
+                    case ("no"):
                         break;
-
                 }
 
-            }
-            else {
+            } else {
                 // something else
             }
         }
