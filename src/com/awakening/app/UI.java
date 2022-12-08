@@ -11,6 +11,7 @@ import java.nio.file.Path;
 
 
 class UI {
+    private TextParser textParser = new TextParser();
     public void displayGameInfo(Player player) {
         System.out.println("You are in the " + player.getCurrentRoom().getName() + ".");
         System.out.println("Your items are " + player.getInventory());
@@ -24,9 +25,9 @@ class UI {
     }
     public void displayGamePlayOptions() {
         System.out.println("Your gameplay options are:\n" +
-                "A two two word command is expected: 'verb + noun'\n" +
-                "Verb: [go, get, look, use, quit]\n" +
-                "Noun: [north, south, east, west, map]\n");
+                "A two two word command is expected: 'Verb + Noun'\n" +
+                "Verb:" + textParser.getAllowedCommands() +
+                "\nNoun:" + textParser.getAllowedNouns());
 
     }
     public static void splashScreen() {

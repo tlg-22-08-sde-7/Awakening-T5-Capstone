@@ -70,6 +70,17 @@ public class GSON {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("\n");
+
+        //GENERATE NPC TEXT
+        NPC npc = new NPC();
+        try (Reader reader = new FileReader("resources/JSON/NPC.json")) {
+            npc = new Gson().fromJson(reader, NPC.class);
+            NPC.Ghost1 ghost1 = npc.getGhost1();
+            System.out.println(ghost1.getAttack());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }
