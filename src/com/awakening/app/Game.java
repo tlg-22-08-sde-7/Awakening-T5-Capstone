@@ -41,6 +41,8 @@ public class Game {
             switch (playGame) {
                 case ("y"):
                 case ("yes"):
+                    System.out.println();
+                    ui.displayGamePlayOptions();
                     gameStart = true;
                     break;
                 case ("n"):
