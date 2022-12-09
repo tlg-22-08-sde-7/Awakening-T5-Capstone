@@ -1,5 +1,6 @@
 package com.awakening.app.game;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class RoomMap {
@@ -95,9 +96,36 @@ public class RoomMap {
         this.patientRoom = patientRoom;
     }
 
+    public RoomLayout getRoom(String name) {
+        switch (name) {
+            case "Basement":
+                return basement;
+            case "Morgue":
+                return morgue;
+            case "Filing Cabinet":
+                return filingCabinet;
+            case "Emergency Room":
+                return emergencyRoom;
+            case "Office":
+                return office;
+            case "Desk":
+                return desk;
+            case "Front Desk":
+                return frontDesk;
+            case "Hallway":
+                return hallway;
+            case "Keypad":
+                return keypad;
+            case "Patient Room":
+                return patientRoom;
+            default:
+                return null;
+        }
+    }
+
     public static class RoomLayout {
         private String name;
-        private Directions directions;
+        private HashMap<String, String> directions;
         private String description;
         private boolean isLocked;
         private List<String> items;
@@ -113,12 +141,8 @@ public class RoomMap {
             this.name = name;
         }
 
-        public Directions getDirections() {
+        public HashMap<String, String> getDirections() {
             return directions;
-        }
-
-        public void setDirections(Directions directions) {
-            this.directions = directions;
         }
 
         public String getDescription() {
@@ -143,48 +167,6 @@ public class RoomMap {
 
         public void setItems(List<String> items) {
             this.items = items;
-        }
-
-        public static class Directions {
-            private String north;
-            private String south;
-            private String east;
-            private String west;
-
-            public Directions() {
-            }
-
-            public String getNorth() {
-                return north;
-            }
-
-            public void setNorth(String north) {
-                this.north = north;
-            }
-
-            public String getSouth() {
-                return south;
-            }
-
-            public void setSouth(String south) {
-                this.south = south;
-            }
-
-            public String getEast() {
-                return east;
-            }
-
-            public void setEast(String east) {
-                this.east = east;
-            }
-
-            public String getWest() {
-                return west;
-            }
-
-            public void setWest(String west) {
-                this.west = west;
-            }
         }
     }
 

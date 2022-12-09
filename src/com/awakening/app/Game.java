@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 //Class that will control gameplay
@@ -86,10 +85,36 @@ public class Game {
                     case ("no"):
                         break;
                 }
-
             } else {
-                // something else
+                executeCommand(move);
             }
+        }
+    }
+
+    private void executeCommand(List<String> move) {
+        // execute command based on verb
+        String verb = move.get(0);
+        String noun = move.get(1);
+        switch (verb) {
+            case "go":
+                move(noun);
+                break;
+
+            case "quit":
+                System.out.println("Thanks for playing!");
+                break;
+            default:
+                System.out.println("Invalid command");
+        }
+    }
+
+    private void move(String direction) {
+        RoomMap.RoomLayout currentRoom = player.getCurrentRoom();
+        RoomMap.RoomLayout nextRoom = world.getRoom(currentRoom.getDirections().get(direction));
+        if (nextRoom == null) {
+            System.out.println("You can't go that way");
+        } else {
+            player.setCurrentRoom(nextRoom);
         }
     }
 

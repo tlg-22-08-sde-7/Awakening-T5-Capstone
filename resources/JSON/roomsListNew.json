@@ -2,10 +2,7 @@
   "basement": {
     "name": "Basement",
     "directions": {
-      "north": "",
-      "south": "Morgue",
-      "east": "",
-      "west": ""
+      "south": "Morgue"
     },
     "description": "Place where the player spawns",
     "isLocked": false,
@@ -17,10 +14,8 @@
   "morgue": {
     "name": "Morgue",
     "directions": {
-      "north": "",
       "south": "Emergency Room",
-      "east": "Filing Cabinet",
-      "west": ""
+      "east": "Filing Cabinet"
     },
     "description": "Patient Records stored here",
     "isLocked": false,
@@ -30,9 +25,6 @@
   "filingCabinet": {
     "name": "Filing Cabinet",
     "directions": {
-      "north": "",
-      "south": "",
-      "east": "",
       "west": "Morgue"
     },
     "description": "Patient Records stored here",
@@ -58,8 +50,6 @@
   "office": {
     "name": "Office",
     "directions": {
-      "north": "",
-      "south": "",
       "east": "Emergency Room",
       "west": "Desk"
     },
@@ -71,10 +61,7 @@
   "desk": {
     "name": "Desk",
     "directions": {
-      "north": "",
-      "south": "",
-      "east": "Office",
-      "west": ""
+      "east": "Office"
     },
     "description": "Stuff stored here",
     "isLocked": false,
@@ -86,10 +73,7 @@
   "frontDesk": {
     "name": "Front Desk",
     "directions": {
-      "north": "Emergency Room",
-      "south": "",
-      "east": "",
-      "west": ""
+      "north": "Emergency Room"
     },
     "description": "Entrance and Exit this way",
     "isLocked": false,
@@ -98,8 +82,6 @@
   "hallway": {
     "name": "Hallway",
     "directions": {
-      "north": "",
-      "south": "",
       "east": "Key Pad",
       "west": "Hallway"
     },
@@ -110,8 +92,6 @@
   "keyPad": {
     "name": "Key Pad",
     "directions": {
-      "north": "",
-      "south": "",
       "east": "Hallway",
       "west": "Patient Room"
     },
@@ -122,9 +102,6 @@
   "patientRoom": {
     "name": "Patient Room",
     "directions": {
-      "north": "",
-      "south": "",
-      "east": "",
       "west": "Key Pad"
     },
     "description": "Patients are treated here",

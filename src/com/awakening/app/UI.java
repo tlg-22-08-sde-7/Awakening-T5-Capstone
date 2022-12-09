@@ -15,7 +15,13 @@ class UI {
     public void displayGameInfo(Player player) {
         System.out.println("You are in the " + player.getCurrentRoom().getName() + ".");
         System.out.println("Your items are " + player.getInventory());
-        System.out.println("You can go South: " + player.getCurrentRoom().getDirections().getSouth());
+        // display exits with room names
+        String exits = "Exits: \n";
+        for (String direction : player.getCurrentRoom().getDirections().keySet()) {
+            exits += direction + ": " + player.getCurrentRoom().getDirections().get(direction) + "\n";
+        }
+
+        System.out.println(exits);
     }
     public void displayGamePlayOptions() {
         System.out.println("Your gameplay options are:\n" +
