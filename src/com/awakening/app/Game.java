@@ -64,12 +64,11 @@ public class Game {
 
         while (!gameOver) {
             ui.displayGameInfo(player);
-            ui.displayGamePlayOptions();
-
-            String response = prompter.prompt("What do you want to do?");
+//            ui.displayGamePlayOptions();
+            String response = prompter.prompt("What do you want to do?\n");
             List<String> move = textParser.parseInput(response);
             while ("invalid".equals(move.get(0))) {
-                response = prompter.prompt("What do you want to do?");
+                response = prompter.prompt("What do you want to do?\n");
                 move = textParser.parseInput(response);
             }
 
@@ -85,7 +84,11 @@ public class Game {
                     case ("no"):
                         break;
                 }
-            } else {
+            }
+            else if ("help".equals(move.get(0))) {
+                ui.displayGamePlayOptions();
+            }
+            else {
                 executeCommand(move);
             }
         }
@@ -99,7 +102,6 @@ public class Game {
             case "go":
                 move(noun);
                 break;
-
             case "quit":
                 System.out.println("Thanks for playing!");
                 break;
