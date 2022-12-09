@@ -30,10 +30,10 @@ public class TextParser {
         if (result.size() == 1 && "quit".equals(verb)) {
             return result;
         } else if (result.size() != 2) {
-            System.out.println("Command not recognized. Only two word commands are recognized.\n" +
+            System.out.println("\033[31mCommand not recognized. Only two word commands are recognized.\033[0m\n" +
                     "First word must be a verb from the following list: " + allowedCommands +
                     "\nSecond word must be a noun from the following list: " + allowedNouns);
-            result.set(0, "invalid");
+            result.set(0, "\033[31minvalid\033[0m");
             return result;
         }
         if (!allowedCommands.contains(verb) || !allowedNouns.contains(result.get(1))) {
@@ -42,12 +42,12 @@ public class TextParser {
         }
         if (!allowedCommands.contains(verb)) {
             System.out.println("allowed commands are " + allowedCommands);
-            result.set(0, "invalid");
+            result.set(0, "\033[31minvalid\033[0m");
 
         }
         if (!allowedNouns.contains(result.get(1))) {
             System.out.println("allowed nouns are " + allowedNouns);
-            result.set(0, "invalid");
+            result.set(0, "\033[31minvalid\033[0m");
         }
         return result;
     }

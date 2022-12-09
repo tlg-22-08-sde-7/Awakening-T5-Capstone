@@ -53,7 +53,7 @@ public class Game {
                     gameStart = true;
                     break;
                 default:
-                    System.out.println("Invalid input, please provide [Y] for Yes, [N] for No.");
+                    System.out.println("\033[31mInvalid input, please provide [Y] for Yes, [N] for No.\033[0m");
                     System.out.println();
             }
             //This is to add a line, with the intention of spacing out the text fields of U/I and game text
@@ -67,7 +67,7 @@ public class Game {
 //            ui.displayGamePlayOptions();
             String response = prompter.prompt("What do you want to do?\n");
             List<String> move = textParser.parseInput(response);
-            while ("invalid".equals(move.get(0))) {
+            while ("\033[31minvalid\033[0m".equals(move.get(0))) {
                 response = prompter.prompt("What do you want to do?\n");
                 move = textParser.parseInput(response);
             }
@@ -106,7 +106,7 @@ public class Game {
                 System.out.println("Thanks for playing!");
                 break;
             default:
-                System.out.println("Invalid command");
+                System.out.println("\033[31mInvalid command\033[0m");
         }
     }
 
