@@ -97,6 +97,9 @@ public class RoomMap {
     }
 
     public RoomLayout getRoom(String name) {
+        if (name == null) {
+            return null;
+        }
         switch (name) {
             case "Basement":
                 return basement;
