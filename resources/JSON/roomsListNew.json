@@ -1,0 +1,114 @@
+{
+  "basement": {
+    "name": "Basement",
+    "directions": {
+      "south": "Morgue"
+    },
+    "description": "Place where the player spawns",
+    "isLocked": false,
+    "items": [
+      "Camera",
+      "Cellphone"
+    ]
+  },
+  "morgue": {
+    "name": "Morgue",
+    "directions": {
+      "south": "Emergency Room",
+      "east": "Filing Cabinet"
+    },
+    "description": "Patient Records stored here",
+    "isLocked": false,
+    "items": [
+    ]
+  },
+  "filingCabinet": {
+    "name": "Filing Cabinet",
+    "directions": {
+      "west": "Morgue"
+    },
+    "description": "Patient Records stored here",
+    "isLocked": true,
+    "items": [
+      "Patient File"
+    ]
+  },
+  "emergencyRoom": {
+    "name": "Emergency Room",
+    "directions": {
+      "north": "Morgue",
+      "south": "Front Desk",
+      "east": "Hallway",
+      "west": "Office"
+    },
+    "description": "Emergencies happen here",
+    "isLocked": false,
+    "items": [
+      "Bandages"
+    ]
+  },
+  "office": {
+    "name": "Office",
+    "directions": {
+      "east": "Emergency Room",
+      "west": "Desk"
+    },
+    "description": "Paperwork, etc.",
+    "isLocked": false,
+    "items": [
+    ]
+  },
+  "desk": {
+    "name": "Desk",
+    "directions": {
+      "east": "Office"
+    },
+    "description": "Stuff stored here",
+    "isLocked": false,
+    "items": [
+      "Paper Clips",
+      "Batteries"
+    ]
+  },
+  "frontDesk": {
+    "name": "Front Desk",
+    "directions": {
+      "north": "Emergency Room"
+    },
+    "description": "Entrance and Exit this way",
+    "isLocked": false,
+    "items": []
+  },
+  "hallway": {
+    "name": "Hallway",
+    "directions": {
+      "east": "Key Pad",
+      "west": "Hallway"
+    },
+    "description": "This way to the patient room",
+    "isLocked": false,
+    "items": []
+  },
+  "keyPad": {
+    "name": "Key Pad",
+    "directions": {
+      "east": "Hallway",
+      "west": "Patient Room"
+    },
+    "description": "You need the PIN to access the Patient Room",
+    "isLocked": true,
+    "items": []
+  },
+  "patientRoom": {
+    "name": "Patient Room",
+    "directions": {
+      "west": "Key Pad"
+    },
+    "description": "Patients are treated here",
+    "isLocked": false,
+    "items": [
+      "Press Pass",
+      "Front Door Key"
+    ]
+  }
+}
