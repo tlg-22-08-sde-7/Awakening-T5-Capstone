@@ -98,25 +98,25 @@ public class RoomMap {
 
     public RoomLayout getRoom(String name) {
         switch (name) {
-            case "basement":
+            case "Basement":
                 return basement;
-            case "morgue":
+            case "Morgue":
                 return morgue;
-            case "filingCabinet":
+            case "Filing Cabinet":
                 return filingCabinet;
-            case "emergencyRoom":
+            case "Emergency Room":
                 return emergencyRoom;
-            case "office":
+            case "Office":
                 return office;
-            case "desk":
+            case "Desk":
                 return desk;
-            case "frontDesk":
+            case "Front Desk":
                 return frontDesk;
-            case "hallway":
+            case "Hallway":
                 return hallway;
-            case "keypad":
+            case "Keypad":
                 return keypad;
-            case "patientRoom":
+            case "Patient Room":
                 return patientRoom;
             default:
                 return null;
