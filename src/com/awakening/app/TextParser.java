@@ -18,12 +18,15 @@ public class TextParser {
     private List<String> allowedNouns = new ArrayList<>(Arrays.asList("map", "north", "south", "east", "west"));
 
     public List<String> parseInput(String input) {
-        List<String> result = new ArrayList<>(Arrays.asList(input.toLowerCase().split(" ")));
+        List<String> result = new ArrayList<>(Arrays.asList(input.toLowerCase().trim().split(" ")));
 
 
         String verb = result.get(0);
         String noun;
 
+        if (result.size() == 1 && "help".equals(verb)) {
+            return result;
+        }
         if (result.size() == 1 && "quit".equals(verb)) {
             return result;
         } else if (result.size() != 2) {
@@ -32,6 +35,10 @@ public class TextParser {
                     "\nSecond word must be a noun from the following list: " + allowedNouns);
             result.set(0, "invalid");
             return result;
+        }
+        if (!allowedCommands.contains(verb) || !allowedNouns.contains(result.get(1))) {
+            System.out.print("\033[31mInvalid input, please try again. Type 'help' for a list of commands. \033[0m\n");
+//            System.out.println("Invalid input, please try again. Type 'help' for a list of commands.\n");
         }
         if (!allowedCommands.contains(verb)) {
             System.out.println("allowed commands are " + allowedCommands);
