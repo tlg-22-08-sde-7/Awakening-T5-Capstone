@@ -132,6 +132,7 @@ public class RoomMap {
         private String description;
         private boolean isLocked;
         private List<String> items;
+        private String npcName;
 
         public RoomLayout() {
         }
@@ -170,6 +171,14 @@ public class RoomMap {
 
         public void setItems(List<String> items) {
             this.items = items;
+        }
+
+        public String getNpcName() {
+            return npcName;
+        }
+
+        public void setNpcName(String npcName) {
+            this.npcName = npcName;
         }
     }
 
