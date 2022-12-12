@@ -53,8 +53,8 @@ public class GSON {
         RoomMap roomMap = new RoomMap();
         try (Reader reader = new FileReader("resources/JSON/roomsListNew.json")) {
             roomMap = new Gson().fromJson(reader, RoomMap.class);
-            RoomMap.Basement basement = roomMap.getBasement();
-            System.out.println(basement.getName());
+            RoomMap.Morgue morgue = roomMap.getMorgue();
+            System.out.println(morgue.getNpcName());
         } catch (IOException e) {
             e.printStackTrace();
         }
