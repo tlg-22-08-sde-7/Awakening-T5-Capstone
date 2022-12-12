@@ -38,6 +38,28 @@ public class NPC {
         this.ghost4 = ghost4;
     }
 
+    public String getGhost(String ghostName){
+        String ghost = null;
+
+        if (ghostName.equals(getGhost1().getName())) {
+            ghost = getGhost1().getDescription();
+        }
+        else if (ghostName.equals(getGhost2().getName())){
+            ghost = getGhost2().getDescription();
+        }
+        else if (ghostName.equals(getGhost3().getName())) {
+            ghost = getGhost3().getDescription();
+        }
+        else if (ghostName.equals(getGhost4().getName())) {
+            ghost = getGhost4().getDescription();
+        }
+        else{
+            ghost = "Name not found";
+        }
+        return ghost;
+
+    }
+
     public static class NPCLayout {
        private String name;
        private String description;
