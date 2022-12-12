@@ -1,15 +1,15 @@
 package com.awakening.app;
 
 import com.apps.util.Prompter;
-import com.awakening.app.game.Player;
-import com.awakening.app.game.Room;
-import com.awakening.app.game.RoomMap;
+import com.awakening.app.game.*;
 import com.google.gson.Gson;
+import com.google.gson.internal.bind.util.ISO8601Utils;
 import org.w3c.dom.Text;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,6 +20,7 @@ public class Game {
 
     public static RoomMap world;
     public static Player player = new Player();
+    public static NPC npc = new NPC();
     private static final Prompter prompter = new Prompter(new Scanner(System.in));
     private UI ui = new UI();
     private TextParser textParser = new TextParser();
@@ -109,6 +110,9 @@ public class Game {
             case "quit":
                 System.out.println("Thanks for playing!");
                 break;
+            case "look":
+                look(noun);
+                break;
             default:
                 System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
         }
@@ -124,10 +128,42 @@ public class Game {
         }
     }
 
+    private void look(String noun) {
+        RoomMap.RoomLayout currentRoom = player.getCurrentRoom();
+        String npcName = currentRoom.getNpcName().toString();
+
+
+        if (noun.equals("ghost")) {
+            if (npcName == null){
+                System.out.println("There is no ghost in this room");
+                return;
+            }
+            String ghostDesc = "";
+            String npcGhost = npc.getGhost(npcName);
+            ghostDesc+= npcGhost +"\n";
+            System.out.println(ui.wrapFrame(ghostDesc));
+
+        }
+        else if(noun.equals("item")) {
+            System.out.println("print list of items here");
+        }
+
+    }
+
+
     private void generateWorld() {
         try (Reader reader = new FileReader("resources/JSON/roomsListNew.json")) {
             world = new Gson().fromJson(reader, RoomMap.class);
             player.setCurrentRoom(world.getBasement());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        loadNPC();
+    }
+
+    private void loadNPC(){
+        try (Reader reader = new FileReader("resources/JSON/NPC.json")) {
+            npc = new Gson().fromJson(reader, NPC.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

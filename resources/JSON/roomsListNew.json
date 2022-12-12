@@ -9,8 +9,7 @@
     "items": [
       "Camera",
       "Cellphone"
-    ],
-    "npcName": ""
+    ]
   },
   "morgue": {
     "name": "Morgue",
@@ -33,8 +32,7 @@
     "isLocked": true,
     "items": [
       "Patient File"
-    ],
-    "npcName": ""
+    ]
   },
   "emergencyRoom": {
     "name": "Emergency Room",
@@ -60,8 +58,7 @@
     "description": "Paperwork, etc.",
     "isLocked": false,
     "items": [
-    ],
-    "npcName": ""
+    ]
   },
   "desk": {
     "name": "Desk",
@@ -73,8 +70,7 @@
     "items": [
       "Paper Clips",
       "Batteries"
-    ],
-    "npcName": ""
+    ]
   },
   "frontDesk": {
     "name": "Front Desk",
@@ -94,8 +90,7 @@
     },
     "description": "This way to the patient room",
     "isLocked": false,
-    "items": [],
-    "npcName": ""
+    "items": []
   },
   "keyPad": {
     "name": "Key Pad",
@@ -105,8 +100,7 @@
     },
     "description": "You need the PIN to access the Patient Room",
     "isLocked": true,
-    "items": [],
-    "npcName": ""
+    "items": []
   },
   "patientRoom": {
     "name": "Patient Room",

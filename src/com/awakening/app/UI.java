@@ -3,6 +3,7 @@ package com.awakening.app;
 import com.awakening.app.game.Player;
 import com.awakening.app.game.Room;
 import com.awakening.app.TextParser;
+import com.awakening.app.game.RoomMap;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
@@ -16,6 +17,9 @@ class UI {
         String infoText = "";
         infoText += "You are in the " + player.getCurrentRoom().getName() + ".\n";
         infoText += "Your items are " + player.getInventory() + ".\n";
+        if (player.getCurrentRoom().getNpcName() != null) {
+            infoText+= "There is a ghost here, their name is " + player.getCurrentRoom().getNpcName() + ".\n";
+        }
         // display exits with room names
         infoText += "Exits : " + player.getCurrentRoom().getDirections().keySet() + ".\n";
         System.out.println(wrapFrame(infoText));

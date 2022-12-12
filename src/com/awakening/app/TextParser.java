@@ -34,7 +34,7 @@ public class TextParser {
         return GREEN+allowedCommands.toString()+RESET;
     }
 
-    private List<String> allowedNouns = new ArrayList<>(Arrays.asList("map", "north", "south", "east", "west"));
+    private List<String> allowedNouns = new ArrayList<>(Arrays.asList("map", "north", "south", "east", "west", "ghost", "item"));
 
 
     public List<String> parseInput(String input) {
