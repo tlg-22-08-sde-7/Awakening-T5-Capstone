@@ -23,8 +23,8 @@ class UI {
     public void displayGamePlayOptions() {
         System.out.println("Your gameplay options are:\n" +
                 "A two word command is expected: 'Verb + Noun'\n" +
-                "Verb:" + textParser.getAllowedCommands() +
-                "\nNoun:" + textParser.getAllowedNouns());
+                "Verb:" + textParser.displayAllowedCommands() +
+                "\nNoun:" + textParser.displayAllowedNouns());
 
     }
     public static void splashScreen() {
