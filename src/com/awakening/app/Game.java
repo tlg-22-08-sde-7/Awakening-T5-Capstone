@@ -169,6 +169,9 @@ public class Game {
             itemDesc = item.getDescription();
             System.out.println(itemDesc);
         }
+        else{
+            System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
+        }
     }
 
     private void pickUp(String noun) {
