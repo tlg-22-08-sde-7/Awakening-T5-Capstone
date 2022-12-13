@@ -29,6 +29,7 @@ public class Player {
         inventory = inventory;
     }
 
+    // This will allow for the player inventory to be printed to the console/terminal
     public String printInventory() {
         String inventory = "";
 
