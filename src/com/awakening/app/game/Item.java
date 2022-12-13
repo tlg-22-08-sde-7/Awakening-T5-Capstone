@@ -33,6 +33,10 @@ public class Item {
     }
 
 
+
+
+
+
     public ItemsSetup findItem(String itemName){
         if(itemName.equals(frontDoorKey.getName())){
             return frontDoorKey;
@@ -64,10 +68,6 @@ public class Item {
         else
             return null;
     }
-
-
-
-
 
     public Item.FrontDoorKey getFrontDoorKey() {
         return frontDoorKey;

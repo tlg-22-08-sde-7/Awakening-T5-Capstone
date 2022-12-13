@@ -131,9 +131,16 @@ public class Game {
     private void pickUp(String noun) {
         RoomMap.RoomLayout currentRoom = player.getCurrentRoom();
         List itemList = player.getCurrentRoom().getItems();
-        System.out.println(itemList);
+        //System.out.println(itemList);
         int index;
-        Item item;
+        Item.ItemsSetup item = findItem(noun);
+
+        if(item == null){
+            System.out.println(noun + " is not in " + currentRoom);
+        }
+
+        player.addToInventory(item);
+
 
         for (int i = 0; i < itemList.size() ; i++) {
             if(noun.equals(itemList.get(i))){
@@ -143,19 +150,33 @@ public class Game {
             }
         }
 
-        for (int i = 0; i < roomItems.size(); i++) {
-            if (roomItems.contains(noun)){
-                int j = roomItems.indexOf(noun);
-                player.addToInventory(roomItems.get(j));
-            }
 
-        }
+
+
+
+//
+//        for (int i = 0; i < roomItems.size(); i++) {
+//            if (roomItems.contains(noun)){
+//                int j = roomItems.indexOf(noun);
+//                player.addToInventory(roomItems.get(j));
+//            }
+//
+//        }
 
 
 
 //        Item searchItem = null;
 //        player.addToInventory(roomItems.get(index));
 
+    }
+
+    private Item.ItemsSetup findItem(String noun) {
+        for(Item.ItemsSetup roomItem:roomItems){
+            if(noun.equals(roomItem.getName())){
+                return roomItem;
+            }
+        }
+        return null;
     }
 
     private void generateWorld() {

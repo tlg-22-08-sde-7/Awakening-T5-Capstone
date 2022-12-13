@@ -28,4 +28,14 @@ public class Player {
     public void setInventory(List<Item> inventory) {
         inventory = inventory;
     }
+
+    public String printInventory() {
+        String inventory = "";
+
+        for(Item.ItemsSetup item : getInventory() ){
+            inventory += item.getName() + " ";
+        }
+
+        return inventory;
+    }
 }
