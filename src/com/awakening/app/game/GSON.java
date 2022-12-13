@@ -36,18 +36,18 @@ public class GSON {
         System.out.println("\n");
 
         //GENERATE ROOM LIST
-        ArrayList<Room> roomList = null;
-        try (Reader reader = new FileReader("resources/JSON/roomsList.json")) {
-
-            roomList = new Gson().fromJson(reader, new TypeToken<List<Room>>() {
-            }.getType());
-            roomList.forEach(System.out::println);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println("\n");
-        System.out.println("\n");
+//        ArrayList<Room> roomList = null;
+//        try (Reader reader = new FileReader("resources/JSON/roomsList.json")) {
+//
+//            roomList = new Gson().fromJson(reader, new TypeToken<List<Room>>() {
+//            }.getType());
+//            roomList.forEach(System.out::println);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println("\n");
+//        System.out.println("\n");
 
         //GENERATE ROOMMAP
         RoomMap roomMap = new RoomMap();

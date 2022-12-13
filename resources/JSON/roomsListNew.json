@@ -31,7 +31,7 @@
     "description": "Patient Records stored here",
     "isLocked": true,
     "items": [
-      "Patient File"
+      "file"
     ]
   },
   "emergencyRoom": {
@@ -45,7 +45,7 @@
     "description": "Emergencies happen here",
     "isLocked": false,
     "items": [
-      "Bandages"
+      "bandages"
     ],
     "npcName": "The Wandering Spirit"
   },
@@ -68,8 +68,8 @@
     "description": "Stuff stored here",
     "isLocked": false,
     "items": [
-      "Paper Clips",
-      "Batteries"
+      "paper-clip",
+      "batteries"
     ]
   },
   "frontDesk": {
@@ -110,8 +110,8 @@
     "description": "Patients are treated here",
     "isLocked": false,
     "items": [
-      "Press Pass",
-      "Front Door Key"
+      "press-pass",
+      "key"
     ],
     "npcName": "The Lost Soul"
   }
