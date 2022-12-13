@@ -7,8 +7,8 @@
     "description": "Place where the player spawns",
     "isLocked": false,
     "items": [
-      "Camera",
-      "Cellphone"
+      "camera",
+      "cellphone"
     ]
   },
   "morgue": {

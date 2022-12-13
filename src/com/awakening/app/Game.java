@@ -1,6 +1,7 @@
 package com.awakening.app;
 
 import com.apps.util.Prompter;
+import com.awakening.app.game.Item;
 import com.awakening.app.game.Player;
 import com.awakening.app.game.Room;
 import com.awakening.app.game.RoomMap;
@@ -17,6 +18,7 @@ import java.util.Scanner;
 public class Game {
 
     public static RoomMap world;
+    public static List<Item.ItemsSetup> roomItems;
     public static Player player = new Player();
     private static final Prompter prompter = new Prompter(new Scanner(System.in));
     private UI ui = new UI();
@@ -107,6 +109,9 @@ public class Game {
             case "quit":
                 System.out.println("Thanks for playing!");
                 break;
+            case "get":
+                pickUp(noun);
+                break;
             default:
                 System.out.println("\033[31mInvalid command\033[0m");
         }
@@ -122,6 +127,37 @@ public class Game {
         }
     }
 
+
+    private void pickUp(String noun) {
+        RoomMap.RoomLayout currentRoom = player.getCurrentRoom();
+        List itemList = player.getCurrentRoom().getItems();
+        System.out.println(itemList);
+        int index;
+        Item item;
+
+        for (int i = 0; i < itemList.size() ; i++) {
+            if(noun.equals(itemList.get(i))){
+                index = i;
+                //Remove item form room
+                player.getCurrentRoom().getItems().remove(index);
+            }
+        }
+
+        for (int i = 0; i < roomItems.size(); i++) {
+            if (roomItems.contains(noun)){
+                int j = roomItems.indexOf(noun);
+                player.addToInventory(roomItems.get(j));
+            }
+
+        }
+
+
+
+//        Item searchItem = null;
+//        player.addToInventory(roomItems.get(index));
+
+    }
+
     private void generateWorld() {
         try (Reader reader = new FileReader("resources/JSON/roomsListNew.json")) {
             world = new Gson().fromJson(reader, RoomMap.class);
@@ -129,6 +165,18 @@ public class Game {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        generateItems();
+    }
+
+    private void generateItems(){
+        Item item;
+        try (Reader reader = new FileReader("resources/JSON/Items.json")) {
+            item = new Gson().fromJson(reader, Item.class);
+            roomItems = item.loadItems();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void startGame() {

@@ -14,6 +14,8 @@ class UI {
     private TextParser textParser = new TextParser();
     public void displayGameInfo(Player player) {
         System.out.println("You are in the " + player.getCurrentRoom().getName() + ".");
+        // TODO: Hency Ask team if to add this sentence
+        System.out.println("In this room you see:" + player.getCurrentRoom().getItems());
         System.out.println("Your items are " + player.getInventory());
         // display exits with room names
         String exits = "Exits: \n";

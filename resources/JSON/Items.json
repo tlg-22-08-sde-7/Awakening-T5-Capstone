@@ -1,6 +1,6 @@
 {
   "camera": {
-    "name": "Camera",
+    "name": "camera",
     "description": "My camera. No pictures on it. I use its light to see around me. Hope it doesn't run out of batteries...Ω",
     "startLocation": "Basement",
     "specialItemFlag": "false",

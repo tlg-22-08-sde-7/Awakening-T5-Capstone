@@ -15,7 +15,7 @@ public class TextParser {
         return allowedNouns;
     }
 
-    private List<String> allowedNouns = new ArrayList<>(Arrays.asList("map", "north", "south", "east", "west"));
+    private List<String> allowedNouns = new ArrayList<>(Arrays.asList("map", "north", "south", "east", "west", "camera"));
 
     public List<String> parseInput(String input) {
         List<String> result = new ArrayList<>(Arrays.asList(input.toLowerCase().trim().split(" ")));
