@@ -138,7 +138,7 @@ public class Game {
         RoomMap.RoomLayout currentRoom = player.getCurrentRoom();
         RoomMap.RoomLayout nextRoom = world.getRoom(currentRoom.getDirections().get(direction));
         if (nextRoom == null) {
-            System.out.println("You can't go that way");
+            System.out.println(TextParser.RED + "You can't go that way" + TextParser.RESET);
         } else {
             player.setCurrentRoom(nextRoom);
         }
