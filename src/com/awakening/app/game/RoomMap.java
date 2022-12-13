@@ -13,7 +13,7 @@ public class RoomMap {
     private Desk desk;
     private FrontDesk frontDesk;
     private Hallway hallway;
-    private KeyPad keypad;
+    private KeyPad keyPad;
     private PatientRoom patientRoom;
 
     public Basement getBasement() {
@@ -81,11 +81,11 @@ public class RoomMap {
     }
 
     public KeyPad getKeypad() {
-        return keypad;
+        return keyPad;
     }
 
     public void setKeypad(KeyPad keypad) {
-        this.keypad = keypad;
+        this.keyPad = keypad;
     }
 
     public PatientRoom getPatientRoom() {
@@ -117,8 +117,8 @@ public class RoomMap {
                 return frontDesk;
             case "Hallway":
                 return hallway;
-            case "Keypad":
-                return keypad;
+            case "Key Pad":
+                return keyPad;
             case "Patient Room":
                 return patientRoom;
             default:
