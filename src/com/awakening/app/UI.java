@@ -43,7 +43,7 @@ class UI {
     }
 
     public String wrapFrame(String text) {
-        // wrap text in ascci frame
+        // wrap text in ascii frame
         String formattedText = breakIntoLines(text);
         String[] lines = text.split("\\n");
         int longestLine = 0;

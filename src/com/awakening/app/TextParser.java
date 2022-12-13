@@ -27,9 +27,11 @@ public class TextParser {
         return allowedNouns;
     }
 
+    // method to print array of nouns to string and in color
     public String displayAllowedNouns() {
         return BLUE+allowedNouns.toString()+RESET;
     }
+    // method to print array of commands to string and in color
     public String displayAllowedCommands() {
         return GREEN+allowedCommands.toString()+RESET;
     }
