@@ -28,6 +28,7 @@ public class Game {
     public static Player player = new Player();
     public static NPC npc = new NPC();
     private static final Prompter prompter = new Prompter(new Scanner(System.in));
+    private List<String> approvedItems = new ArrayList<>(Arrays.asList("camera","cellphone","key","journal","batteries","file","bandages","bandages","paper-clip"));
     private UI ui = new UI();
     private TextParser textParser = new TextParser();
     private List<Room> rooms = new ArrayList<>();
@@ -121,7 +122,12 @@ public class Game {
                 look(noun);
                 break;
             case "get":
-                pickUp(noun);
+                if (approvedItems.contains(noun)){
+                    pickUp(noun);
+                }
+                else{
+                    System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
+                }
                 break;
             default:
                 System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
@@ -140,7 +146,7 @@ public class Game {
 
     private void look(String noun) {
         RoomMap.RoomLayout currentRoom = player.getCurrentRoom();
-        List<String> approvedItems = new ArrayList<>(Arrays.asList("camera","cellphone","key","journal","batteries","file","bandages","bandages","paper-clip"));
+
 
         if (noun.equals("ghost")) {
             String npcName = currentRoom.getNpcName().toString();
