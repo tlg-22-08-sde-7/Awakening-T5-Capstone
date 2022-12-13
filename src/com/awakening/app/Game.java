@@ -147,7 +147,6 @@ public class Game {
     private void look(String noun) {
         RoomMap.RoomLayout currentRoom = player.getCurrentRoom();
 
-
         if (noun.equals("ghost")) {
             String npcName = currentRoom.getNpcName().toString();
             if (npcName == null){
@@ -162,7 +161,7 @@ public class Game {
         else if (noun.equals("map")){
             ui.displayMap();
         }
-        else if(approvedItems.contains(noun)) {
+        else if(approvedItems.contains(noun) && currentRoom.getItems().contains(noun)) {
             String itemDesc = "";
             Item.ItemsSetup item = findItem(noun);
             assert item != null;
@@ -181,21 +180,22 @@ public class Game {
         int index;
         Item.ItemsSetup item = findItem(noun);
 
-        if(item == null){
+        if (item == null) {
             System.out.println(noun + " is not in " + currentRoom);
-        }
-
-        player.addToInventory(item);
-
-        for (int i = 0; i < itemList.size() ; i++) {
-            if(noun.equals(itemList.get(i))){
-                index = i;
-                //Remove item form room
-                player.getCurrentRoom().getItems().remove(index);
+        } else if (itemList.contains(noun)) {
+            player.addToInventory(item);
+            for (int i = 0; i < itemList.size(); i++) {
+                if (noun.equals(itemList.get(i))) {
+                    index = i;
+                    //Remove item form room
+                    player.getCurrentRoom().getItems().remove(index);
+                }
             }
+        } else {
+            System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
         }
-
     }
+
 
     private Item.ItemsSetup findItem(String noun) {
         for(Item.ItemsSetup roomItem:roomItems){
