@@ -54,9 +54,9 @@ public class TextParser {
         if (result.size() == 1 && "quit".equals(verb)) {
             return result;
         } else if (result.size() != 2) {
-            System.out.println(RED + "Command not recognized. Only two word commands are recognized.\n" + RESET +
-                    "First word must be a verb from the following list: " + displayAllowedCommands() +
-                    "\nSecond word must be a noun from the following list: " + displayAllowedNouns());
+            System.out.println(RED + "Command not recognized. Only two word commands are recognized.\n" + RESET); //+
+//                    "First word must be a verb from the following list: " + displayAllowedCommands() +
+//                    "\nSecond word must be a noun from the following list: " + displayAllowedNouns());
             result.set(0, "invalid");
             return result;
         }
@@ -65,12 +65,12 @@ public class TextParser {
 //            System.out.println("Invalid input, please try again. Type 'help' for a list of commands.\n");
         }
         if (!allowedCommands.contains(verb)) {
-            System.out.println("Allowed commands are " + displayAllowedCommands());
+            System.out.println(RED + "First word in command not recognized" + RESET);
             result.set(0, "invalid");
 
         }
         if (!allowedNouns.contains(result.get(1))) {
-            System.out.println("allowed nouns are " + displayAllowedNouns());
+            System.out.println(RED + "Second word in command not recognized" + RESET);
             result.set(0, "invalid");
         }
         return result;
