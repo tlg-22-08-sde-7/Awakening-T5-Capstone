@@ -86,7 +86,7 @@
     "name": "Hallway",
     "directions": {
       "east": "Key Pad",
-      "west": "Hallway"
+      "west": "Emergency Room"
     },
     "description": "This way to the patient room",
     "isLocked": false,
