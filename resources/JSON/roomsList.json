@@ -1,9 +1,0 @@
-[{"name":"Basement","directions":{"South":"Morgue"},"description":"Place where the player spawns","isLocked":false,"items":["Camera","Cellphone"]},
-{"name":"Morgue","directions":{"East":"Filing Cabinet","South":"Emergency Room"},"description":"Patient Records stored here","isLocked":false,"items":[]},
-{"name":"Filing Cabinet","directions":{"West":"Morgue"},"description":"Patient Records stored here","isLocked":true,"items":["Patient File"]},
-{"name":"Emergency Room","directions":{"North":"Morgue", "East":"Hallway", "West":"Office", "South":"Front Desk"},"description":"Emergencies happen here","isLocked":false,"items":["Bandages"]},
-{"name":"Office","directions":{ "East":"Emergency Room", "West":"Desk"},"description":"Paperwork, etc.","isLocked":false,"items":[]},
-{"name":"Desk","directions":{"East":"Office"},"description":"Stuff stored here","isLocked":false,"items":["Paper Clips", "Batteries"]},
-{"name":"Front Desk","directions":{"North":"Emergency Room"},"description":"Entrance and Exit this way","isLocked":false,"items":[]},
-{"name":"Hallway","directions":{"East":"Key Pad", "West":"Hallway"},"description":"You need the PIN to access the Patient Room","isLocked":true,"items":[]},
-{"name":"Patient Room","directions":{"West":"Key Pad"},"description":"Patients are treated here","isLocked":false,"items":["Press Pass", "Front Door Key"]}]
