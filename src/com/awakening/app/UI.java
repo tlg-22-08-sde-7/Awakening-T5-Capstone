@@ -16,8 +16,8 @@ class UI {
     public void displayGameInfo(Player player) {
         String infoText = "";
         infoText += "You are in the " + player.getCurrentRoom().getName() + ".\n";
-        infoText += "In this room you see:" + player.getCurrentRoom().getItems();
-        infoText += "Your items are: " + player.printInventory();
+        infoText += "In this room you see:" + player.getCurrentRoom().getItems() + ".\n";
+        infoText += "Your items are: " + player.printInventory() + "\n";
         if (player.getCurrentRoom().getNpcName() != null) {
             infoText+= "There is a ghost here, their name is " + player.getCurrentRoom().getNpcName() + ".\n";
         }
@@ -38,6 +38,16 @@ class UI {
             welcome = Files.readString(Path.of("resources/ASCII/banner.txt"));
             System.out.println(welcome);
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void displayMap(){
+        String map = null;
+        try{
+            map = Files.readString(Path.of("resources/ASCII/hospitalLayoutASCII.txt"));
+            System.out.println(map);
+        }catch (IOException e){
             e.printStackTrace();
         }
     }

@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -139,10 +140,10 @@ public class Game {
 
     private void look(String noun) {
         RoomMap.RoomLayout currentRoom = player.getCurrentRoom();
-        String npcName = currentRoom.getNpcName().toString();
-
+        List<String> approvedItems = new ArrayList<>(Arrays.asList("camera","cellphone","key","journal","batteries","file","bandages","bandages","paper-clip"));
 
         if (noun.equals("ghost")) {
+            String npcName = currentRoom.getNpcName().toString();
             if (npcName == null){
                 System.out.println("There is no ghost in this room");
                 return;
@@ -151,15 +152,18 @@ public class Game {
             String npcGhost = npc.getGhost(npcName);
             ghostDesc+= npcGhost +"\n";
             System.out.println(ui.wrapFrame(ghostDesc));
-
         }
-        else if(noun.equals("item")) {
-            System.out.println("print list of items here");
+        else if (noun.equals("map")){
+            ui.displayMap();
         }
-
+        else if(approvedItems.contains(noun)) {
+            String itemDesc = "";
+            Item.ItemsSetup item = findItem(noun);
+            assert item != null;
+            itemDesc = item.getDescription();
+            System.out.println(itemDesc);
+        }
     }
-
-
 
     private void pickUp(String noun) {
         RoomMap.RoomLayout currentRoom = player.getCurrentRoom();
