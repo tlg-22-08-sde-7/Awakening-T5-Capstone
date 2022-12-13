@@ -3,6 +3,7 @@ package com.awakening.app;
 import com.awakening.app.game.Player;
 import com.awakening.app.game.Room;
 import com.awakening.app.TextParser;
+import com.awakening.app.game.RoomMap;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
@@ -15,7 +16,11 @@ class UI {
     public void displayGameInfo(Player player) {
         String infoText = "";
         infoText += "You are in the " + player.getCurrentRoom().getName() + ".\n";
-        infoText += "Your items are " + player.getInventory() + ".\n";
+        infoText += "In this room you see:" + player.getCurrentRoom().getItems();
+        infoText += "Your items are: " + player.printInventory();
+        if (player.getCurrentRoom().getNpcName() != null) {
+            infoText+= "There is a ghost here, their name is " + player.getCurrentRoom().getNpcName() + ".\n";
+        }
         // display exits with room names
         infoText += "Exits : " + player.getCurrentRoom().getDirections().keySet() + ".\n";
         System.out.println(wrapFrame(infoText));
@@ -23,8 +28,8 @@ class UI {
     public void displayGamePlayOptions() {
         System.out.println("Your gameplay options are:\n" +
                 "A two word command is expected: 'Verb + Noun'\n" +
-                "Verb:" + textParser.getAllowedCommands() +
-                "\nNoun:" + textParser.getAllowedNouns());
+                "Verb:" + textParser.displayAllowedCommands() +
+                "\nNoun:" + textParser.displayAllowedNouns());
 
     }
     public static void splashScreen() {
