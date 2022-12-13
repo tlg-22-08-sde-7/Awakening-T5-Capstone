@@ -75,7 +75,7 @@ public class Game {
         while (!gameOver) {
             ui.clearConsole();
             ui.displayGameInfo(player);
-//            ui.displayGamePlayOptions();
+
             String response = prompter.prompt("What do you want to do?\n");
             List<String> move = textParser.parseInput(response);
             while ("invalid".equals(move.get(0))) {
@@ -164,7 +164,7 @@ public class Game {
     private void pickUp(String noun) {
         RoomMap.RoomLayout currentRoom = player.getCurrentRoom();
         List itemList = player.getCurrentRoom().getItems();
-        //System.out.println(itemList);
+
         int index;
         Item.ItemsSetup item = findItem(noun);
 
@@ -174,7 +174,6 @@ public class Game {
 
         player.addToInventory(item);
 
-
         for (int i = 0; i < itemList.size() ; i++) {
             if(noun.equals(itemList.get(i))){
                 index = i;
@@ -182,24 +181,6 @@ public class Game {
                 player.getCurrentRoom().getItems().remove(index);
             }
         }
-
-
-
-
-
-//
-//        for (int i = 0; i < roomItems.size(); i++) {
-//            if (roomItems.contains(noun)){
-//                int j = roomItems.indexOf(noun);
-//                player.addToInventory(roomItems.get(j));
-//            }
-//
-//        }
-
-
-
-//        Item searchItem = null;
-//        player.addToInventory(roomItems.get(index));
 
     }
 
