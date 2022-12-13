@@ -73,6 +73,7 @@ public class Game {
         generateWorld();
 
         while (!gameOver) {
+            ui.clearConsole();
             ui.displayGameInfo(player);
 //            ui.displayGamePlayOptions();
             String response = prompter.prompt("What do you want to do?\n");

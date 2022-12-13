@@ -42,12 +42,9 @@ class UI {
         }
     }
 
-    public void loadRooms(String locations) {
-        
-    }
-
     public String wrapFrame(String text) {
         // wrap text in ascci frame
+        String formattedText = breakIntoLines(text);
         String[] lines = text.split("\\n");
         int longestLine = 0;
         for (String line : lines) {
@@ -79,5 +76,50 @@ class UI {
         frame = top + textBody + bottom;
 
         return frame;
+    }
+
+    public static String breakIntoLines(String input) {
+        // check if lines are already broken
+        boolean alreadySplit = true;
+        for (String line : input.split("\n")) {
+            if (line.length() > 80) {
+                alreadySplit = false;
+                break;
+            }
+        }
+
+        // If the input is already split, return it as-is.
+        if (alreadySplit) {
+            return input;
+        }
+        // If the input is not already split, split it.
+        StringBuilder sb = new StringBuilder();
+        int startIndex = 0;
+        while (startIndex < input.length()) {
+            int endIndex = startIndex + 80;
+            if (endIndex > input.length()) {
+                endIndex = input.length();
+            }
+            sb.append(input.substring(startIndex, endIndex));
+            sb.append("\n");
+            startIndex = endIndex;
+        }
+        return sb.toString();
+    }
+
+
+    public void clearConsole() {
+        try {
+            final String os = System.getProperty("os.name");
+
+            if (os.contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+        } catch (final Exception e) {
+            System.out.println("Unable to clear console");
+        }
     }
 }
