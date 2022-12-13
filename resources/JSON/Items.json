@@ -1,6 +1,6 @@
 {
   "camera": {
-    "name": "Camera",
+    "name": "camera",
     "description": "My camera. No pictures on it. I use its light to see around me. Hope it doesn't run out of batteries...Ω",
     "startLocation": "Basement",
     "specialItemFlag": "false",
@@ -8,7 +8,7 @@
     "attackPoints": "75"
   },
   "cellPhone": {
-    "name": "Cellphone",
+    "name": "cellphone",
     "description": "Dead phone, needs charge.",
     "startLocation": "Basement",
     "specialItemFlag": "false",
@@ -16,7 +16,7 @@
     "attackPoints": "20"
   },
   "frontDoorKey": {
-    "name": "Frond Door Key",
+    "name": "key",
     "description": "Key to the front door. Hopefully now I can get out of here.",
     "startLocation": "Side Table",
     "specialItemFlag": "true",
@@ -24,7 +24,7 @@
     "attackPoints": "0"
   },
   "journal": {
-    "name": "Journal",
+    "name": "journal",
     "description": "This is my journal... I read it and remember going to the hospital to confront the doctor... About what though?",
     "startLocation": "",
     "specialItemFlag": "false",
@@ -32,7 +32,7 @@
     "attackPoints": "0"
   },
   "batteries": {
-    "name": "Batteries",
+    "name": "batteries",
     "description": "Old batteries... Hope they have some juice left.",
     "startLocation": "Desk",
     "specialItemFlag": "false",
@@ -40,7 +40,7 @@
     "attackPoints": "0"
   },
   "patientFile": {
-    "name": "Patient File",
+    "name": "file",
     "description": "You read the file... Patient is Jessica Smith. Held for mental health examination. Room 103. Door code is ####. The rest is illegible. Maybe her room will have an answer?",
     "startLocation": "Filing Cabinet",
     "specialItemFlag": "false",
@@ -48,7 +48,7 @@
     "attackPoints": "0"
   },
   "bandages": {
-    "name": "Bandages",
+    "name": "bandages",
     "description": "Old Bandages... Hope I won't have to use these.",
     "startLocation": "Emergency Room",
     "specialItemFlag": "false",
@@ -56,7 +56,7 @@
     "attackPoints": "0"
   },
   "pressPass": {
-    "name": "Press Pass",
+    "name": "press-pass",
     "description": "This belonged to Jessica S... The picture is of me? I'm Jessica? I need to get out of here.",
     "startLocation": "Side Table",
     "specialItemFlag": "false",
@@ -64,7 +64,7 @@
     "attackPoints": "0"
   },
   "paperClip": {
-    "name": "Paper Clip",
+    "name": "paper-clip",
     "description": "Paper clip. All I need to open simple locks... How do I know this?",
     "startLocation": "Desk",
     "specialItemFlag": "true",

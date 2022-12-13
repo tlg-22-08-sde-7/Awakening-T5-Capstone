@@ -2,6 +2,10 @@ package com.awakening.app;
 
 import com.apps.util.Prompter;
 import com.awakening.app.game.*;
+import com.awakening.app.game.Item;
+import com.awakening.app.game.Player;
+import com.awakening.app.game.Room;
+import com.awakening.app.game.RoomMap;
 import com.google.gson.Gson;
 import com.google.gson.internal.bind.util.ISO8601Utils;
 import org.w3c.dom.Text;
@@ -19,6 +23,7 @@ import java.util.Scanner;
 public class Game {
 
     public static RoomMap world;
+    public static List<Item.ItemsSetup> roomItems;
     public static Player player = new Player();
     public static NPC npc = new NPC();
     private static final Prompter prompter = new Prompter(new Scanner(System.in));
@@ -113,6 +118,9 @@ public class Game {
             case "look":
                 look(noun);
                 break;
+            case "get":
+                pickUp(noun);
+                break;
             default:
                 System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
         }
@@ -151,6 +159,58 @@ public class Game {
     }
 
 
+
+    private void pickUp(String noun) {
+        RoomMap.RoomLayout currentRoom = player.getCurrentRoom();
+        List itemList = player.getCurrentRoom().getItems();
+        //System.out.println(itemList);
+        int index;
+        Item.ItemsSetup item = findItem(noun);
+
+        if(item == null){
+            System.out.println(noun + " is not in " + currentRoom);
+        }
+
+        player.addToInventory(item);
+
+
+        for (int i = 0; i < itemList.size() ; i++) {
+            if(noun.equals(itemList.get(i))){
+                index = i;
+                //Remove item form room
+                player.getCurrentRoom().getItems().remove(index);
+            }
+        }
+
+
+
+
+
+//
+//        for (int i = 0; i < roomItems.size(); i++) {
+//            if (roomItems.contains(noun)){
+//                int j = roomItems.indexOf(noun);
+//                player.addToInventory(roomItems.get(j));
+//            }
+//
+//        }
+
+
+
+//        Item searchItem = null;
+//        player.addToInventory(roomItems.get(index));
+
+    }
+
+    private Item.ItemsSetup findItem(String noun) {
+        for(Item.ItemsSetup roomItem:roomItems){
+            if(noun.equals(roomItem.getName())){
+                return roomItem;
+            }
+        }
+        return null;
+    }
+
     private void generateWorld() {
         try (Reader reader = new FileReader("resources/JSON/roomsListNew.json")) {
             world = new Gson().fromJson(reader, RoomMap.class);
@@ -167,6 +227,18 @@ public class Game {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        generateItems();
+    }
+
+    private void generateItems(){
+        Item item;
+        try (Reader reader = new FileReader("resources/JSON/Items.json")) {
+            item = new Gson().fromJson(reader, Item.class);
+            roomItems = item.loadItems();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void startGame() {

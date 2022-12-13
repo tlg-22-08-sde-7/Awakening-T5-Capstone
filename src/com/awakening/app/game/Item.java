@@ -1,5 +1,9 @@
 package com.awakening.app.game;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Item {
 
     private Item.FrontDoorKey frontDoorKey;
@@ -14,7 +18,56 @@ public class Item {
 
 
 
+    public List<ItemsSetup> loadItems(){
+        List<Item.ItemsSetup> itemList = new ArrayList<>();
+        itemList.add(frontDoorKey);
+        itemList.add(journal);
+        itemList.add(batteries);
+        itemList.add(patientFile);
+        itemList.add(bandages);
+        itemList.add(pressPass);
+        itemList.add(cellPhone);
+        itemList.add(paperClip);
+        itemList.add(camera);
+        return itemList;
+    }
 
+
+
+
+
+
+    public ItemsSetup findItem(String itemName){
+        if(itemName.equals(frontDoorKey.getName())){
+            return frontDoorKey;
+        }
+        if(itemName.equals(journal.getName())){
+            return journal;
+        }
+        if(itemName.equals(batteries.getName())){
+            return batteries;
+        }
+        if(itemName.equals(patientFile.getName())){
+            return patientFile;
+        }
+        if(itemName.equals(bandages.getName())){
+            return bandages;
+        }
+        if(itemName.equals(pressPass.getName())){
+            return pressPass;
+        }
+        if(itemName.equals(cellPhone.getName())){
+            return cellPhone;
+        }
+        if(itemName.equals(paperClip.getName())){
+            return paperClip;
+        }
+        if(itemName.equals(camera.getName())){
+            return camera;
+        }
+        else
+            return null;
+    }
 
     public Item.FrontDoorKey getFrontDoorKey() {
         return frontDoorKey;
@@ -97,6 +150,8 @@ public class Item {
         private int attackPoints;
 
         public ItemsSetup(){ }
+
+
 
         public String getName() {
             return name;
