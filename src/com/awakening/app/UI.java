@@ -3,6 +3,7 @@ package com.awakening.app;
 import com.awakening.app.game.Player;
 import com.awakening.app.game.Room;
 import com.awakening.app.TextParser;
+import com.awakening.app.game.RoomMap;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
@@ -13,23 +14,22 @@ import java.nio.file.Path;
 class UI {
     private TextParser textParser = new TextParser();
     public void displayGameInfo(Player player) {
-        System.out.println("You are in the " + player.getCurrentRoom().getName() + ".");
-
-        System.out.println("In this room you see:" + player.getCurrentRoom().getItems());
-        System.out.println("Your items are: " + player.printInventory());
-        // display exits with room names
-        String exits = "Exits: \n";
-        for (String direction : player.getCurrentRoom().getDirections().keySet()) {
-            exits += direction + ": " + player.getCurrentRoom().getDirections().get(direction) + "\n";
+        String infoText = "";
+        infoText += "You are in the " + player.getCurrentRoom().getName() + ".\n";
+        infoText += "In this room you see:" + player.getCurrentRoom().getItems();
+        infoText += "Your items are: " + player.printInventory();
+        if (player.getCurrentRoom().getNpcName() != null) {
+            infoText+= "There is a ghost here, their name is " + player.getCurrentRoom().getNpcName() + ".\n";
         }
-
-        System.out.println(exits);
+        // display exits with room names
+        infoText += "Exits : " + player.getCurrentRoom().getDirections().keySet() + ".\n";
+        System.out.println(wrapFrame(infoText));
     }
     public void displayGamePlayOptions() {
         System.out.println("Your gameplay options are:\n" +
                 "A two word command is expected: 'Verb + Noun'\n" +
-                "Verb:" + textParser.getAllowedCommands() +
-                "\nNoun:" + textParser.getAllowedNouns());
+                "Verb:" + textParser.displayAllowedCommands() +
+                "\nNoun:" + textParser.displayAllowedNouns());
 
     }
     public static void splashScreen() {
@@ -46,11 +46,38 @@ class UI {
         
     }
 
-    public static void main(String[] args) {
-        UI ui = new UI();
+    public String wrapFrame(String text) {
+        // wrap text in ascci frame
+        String[] lines = text.split("\\n");
+        int longestLine = 0;
+        for (String line : lines) {
+            if (line.length() > longestLine) {
+                longestLine = line.length();
+            }
+        }
 
+        String frame = "";
+        String top = "╔";
+        String textBody = "";
+        String bottom = "╚";
+        for (int i = 0; i < longestLine + 2; i++) {
+            top += "═";
+            bottom += "═";
+        }
+        top += "╗\n";
+        bottom += "╝\n";
 
-        ui.loadRooms("Basement");
+        for (String line : lines) {
+            int lineLength = line.length();
+            int spaces = longestLine - lineLength;
+            for (int i = 0; i < spaces; i++) {
+                line += " ";
+            }
+            textBody += "║ " + line + " ║\n";
+        }
+
+        frame = top + textBody + bottom;
+
+        return frame;
     }
-
 }

@@ -20,7 +20,8 @@
     "description": "Patient Records stored here",
     "isLocked": false,
     "items": [
-    ]
+    ],
+    "npcName": "The Haunted Librarian"
   },
   "filingCabinet": {
     "name": "Filing Cabinet",
@@ -45,7 +46,8 @@
     "isLocked": false,
     "items": [
       "Bandages"
-    ]
+    ],
+    "npcName": "The Wandering Spirit"
   },
   "office": {
     "name": "Office",
@@ -77,7 +79,8 @@
     },
     "description": "Entrance and Exit this way",
     "isLocked": false,
-    "items": []
+    "items": [],
+    "npcName": "The Angry Specter"
   },
   "hallway": {
     "name": "Hallway",
@@ -109,6 +112,7 @@
     "items": [
       "Press Pass",
       "Front Door Key"
-    ]
+    ],
+    "npcName": "The Lost Soul"
   }
 }

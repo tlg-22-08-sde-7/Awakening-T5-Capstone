@@ -5,6 +5,18 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TextParser {
+    // Reset
+    public static final String RESET = "\033[0m";  // Text Reset
+
+    // Regular Colors
+    public static final String BLACK = "\033[0;30m";   // BLACK
+    public static final String RED = "\033[0;31m";     // RED
+    public static final String GREEN = "\033[0;32m";   // GREEN
+    public static final String YELLOW = "\033[0;33m";  // YELLOW
+    public static final String BLUE = "\033[0;34m";    // BLUE
+    public static final String PURPLE = "\033[0;35m";  // PURPLE
+    public static final String CYAN = "\033[0;36m";    // CYAN
+    public static final String WHITE = "\033[0;37m";   // WHITE
     private List<String> allowedCommands = new ArrayList<>(Arrays.asList("go", "get", "look", "quit"));
 
     public List<String> getAllowedCommands() {
@@ -15,7 +27,15 @@ public class TextParser {
         return allowedNouns;
     }
 
-    private List<String> allowedNouns = new ArrayList<>(Arrays.asList("map", "north", "south", "east", "west", "camera"));
+    public String displayAllowedNouns() {
+        return BLUE+allowedNouns.toString()+RESET;
+    }
+    public String displayAllowedCommands() {
+        return GREEN+allowedCommands.toString()+RESET;
+    }
+
+    private List<String> allowedNouns = new ArrayList<>(Arrays.asList("map", "north", "south", "east", "west", "ghost", "item"));
+
 
     public List<String> parseInput(String input) {
         List<String> result = new ArrayList<>(Arrays.asList(input.toLowerCase().trim().split(" ")));
@@ -30,24 +50,24 @@ public class TextParser {
         if (result.size() == 1 && "quit".equals(verb)) {
             return result;
         } else if (result.size() != 2) {
-            System.out.println("\033[31mCommand not recognized. Only two word commands are recognized.\033[0m\n" +
-                    "First word must be a verb from the following list: " + allowedCommands +
-                    "\nSecond word must be a noun from the following list: " + allowedNouns);
-            result.set(0, "\033[31minvalid\033[0m");
+            System.out.println(RED + "Command not recognized. Only two word commands are recognized.\n" + RESET +
+                    "First word must be a verb from the following list: " + displayAllowedCommands() +
+                    "\nSecond word must be a noun from the following list: " + displayAllowedNouns());
+            result.set(0, "invalid");
             return result;
         }
         if (!allowedCommands.contains(verb) || !allowedNouns.contains(result.get(1))) {
-            System.out.print("\033[31mInvalid input, please try again. Type 'help' for a list of commands. \033[0m\n");
+            System.out.print(RED + "Invalid input, please try again. Type 'help' for a list of commands.\n" + RESET);
 //            System.out.println("Invalid input, please try again. Type 'help' for a list of commands.\n");
         }
         if (!allowedCommands.contains(verb)) {
-            System.out.println("allowed commands are " + allowedCommands);
-            result.set(0, "\033[31minvalid\033[0m");
+            System.out.println("Allowed commands are " + displayAllowedCommands());
+            result.set(0, "invalid");
 
         }
         if (!allowedNouns.contains(result.get(1))) {
-            System.out.println("allowed nouns are " + allowedNouns);
-            result.set(0, "\033[31minvalid\033[0m");
+            System.out.println("allowed nouns are " + displayAllowedNouns());
+            result.set(0, "invalid");
         }
         return result;
     }

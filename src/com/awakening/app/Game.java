@@ -1,18 +1,23 @@
 package com.awakening.app;
 
 import com.apps.util.Prompter;
+import com.awakening.app.game.*;
 import com.awakening.app.game.Item;
 import com.awakening.app.game.Player;
 import com.awakening.app.game.Room;
 import com.awakening.app.game.RoomMap;
 import com.google.gson.Gson;
+import com.google.gson.internal.bind.util.ISO8601Utils;
+import org.w3c.dom.Text;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 
 //Class that will control gameplay
 public class Game {
@@ -20,6 +25,7 @@ public class Game {
     public static RoomMap world;
     public static List<Item.ItemsSetup> roomItems;
     public static Player player = new Player();
+    public static NPC npc = new NPC();
     private static final Prompter prompter = new Prompter(new Scanner(System.in));
     private UI ui = new UI();
     private TextParser textParser = new TextParser();
@@ -57,7 +63,7 @@ public class Game {
                     gameStart = true;
                     break;
                 default:
-                    System.out.println("\033[31mInvalid input, please provide [Y] for Yes, [N] for No.\033[0m");
+                    System.out.println(TextParser.RED+"Invalid input, please provide [Y] for Yes, [N] for No."+TextParser.RESET);
                     System.out.println();
             }
             //This is to add a line, with the intention of spacing out the text fields of U/I and game text
@@ -71,7 +77,7 @@ public class Game {
 //            ui.displayGamePlayOptions();
             String response = prompter.prompt("What do you want to do?\n");
             List<String> move = textParser.parseInput(response);
-            while ("\033[31minvalid\033[0m".equals(move.get(0))) {
+            while ("invalid".equals(move.get(0))) {
                 response = prompter.prompt("What do you want to do?\n");
                 move = textParser.parseInput(response);
             }
@@ -109,11 +115,14 @@ public class Game {
             case "quit":
                 System.out.println("Thanks for playing!");
                 break;
+            case "look":
+                look(noun);
+                break;
             case "get":
                 pickUp(noun);
                 break;
             default:
-                System.out.println("\033[31mInvalid command\033[0m");
+                System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
         }
     }
 
@@ -126,6 +135,29 @@ public class Game {
             player.setCurrentRoom(nextRoom);
         }
     }
+
+    private void look(String noun) {
+        RoomMap.RoomLayout currentRoom = player.getCurrentRoom();
+        String npcName = currentRoom.getNpcName().toString();
+
+
+        if (noun.equals("ghost")) {
+            if (npcName == null){
+                System.out.println("There is no ghost in this room");
+                return;
+            }
+            String ghostDesc = "";
+            String npcGhost = npc.getGhost(npcName);
+            ghostDesc+= npcGhost +"\n";
+            System.out.println(ui.wrapFrame(ghostDesc));
+
+        }
+        else if(noun.equals("item")) {
+            System.out.println("print list of items here");
+        }
+
+    }
+
 
 
     private void pickUp(String noun) {
@@ -183,6 +215,15 @@ public class Game {
         try (Reader reader = new FileReader("resources/JSON/roomsListNew.json")) {
             world = new Gson().fromJson(reader, RoomMap.class);
             player.setCurrentRoom(world.getBasement());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        loadNPC();
+    }
+
+    private void loadNPC(){
+        try (Reader reader = new FileReader("resources/JSON/NPC.json")) {
+            npc = new Gson().fromJson(reader, NPC.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
