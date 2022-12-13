@@ -95,8 +95,8 @@
   "keyPad": {
     "name": "Key Pad",
     "directions": {
-      "east": "Patient Room",
-      "west": "Hallway"
+      "east": "Hallway",
+      "west": "Patient Room"
     },
     "description": "You need the PIN to access the Patient Room",
     "isLocked": true,
