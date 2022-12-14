@@ -168,6 +168,13 @@ public class Game {
             itemDesc = item.getDescription();
             System.out.println(itemDesc);
         }
+        else if(approvedItems.contains(noun) && player.printInventory().contains(noun)){
+            String itemDesc = "";
+            Item.ItemsSetup item = findItem(noun);
+            assert item != null;
+            itemDesc = item.getDescription();
+            System.out.println(itemDesc);
+        }
         else{
             System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
         }
