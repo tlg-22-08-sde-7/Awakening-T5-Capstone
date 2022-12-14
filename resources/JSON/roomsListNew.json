@@ -7,8 +7,8 @@
     "description": "Place where the player spawns",
     "isLocked": false,
     "items": [
-      "Camera",
-      "Cellphone"
+      "camera",
+      "cellphone"
     ]
   },
   "morgue": {
@@ -20,7 +20,8 @@
     "description": "Patient Records stored here",
     "isLocked": false,
     "items": [
-    ]
+    ],
+    "npcName": "The Haunted Librarian"
   },
   "filingCabinet": {
     "name": "Filing Cabinet",
@@ -30,7 +31,7 @@
     "description": "Patient Records stored here",
     "isLocked": true,
     "items": [
-      "Patient File"
+      "file"
     ]
   },
   "emergencyRoom": {
@@ -44,8 +45,9 @@
     "description": "Emergencies happen here",
     "isLocked": false,
     "items": [
-      "Bandages"
-    ]
+      "bandages"
+    ],
+    "npcName": "The Wandering Spirit"
   },
   "office": {
     "name": "Office",
@@ -66,8 +68,8 @@
     "description": "Stuff stored here",
     "isLocked": false,
     "items": [
-      "Paper Clips",
-      "Batteries"
+      "paper-clip",
+      "batteries"
     ]
   },
   "frontDesk": {
@@ -75,15 +77,16 @@
     "directions": {
       "north": "Emergency Room"
     },
-    "description": "Entrance and Exit this way",
+    "description": "Entrance and Exit this way, but its locked...",
     "isLocked": false,
-    "items": []
+    "items": [],
+    "npcName": "The Angry Specter"
   },
   "hallway": {
     "name": "Hallway",
     "directions": {
       "east": "Key Pad",
-      "west": "Hallway"
+      "west": "Emergency Room"
     },
     "description": "This way to the patient room",
     "isLocked": false,
@@ -92,8 +95,8 @@
   "keyPad": {
     "name": "Key Pad",
     "directions": {
-      "east": "Hallway",
-      "west": "Patient Room"
+      "east": "Patient Room",
+      "west": "Hallway"
     },
     "description": "You need the PIN to access the Patient Room",
     "isLocked": true,
@@ -107,8 +110,9 @@
     "description": "Patients are treated here",
     "isLocked": false,
     "items": [
-      "Press Pass",
-      "Front Door Key"
-    ]
+      "press-pass",
+      "key"
+    ],
+    "npcName": "The Lost Soul"
   }
 }
