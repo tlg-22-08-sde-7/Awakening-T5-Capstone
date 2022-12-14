@@ -77,7 +77,7 @@
     "directions": {
       "north": "Emergency Room"
     },
-    "description": "Entrance and Exit this way",
+    "description": "Entrance and Exit this way, but its locked...",
     "isLocked": false,
     "items": [],
     "npcName": "The Angry Specter"
