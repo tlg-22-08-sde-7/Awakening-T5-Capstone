@@ -9,14 +9,26 @@ import org.w3c.dom.Text;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 class UI {
     private TextParser textParser = new TextParser();
     public void displayGameInfo(Player player) {
         String infoText = "";
-        infoText += "You are in the " + player.getCurrentRoom().getName() + ".\n";
-        infoText += "In this room you see:" + player.getCurrentRoom().getItems() + ".\n";
+        String currentRoom = player.getCurrentRoom().getName();
+        List<String> containers = new ArrayList<>(Arrays.asList("Desk", "Filing Cabinet", "Key Pad"));
+        if (containers.contains(currentRoom)) {
+            infoText += "You are at the " + player.getCurrentRoom().getName() + ".\n";
+            infoText += "At the " + currentRoom + " you see:" + player.getCurrentRoom().getItems() + ".\n";
+        }
+        else {
+            infoText += "You are in the " + player.getCurrentRoom().getName() + ".\n";
+            infoText += "In this room you see:" + player.getCurrentRoom().getItems() + ".\n";
+        }
+
         infoText += "Your items are: " + player.printInventory() + "\n";
         if (player.getCurrentRoom().getNpcName() != null) {
             infoText+= "There is a ghost here, their name is " + player.getCurrentRoom().getNpcName() + ".\n";
@@ -55,7 +67,7 @@ class UI {
     public String wrapFrame(String text) {
         // wrap text in ascii frame
         String formattedText = breakIntoLines(text);
-        String[] lines = text.split("\\n");
+        String[] lines = formattedText.split("\\n");
         int longestLine = 0;
         for (String line : lines) {
             if (line.length() > longestLine) {

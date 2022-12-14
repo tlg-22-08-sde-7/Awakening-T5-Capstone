@@ -14,6 +14,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,16 +30,16 @@ public class Game {
     public static Player player = new Player();
     public static NPC npc = new NPC();
     private static final Prompter prompter = new Prompter(new Scanner(System.in));
-    private List<String> approvedItems = new ArrayList<>(Arrays.asList("camera","cellphone","key","journal","batteries","file","bandages","bandages","paper-clip"));
+    private List<String> approvedItems = new ArrayList<>(Arrays.asList("camera", "cellphone", "key", "journal", "batteries", "file", "bandages", "bandages", "paper-clip"));
     private UI ui = new UI();
     private TextParser textParser = new TextParser();
     private List<Room> rooms = new ArrayList<>();
+    boolean gameOver = false;
 
     public Game() {
     }
 
     public void initGame() {
-        boolean gameOver = false;
         boolean gameStart = false;
         String confirmation;
 
@@ -65,7 +67,7 @@ public class Game {
                     gameStart = true;
                     break;
                 default:
-                    System.out.println(TextParser.RED+"Invalid input, please provide [Y] for Yes, [N] for No."+TextParser.RESET);
+                    System.out.println(TextParser.RED + "Invalid input, please provide [Y] for Yes, [N] for No." + TextParser.RESET);
                     System.out.println();
             }
             //This is to add a line, with the intention of spacing out the text fields of U/I and game text
@@ -97,13 +99,33 @@ public class Game {
                     case ("no"):
                         break;
                 }
-            }
-            else if ("help".equals(move.get(0))) {
+            } else if ("help".equals(move.get(0))) {
                 ui.displayGamePlayOptions();
-            }
-            else {
+            } else {
                 executeCommand(move);
             }
+            gameStateCheck();
+            prompter.prompt("Hit enter to continue...");
+        }
+    }
+
+    private void gameStateCheck() {
+        if (player.getCurrentRoom() != world.getRoom("Front Desk")) {
+            return;
+        }
+        if (player.printInventory().contains("key")) {
+            gameOver = true;
+            printGameWon();
+        }
+    }
+
+    private void printGameWon() {
+        String endText = null;
+        try{
+            endText = Files.readString(Path.of("resources/ASCII/gameEnd.txt"));
+            System.out.println(endText);
+        }catch (IOException e){
+            e.printStackTrace();
         }
     }
 
@@ -122,10 +144,9 @@ public class Game {
                 look(noun);
                 break;
             case "get":
-                if (approvedItems.contains(noun)){
+                if (approvedItems.contains(noun)) {
                     pickUp(noun);
-                }
-                else{
+                } else {
                     System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
                 }
                 break;
@@ -149,33 +170,29 @@ public class Game {
 
         if (noun.equals("ghost")) {
             String npcName = currentRoom.getNpcName().toString();
-            if (npcName == null){
+            if (npcName == null) {
                 System.out.println("There is no ghost in this room");
                 return;
             }
             String ghostDesc = "";
             String npcGhost = npc.getGhost(npcName);
-            ghostDesc+= npcGhost +"\n";
+            ghostDesc += npcGhost + "\n";
             System.out.println(ui.wrapFrame(ghostDesc));
-        }
-        else if (noun.equals("map")){
+        } else if (noun.equals("map")) {
             ui.displayMap();
-        }
-        else if(approvedItems.contains(noun) && currentRoom.getItems().contains(noun)) {
+        } else if (approvedItems.contains(noun) && currentRoom.getItems().contains(noun)) {
             String itemDesc = "";
             Item.ItemsSetup item = findItem(noun);
             assert item != null;
             itemDesc = item.getDescription();
             System.out.println(itemDesc);
-        }
-        else if(approvedItems.contains(noun) && player.printInventory().contains(noun)){
+        } else if (approvedItems.contains(noun) && player.printInventory().contains(noun)) {
             String itemDesc = "";
             Item.ItemsSetup item = findItem(noun);
             assert item != null;
             itemDesc = item.getDescription();
             System.out.println(itemDesc);
-        }
-        else{
+        } else {
             System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
         }
     }
@@ -205,8 +222,8 @@ public class Game {
 
 
     private Item.ItemsSetup findItem(String noun) {
-        for(Item.ItemsSetup roomItem:roomItems){
-            if(noun.equals(roomItem.getName())){
+        for (Item.ItemsSetup roomItem : roomItems) {
+            if (noun.equals(roomItem.getName())) {
                 return roomItem;
             }
         }
@@ -223,7 +240,7 @@ public class Game {
         loadNPC();
     }
 
-    private void loadNPC(){
+    private void loadNPC() {
         try (Reader reader = new FileReader("resources/JSON/NPC.json")) {
             npc = new Gson().fromJson(reader, NPC.class);
         } catch (IOException e) {
@@ -232,7 +249,7 @@ public class Game {
         generateItems();
     }
 
-    private void generateItems(){
+    private void generateItems() {
         Item item;
         try (Reader reader = new FileReader("resources/JSON/Items.json")) {
             item = new Gson().fromJson(reader, Item.class);
