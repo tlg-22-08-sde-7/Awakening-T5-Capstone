@@ -114,5 +114,94 @@
       "key"
     ],
     "npcName": "The Lost Soul"
+  },
+  "stairs": {
+    "name": "Stairs",
+    "directions": {
+      "south": "Upper Hallway"
+    },
+    "description": "Patient Records stored here",
+    "isLocked": true,
+    "items": [
+      "picture"
+    ],
+    "npcName": "Spooky Janitor"
+  },
+  "upperHallway": {
+    "name": "Upper Hallway",
+    "directions": {
+      "north": "Stairs",
+      "east": "Finance",
+      "west": "Fellowship Room"
+    },
+    "description": "Patient Records stored here",
+    "isLocked": false,
+    "items": [
+      "fire extinguisher",
+      "axe"
+    ]
+  },
+  "finance": {
+    "name": "Finance",
+    "directions": {
+      "west": "Upper Hallway"
+    },
+    "description": "Patient Records stored here",
+    "isLocked": true,
+    "items": [
+      "records key",
+      "first aid kit"
+    ],
+    "npcName": "Delirious Auditor"
+  },
+  "fellowshipRoom": {
+    "name": "Fellowship Room",
+    "directions": {
+      "north": "Pharmacy",
+      "south": "Gym",
+      "east": "Upper Hallway",
+      "west": "Janitor Closet"
+    },
+    "description": "Patient Records stored here",
+    "isLocked": false,
+    "items": [
+      "wood cane"
+    ],
+    "npcName": "Decomposed Spirit"
+  },
+  "pharmacy": {
+    "name": "Pharmacy",
+    "directions": {
+      "south": "Fellowship Room"
+    },
+    "description": "Patient Records stored here",
+    "isLocked": true,
+    "items": [
+      "first aid kit"
+    ],
+    "npcName": "Spooky Pharmacist"
+  },
+  "gym": {
+    "name": "Gym",
+    "directions": {
+      "north": "Fellowship Room"
+    },
+    "description": "Patient Records stored here",
+    "isLocked": true,
+    "items": [
+      "barbell"
+    ]
+  },
+  "janitorCloset": {
+    "name": "Janitor Closet",
+    "directions": {
+      "east": "Fellowship Room"
+    },
+    "description": "Patient Records stored here",
+    "isLocked": false,
+    "items": [
+      "master key"
+    ],
+    "npcName": "Rabies Riddled Rat"
   }
 }
