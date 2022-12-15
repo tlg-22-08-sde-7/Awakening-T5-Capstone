@@ -20,6 +20,10 @@ public class TextParser {
 
     // Allowed Commands
     private List<String> allowedCommands = new ArrayList<>(Arrays.asList("go", "get", "look", "quit"));
+    private List<String> actionPromptCommands = new ArrayList<>(Arrays.asList("fight", "flee", "use", "talk"));
+    private List<String> fightCommands = new ArrayList<>(Arrays.asList("use"));
+    private List<String> fightNouns = new ArrayList<>(Arrays.asList("barbell", "camera", "wood cane",
+            "first aid kit", "cellphone", "bandages", "fire extinguisher", "axe", "fist", "foot"));
 
     public List<String> getAllowedCommands() {
         return allowedCommands;
@@ -38,11 +42,16 @@ public class TextParser {
         return GREEN+allowedCommands.toString()+RESET;
     }
 
-    private List<String> allowedNouns = new ArrayList<>(Arrays.asList("map", "north", "south", "east", "west", "ghost", "item", "camera","cellphone","key","journal","batteries","file","bandages","press-pass","paper-clip"));
+    private List<String> allowedNouns = new ArrayList<>(Arrays.asList("map", "north",
+            "south", "east", "west", "ghost", "item", "camera","cellphone","key","journal","batteries",
+            "file","bandages","press-pass","paper-clip", "picture","fire-extinguisher",
+            "axe","first-aid-kit","barbell","wood-cane","master-key","tylenol"));
+
+
 
 
     public List<String> parseInput(String input) {
-        List<String> result = new ArrayList<>(Arrays.asList(input.toLowerCase().trim().split(" ")));
+        List<String> result = new ArrayList<>(Arrays.asList(input.strip().toLowerCase().trim().split(" ")));
 
 
         String verb = result.get(0);

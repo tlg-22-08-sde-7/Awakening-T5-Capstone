@@ -5,7 +5,8 @@
     "startLocation": "Basement",
     "specialItemFlag": "false",
     "charge": "50",
-    "attackPoints": "75"
+    "attackPoints": "10",
+    "healPoints": "0"
   },
   "cellPhone": {
     "name": "cellphone",
@@ -13,7 +14,8 @@
     "startLocation": "Basement",
     "specialItemFlag": "false",
     "charge": "0",
-    "attackPoints": "20"
+    "attackPoints": "3",
+    "healPoints": "0"
   },
   "frontDoorKey": {
     "name": "key",
@@ -21,7 +23,8 @@
     "startLocation": "Side Table",
     "specialItemFlag": "true",
     "charge": "0",
-    "attackPoints": "0"
+    "attackPoints": "0",
+    "healPoints": "0"
   },
   "journal": {
     "name": "journal",
@@ -29,7 +32,8 @@
     "startLocation": "",
     "specialItemFlag": "false",
     "charge": "0",
-    "attackPoints": "0"
+    "attackPoints": "0",
+    "healPoints": "0"
   },
   "batteries": {
     "name": "batteries",
@@ -37,7 +41,8 @@
     "startLocation": "Desk",
     "specialItemFlag": "false",
     "charge": "100",
-    "attackPoints": "0"
+    "attackPoints": "0",
+    "healPoints": "0"
   },
   "patientFile": {
     "name": "file",
@@ -45,7 +50,8 @@
     "startLocation": "Filing Cabinet",
     "specialItemFlag": "false",
     "charge": "0",
-    "attackPoints": "0"
+    "attackPoints": "0",
+    "healPoints": "0"
   },
   "bandages": {
     "name": "bandages",
@@ -53,15 +59,80 @@
     "startLocation": "Emergency Room",
     "specialItemFlag": "false",
     "charge": "0",
-    "attackPoints": "0"
+    "attackPoints": "0",
+    "healPoints": "5"
   },
   "pressPass": {
     "name": "press-pass",
-    "description": "This belonged to Jessica S... The picture is of me? I'm Jessica? I need to get out of here.",
+    "description": "This belonged to someone... The picture is of me? I'm this person? I need to get out of here.",
     "startLocation": "Side Table",
     "specialItemFlag": "false",
     "charge": "0",
-    "attackPoints": "0"
+    "attackPoints": "0",
+    "healPoints": "0"
+  },
+  "picture": {
+    "name": "picture",
+    "description": "This picture...I have seen it before. Why does it look familiar?",
+    "startLocation": "Stairs",
+    "specialItemFlag": "false",
+    "charge": "0",
+    "attackPoints": "0",
+    "healPoints": "0"
+  },
+  "fireExtinguisher": {
+    "name": "fire-extinguisher",
+    "description": "This is heavy, but also has a charge so it might come in handy.",
+    "startLocation": "Upper Hallway",
+    "specialItemFlag": "false",
+    "charge": "0",
+    "attackPoints": "3",
+    "healPoints": "0"
+  },
+  "axe": {
+    "name": "axe",
+    "description": "The blade is dull, but it can generate a lot of force.",
+    "startLocation": "Upper Hallway",
+    "specialItemFlag": "false",
+    "charge": "0",
+    "attackPoints": "5",
+    "healPoints": "0"
+  },
+  "firstAidKit": {
+    "name": "first-aid-kit",
+    "description": "This has everything I need to ensure I can fix up any wounds.",
+    "startLocation": "Pharmacy",
+    "specialItemFlag": "false",
+    "charge": "0",
+    "attackPoints": "0",
+    "healPoints": "20"
+  },
+  "barbell": {
+    "name": "barbell",
+    "description": "It's a good thing I am pretty strong. I could probably throw this at something....",
+    "startLocation": "Desk",
+    "specialItemFlag": "false",
+    "charge": "0",
+    "attackPoints": "5",
+    "healPoints": "0"
+  },
+  "woodCane": {
+    "name": "wood-cane",
+    "description": "This is very well built and easy to swing around.",
+    "startLocation": "Desk",
+    "specialItemFlag": "false",
+    "charge": "0",
+    "attackPoints": "5",
+    "healPoints": "0"
+  },
+  "masterKey": {
+    "name": "master-key",
+    "description": "This says Master on it. I think it will open up all of the rooms in this place....",
+    "startLocation": "Desk",
+    "specialItemFlag": "true",
+    "charge": "0",
+    "attackPoints": "0",
+    "healPoints": "0"
   },
   "paperClip": {
     "name": "paper-clip",
@@ -69,6 +140,16 @@
     "startLocation": "Desk",
     "specialItemFlag": "true",
     "charge": "0",
-    "attackPoints": "0"
+    "attackPoints": "0",
+    "healPoints": "0"
+  },
+  "tylenol": {
+    "name": "tylenol",
+    "description": "This will help me feel better if I get injured.",
+    "startLocation": "Finance",
+    "specialItemFlag": "false",
+    "charge": "0",
+    "attackPoints": "0",
+    "healPoints": "10"
   }
 }
