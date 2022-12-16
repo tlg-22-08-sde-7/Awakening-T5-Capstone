@@ -22,5 +22,35 @@
         "description":"A sad and lonely figure, the Lost Soul wanders the earth, unable to find its way to the afterlife. It is said to be the ghost of a child who died before its time, and is in need of guidance to move on.",
         "health":8,
         "attack":3
+    },
+    "ghost5":{
+        "name":"Rabies Riddled Rat",
+        "description":"A sad and lonely figure, the Lost Soul wanders the earth, unable to find its way to the afterlife. It is said to be the ghost of a child who died before its time, and is in need of guidance to move on.",
+        "health":10,
+        "attack":4
+    },
+    "ghost6":{
+        "name":"The Spooky Pharmacist",
+        "description":"A sad and lonely figure, the Lost Soul wanders the earth, unable to find its way to the afterlife. It is said to be the ghost of a child who died before its time, and is in need of guidance to move on.",
+        "health":15,
+        "attack":6
+    },
+    "ghost7":{
+        "name":"The Decomposed Spirit",
+        "description":"A sad and lonely figure, the Lost Soul wanders the earth, unable to find its way to the afterlife. It is said to be the ghost of a child who died before its time, and is in need of guidance to move on.",
+        "health":13,
+        "attack":7
+    },
+    "ghost8":{
+        "name":"The Spooky Janitor",
+        "description":"A sad and lonely figure, the Lost Soul wanders the earth, unable to find its way to the afterlife. It is said to be the ghost of a child who died before its time, and is in need of guidance to move on.",
+        "health":14,
+        "attack":5
+    },
+    "ghost9":{
+        "name":"The Delirious Auditor",
+        "description":"A sad and lonely figure, the Lost Soul wanders the earth, unable to find its way to the afterlife. It is said to be the ghost of a child who died before its time, and is in need of guidance to move on.",
+        "health":2,
+        "attack":1
     }
 }
