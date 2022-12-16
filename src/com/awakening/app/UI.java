@@ -16,17 +16,19 @@ import java.util.List;
 
 class UI {
     private TextParser textParser = new TextParser();
-    public void displayGameInfo(Player player) {
+    public void displayGameInfo(Player player, Player.PlayerLayout currentPlayer) {
         String infoText = "";
         String currentRoom = player.getCurrentRoom().getName();
         List<String> containers = new ArrayList<>(Arrays.asList("Desk", "Filing Cabinet", "Key Pad"));
         if (containers.contains(currentRoom)) {
             infoText += "You are at the " + player.getCurrentRoom().getName() + ".\n";
             infoText += "At the " + currentRoom + " you see:" + player.getCurrentRoom().getItems() + ".\n";
+            infoText += currentPlayer.getName() + " | HP: " + currentPlayer.getHealth() + "\n";
         }
         else {
             infoText += "You are in the " + player.getCurrentRoom().getName() + ".\n";
             infoText += "In this room you see:" + player.getCurrentRoom().getItems() + ".\n";
+            infoText += currentPlayer.getName() + " | HP: " + currentPlayer.getHealth() + "\n";
         }
 
         infoText += "Your items are: " + player.printInventory() + "\n";
