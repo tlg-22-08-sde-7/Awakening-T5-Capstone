@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 class GameGUI {
     JFrame window;
     Container container;
-    JPanel titleNamePanel;
     JLabel backgroundPicture;
     ImageIcon titleBackgroundImg;
     JButton startButton, instructionButton, quitButton;
@@ -19,7 +18,7 @@ class GameGUI {
         new GameGUI();
     }
 
-    public GameGUI(){
+    public GameGUI() {
         int winX = 1200;
         int winY = 800;
         // Title Background Image
@@ -33,28 +32,28 @@ class GameGUI {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setBackground(Color.black);
         window.setTitle("Awakening");
-        window.add(backgroundPicture);
         window.setLayout(null);
         window.setVisible(true);
         window.setResizable(false);
 
-        container  = window.getContentPane();
+        container = window.getContentPane();
+        container.add(backgroundPicture);
 
         //Start Game Button
         startButton = new JButton("New Game");
-        startButton.setBounds(winX/2 - 200, 550, 150, 50);
+        startButton.setBounds(winX / 2 - 200, 550, 150, 50);
         startButton.setBorder(new MetalBorders.MenuItemBorder());
         startButton.setFont(new Font("Times new Roman", Font.BOLD, 20));
 
         // Instruction Button
         instructionButton = new JButton("Instructions");
-        instructionButton.setBounds(winX/2, 550, 150, 50);
+        instructionButton.setBounds(winX / 2, 550, 150, 50);
         instructionButton.setBorder(new MetalBorders.MenuItemBorder());
         instructionButton.setFont(new Font("Times new Roman", Font.BOLD, 20));
 
         // Quit Game Button
         quitButton = new JButton("Quit");
-        quitButton.setBounds(winX-100, 25, 50, 25);
+        quitButton.setBounds(winX - 100, 25, 50, 25);
         quitButton.setBorder(new MetalBorders.MenuItemBorder());
         quitButton.setFont(new Font("Times new Roman", Font.BOLD, 20));
 
