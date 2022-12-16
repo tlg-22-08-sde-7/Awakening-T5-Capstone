@@ -92,6 +92,15 @@ public class GSON {
             e.printStackTrace();
         }
 
+        //GENERATE Player Text
+        Player player = new Player();
+        try (Reader reader = new FileReader("resources/JSON/Player.json")) {
+            player = new Gson().fromJson(reader, Player.class);
+            System.out.println(player.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 }

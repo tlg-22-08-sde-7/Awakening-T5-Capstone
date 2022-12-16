@@ -7,28 +7,25 @@ import com.awakening.app.game.Player;
 import com.awakening.app.game.Room;
 import com.awakening.app.game.RoomMap;
 import com.google.gson.Gson;
-import com.google.gson.internal.bind.util.ISO8601Utils;
-import org.w3c.dom.Text;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 
 //Class that will control gameplay
 public class Game {
 
     public static RoomMap world;
+    public static RoomMap.RoomLayout roomLayout = new RoomMap.RoomLayout();
     public static List<Item.ItemsSetup> roomItems;
     public static Player player = new Player();
+    public static Player.PlayerLayout currentPlayer;
     public static NPC npc = new NPC();
+
     private static final Prompter prompter = new Prompter(new Scanner(System.in));
     private List<String> approvedItems = new ArrayList<>(Arrays.asList("camera", "cellphone", "key", "journal",
             "batteries", "file", "bandages", "bandages", "paper-clip", "picture", "fire-extinguisher",
@@ -47,7 +44,6 @@ public class Game {
 
         ui.splashScreen();
 
-
         while (!gameStart) {
             String playGame = prompter.prompt("Do you want to play Awakening? [Y/N]").toLowerCase().trim();
 
@@ -56,6 +52,8 @@ public class Game {
                 case ("y"):
                 case ("yes"):
                     System.out.println();
+                    generateWorld();
+                    playerSelect();
                     ui.displayGamePlayOptions();
                     gameStart = true;
                     break;
@@ -76,11 +74,10 @@ public class Game {
             System.out.println();
         }
 
-        generateWorld();
-
         while (!gameOver) {
             ui.clearConsole();
-            ui.displayGameInfo(player);
+
+            ui.displayGameInfo(player, currentPlayer);
 
             String response = prompter.prompt("What do you want to do?\n");
             List<String> move = textParser.parseInput(response);
@@ -109,6 +106,25 @@ public class Game {
             gameStateCheck();
             prompter.prompt("Hit enter to continue...");
         }
+    }
+    private Player.PlayerLayout playerSelect() {
+        System.out.println("PLAYER SELECT: Choose from one of the following characters:");
+        System.out.println();
+        System.out.println(player.toString());
+        String namePrompt = prompter.prompt("\n>", "(?i)lennie|sandra|jimmy|cassidy",
+                "Please select a valid character!").toLowerCase(Locale.ROOT).trim();
+        String name = namePrompt.toLowerCase().trim();
+        switch (name) {
+            case "lennie":
+                return currentPlayer = player.getPlayer1();
+            case "sandra":
+                return currentPlayer = player.getPlayer2();
+            case "jimmy":
+                return currentPlayer = player.getPlayer3();
+            case "cassidy":
+                return currentPlayer = player.getPlayer4();
+        }
+        return null;
     }
 
     private void gameStateCheck() {
@@ -233,6 +249,7 @@ public class Game {
     }
 
     private void generateWorld() {
+        loadPlayer();
         try (Reader reader = new FileReader("resources/JSON/roomsListNew.json")) {
             world = new Gson().fromJson(reader, RoomMap.class);
             player.setCurrentRoom(world.getBasement());
@@ -259,7 +276,13 @@ public class Game {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+    }
+    private void loadPlayer() {
+        try (Reader reader = new FileReader("resources/JSON/Player.json")) {
+            player = new Gson().fromJson(reader, Player.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void startGame() {
