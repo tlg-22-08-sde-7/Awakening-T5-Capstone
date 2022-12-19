@@ -1,5 +1,6 @@
 package com.awakening.app;
 
+import com.apps.util.Console;
 import com.apps.util.Prompter;
 import com.awakening.app.game.*;
 import com.awakening.app.game.Item;
@@ -7,30 +8,31 @@ import com.awakening.app.game.Player;
 import com.awakening.app.game.Room;
 import com.awakening.app.game.RoomMap;
 import com.google.gson.Gson;
-import com.google.gson.internal.bind.util.ISO8601Utils;
-import org.w3c.dom.Text;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 
 //Class that will control gameplay
 public class Game {
 
     public static RoomMap world;
+    public static RoomMap.RoomLayout roomLayout = new RoomMap.RoomLayout();
     public static List<Item.ItemsSetup> roomItems;
     public static Player player = new Player();
+    public static Player.PlayerLayout currentPlayer;
     public static NPC npc = new NPC();
+    public static GameText gameText = new GameText();
+
     private static final Prompter prompter = new Prompter(new Scanner(System.in));
-    private List<String> approvedItems = new ArrayList<>(Arrays.asList("camera", "cellphone", "key", "journal", "batteries", "file", "bandages", "bandages", "paper-clip"));
+    private List<String> approvedItems = new ArrayList<>(Arrays.asList("camera", "cellphone", "key", "journal", "press-pass",
+            "batteries", "file", "bandages", "bandages", "paper-clip", "picture", "fire-extinguisher",
+            "axe", "first-aid-kit", "barbell", "wood-cane", "master-key", "tylenol", "records-key"));
     private UI ui = new UI();
     private TextParser textParser = new TextParser();
     private List<Room> rooms = new ArrayList<>();
@@ -45,7 +47,6 @@ public class Game {
 
         ui.splashScreen();
 
-
         while (!gameStart) {
             String playGame = prompter.prompt("Do you want to play Awakening? [Y/N]").toLowerCase().trim();
 
@@ -54,6 +55,8 @@ public class Game {
                 case ("y"):
                 case ("yes"):
                     System.out.println();
+                    generateWorld();
+                    playerSelect();
                     ui.displayGamePlayOptions();
                     gameStart = true;
                     break;
@@ -74,11 +77,11 @@ public class Game {
             System.out.println();
         }
 
-        generateWorld();
-
         while (!gameOver) {
             ui.clearConsole();
-            ui.displayGameInfo(player);
+
+            ui.displayGameInfo(player, currentPlayer);
+            gameText.roomText(player);
 
             String response = prompter.prompt("What do you want to do?\n");
             List<String> move = textParser.parseInput(response);
@@ -105,15 +108,34 @@ public class Game {
                 executeCommand(move);
             }
             gameStateCheck();
-            prompter.prompt("Hit enter to continue...");
+
         }
+    }
+    private Player.PlayerLayout playerSelect() {
+        System.out.println("PLAYER SELECT: Choose from one of the following characters:");
+        System.out.println();
+        System.out.println(player.toString());
+        String namePrompt = prompter.prompt("\n>", "(?i)lennie|sandra|jimmy|cassidy",
+                "Please select a valid character!").toLowerCase(Locale.ROOT).trim();
+        String name = namePrompt.toLowerCase().trim();
+        switch (name) {
+            case "lennie":
+                return currentPlayer = player.getPlayer1();
+            case "sandra":
+                return currentPlayer = player.getPlayer2();
+            case "jimmy":
+                return currentPlayer = player.getPlayer3();
+            case "cassidy":
+                return currentPlayer = player.getPlayer4();
+        }
+        return null;
     }
 
     private void gameStateCheck() {
         if (player.getCurrentRoom() != world.getRoom("Front Desk")) {
             return;
         }
-        if (player.printInventory().contains("key")) {
+        if (player.printInventory().contains("master-key") && player.printInventory().contains("file")) {
             gameOver = true;
             printGameWon();
         }
@@ -146,12 +168,16 @@ public class Game {
             case "get":
                 if (approvedItems.contains(noun)) {
                     pickUp(noun);
+                    System.out.println("You have successfully added " + noun + " to your inventory!");
+                    Console.pause(1500);
                 } else {
                     System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
+                    Console.pause(1500);
                 }
                 break;
             default:
                 System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
+                Console.pause(1500);
         }
     }
 
@@ -159,8 +185,42 @@ public class Game {
         RoomMap.RoomLayout currentRoom = player.getCurrentRoom();
         RoomMap.RoomLayout nextRoom = world.getRoom(currentRoom.getDirections().get(direction));
         if (nextRoom == null) {
-            System.out.println(TextParser.RED + "You can't go that way" + TextParser.RESET);
-        } else {
+            System.out.println(TextParser.RED + "You can't go that way!" + TextParser.RESET);
+        } else if (nextRoom.isLocked()) {
+            String input = prompter.prompt("Would you like to unlock the door? (yes or no)\n>", "(?i)yes|no", "Please enter yes or no!");
+            if (input.equals("yes") && player.printInventory().contains("master-key")) {
+                System.out.println(TextParser.GREEN + "You have unlocked something!" + TextParser.RESET);
+                Console.pause(1500);
+                player.setCurrentRoom(nextRoom);
+            } else if (input.equals("yes") && player.printInventory().contains("key") &&
+                    nextRoom.getName().contains("Stairs")) {
+                System.out.println(TextParser.GREEN + "You have unlocked something!" + TextParser.RESET);
+                Console.pause(1500);
+                player.setCurrentRoom(nextRoom);
+            } else if (input.equals("yes") && player.printInventory().contains("key") &&
+                    nextRoom.getName().contains("Janitor Closet")) {
+                System.out.println(TextParser.GREEN + "You have unlocked something!" + TextParser.RESET);
+                Console.pause(1500);
+                player.setCurrentRoom(nextRoom);
+            } else if (input.equals("yes") && player.printInventory().contains("records-key") &&
+                    nextRoom.getName().contains("Filing Cabinet")) {
+                System.out.println(TextParser.GREEN + "You have unlocked something!" + TextParser.RESET);
+                Console.pause(1500);
+                player.setCurrentRoom(nextRoom);
+            } else if (input.equals("yes") && player.printInventory().contains("press-pass") &&
+                    nextRoom.getName().contains("Patient Room")) {
+                System.out.println(TextParser.GREEN + "You have unlocked something!" + TextParser.RESET);
+                Console.pause(1500);
+                player.setCurrentRoom(nextRoom);
+            } else if (input.equals("no")) {
+                player.setCurrentRoom(currentRoom);
+            }
+            else {
+                System.out.println(TextParser.RED + "You can't go that way! You don't have the key!" + TextParser.RESET);
+                Console.pause(1500);
+            }
+        }
+        else {
             player.setCurrentRoom(nextRoom);
         }
     }
@@ -171,13 +231,15 @@ public class Game {
         if (noun.equals("ghost")) {
             String npcName = currentRoom.getNpcName().toString();
             if (npcName == null) {
-                System.out.println("There is no ghost in this room");
+                System.out.println("There is no ghost in this room!");
+                Console.pause(1500);
                 return;
             }
             String ghostDesc = "";
             String npcGhost = npc.getGhost(npcName);
             ghostDesc += npcGhost + "\n";
             System.out.println(ui.wrapFrame(ghostDesc));
+            prompter.prompt("Hit enter to continue...");
         } else if (noun.equals("map")) {
             ui.displayMap();
         } else if (approvedItems.contains(noun) && currentRoom.getItems().contains(noun)) {
@@ -194,6 +256,7 @@ public class Game {
             System.out.println(itemDesc);
         } else {
             System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
+            Console.pause(1500);
         }
     }
 
@@ -211,12 +274,13 @@ public class Game {
             for (int i = 0; i < itemList.size(); i++) {
                 if (noun.equals(itemList.get(i))) {
                     index = i;
-                    //Remove item form room
+                    //Remove item from room
                     player.getCurrentRoom().getItems().remove(index);
                 }
             }
         } else {
             System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
+            Console.pause(1500);
         }
     }
 
@@ -231,6 +295,8 @@ public class Game {
     }
 
     private void generateWorld() {
+        loadRoomDescriptions();
+        loadPlayer();
         try (Reader reader = new FileReader("resources/JSON/roomsListNew.json")) {
             world = new Gson().fromJson(reader, RoomMap.class);
             player.setCurrentRoom(world.getBasement());
@@ -257,7 +323,20 @@ public class Game {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+    }
+    private void loadPlayer() {
+        try (Reader reader = new FileReader("resources/JSON/Player.json")) {
+            player = new Gson().fromJson(reader, Player.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void loadRoomDescriptions() {
+        try (Reader reader = new FileReader("resources/JSON/GameText.json")) {
+            gameText = new Gson().fromJson(reader, GameText.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void startGame() {

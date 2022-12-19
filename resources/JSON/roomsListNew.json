@@ -79,12 +79,15 @@
     },
     "description": "Entrance and Exit this way, but its locked...",
     "isLocked": false,
-    "items": [],
+    "items": [
+      "key"
+    ],
     "npcName": "The Angry Specter"
   },
   "hallway": {
     "name": "Hallway",
     "directions": {
+      "north": "Stairs",
       "east": "Key Pad",
       "west": "Emergency Room"
     },
@@ -99,7 +102,7 @@
       "west": "Hallway"
     },
     "description": "You need the PIN to access the Patient Room",
-    "isLocked": true,
+    "isLocked": false,
     "items": []
   },
   "patientRoom": {
@@ -108,11 +111,99 @@
       "west": "Key Pad"
     },
     "description": "Patients are treated here",
+    "isLocked": true,
+    "items": [],
+    "npcName": "The Lost Soul"
+  },
+  "stairs": {
+    "name": "Stairs",
+    "directions": {
+      "north": "Upper Hallway",
+      "south": "Hallway"
+    },
+    "description": "This leads up to the second level of the building.",
+    "isLocked": true,
+    "items": [
+      "picture"
+    ],
+    "npcName": "The Spooky Janitor"
+  },
+  "upperHallway": {
+    "name": "Upper Hallway",
+    "directions": {
+      "south": "Stairs",
+      "east": "Finance",
+      "west": "Fellowship Room"
+    },
+    "description": "Just like the lower hallway, but there is a locked door to the east.",
     "isLocked": false,
     "items": [
-      "press-pass",
-      "key"
+      "fire-extinguisher",
+      "axe"
+    ]
+  },
+  "finance": {
+    "name": "Finance",
+    "directions": {
+      "west": "Upper Hallway"
+    },
+    "description": "This is where the financial records are kept.",
+    "isLocked": true,
+    "items": [
+      "records-key",
+      "tylenol"
     ],
-    "npcName": "The Lost Soul"
+    "npcName": "The Delirious Auditor"
+  },
+  "fellowshipRoom": {
+    "name": "Fellowship Room",
+    "directions": {
+      "north": "Pharmacy",
+      "south": "Gym",
+      "east": "Upper Hallway",
+      "west": "Janitor Closet"
+    },
+    "description": "Where all the fun and games are supposed to happen...",
+    "isLocked": false,
+    "items": [
+      "wood-cane"
+    ],
+    "npcName": "The Decomposed Spirit"
+  },
+  "pharmacy": {
+    "name": "Pharmacy",
+    "directions": {
+      "south": "Fellowship Room"
+    },
+    "description": "The place where people are forced to take their meds.",
+    "isLocked": true,
+    "items": [
+      "first-aid-kit",
+      "press-pass"
+    ],
+    "npcName": "The Spooky Pharmacist"
+  },
+  "gym": {
+    "name": "Gym",
+    "directions": {
+      "north": "Fellowship Room"
+    },
+    "description": "A workout room for the motivated.",
+    "isLocked": true,
+    "items": [
+      "barbell"
+    ]
+  },
+  "janitorCloset": {
+    "name": "Janitor Closet",
+    "directions": {
+      "east": "Fellowship Room"
+    },
+    "description": "Lots of cleaning supplies in here...",
+    "isLocked": true,
+    "items": [
+      "master-key"
+    ],
+    "npcName": "Rabies Riddled Rat"
   }
 }

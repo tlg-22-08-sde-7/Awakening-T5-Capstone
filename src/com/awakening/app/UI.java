@@ -1,5 +1,6 @@
 package com.awakening.app;
 
+import com.apps.util.Prompter;
 import com.awakening.app.game.Player;
 import com.awakening.app.game.Room;
 import com.awakening.app.TextParser;
@@ -12,21 +13,25 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 
 class UI {
     private TextParser textParser = new TextParser();
-    public void displayGameInfo(Player player) {
+    private Prompter prompter = new Prompter(new Scanner(System.in));
+    public void displayGameInfo(Player player, Player.PlayerLayout currentPlayer) {
         String infoText = "";
         String currentRoom = player.getCurrentRoom().getName();
         List<String> containers = new ArrayList<>(Arrays.asList("Desk", "Filing Cabinet", "Key Pad"));
         if (containers.contains(currentRoom)) {
             infoText += "You are at the " + player.getCurrentRoom().getName() + ".\n";
             infoText += "At the " + currentRoom + " you see:" + player.getCurrentRoom().getItems() + ".\n";
+            infoText += currentPlayer.getName() + " | HP: " + currentPlayer.getHealth() + "\n";
         }
         else {
             infoText += "You are in the " + player.getCurrentRoom().getName() + ".\n";
             infoText += "In this room you see:" + player.getCurrentRoom().getItems() + ".\n";
+            infoText += currentPlayer.getName() + " | HP: " + currentPlayer.getHealth() + "\n";
         }
 
         infoText += "Your items are: " + player.printInventory() + "\n";
@@ -40,8 +45,7 @@ class UI {
     public void displayGamePlayOptions() {
         System.out.println("Your gameplay options are:\n" +
                 "A two word command is expected: 'Verb + Noun'\n" +
-                "Verb:" + textParser.displayAllowedCommands() +
-                "\nNoun:" + textParser.displayAllowedNouns());
+                "Verb:" + textParser.displayAllowedCommands());
 
     }
     public static void splashScreen() {
@@ -59,6 +63,7 @@ class UI {
         try{
             map = Files.readString(Path.of("resources/ASCII/hospitalLayoutASCII.txt"));
             System.out.println(map);
+            prompter.prompt("Hit enter to continue...");
         }catch (IOException e){
             e.printStackTrace();
         }

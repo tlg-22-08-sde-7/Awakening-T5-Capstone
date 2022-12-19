@@ -15,6 +15,13 @@ public class RoomMap {
     private Hallway hallway;
     private KeyPad keyPad;
     private PatientRoom patientRoom;
+    private Stairs stairs;
+    private UpperHallway upperHallway;
+    private Finance finance;
+    private FellowshipRoom fellowshipRoom;
+    private Pharmacy pharmacy;
+    private Gym gym;
+    private JanitorCloset janitorCloset;
 
     public Basement getBasement() {
         return basement;
@@ -101,6 +108,20 @@ public class RoomMap {
             return null;
         }
         switch (name) {
+            case "Janitor Closet":
+                return janitorCloset;
+            case "Stairs":
+                return stairs;
+            case "Upper Hallway":
+                return upperHallway;
+            case "Finance":
+                return finance;
+            case "Fellowship Room":
+                return fellowshipRoom;
+            case "Pharmacy":
+                return pharmacy;
+            case "Gym":
+                return gym;
             case "Basement":
                 return basement;
             case "Morgue":
@@ -232,6 +253,35 @@ public class RoomMap {
         public PatientRoom() {
         }
     }
+    public static class Stairs extends RoomLayout {
+        public Stairs() {
+        }
+    }
+    public static class UpperHallway extends RoomLayout {
+        public UpperHallway() {
+        }
+    }
+    public static class Finance extends RoomLayout {
+        public Finance() {
+        }
+    }
+    public static class FellowshipRoom extends RoomLayout {
+        public FellowshipRoom() {
+        }
+    }
+    public static class Pharmacy extends RoomLayout {
+        public Pharmacy() {
+        }
+    }
+    public static class Gym extends RoomLayout {
+        public Gym() {
+        }
+    }
+    public static class JanitorCloset extends RoomLayout {
+        public JanitorCloset() {
+        }
+    }
+
 }
 
 
