@@ -168,13 +168,16 @@ public class Game {
             case "get":
                 if (approvedItems.contains(noun)) {
                     pickUp(noun);
-                    System.out.println("You have successfully added " + noun + " to your inventory.");
+                    System.out.println("You have successfully added " + noun + " to your inventory!");
+                    Console.pause(1500);
                 } else {
                     System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
+                    Console.pause(1500);
                 }
                 break;
             default:
                 System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
+                Console.pause(1500);
         }
     }
 
@@ -182,27 +185,39 @@ public class Game {
         RoomMap.RoomLayout currentRoom = player.getCurrentRoom();
         RoomMap.RoomLayout nextRoom = world.getRoom(currentRoom.getDirections().get(direction));
         if (nextRoom == null) {
-            System.out.println(TextParser.RED + "You can't go that way" + TextParser.RESET);
+            System.out.println(TextParser.RED + "You can't go that way!" + TextParser.RESET);
         } else if (nextRoom.isLocked()) {
-            System.out.println(nextRoom.getName());
-            System.out.println(player.printInventory());
             String input = prompter.prompt("Would you like to unlock the door? (yes or no)\n>", "(?i)yes|no", "Please enter yes or no!");
             if (input.equals("yes") && player.printInventory().contains("master-key")) {
+                System.out.println(TextParser.GREEN + "You have unlocked something!" + TextParser.RESET);
+                Console.pause(1500);
                 player.setCurrentRoom(nextRoom);
             } else if (input.equals("yes") && player.printInventory().contains("key") &&
                     nextRoom.getName().contains("Stairs")) {
+                System.out.println(TextParser.GREEN + "You have unlocked something!" + TextParser.RESET);
+                Console.pause(1500);
                 player.setCurrentRoom(nextRoom);
             } else if (input.equals("yes") && player.printInventory().contains("key") &&
                     nextRoom.getName().contains("Janitor Closet")) {
+                System.out.println(TextParser.GREEN + "You have unlocked something!" + TextParser.RESET);
+                Console.pause(1500);
                 player.setCurrentRoom(nextRoom);
             } else if (input.equals("yes") && player.printInventory().contains("records-key") &&
                     nextRoom.getName().contains("Filing Cabinet")) {
+                System.out.println(TextParser.GREEN + "You have unlocked something!" + TextParser.RESET);
+                Console.pause(1500);
                 player.setCurrentRoom(nextRoom);
             } else if (input.equals("yes") && player.printInventory().contains("press-pass") &&
                     nextRoom.getName().contains("Patient Room")) {
+                System.out.println(TextParser.GREEN + "You have unlocked something!" + TextParser.RESET);
+                Console.pause(1500);
                 player.setCurrentRoom(nextRoom);
-            } else {
-                System.out.println(TextParser.RED + "You can't go that way" + TextParser.RESET);
+            } else if (input.equals("no")) {
+                player.setCurrentRoom(currentRoom);
+            }
+            else {
+                System.out.println(TextParser.RED + "You can't go that way! You don't have the key!" + TextParser.RESET);
+                Console.pause(1500);
             }
         }
         else {
@@ -216,13 +231,15 @@ public class Game {
         if (noun.equals("ghost")) {
             String npcName = currentRoom.getNpcName().toString();
             if (npcName == null) {
-                System.out.println("There is no ghost in this room");
+                System.out.println("There is no ghost in this room!");
+                Console.pause(1500);
                 return;
             }
             String ghostDesc = "";
             String npcGhost = npc.getGhost(npcName);
             ghostDesc += npcGhost + "\n";
             System.out.println(ui.wrapFrame(ghostDesc));
+            prompter.prompt("Hit enter to continue...");
         } else if (noun.equals("map")) {
             ui.displayMap();
         } else if (approvedItems.contains(noun) && currentRoom.getItems().contains(noun)) {
@@ -239,6 +256,7 @@ public class Game {
             System.out.println(itemDesc);
         } else {
             System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
+            Console.pause(1500);
         }
     }
 
@@ -262,6 +280,7 @@ public class Game {
             }
         } else {
             System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
+            Console.pause(1500);
         }
     }
 
