@@ -1,5 +1,6 @@
 package com.awakening.app;
 
+import com.apps.util.Prompter;
 import com.awakening.app.game.Player;
 import com.awakening.app.game.Room;
 import com.awakening.app.TextParser;
@@ -12,10 +13,12 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 
 class UI {
     private TextParser textParser = new TextParser();
+    private Prompter prompter = new Prompter(new Scanner(System.in));
     public void displayGameInfo(Player player, Player.PlayerLayout currentPlayer) {
         String infoText = "";
         String currentRoom = player.getCurrentRoom().getName();
@@ -60,6 +63,7 @@ class UI {
         try{
             map = Files.readString(Path.of("resources/ASCII/hospitalLayoutASCII.txt"));
             System.out.println(map);
+            prompter.prompt("Hit enter to continue...");
         }catch (IOException e){
             e.printStackTrace();
         }
