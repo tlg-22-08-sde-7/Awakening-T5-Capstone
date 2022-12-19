@@ -9,6 +9,13 @@ public class GameText {
     private PatientRoomText patientRoomText;
     private HallwayText hallwayText;
     private BasementText basementText;
+    private GymText gymText;
+    private PharmacyText pharmacyText;
+    private FellowshipRoomText fellowshipRoomText;
+    private FinanceText financeText;
+    private UpperHallwayText upperHallwayText;
+    private StairsText stairsText;
+    private JanitorClosetText janitorClosetText;
 
 
     public StartText getStartText() {
@@ -75,6 +82,62 @@ public class GameText {
         this.basementText = basementText;
     }
 
+    public GymText getGymText() {
+        return gymText;
+    }
+
+    public void setGymText(GymText gymText) {
+        this.gymText = gymText;
+    }
+
+    public PharmacyText getPharmacyText() {
+        return pharmacyText;
+    }
+
+    public void setPharmacyText(PharmacyText pharmacyText) {
+        this.pharmacyText = pharmacyText;
+    }
+
+    public FellowshipRoomText getFellowshipRoomText() {
+        return fellowshipRoomText;
+    }
+
+    public void setFellowshipRoomText(FellowshipRoomText fellowshipRoomText) {
+        this.fellowshipRoomText = fellowshipRoomText;
+    }
+
+    public FinanceText getFinanceText() {
+        return financeText;
+    }
+
+    public void setFinanceText(FinanceText financeText) {
+        this.financeText = financeText;
+    }
+
+    public UpperHallwayText getUpperHallwayText() {
+        return upperHallwayText;
+    }
+
+    public void setUpperHallwayText(UpperHallwayText upperHallwayText) {
+        this.upperHallwayText = upperHallwayText;
+    }
+
+    public StairsText getStairsText() {
+        return stairsText;
+    }
+
+    public void setStairsText(StairsText stairsText) {
+        this.stairsText = stairsText;
+    }
+
+    public JanitorClosetText getJanitorClosetText() {
+        return janitorClosetText;
+    }
+
+    public void setJanitorClosetText(JanitorClosetText janitorClosetText) {
+        this.janitorClosetText = janitorClosetText;
+    }
+
     public static class GameTextLayout {
         private String text;
 
@@ -119,5 +182,33 @@ public class GameText {
 
     public static class BasementText extends GameTextLayout{
         public BasementText(){}
+    }
+
+    public static class UpperHallwayText extends GameTextLayout {
+        public UpperHallwayText(){}
+    }
+
+    public static class StairsText extends GameTextLayout {
+        public StairsText(){}
+    }
+
+    public static class FinanceText extends GameTextLayout {
+        public FinanceText(){}
+    }
+
+    public static class FellowshipRoomText extends GameTextLayout {
+        public FellowshipRoomText(){}
+    }
+
+    public static class JanitorClosetText extends GameTextLayout {
+        public JanitorClosetText(){}
+    }
+
+    public static class PharmacyText extends GameTextLayout {
+        public PharmacyText(){}
+    }
+
+    public static class GymText extends GameTextLayout {
+        public GymText(){}
     }
 }

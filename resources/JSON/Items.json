@@ -151,5 +151,14 @@
     "charge": "0",
     "attackPoints": "0",
     "healPoints": "10"
+  },
+  "recordsKey": {
+    "name": "records-key",
+    "description": "This looks like a key to get me into something....",
+    "startLocation": "Finance",
+    "specialItemFlag": "true",
+    "charge": "0",
+    "attackPoints": "0",
+    "healPoints": "0"
   }
 }

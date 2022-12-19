@@ -27,9 +27,9 @@ public class Game {
     public static NPC npc = new NPC();
 
     private static final Prompter prompter = new Prompter(new Scanner(System.in));
-    private List<String> approvedItems = new ArrayList<>(Arrays.asList("camera", "cellphone", "key", "journal",
+    private List<String> approvedItems = new ArrayList<>(Arrays.asList("camera", "cellphone", "key", "journal", "press-pass",
             "batteries", "file", "bandages", "bandages", "paper-clip", "picture", "fire-extinguisher",
-            "axe", "first-aid-kit", "barbell", "wood-cane", "master-key", "tylenol"));
+            "axe", "first-aid-kit", "barbell", "wood-cane", "master-key", "tylenol", "records-key"));
     private UI ui = new UI();
     private TextParser textParser = new TextParser();
     private List<Room> rooms = new ArrayList<>();

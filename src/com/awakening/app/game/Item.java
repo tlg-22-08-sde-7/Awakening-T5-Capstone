@@ -23,6 +23,7 @@ public class Item {
     private Item.Picture picture;
     private Item.FireExtinguisher fireExtinguisher;
     private Item.Barbell barbell;
+    private Item.RecordsKey recordsKey;
 
 
 
@@ -45,6 +46,7 @@ public class Item {
         itemList.add(axe);
         itemList.add(picture);
         itemList.add(barbell);
+        itemList.add(recordsKey);
 
         return itemList;
     }
@@ -55,6 +57,9 @@ public class Item {
 
 
     public ItemsSetup findItem(String itemName){
+        if (itemName.equals(recordsKey.getName())) {
+            return recordsKey;
+        }
         if(itemName.equals(frontDoorKey.getName())){
             return frontDoorKey;
         }
@@ -108,6 +113,14 @@ public class Item {
         }
         else
             return null;
+    }
+
+    public RecordsKey getRecordsKey() {
+        return recordsKey;
+    }
+
+    public void setRecordsKey(RecordsKey recordsKey) {
+        this.recordsKey = recordsKey;
     }
 
     public Item.FrontDoorKey getFrontDoorKey() {
@@ -318,6 +331,11 @@ public class Item {
 
 
 //Creation of special classes
+
+    public static class RecordsKey extends Item.ItemsSetup {
+        public RecordsKey() {
+        }
+    }
 
     public static class FrontDoorKey extends Item.ItemsSetup {
         public FrontDoorKey() {

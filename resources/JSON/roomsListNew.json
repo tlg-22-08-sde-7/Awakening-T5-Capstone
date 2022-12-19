@@ -122,7 +122,7 @@
       "north": "Upper Hallway",
       "south": "Hallway"
     },
-    "description": "Patient Records stored here",
+    "description": "This leads up to the second level of the building.",
     "isLocked": true,
     "items": [
       "picture"
@@ -136,7 +136,7 @@
       "east": "Finance",
       "west": "Fellowship Room"
     },
-    "description": "Patient Records stored here",
+    "description": "Just like the lower hallway, but there is a locked door to the east.",
     "isLocked": false,
     "items": [
       "fire-extinguisher",
@@ -148,7 +148,7 @@
     "directions": {
       "west": "Upper Hallway"
     },
-    "description": "Patient Records stored here",
+    "description": "This is where the financial records are kept.",
     "isLocked": true,
     "items": [
       "records-key",
@@ -164,7 +164,7 @@
       "east": "Upper Hallway",
       "west": "Janitor Closet"
     },
-    "description": "Patient Records stored here",
+    "description": "Where all the fun and games are supposed to happen...",
     "isLocked": false,
     "items": [
       "wood-cane"
@@ -176,7 +176,7 @@
     "directions": {
       "south": "Fellowship Room"
     },
-    "description": "Patient Records stored here",
+    "description": "The place where people are forced to take their meds.",
     "isLocked": true,
     "items": [
       "first-aid-kit"
@@ -188,7 +188,7 @@
     "directions": {
       "north": "Fellowship Room"
     },
-    "description": "Patient Records stored here",
+    "description": "A workout room for the motivated.",
     "isLocked": true,
     "items": [
       "barbell"
@@ -199,7 +199,7 @@
     "directions": {
       "east": "Fellowship Room"
     },
-    "description": "Patient Records stored here",
+    "description": "Lots of cleaning supplies in here...",
     "isLocked": false,
     "items": [
       "master-key"
