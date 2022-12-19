@@ -18,9 +18,30 @@
         "text":"You enter a medium size room, it contains a bed, some health monitoring equipment and a side table."
     },
     "hallwayText" : {
-        "text": "You are in a hallway, there are several doors, all are locked, however you notice that one of the doors is different. This door has a mechanical keypad; you need a combination in order to open this door."
+        "text": "You are in a hallway, there are several doors, all are locked, except the stairs that head up, however you notice that one of the doors is different. This door has a mechanical keypad; you need a combination in order to open this door."
     },
     "basementText" : {
         "text" : "You enter the room, it feels colder in here. There are a few items scattered around the room: rusted surgical equipment on a tray, an operating table, old dirty gowns and towels. You notice 10 large cabinet door in the far wall, and a locked filing cabinet by the corner of the room."
+    },
+    "upperHallwayText" : {
+        "text": "You are in a hallway, there is one door that is locked, a set of stairs, and to the west you see a large open room."
+    },
+    "stairsText" : {
+        "text": "You start walking up a set of stairs, which emit loud creaks on every step. Their is a window that shines some light to illuminate your path."
+    },
+    "financeText" : {
+        "text" : "You see cabinets all around the office that are labeled by year. There is a desk in the middle of the room and a boarded up window."
+    },
+    "fellowshipRoomText" : {
+        "text" : "You see lots of couches, a foosball table, a pool table, an old tube tv, and lots of dusty games on a shelf."
+    },
+    "janitorClosetText" : {
+        "text":"This holds all of the supplies for the hospital for cleaning. There are brooms, buckets, a water filling station, and some corrosive cleaning supplies."
+    },
+    "gymText" : {
+        "text": "There is padding on the ground. You see a couple of treadmills and some cable weight machines."
+    },
+    "pharmacyText" : {
+        "text" : "So this is where all of the medicine is distributed for the patients. You see a counter with a cubby leading to the back storage. You can fit through to get to the medicine."
     }
   }

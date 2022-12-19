@@ -45,12 +45,13 @@ public class TextParser {
     private List<String> allowedNouns = new ArrayList<>(Arrays.asList("map", "north",
             "south", "east", "west", "ghost", "item", "camera","cellphone","key","journal","batteries",
             "file","bandages","press-pass","paper-clip", "picture","fire-extinguisher",
-            "axe","first-aid-kit","barbell","wood-cane","master-key","tylenol"));
+            "axe","first-aid-kit","barbell","wood-cane","master-key","tylenol", "records-key"));
 
 
 
 
     public List<String> parseInput(String input) {
+
         List<String> result = new ArrayList<>(Arrays.asList(input.strip().toLowerCase().trim().split(" ")));
 
 
