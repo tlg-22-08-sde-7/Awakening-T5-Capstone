@@ -3,9 +3,10 @@ package com.awakening.app;
 import javax.swing.*;
 import javax.swing.plaf.metal.MetalBorders;
 import java.awt.*;
-import java.util.stream.Collectors;
 
 class GameGUI {
+    int winX = 1200;
+    int winY = 800;
     JFrame window;
     Container container;
     JLabel backgroundPicture;
@@ -19,8 +20,6 @@ class GameGUI {
     }
 
     public GameGUI() {
-        int winX = 1200;
-        int winY = 800;
         // Title Background Image
         titleBackgroundImg = new ImageIcon("resources\\pictures\\titlescreen.jpg");
         backgroundPicture = new JLabel(titleBackgroundImg);
@@ -61,5 +60,14 @@ class GameGUI {
         backgroundPicture.add(instructionButton);
         backgroundPicture.add(quitButton);
 
+    }
+
+    private void itemsSizing(int x, int y, String file) {
+        ImageIcon icon = new ImageIcon(new ImageIcon(file)
+                .getImage().getScaledInstance(winY / 15, winX / 15, Image.SCALE_DEFAULT));
+        JLabel items = new JLabel(icon);
+        items.setBounds(x, y, 75, 75);
+        items.setIcon(icon);
+        backgroundPicture.add(items);
     }
 }
