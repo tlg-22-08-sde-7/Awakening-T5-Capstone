@@ -1,23 +1,57 @@
 package com.awakening.app.game;
 
+import com.awakening.app.Game;
+
+import java.util.Objects;
+
 public class GameText {
-    private StartText startText;
-    private MorgueText morgueText;
-    private OfficeText officeText;
-    private FrontDeskText frontDeskText;
-    private EmergencyRoomText emergencyRoomText;
-    private PatientRoomText patientRoomText;
-    private HallwayText hallwayText;
-    private BasementText basementText;
-    private GymText gymText;
-    private PharmacyText pharmacyText;
-    private FellowshipRoomText fellowshipRoomText;
-    private FinanceText financeText;
-    private UpperHallwayText upperHallwayText;
-    private StairsText stairsText;
-    private JanitorClosetText janitorClosetText;
+    private GameText.StartText startText;
+    private GameText.MorgueText morgueText;
+    private GameText.OfficeText officeText;
+    private GameText.FrontDeskText frontDeskText;
+    private GameText.EmergencyRoomText emergencyRoomText;
+    private GameText.PatientRoomText patientRoomText;
+    private GameText.HallwayText hallwayText;
+    private GameText.BasementText basementText;
+    private GameText.GymText gymText;
+    private GameText.PharmacyText pharmacyText;
+    private GameText.FellowshipRoomText fellowshipRoomText;
+    private GameText.FinanceText financeText;
+    private GameText.UpperHallwayText upperHallwayText;
+    private GameText.StairsText stairsText;
+    private GameText.JanitorClosetText janitorClosetText;
 
-
+    public void roomText(Player player) {
+        if (Objects.equals(player.getCurrentRoom().getName(), "Morgue")) {
+            System.out.println(getMorgueText().getText() + "\n");
+        } else if (Objects.equals(player.getCurrentRoom().getName(), "Office")) {
+            System.out.println(getOfficeText().getText() + "\n");
+        }else if (Objects.equals(player.getCurrentRoom().getName(), "Front Desk")) {
+            System.out.println(getFrontDeskText().getText() + "\n");
+        }else if (Objects.equals(player.getCurrentRoom().getName(), "Emergency Room")) {
+            System.out.println(getEmergencyRoomText().getText() + "\n");
+        }else if (Objects.equals(player.getCurrentRoom().getName(), "Patient Room")) {
+            System.out.println(getPatientRoomText().getText() + "\n");
+        }else if (Objects.equals(player.getCurrentRoom().getName(), "Hallway")) {
+            System.out.println(getHallwayText().getText() + "\n");
+        }else if (Objects.equals(player.getCurrentRoom().getName(), "Basement")) {
+            System.out.println(getBasementText().getText() + "\n");
+        }else if (Objects.equals(player.getCurrentRoom().getName(), "Gym")) {
+            System.out.println(getGymText().getText() + "\n");
+        }else if (Objects.equals(player.getCurrentRoom().getName(), "Pharmacy")) {
+            System.out.println(getPharmacyText().getText() + "\n");
+        }else if (Objects.equals(player.getCurrentRoom().getName(), "Fellowship Room")) {
+            System.out.println(getFellowshipRoomText().getText() + "\n");
+        }else if (Objects.equals(player.getCurrentRoom().getName(), "Finance")) {
+            System.out.println(getFinanceText().getText() + "\n");
+        }else if (Objects.equals(player.getCurrentRoom().getName(), "Upper Hallway")) {
+            System.out.println(getUpperHallwayText().getText() + "\n");
+        }else if (Objects.equals(player.getCurrentRoom().getName(), "Stairs")) {
+            System.out.println(getStairsText().getText() + "\n");
+        }else if (Objects.equals(player.getCurrentRoom().getName(), "Janitor Closet")) {
+            System.out.println(getJanitorClosetText().getText() + "\n");
+        }
+    }
     public StartText getStartText() {
         return startText;
     }

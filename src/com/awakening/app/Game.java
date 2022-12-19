@@ -1,5 +1,6 @@
 package com.awakening.app;
 
+import com.apps.util.Console;
 import com.apps.util.Prompter;
 import com.awakening.app.game.*;
 import com.awakening.app.game.Item;
@@ -8,6 +9,7 @@ import com.awakening.app.game.Room;
 import com.awakening.app.game.RoomMap;
 import com.google.gson.Gson;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -25,6 +27,7 @@ public class Game {
     public static Player player = new Player();
     public static Player.PlayerLayout currentPlayer;
     public static NPC npc = new NPC();
+    public static GameText gameText = new GameText();
 
     private static final Prompter prompter = new Prompter(new Scanner(System.in));
     private List<String> approvedItems = new ArrayList<>(Arrays.asList("camera", "cellphone", "key", "journal", "press-pass",
@@ -78,6 +81,7 @@ public class Game {
             ui.clearConsole();
 
             ui.displayGameInfo(player, currentPlayer);
+            gameText.roomText(player);
 
             String response = prompter.prompt("What do you want to do?\n");
             List<String> move = textParser.parseInput(response);
@@ -104,7 +108,7 @@ public class Game {
                 executeCommand(move);
             }
             gameStateCheck();
-            prompter.prompt("Hit enter to continue...");
+
         }
     }
     private Player.PlayerLayout playerSelect() {
@@ -164,6 +168,7 @@ public class Game {
             case "get":
                 if (approvedItems.contains(noun)) {
                     pickUp(noun);
+                    System.out.println("You have successfully added " + noun + " to your inventory.");
                 } else {
                     System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
                 }
@@ -251,7 +256,7 @@ public class Game {
             for (int i = 0; i < itemList.size(); i++) {
                 if (noun.equals(itemList.get(i))) {
                     index = i;
-                    //Remove item form room
+                    //Remove item from room
                     player.getCurrentRoom().getItems().remove(index);
                 }
             }
@@ -271,6 +276,7 @@ public class Game {
     }
 
     private void generateWorld() {
+        loadRoomDescriptions();
         loadPlayer();
         try (Reader reader = new FileReader("resources/JSON/roomsListNew.json")) {
             world = new Gson().fromJson(reader, RoomMap.class);
@@ -302,6 +308,13 @@ public class Game {
     private void loadPlayer() {
         try (Reader reader = new FileReader("resources/JSON/Player.json")) {
             player = new Gson().fromJson(reader, Player.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void loadRoomDescriptions() {
+        try (Reader reader = new FileReader("resources/JSON/GameText.json")) {
+            gameText = new Gson().fromJson(reader, GameText.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

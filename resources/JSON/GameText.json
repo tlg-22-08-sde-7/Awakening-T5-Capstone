@@ -1,9 +1,9 @@
 {
     "startText" : {
-        "text": "You wake up on the floor in a dark place. You feel disoriented  and  cannot recall how you got here. As you look around, you see a few rays light filtering through an opening."
+        "text": "You wake up on the floor in a dark place. You feel disoriented  and  cannot recall how you got here. \nAs you look around, you see a few rays light filtering through an opening."
     },
     "morgueText" : {
-        "text": "The room is pitch dark, except for a ray of light that filters through some opening. It is difficult to tell where the light is coming from, but it allows you to see  outlines of shapes. Next to you you observe two rectangular items. Your hand hovers over the one nearest to you."
+        "text": "The room is pitch dark, except for a ray of light that filters through some opening. \nIt is difficult to tell where the light is coming from, but it allows you to see  outlines of shapes. \nNext to you you observe two rectangular items. Your hand hovers over the one nearest to you."
     },
     "officeText" : {
         "text": "You enter an office. Mostly empty besides a couple of supplies on a desk."
@@ -18,30 +18,30 @@
         "text":"You enter a medium size room, it contains a bed, some health monitoring equipment and a side table."
     },
     "hallwayText" : {
-        "text": "You are in a hallway, there are several doors, all are locked, except the stairs that head up, however you notice that one of the doors is different. This door has a mechanical keypad; you need a combination in order to open this door."
+        "text": "You are in a hallway, there are several doors, all are locked, except the stairs that head up, \nhowever you notice that one of the doors is different. This door has a mechanical keypad; you need a combination in order to open this door."
     },
     "basementText" : {
-        "text" : "You enter the room, it feels colder in here. There are a few items scattered around the room: rusted surgical equipment on a tray, an operating table, old dirty gowns and towels. You notice 10 large cabinet door in the far wall, and a locked filing cabinet by the corner of the room."
+        "text" : "You enter the room, it feels colder in here. There are a few items scattered around the room: \nrusted surgical equipment on a tray, an operating table, old dirty gowns and towels. \nYou notice 10 large cabinet door in the far wall, and a locked filing cabinet by the corner of the room."
     },
     "upperHallwayText" : {
-        "text": "You are in a hallway, there is one door that is locked, a set of stairs, and to the west you see a large open room."
+        "text": "You are in a hallway, there is one door that is locked, a set of stairs, \nand to the west you see a large open room."
     },
     "stairsText" : {
-        "text": "You start walking up a set of stairs, which emit loud creaks on every step. Their is a window that shines some light to illuminate your path."
+        "text": "You start walking up a set of stairs, which emit loud creaks on every step. \nTheir is a window that shines some light to illuminate your path."
     },
     "financeText" : {
-        "text" : "You see cabinets all around the office that are labeled by year. There is a desk in the middle of the room and a boarded up window."
+        "text" : "You see cabinets all around the office that are labeled by year. \nThere is a desk in the middle of the room and a boarded up window."
     },
     "fellowshipRoomText" : {
         "text" : "You see lots of couches, a foosball table, a pool table, an old tube tv, and lots of dusty games on a shelf."
     },
     "janitorClosetText" : {
-        "text":"This holds all of the supplies for the hospital for cleaning. There are brooms, buckets, a water filling station, and some corrosive cleaning supplies."
+        "text":"This holds all of the supplies for the hospital for cleaning. \nThere are brooms, buckets, a water filling station, and some corrosive cleaning supplies."
     },
     "gymText" : {
         "text": "There is padding on the ground. You see a couple of treadmills and some cable weight machines."
     },
     "pharmacyText" : {
-        "text" : "So this is where all of the medicine is distributed for the patients. You see a counter with a cubby leading to the back storage. You can fit through to get to the medicine."
+        "text" : "So this is where all of the medicine is distributed for the patients. \nYou see a counter with a cubby leading to the back storage. You can fit through to get to the medicine."
     }
   }
