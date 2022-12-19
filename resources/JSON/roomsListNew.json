@@ -79,7 +79,9 @@
     },
     "description": "Entrance and Exit this way, but its locked...",
     "isLocked": false,
-    "items": [],
+    "items": [
+      "key"
+    ],
     "npcName": "The Angry Specter"
   },
   "hallway": {
@@ -100,7 +102,7 @@
       "west": "Hallway"
     },
     "description": "You need the PIN to access the Patient Room",
-    "isLocked": true,
+    "isLocked": false,
     "items": []
   },
   "patientRoom": {
@@ -109,11 +111,8 @@
       "west": "Key Pad"
     },
     "description": "Patients are treated here",
-    "isLocked": false,
-    "items": [
-      "press-pass",
-      "key"
-    ],
+    "isLocked": true,
+    "items": [],
     "npcName": "The Lost Soul"
   },
   "stairs": {
@@ -179,7 +178,8 @@
     "description": "The place where people are forced to take their meds.",
     "isLocked": true,
     "items": [
-      "first-aid-kit"
+      "first-aid-kit",
+      "press-pass"
     ],
     "npcName": "The Spooky Pharmacist"
   },
@@ -200,7 +200,7 @@
       "east": "Fellowship Room"
     },
     "description": "Lots of cleaning supplies in here...",
-    "isLocked": false,
+    "isLocked": true,
     "items": [
       "master-key"
     ],

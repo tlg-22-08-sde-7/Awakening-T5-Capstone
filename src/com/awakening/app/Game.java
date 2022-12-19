@@ -131,7 +131,7 @@ public class Game {
         if (player.getCurrentRoom() != world.getRoom("Front Desk")) {
             return;
         }
-        if (player.printInventory().contains("key")) {
+        if (player.printInventory().contains("master-key") && player.printInventory().contains("file")) {
             gameOver = true;
             printGameWon();
         }
@@ -178,7 +178,29 @@ public class Game {
         RoomMap.RoomLayout nextRoom = world.getRoom(currentRoom.getDirections().get(direction));
         if (nextRoom == null) {
             System.out.println(TextParser.RED + "You can't go that way" + TextParser.RESET);
-        } else {
+        } else if (nextRoom.isLocked()) {
+            System.out.println(nextRoom.getName());
+            System.out.println(player.printInventory());
+            String input = prompter.prompt("Would you like to unlock the door? (yes or no)\n>", "(?i)yes|no", "Please enter yes or no!");
+            if (input.equals("yes") && player.printInventory().contains("master-key")) {
+                player.setCurrentRoom(nextRoom);
+            } else if (input.equals("yes") && player.printInventory().contains("key") &&
+                    nextRoom.getName().contains("Stairs")) {
+                player.setCurrentRoom(nextRoom);
+            } else if (input.equals("yes") && player.printInventory().contains("key") &&
+                    nextRoom.getName().contains("Janitor Closet")) {
+                player.setCurrentRoom(nextRoom);
+            } else if (input.equals("yes") && player.printInventory().contains("records-key") &&
+                    nextRoom.getName().contains("Filing Cabinet")) {
+                player.setCurrentRoom(nextRoom);
+            } else if (input.equals("yes") && player.printInventory().contains("press-pass") &&
+                    nextRoom.getName().contains("Patient Room")) {
+                player.setCurrentRoom(nextRoom);
+            } else {
+                System.out.println(TextParser.RED + "You can't go that way" + TextParser.RESET);
+            }
+        }
+        else {
             player.setCurrentRoom(nextRoom);
         }
     }
