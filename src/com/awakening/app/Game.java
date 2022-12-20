@@ -9,7 +9,6 @@ import com.awakening.app.game.Room;
 import com.awakening.app.game.RoomMap;
 import com.google.gson.Gson;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -27,12 +26,15 @@ public class Game {
     public static Player player = new Player();
     public static Player.PlayerLayout currentPlayer;
     public static NPC npc = new NPC();
+    public static NPC.NPCLayout currentNPC;
     public static GameText gameText = new GameText();
 
     private static final Prompter prompter = new Prompter(new Scanner(System.in));
     private List<String> approvedItems = new ArrayList<>(Arrays.asList("camera", "cellphone", "key", "journal", "press-pass",
             "batteries", "file", "bandages", "bandages", "paper-clip", "picture", "fire-extinguisher",
             "axe", "first-aid-kit", "barbell", "wood-cane", "master-key", "tylenol", "records-key"));
+    private List<String> fightNouns = new ArrayList<>(Arrays.asList("barbell", "camera", "wood-cane",
+            "first-aid-kit", "cellphone", "bandages", "fire-extinguisher", "axe", "fist"));
     private UI ui = new UI();
     private TextParser textParser = new TextParser();
     private List<Room> rooms = new ArrayList<>();
@@ -77,16 +79,25 @@ public class Game {
             System.out.println();
         }
 
+        gameCycle();
+    }
+
+    private void gameCycle() {
+        String confirmation;
         while (!gameOver) {
             ui.clearConsole();
 
-            ui.displayGameInfo(player, currentPlayer);
-            gameText.roomText(player);
+            if (player.getCurrentRoom().getNpcName() != null) {
+                runningIntoAGhost();
+            } else {
+                ui.displayGameInfo(player, currentPlayer);
+                gameText.roomText(player);
+            }
 
-            String response = prompter.prompt("What do you want to do?\n");
+            String response = prompter.prompt("What do you want to do?\n>");
             List<String> move = textParser.parseInput(response);
             while ("invalid".equals(move.get(0))) {
-                response = prompter.prompt("What do you want to do?\n");
+                response = prompter.prompt("What do you want to do?\n>");
                 move = textParser.parseInput(response);
             }
 
@@ -111,7 +122,9 @@ public class Game {
 
         }
     }
-    private Player.PlayerLayout playerSelect() {
+
+    //method to select the player at the beginning of the game
+    private void playerSelect() {
         System.out.println("PLAYER SELECT: Choose from one of the following characters:");
         System.out.println();
         System.out.println(player.toString());
@@ -120,18 +133,25 @@ public class Game {
         String name = namePrompt.toLowerCase().trim();
         switch (name) {
             case "lennie":
-                return currentPlayer = player.getPlayer1();
+                currentPlayer = player.getPlayer1();
+                return;
             case "sandra":
-                return currentPlayer = player.getPlayer2();
+                currentPlayer = player.getPlayer2();
+                return;
             case "jimmy":
-                return currentPlayer = player.getPlayer3();
+                currentPlayer = player.getPlayer3();
+                return;
             case "cassidy":
-                return currentPlayer = player.getPlayer4();
+                currentPlayer = player.getPlayer4();
         }
-        return null;
     }
 
     private void gameStateCheck() {
+        if (currentPlayer.getHealth() < 1) {
+            System.out.println("You have been killed by the " + currentNPC.getName() + "!");
+            System.out.println("Thanks for playing!");
+            System.exit(0);
+        }
         if (player.getCurrentRoom() != world.getRoom("Front Desk")) {
             return;
         }
@@ -162,18 +182,25 @@ public class Game {
             case "quit":
                 System.out.println("Thanks for playing!");
                 break;
+            case "use":
+                if (fightNouns.contains(noun)) {
+                    useItem(noun);
+                } else {
+                    System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
+                }
+                Console.pause(1500);
+                break;
             case "look":
                 look(noun);
                 break;
             case "get":
                 if (approvedItems.contains(noun)) {
                     pickUp(noun);
-                    System.out.println("You have successfully added " + noun + " to your inventory!");
-                    Console.pause(1500);
+                    System.out.println(TextParser.GREEN + "You have successfully added " + noun + " to your inventory!" + TextParser.RESET);
                 } else {
                     System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
-                    Console.pause(1500);
                 }
+                Console.pause(1500);
                 break;
             default:
                 System.out.println(TextParser.RED + "Invalid command" + TextParser.RESET);
@@ -181,6 +208,7 @@ public class Game {
         }
     }
 
+    //method for player to move between the different rooms
     private void move(String direction) {
         RoomMap.RoomLayout currentRoom = player.getCurrentRoom();
         RoomMap.RoomLayout nextRoom = world.getRoom(currentRoom.getDirections().get(direction));
@@ -225,6 +253,7 @@ public class Game {
         }
     }
 
+    //method to look at various objects in the rooms, including items in player inventory, and the map
     private void look(String noun) {
         RoomMap.RoomLayout currentRoom = player.getCurrentRoom();
 
@@ -260,6 +289,7 @@ public class Game {
         }
     }
 
+    //method to pick up the items in the rooms
     private void pickUp(String noun) {
         RoomMap.RoomLayout currentRoom = player.getCurrentRoom();
         List itemList = player.getCurrentRoom().getItems();
@@ -284,6 +314,37 @@ public class Game {
         }
     }
 
+    //method to use items for attack and healing
+    private void useItem(String noun) {
+        Item.ItemsSetup item = inventoryItem(noun);
+
+        if (item == null) {
+            System.out.println("Item is not in you inventory!");
+        } else if (player.getInventory().contains(item)) {
+            if (item.getHealPoints() > 0) {
+                currentPlayer.setHealth(currentPlayer.getHealth() + item.getHealPoints());
+                System.out.println("You have used " + item.getName() + " to heal " + item.getHealPoints() + " HP.");
+                System.out.println(item.getName() + " is now removed from inventory.");
+                player.getInventory().remove(item);
+                Console.pause(1500);
+            } else if (item.getAttackPoints() > 0) {
+                currentNPC.setHealth(currentNPC.getHealth() - (item.getAttackPoints() + currentPlayer.getAttack()));
+                System.out.println("You have used " + item.getName() + " to attack the " + currentNPC.getName());
+                System.out.println(item.getName() + " has been destroyed during use and must be discarded!");
+                player.getInventory().remove(item);
+                Console.pause(1500);
+            }
+        }
+    }
+
+    private Item.ItemsSetup inventoryItem(String noun) {
+        for (Item.ItemsSetup item : player.getInventory()) {
+            if (noun.equals(item.getName())) {
+                return item;
+            }
+        }
+        return null;
+    }
 
     private Item.ItemsSetup findItem(String noun) {
         for (Item.ItemsSetup roomItem : roomItems) {
@@ -294,6 +355,112 @@ public class Game {
         return null;
     }
 
+    private void runningIntoAGhost() {
+        ui.displayGameInfo(player, currentPlayer);
+        gameText.roomText(player);
+        getGhostInRoom();
+
+        if (player.getCurrentRoom().getNpcName() != null && currentNPC.getHealth() > 0) {
+            System.out.println("You are in a fight with a ghost!");
+            System.out.println(currentPlayer.getName() + " | HP: " + currentPlayer.getHealth());
+            System.out.println(currentNPC.getName() + " | HP: " + currentNPC.getHealth());
+
+            String input = prompter.prompt("What would you like to do? (use + fist or item)\n>");
+            List<String> fightCommands = textParser.fightParseInput(input);
+            String verb = fightCommands.get(0);
+
+            if ("quit".equals(fightCommands.get(0))) {
+                String confirmation = prompter.prompt("Are you sure? [Y/N]").toLowerCase().trim();
+                switch (confirmation) {
+                    case ("y"):
+                    case ("yes"):
+                        gameOver = true;
+                        System.out.println("You have left the game....");
+                        System.exit(0);
+                        break;
+                    case ("n"):
+                    case ("no"):
+                        runningIntoAGhost();
+                }
+            } else if ("help".equals(fightCommands.get(0))) {
+                ui.displayGamePlayOptions();
+                runningIntoAGhost();
+            }
+
+            String noun = fightCommands.get(1);
+            while ("invalid".equals(verb)) {
+                input = prompter.prompt("What would you like to do? (use + fist or item)\n>");
+                fightCommands = textParser.fightParseInput(input);
+            }
+            Item.ItemsSetup item = inventoryItem(noun);
+            if (verb.equals("use")) {
+                if (item != null && noun.equals(item.getName()) && item.getHealPoints() > 0) {
+                    useItem(noun);
+                    runningIntoAGhost();
+                }
+                else if (item != null && noun.equals(item.getName())) {
+                    currentNPC.setHealth(currentNPC.getHealth() - item.getAttackPoints());
+                    playerAttack();
+                    npcAttack();
+                    useItem(noun);
+                    gameStateCheck();
+                    if (currentNPC.getHealth() < 1) {
+                        System.out.println("You have defeated the ghost!");
+                        Console.pause(1000);
+                        gameCycle();
+                    } else {
+                        runningIntoAGhost();
+                    }
+                } else if (noun.equals("fist")){
+                    playerAttack();
+                    npcAttack();
+                    gameStateCheck();
+                    if (currentNPC.getHealth() < 1) {
+                        System.out.println("You have defeated the ghost!");
+                        Console.pause(1000);
+                        gameCycle();
+                    } else {
+                        runningIntoAGhost();
+                    }
+                } else {
+                    System.out.println(TextParser.RED + "Invalid Command!" + TextParser.RESET);
+                    Console.pause(1000);
+                    runningIntoAGhost();
+                }
+            }
+        }
+    }
+    private void playerAttack() {
+        currentNPC.setHealth(currentNPC.getHealth() - currentPlayer.getAttack());
+    }
+    private void npcAttack() {
+        currentPlayer.setHealth(currentPlayer.getHealth() - currentNPC.getAttack());
+    }
+    public void getGhostInRoom() {
+        if (Objects.equals(player.getCurrentRoom().getName(), "Morgue")) {
+            currentNPC = npc.getGhost1();
+        } else if (Objects.equals(player.getCurrentRoom().getName(), "Emergency Room")) {
+            currentNPC = npc.getGhost2();
+        }else if (Objects.equals(player.getCurrentRoom().getName(), "Patient Room")) {
+            currentNPC = npc.getGhost4();
+        }else if (Objects.equals(player.getCurrentRoom().getName(), "Front Desk")) {
+            currentNPC = npc.getGhost3();
+        }else if (Objects.equals(player.getCurrentRoom().getName(), "Pharmacy")) {
+            currentNPC = npc.getGhost6();
+        }else if (Objects.equals(player.getCurrentRoom().getName(), "Fellowship Room")) {
+            currentNPC = npc.getGhost7();
+        }else if (Objects.equals(player.getCurrentRoom().getName(), "Finance")) {
+            currentNPC = npc.getGhost9();
+        }else if (Objects.equals(player.getCurrentRoom().getName(), "Stairs")) {
+            currentNPC = npc.getGhost8();
+        }else if (Objects.equals(player.getCurrentRoom().getName(), "Janitor Closet")) {
+            currentNPC = npc.getGhost5();
+        }
+    }
+
+    //JSON integration into the game
+
+    //Generate the rooms in the map
     private void generateWorld() {
         loadRoomDescriptions();
         loadPlayer();
@@ -306,6 +473,7 @@ public class Game {
         loadNPC();
     }
 
+    //load the NPCs into the game
     private void loadNPC() {
         try (Reader reader = new FileReader("resources/JSON/NPC.json")) {
             npc = new Gson().fromJson(reader, NPC.class);
@@ -315,6 +483,7 @@ public class Game {
         generateItems();
     }
 
+    //load the items into the game
     private void generateItems() {
         Item item;
         try (Reader reader = new FileReader("resources/JSON/Items.json")) {
@@ -324,6 +493,8 @@ public class Game {
             e.printStackTrace();
         }
     }
+
+    //load the player into the game
     private void loadPlayer() {
         try (Reader reader = new FileReader("resources/JSON/Player.json")) {
             player = new Gson().fromJson(reader, Player.class);
@@ -331,6 +502,8 @@ public class Game {
             e.printStackTrace();
         }
     }
+
+    //load the descriptions of the rooms into the map
     private void loadRoomDescriptions() {
         try (Reader reader = new FileReader("resources/JSON/GameText.json")) {
             gameText = new Gson().fromJson(reader, GameText.class);
