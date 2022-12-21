@@ -46,7 +46,7 @@ class UI {
         System.out.println("Your gameplay options are:\n" +
                 "A two word command is expected: 'Verb + Noun'\n" +
                 "Verb:" + textParser.displayAllowedCommands());
-
+        prompter.prompt("Press ENTER to continue...");
     }
     public static void splashScreen() {
         String welcome = null;
