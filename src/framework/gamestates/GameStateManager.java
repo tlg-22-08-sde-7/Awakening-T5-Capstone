@@ -1,4 +1,4 @@
-package com.awakening.ui.framework.gamestates;
+package framework.gamestates;
 
 import java.awt.*;
 import java.util.EmptyStackException;

@@ -1,4 +1,4 @@
-package com.awakening.ui.framework.gui;
+package framework.gamestates.gui;
 
 import javax.swing.*;
 import java.awt.*;
