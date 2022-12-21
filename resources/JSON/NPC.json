@@ -1,0 +1,56 @@
+{
+    "ghost1":{
+        "name":"The Haunted Librarian",
+        "description":"Once a kind and studious librarian, the Haunted Librarian was killed in a tragic accident and now haunts the library, seeking to protect its books and knowledge from those who would do them harm.",
+        "health":10,
+        "attack":3
+    },
+    "ghost2":{
+        "name":"The Wandering Spirit",
+        "description":"This ghostly figure wanders the earth, never staying in one place for long. It is said that it is searching for something, or someone, but no one knows for sure.",
+        "health":12,
+        "attack":4
+    },
+    "ghost3":{
+        "name":"The Angry Specter",
+        "description":"Trapped in the mortal realm by a powerful curse, the Angry Specter lashes out at anyone who dares to cross its path. It is said to be the spirit of a wronged woman, seeking vengeance for the wrongs done to her in life.",
+        "health":15,
+        "attack":3
+    },
+    "ghost4":{
+        "name":"The Lost Soul",
+        "description":"A sad and lonely figure, the Lost Soul wanders the earth, unable to find its way to the afterlife. It is said to be the ghost of a child who died before its time, and is in need of guidance to move on.",
+        "health":8,
+        "attack":3
+    },
+    "ghost5":{
+        "name":"Rabies Riddled Rat",
+        "description":"A sad and lonely figure, the Lost Soul wanders the earth, unable to find its way to the afterlife. It is said to be the ghost of a child who died before its time, and is in need of guidance to move on.",
+        "health":10,
+        "attack":4
+    },
+    "ghost6":{
+        "name":"The Spooky Pharmacist",
+        "description":"A sad and lonely figure, the Lost Soul wanders the earth, unable to find its way to the afterlife. It is said to be the ghost of a child who died before its time, and is in need of guidance to move on.",
+        "health":15,
+        "attack":4
+    },
+    "ghost7":{
+        "name":"The Decomposed Spirit",
+        "description":"A sad and lonely figure, the Lost Soul wanders the earth, unable to find its way to the afterlife. It is said to be the ghost of a child who died before its time, and is in need of guidance to move on.",
+        "health":13,
+        "attack":3
+    },
+    "ghost8":{
+        "name":"The Spooky Janitor",
+        "description":"A sad and lonely figure, the Lost Soul wanders the earth, unable to find its way to the afterlife. It is said to be the ghost of a child who died before its time, and is in need of guidance to move on.",
+        "health":14,
+        "attack":4
+    },
+    "ghost9":{
+        "name":"The Delirious Auditor",
+        "description":"A sad and lonely figure, the Lost Soul wanders the earth, unable to find its way to the afterlife. It is said to be the ghost of a child who died before its time, and is in need of guidance to move on.",
+        "health":2,
+        "attack":1
+    }
+}
