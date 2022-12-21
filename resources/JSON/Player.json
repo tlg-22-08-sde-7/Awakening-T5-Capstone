@@ -1,0 +1,26 @@
+{
+  "player1": {
+    "name": "Lennie",
+    "description": "A scrawny, malnourished 22-year old high school dropout.",
+    "health": 50,
+    "attack": 5
+  },
+  "player2": {
+    "name": "Sandra",
+    "description": "Terribly uncoordinated and not good at anything 34-year old.",
+    "health": 50,
+    "attack": 5
+  },
+  "player3": {
+    "name": "Jimmy",
+    "description": "Wasting life with one potato chip at a time 45-year old.",
+    "health": 50,
+    "attack": 5
+  },
+  "player4": {
+    "name": "Cassidy",
+    "description": "Parents are recovering addicts, but that didn't help the early years, 18-year old.",
+    "health": 50,
+    "attack": 5
+  }
+}

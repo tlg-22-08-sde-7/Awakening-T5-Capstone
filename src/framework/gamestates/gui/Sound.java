@@ -1,4 +1,4 @@
-package com.awakening.ui.framework.gui;
+package framework.gamestates.gui;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;

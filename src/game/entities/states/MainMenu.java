@@ -1,8 +1,8 @@
-package com.awakening.ui.game.states;
+package game.entities.states;
 
-import com.awakening.ui.framework.gamestates.GameState;
-import com.awakening.ui.framework.gamestates.GameStateManager;
-import com.awakening.ui.framework.gui.WindowManager;
+import framework.gamestates.GameState;
+import framework.gamestates.GameStateManager;
+import framework.gamestates.gui.WindowManager;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -33,7 +33,7 @@ public class MainMenu extends GameState {
     @Override
     protected void render(Graphics graphics) {
         try {
-            BufferedImage image = ImageIO.read(new File("resources/pictures/titlescreen.jpg"));
+            BufferedImage image = ImageIO.read(new File("res/pictures/titlescreen.jpg"));
             graphics.drawImage(image, 0, 0, WindowManager.WIDTH, WindowManager.HEIGHT,  null);
         } catch (IOException e) {
             e.printStackTrace();
