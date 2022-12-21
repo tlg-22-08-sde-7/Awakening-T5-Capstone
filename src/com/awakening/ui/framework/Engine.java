@@ -1,8 +1,8 @@
 package com.awakening.ui.framework;
 
-import framework.gamestates.GameStateManager;
-import framework.gamestates.gui.WindowManager;
-import game.entities.states.MainMenu;
+import com.awakening.ui.framework.gamestates.GameStateManager;
+import com.awakening.ui.framework.gui.WindowManager;
+import com.awakening.ui.game.states.MainMenu;
 
 import javax.swing.*;
 import java.awt.*;

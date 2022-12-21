@@ -1,7 +1,7 @@
 package com.awakening.ui;
 
 import com.awakening.ui.framework.Engine;
-import framework.gamestates.gui.resources.Loader;
+import com.awakening.ui.framework.resources.Loader;
 
 import javax.swing.*;
 

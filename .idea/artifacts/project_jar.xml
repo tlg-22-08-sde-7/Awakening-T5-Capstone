@@ -3,9 +3,6 @@
     <output-path>$PROJECT_DIR$/out/artifacts/project_jar</output-path>
     <root id="archive" name="project.jar">
       <element id="module-output" name="project" />
-      <element id="library" level="project" name="app-utils-1.1 (2)" />
-      <element id="library" level="project" name="hamcrest-core-1.3" />
-      <element id="library" level="project" name="gson-2.10" />
     </root>
   </artifact>
 </component>

@@ -1,8 +1,5 @@
 package com.awakening.app.game;
 
-import game.entities.Player;
-import game.entities.generator.RoomData;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,8 +13,6 @@ public class Room {
     private boolean isLocked;
     private List<String> items;
 
-    private RoomData data;
-
     public Room(){
 
     }
@@ -26,9 +21,6 @@ public class Room {
         this.directions = directions;
         this.description = description;
         this.items = items;
-    }
-
-    public Room(RoomData roomData) {
     }
 
     public String getName() {
@@ -76,16 +68,5 @@ public class Room {
         return "Room [name=" + name + ", directions=" + directions
                 + ", description=" + description + ", isLocked="
                 + isLocked + ", items=" + items + "]";
-    }
-
-
-    public void render(Graphics graphics) {
-    }
-
-    public void featureInteraction(Player player) {
-    }
-
-    public RoomData getData() {
-        return data;
     }
 }
