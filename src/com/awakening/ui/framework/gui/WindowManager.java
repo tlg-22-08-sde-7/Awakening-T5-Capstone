@@ -10,7 +10,7 @@ public class WindowManager {
     private JPanel panel;
 
     public static final int WIDTH = 1200;
-    public static final int HEIGHT = 800;
+    public static final int HEIGHT = 675;
 
     public WindowManager() {
         frame = new JFrame("Awakening");

@@ -27,7 +27,6 @@ public class MainMenu extends GameState {
 
     @Override
     protected void loop() {
-
     }
 
     @Override
