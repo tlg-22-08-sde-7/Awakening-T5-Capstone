@@ -28,16 +28,15 @@ public class Engine {
         windowManager.addPanel(new GameScreen());
         windowManager.addKeyListener(new Keyboard());
         windowManager.createWindow();
-
+        timer.start();
     }
 
     private static class MainGameLoop implements ActionListener {
 
         @Override
-        public void actionPerformed(ActionEvent arg0) {
+        public void actionPerformed(ActionEvent e) {
             gameStateManager.loop();
         }
-
     }
 
     private static class GameScreen extends JPanel {
