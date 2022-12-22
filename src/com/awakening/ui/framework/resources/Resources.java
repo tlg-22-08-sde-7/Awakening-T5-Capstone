@@ -20,6 +20,8 @@ public class Resources {
     public static final byte PLAYER_BACK = 11;
     public static final byte PLAYER_BACK_2 = 12;
 
+    public static final byte ENEMY = 13;
+
     public static final HashMap<String, BufferedImage> ROOMS = new HashMap<>();
     public static final ArrayList<BufferedImage> TEXTURES = new ArrayList<>();
 }

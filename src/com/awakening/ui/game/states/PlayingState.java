@@ -5,6 +5,7 @@ import com.awakening.ui.framework.gamestates.GameStateManager;
 import com.awakening.ui.framework.gui.Sound;
 import com.awakening.ui.framework.resources.Resources;
 import com.awakening.ui.framework.utils.MathHelper;
+import com.awakening.ui.game.entities.Enemy;
 import com.awakening.ui.game.entities.Player;
 import com.awakening.ui.game.world.Tile;
 import com.awakening.ui.game.world.World;
@@ -105,16 +106,16 @@ class PlayingState extends GameState {
         this.world = new World(this.generator.getRoomsData());
 
 
+//       this.world.getRoomRandom().placeFeature(new Feature(Resources.STAIRS, this::generateLevel));
+//
+//        for(int i=0;i<12;i++) {
+//            this.world.getRoomRandom().placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
+//        }
 
-       /* this.world.getRoomRandom().placeFeature(new Feature(Resources.STAIRS, this::generateLevel));
-
-        for(int i=0;i<12;i++) {
-            this.world.getRoomRandom().placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
-        }
 
         for(int i=0;i<25;i++) {
             this.world.getRoomRandom().spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
-        }*/
+        }
 
         this.spawnPlayer();
     }
@@ -130,7 +131,7 @@ class PlayingState extends GameState {
         RoomData roomIn = this.world.getRoom().getData();
         for(int i=0;i<roomIn.getSizeX();i++) {
             for(int j=0;j<roomIn.getSizeY();j++) {
-                //this.player.handleCollisionWith(roomIn.getTileAt(i, j));
+//                this.player.handleCollisionWith(roomIn.getTileAt(i, j));
 //                for(Enemy enemy : this.world.getRoom().getEnemies()) {
 //                    enemy.handleCollisionWith(roomIn.getTileAt(i, j));
 //                }
