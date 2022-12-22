@@ -18,11 +18,12 @@ public class MainMenu extends GameState {
     private static final String START_GAME = "Start";
     private static final String QUIT_GAME = "Quit";
     private static final String SHOW_INSTRUCTIONS = "Instructions";
+    private static final String SETTINGS = "Settings";
     private int selected;
 
     public MainMenu(GameStateManager manager) {
         super(manager);
-        this.optionsMenu = new String[] {START_GAME, SHOW_INSTRUCTIONS, QUIT_GAME};
+        this.optionsMenu = new String[] {START_GAME, SHOW_INSTRUCTIONS, QUIT_GAME, SETTINGS};
         this.selected = 0;
     }
 
@@ -54,8 +55,10 @@ public class MainMenu extends GameState {
             else if(i == 1){ // show instructions
                 graphics.drawString(this.optionsMenu[i], WindowManager.WIDTH/2, 550);
             }
-            else{ // quit game
+            else if(i == 2) { // quit game
                 graphics.drawString(this.optionsMenu[i], WindowManager.WIDTH - 100, 50);
+            } else {
+                graphics.drawString(this.optionsMenu[i], WindowManager.WIDTH - 100, 100);
             }
         }
     }
@@ -97,6 +100,14 @@ public class MainMenu extends GameState {
                             window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                         }
                         break;
+                    case SETTINGS:
+                        window = new JFrame();
+                        resp = JOptionPane.showConfirmDialog(window, "Adjust Music Volume", "Music?", JOptionPane.YES_NO_OPTION);
+                        if (resp == JOptionPane.YES_OPTION) {
+                            Sound.volumeControl();
+                        } else {
+                            window.setDefaultCloseOperation(window.DISPOSE_ON_CLOSE);
+                        }
                 }
                 break;
         }
