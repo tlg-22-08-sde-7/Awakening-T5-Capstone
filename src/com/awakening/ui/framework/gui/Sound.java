@@ -3,12 +3,21 @@ package com.awakening.ui.framework.gui;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
 
 public class Sound {
 
     static Clip clip;
     static URL[] soundURL = new URL[30];
+    static float previousVolume = 0;
+    static float currentVolume = 0;
+    static FloatControl fc;
+    static boolean mute = false;
 
     static{
         soundURL[0] = Sound.class.getResource("/sound/titlescreen.wav");
@@ -32,6 +41,7 @@ public class Sound {
             AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
             clip = AudioSystem.getClip();
             clip.open(ais);
+            fc = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,5 +74,70 @@ public class Sound {
     public static void playSE(int i) {
         setFile(i);
         play();
+    }
+
+    // Volume Control
+    public static void volumeControl() {
+        JFrame window = new JFrame();
+        window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        window.setLayout(new GridLayout(1, 3));
+
+        JButton volumeUpB = new JButton("Volume Up");
+        volumeUpB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                volumeUp();
+            }
+        });
+        window.add(volumeUpB);
+
+        JButton volumeDownB = new JButton("Volume Down");
+        volumeDownB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                volumeDown();
+            }
+        });
+        window.add(volumeDownB);
+
+        JButton muteB = new JButton("Mute");
+        muteB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                volumeMute();
+            }
+        });
+        window.add(muteB);
+
+        window.pack();
+        window.setVisible(true);
+        window.setDefaultCloseOperation(window.DISPOSE_ON_CLOSE);
+    }
+    public static void volumeUp() {
+        currentVolume += 1.0f;
+        if (currentVolume > 6.0f) {
+            currentVolume = 6.0f;
+        }
+        fc.setValue(currentVolume);
+    }
+    public static void volumeDown() {
+        currentVolume -= 1.0f;
+        if (currentVolume < -80.0f) {
+            currentVolume = -80.0f;
+        }
+        fc.setValue(currentVolume);
+    }
+    public static void volumeMute() {
+        if (!mute) {
+            previousVolume = currentVolume;
+            currentVolume = -80.0f;
+            fc.setValue(currentVolume);
+            mute = true;
+        }
+        else {
+            currentVolume = previousVolume;
+            fc.setValue(currentVolume);
+            mute = false;
+        }
     }
 }
