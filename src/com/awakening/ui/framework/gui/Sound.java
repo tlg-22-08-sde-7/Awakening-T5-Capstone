@@ -77,10 +77,9 @@ public class Sound {
     }
 
     // Volume Control
-    public static void volumeControl() {
-        JFrame window = new JFrame();
-        window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        window.setLayout(new GridLayout(1, 3));
+    public static JPanel volumeControl() {
+        JPanel adjustSound = new JPanel();
+        adjustSound.setLayout(new GridLayout(1, 3));
 
         JButton volumeUpB = new JButton("Volume Up");
         volumeUpB.addActionListener(new ActionListener() {
@@ -89,7 +88,7 @@ public class Sound {
                 volumeUp();
             }
         });
-        window.add(volumeUpB);
+        adjustSound.add(volumeUpB);
 
         JButton volumeDownB = new JButton("Volume Down");
         volumeDownB.addActionListener(new ActionListener() {
@@ -98,7 +97,7 @@ public class Sound {
                 volumeDown();
             }
         });
-        window.add(volumeDownB);
+        adjustSound.add(volumeDownB);
 
         JButton muteB = new JButton("Mute");
         muteB.addActionListener(new ActionListener() {
@@ -107,11 +106,11 @@ public class Sound {
                 volumeMute();
             }
         });
-        window.add(muteB);
+        adjustSound.add(muteB);
 
-        window.pack();
-        window.setVisible(true);
-        window.setDefaultCloseOperation(window.DISPOSE_ON_CLOSE);
+
+        adjustSound.setVisible(true);
+        return adjustSound;
     }
     public static void volumeUp() {
         currentVolume += 1.0f;
