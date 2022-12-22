@@ -102,9 +102,12 @@ public class MainMenu extends GameState {
                         break;
                     case SETTINGS:
                         window = new JFrame();
-                        resp = JOptionPane.showConfirmDialog(window, "Adjust Music Volume", "Music?", JOptionPane.YES_NO_OPTION);
-                        if (resp == JOptionPane.YES_OPTION) {
-                            Sound.volumeControl();
+                        int optionPane = JOptionPane.showConfirmDialog
+                                (window, Sound.volumeControl(), "Sound", JOptionPane.OK_CANCEL_OPTION);
+
+                        JPanel settingsWindow = new JPanel();
+                        if (optionPane == JOptionPane.OK_OPTION) {
+                            window.setDefaultCloseOperation(window.DO_NOTHING_ON_CLOSE);
                         } else {
                             window.setDefaultCloseOperation(window.DISPOSE_ON_CLOSE);
                         }
