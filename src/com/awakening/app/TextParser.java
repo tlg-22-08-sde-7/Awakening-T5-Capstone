@@ -19,11 +19,8 @@ public class TextParser {
     public static final String WHITE = "\033[0;37m";   // WHITE
 
     // Allowed Commands
-    private List<String> allowedCommands = new ArrayList<>(Arrays.asList("go", "get", "look", "quit"));
-    private List<String> actionPromptCommands = new ArrayList<>(Arrays.asList("fight", "flee", "use", "talk"));
-    private List<String> fightCommands = new ArrayList<>(Arrays.asList("use"));
-    private List<String> fightNouns = new ArrayList<>(Arrays.asList("barbell", "camera", "wood cane",
-            "first aid kit", "cellphone", "bandages", "fire extinguisher", "axe", "fist", "foot"));
+    private List<String> allowedCommands = new ArrayList<>(Arrays.asList("go", "get", "look", "quit", "use", "help"));
+    private List<String> allowedFightCommands = new ArrayList<>(Arrays.asList("help", "quit", "use"));
 
     public List<String> getAllowedCommands() {
         return allowedCommands;
@@ -31,6 +28,10 @@ public class TextParser {
 
     public List<String> getAllowedNouns() {
         return allowedNouns;
+    }
+
+    public List<String> getFightNouns() {
+        return fightNouns;
     }
 
     // method to print array of nouns to string and in color
@@ -41,6 +42,8 @@ public class TextParser {
     public String displayAllowedCommands() {
         return GREEN+allowedCommands.toString()+RESET;
     }
+    private List<String> fightNouns = new ArrayList<>(Arrays.asList("barbell", "camera", "wood-cane",
+            "first-aid-kit", "cellphone", "bandages", "fire-extinguisher", "axe", "fist"));
 
     private List<String> allowedNouns = new ArrayList<>(Arrays.asList("map", "north",
             "south", "east", "west", "ghost", "item", "camera","cellphone","key","journal","batteries",
@@ -58,11 +61,13 @@ public class TextParser {
         String verb = result.get(0);
         String noun;
 
+
         if (result.size() == 1 && "help".equals(verb)) {
             return result;
         }
         if (result.size() == 1 && "quit".equals(verb)) {
             return result;
+
         } else if (result.size() != 2) {
             System.out.println(RED + "Command not recognized. Only two word commands are recognized.\n" + RESET); //+
 //                    "First word must be a verb from the following list: " + displayAllowedCommands() +
@@ -83,6 +88,45 @@ public class TextParser {
             System.out.println(RED + "Second word in command not recognized" + RESET);
             result.set(0, "invalid");
         }
+
+        return result;
+    }
+    public List<String> fightParseInput(String input) {
+
+        List<String> result = new ArrayList<>(Arrays.asList(input.strip().toLowerCase().trim().split(" ")));
+
+
+        String verb = result.get(0);
+        String noun;
+
+
+        if (result.size() == 1 && "help".equals(verb)) {
+            return result;
+        }
+        if (result.size() == 1 && "quit".equals(verb)) {
+            return result;
+
+        } else if (result.size() != 2) {
+            System.out.println(RED + "Command not recognized. Only two word commands are recognized.\n" + RESET); //+
+//                    "First word must be a verb from the following list: " + displayAllowedCommands() +
+//                    "\nSecond word must be a noun from the following list: " + displayAllowedNouns());
+            result.set(0, "invalid");
+            return result;
+        }
+        if (!allowedFightCommands.contains(verb) || !fightNouns.contains(result.get(1))) {
+            System.out.print(RED + "Invalid input, please try again. Type 'help' for a list of commands.\n" + RESET);
+//            System.out.println("Invalid input, please try again. Type 'help' for a list of commands.\n");
+        }
+        if (!allowedFightCommands.contains(verb)) {
+            System.out.println(RED + "First word in command not recognized" + RESET);
+            result.set(0, "invalid");
+
+        }
+        if (!fightNouns.contains(result.get(1))) {
+            System.out.println(RED + "Second word in command not recognized" + RESET);
+            result.set(0, "invalid");
+        }
+
         return result;
     }
 }

@@ -2,6 +2,7 @@ package com.awakening.ui.game.states;
 
 import com.awakening.ui.framework.gamestates.GameState;
 import com.awakening.ui.framework.gamestates.GameStateManager;
+import com.awakening.ui.framework.gui.Sound;
 import com.awakening.ui.framework.gui.WindowManager;
 
 import javax.imageio.ImageIO;
@@ -17,17 +18,17 @@ public class MainMenu extends GameState {
     private static final String START_GAME = "Start";
     private static final String QUIT_GAME = "Quit";
     private static final String SHOW_INSTRUCTIONS = "Instructions";
+    private static final String SETTINGS = "Settings";
     private int selected;
 
     public MainMenu(GameStateManager manager) {
         super(manager);
-        this.optionsMenu = new String[] {START_GAME, SHOW_INSTRUCTIONS, QUIT_GAME};
+        this.optionsMenu = new String[] {START_GAME, SHOW_INSTRUCTIONS, QUIT_GAME, SETTINGS};
         this.selected = 0;
     }
 
     @Override
     protected void loop() {
-
     }
 
     @Override
@@ -54,8 +55,10 @@ public class MainMenu extends GameState {
             else if(i == 1){ // show instructions
                 graphics.drawString(this.optionsMenu[i], WindowManager.WIDTH/2, 550);
             }
-            else{ // quit game
+            else if(i == 2) { // quit game
                 graphics.drawString(this.optionsMenu[i], WindowManager.WIDTH - 100, 50);
+            } else {
+                graphics.drawString(this.optionsMenu[i], WindowManager.WIDTH - 100, 100);
             }
         }
     }
@@ -80,6 +83,8 @@ public class MainMenu extends GameState {
                 switch(this.optionsMenu[selected]) {
                     case START_GAME:
                         super.gameStateManager.stackState(new PlayingState(gameStateManager));
+                        Sound.stopMusic();
+                        Sound.playMusic(10);
                         break;
                     case SHOW_INSTRUCTIONS:
                         JOptionPane.showMessageDialog(null, "These are your instructions",
@@ -95,6 +100,17 @@ public class MainMenu extends GameState {
                             window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                         }
                         break;
+                    case SETTINGS:
+                        window = new JFrame();
+                        int optionPane = JOptionPane.showConfirmDialog
+                                (window, Sound.volumeControl(), "Sound", JOptionPane.OK_CANCEL_OPTION);
+
+                        JPanel settingsWindow = new JPanel();
+                        if (optionPane == JOptionPane.OK_OPTION) {
+                            window.setDefaultCloseOperation(window.DO_NOTHING_ON_CLOSE);
+                        } else {
+                            window.setDefaultCloseOperation(window.DISPOSE_ON_CLOSE);
+                        }
                 }
                 break;
         }

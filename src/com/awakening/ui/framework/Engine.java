@@ -1,6 +1,7 @@
 package com.awakening.ui.framework;
 
 import com.awakening.ui.framework.gamestates.GameStateManager;
+import com.awakening.ui.framework.gui.Sound;
 import com.awakening.ui.framework.gui.WindowManager;
 import com.awakening.ui.game.states.MainMenu;
 
@@ -16,6 +17,7 @@ public class Engine {
     private static GameStateManager gameStateManager;
     private static WindowManager windowManager;
     private static Timer timer;
+    private static Sound sound = new Sound();
 
     public static void init() {
         gameStateManager = new GameStateManager();
@@ -24,20 +26,20 @@ public class Engine {
     }
 
     public static void start() {
+        Sound.playMusic(0);
         gameStateManager.stackState(new MainMenu(gameStateManager));
         windowManager.addPanel(new GameScreen());
         windowManager.addKeyListener(new Keyboard());
         windowManager.createWindow();
-
+        timer.start();
     }
 
     private static class MainGameLoop implements ActionListener {
 
         @Override
-        public void actionPerformed(ActionEvent arg0) {
+        public void actionPerformed(ActionEvent e) {
             gameStateManager.loop();
         }
-
     }
 
     private static class GameScreen extends JPanel {
