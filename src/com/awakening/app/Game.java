@@ -389,8 +389,8 @@ public class Game {
 
             String noun = fightCommands.get(1);
             while ("invalid".equals(verb)) {
-                input = prompter.prompt("What would you like to do? (use + fist or item)\n>");
-                fightCommands = textParser.fightParseInput(input);
+                Console.pause(1500);
+                runningIntoAGhost();
             }
             Item.ItemsSetup item = inventoryItem(noun);
             if (verb.equals("use")) {

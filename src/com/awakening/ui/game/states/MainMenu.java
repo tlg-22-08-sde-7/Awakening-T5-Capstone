@@ -2,6 +2,7 @@ package com.awakening.ui.game.states;
 
 import com.awakening.ui.framework.gamestates.GameState;
 import com.awakening.ui.framework.gamestates.GameStateManager;
+import com.awakening.ui.framework.gui.Sound;
 import com.awakening.ui.framework.gui.WindowManager;
 
 import javax.imageio.ImageIO;
@@ -79,6 +80,8 @@ public class MainMenu extends GameState {
                 switch(this.optionsMenu[selected]) {
                     case START_GAME:
                         super.gameStateManager.stackState(new PlayingState(gameStateManager));
+                        Sound.stopMusic();
+                        Sound.playMusic(10);
                         break;
                     case SHOW_INSTRUCTIONS:
                         JOptionPane.showMessageDialog(null, "These are your instructions",
