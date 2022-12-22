@@ -2,6 +2,7 @@ package com.awakening.ui.game.states;
 
 import com.awakening.ui.framework.gamestates.GameState;
 import com.awakening.ui.framework.gamestates.GameStateManager;
+import com.awakening.ui.framework.gui.Sound;
 import com.awakening.ui.framework.resources.Resources;
 import com.awakening.ui.framework.utils.MathHelper;
 import com.awakening.ui.game.entities.Player;
@@ -35,6 +36,7 @@ class PlayingState extends GameState {
 
         this.world.getRoom().featureInteraction(player);
 
+
 //        this.player.regenerateHealth();
 //        this.playerAttacks();
     }
@@ -43,7 +45,6 @@ class PlayingState extends GameState {
     protected void render(Graphics graphics) {
         this.world.getRoom().render(graphics);
         this.player.render(graphics);
-
         /*graphics.drawImage(Resources.TEXTURES.get(Resources.ATTACK), this.player.getAttackBox().x, this.player.getAttackBox().y, this.player.getAttackBox().width, this.player.getAttackBox().height, null);
 
         graphics.setColor(Color.WHITE);
@@ -103,6 +104,8 @@ class PlayingState extends GameState {
         }
         this.world = new World(this.generator.getRoomsData());
 
+
+
        /* this.world.getRoomRandom().placeFeature(new Feature(Resources.STAIRS, this::generateLevel));
 
         for(int i=0;i<12;i++) {
@@ -161,4 +164,5 @@ class PlayingState extends GameState {
             }
         }
     }*/
+
 }
