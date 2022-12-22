@@ -25,6 +25,7 @@ public class Loader {
             Resources.TEXTURES.add(Resources.PLAYER_RIGHT_2, ImageIO.read(new File("resources/pictures/player2/p2walkright.png")));
             Resources.TEXTURES.add(Resources.PLAYER_BACK, ImageIO.read(new File("resources/pictures/player2/p2standup.png")));
             Resources.TEXTURES.add(Resources.PLAYER_BACK_2, ImageIO.read(new File("resources/pictures/player2/p2walkup.png")));
+            Resources.TEXTURES.add(Resources.ENEMY, ImageIO.read(new File("resources/pictures.ghost/ghost.png")));
 
         } catch (IOException e) {
             e.printStackTrace();
