@@ -24,7 +24,7 @@ public class Entity extends Rectangle {
     protected byte animationDelay;
 
     public Entity(byte id, int posXinRoom, int posYinRoom) {
-        super(posXinRoom * Tile.SIZE, posYinRoom*Tile.SIZE, Tile.SIZE, Tile.SIZE);
+        super(posXinRoom * Tile.SIZE, posYinRoom * Tile.SIZE, Tile.SIZE, Tile.SIZE);
         this.id = id;
         up = false;
         down = false;
@@ -34,34 +34,52 @@ public class Entity extends Rectangle {
         facing = MathHelper.Direction.SOUTH;
     }
 
-    public void move(){
-        if (up){
+    public void move() {
+        if (up) {
             super.y -= speed;
             facing = MathHelper.Direction.NORTH;
         }
-        if (down){
+        if (down) {
             super.y += speed;
             facing = MathHelper.Direction.SOUTH;
         }
-        if (left){
+        if (left) {
             super.x -= speed;
             facing = MathHelper.Direction.WEST;
         }
-        if (right){
+        if (right) {
             super.x += speed;
             facing = MathHelper.Direction.EAST;
         }
     }
 
-    public void render(Graphics graphics){
-        if(up || down || left || right) {
+    public void render(Graphics graphics) {
+        if (up || down || left || right) {
             this.animationDelay++;
-            if(this.animationDelay == 70) {
+            if (this.animationDelay == 70) {
                 this.animationDelay = 0;
                 this.animationFrame = (byte) (1 - this.animationFrame);
             }
         }
         graphics.drawImage(Resources.TEXTURES.get(id + animationFrame), super.x, super.y, super.width, super.height, null);
+    }
+
+    public void handleCollisionWith(Tile tile) {
+        Rectangle intersection = this.intersection(tile);
+        if (intersection.isEmpty() || !tile.isWall())
+            return;
+
+        if (intersection.width > intersection.height) {
+            if (this.y < tile.y)
+                this.y = tile.y - this.height;
+            else
+                this.y = tile.y + this.height;
+        } else {
+            if (this.x < tile.x)
+                this.x = tile.x - this.width;
+            else
+                this.x = tile.x + this.width;
+        }
     }
 
     public byte getID() {
@@ -85,11 +103,11 @@ public class Entity extends Rectangle {
     }
 
     public void setCenterX(int x) {
-        super.x = x - super.width/2;
+        super.x = x - super.width / 2;
     }
 
     public void setCenterY(int y) {
-        super.y = y - super.height/2;
+        super.y = y - super.height / 2;
     }
 
     public MathHelper.Direction getFacing() {
