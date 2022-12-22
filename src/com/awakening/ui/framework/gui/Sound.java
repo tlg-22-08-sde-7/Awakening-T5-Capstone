@@ -7,28 +7,26 @@ import java.net.URL;
 
 public class Sound {
 
-    Clip clip;
-    URL soundURL[] = new URL[30];
+    static Clip clip;
+    static URL[] soundURL = new URL[30];
 
-    public Sound() {
-        soundURL[0] = getClass().getResource("resources/sound/titlescreen.wav");
-        soundURL[1] = getClass().getResource("resources/sound/attack.wav");
-        soundURL[2] = getClass().getResource("resources/sound/badcommand.wav");
-        soundURL[3] = getClass().getResource("resources/sound/camera.wav");
-        soundURL[4] = getClass().getResource("resources/sound/file.wav");
-        soundURL[5] = getClass().getResource("resources/sound/ghost.wav");
-        soundURL[6] = getClass().getResource("resources/sound/item.wav");
-        soundURL[7] = getClass().getResource("resources/sound/losegame.wav");
-        soundURL[8] = getClass().getResource("resources/sound/opendoor.wav");
-        soundURL[9] = getClass().getResource("resources/sound/room.wav");
-        soundURL[10] = getClass().getResource("resources/sound/room2.wav");
-        soundURL[11] = getClass().getResource("resources/sound/room3.wav");
-        soundURL[12] = getClass().getResource("resources/sound/useitem.wav");
-        soundURL[13] = getClass().getResource("resources/sound/wingame.wav");
-        soundURL[14] = getClass().getResource("resources/sound/wrongway.wav");
-
+    static{
+        soundURL[0] = Sound.class.getResource("/sound/titlescreen.wav");
+        soundURL[1] = Sound.class.getResource("/sound/attack.wav");
+        soundURL[2] = Sound.class.getResource("/sound/badcommand.wav");
+        soundURL[3] = Sound.class.getResource("/sound/camera.wav");
+        soundURL[4] = Sound.class.getResource("/sound/file.wav");
+        soundURL[5] = Sound.class.getResource("/sound/ghost.wav");
+        soundURL[6] = Sound.class.getResource("/sound/item.wav");
+        soundURL[7] = Sound.class.getResource("/sound/losegame.wav");
+        soundURL[8] = Sound.class.getResource("/sound/opendoor.wav");
+        soundURL[9] = Sound.class.getResource("/sound/room.wav");
+        soundURL[10] = Sound.class.getResource("/sound/room2.wav");
+        soundURL[11] = Sound.class.getResource("/sound/room3.wav");
+        soundURL[12] = Sound.class.getResource("/sound/wingame.wav");
     }
-    public void setFile(int i) {
+
+    public static void setFile(int i) {
         try {
 
             AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
@@ -40,31 +38,31 @@ public class Sound {
         }
     }
 
-    public void play() {
+    public static void play() {
         clip.start();
     }
 
-    public void loop() {
+    public static void loop() {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
-    public void stop() {
+    public static void stop() {
         clip.stop();
     }
 
-    /*public void playMusic(int i) {
+    public static void playMusic(int i) {
 
-        sound.setFile(i);
-        sound.play();
-        sound.loop();
+        setFile(i);
+        play();
+        loop();
     }
 
-    public void stopMusic() {
-        sound.stop();
+    public static void stopMusic() {
+        stop();
     }
 
-    public void playSE(int i) {
-        sound.setFile(i);
-        sound.play();
-    }*/
+    public static void playSE(int i) {
+        setFile(i);
+        play();
+    }
 }
