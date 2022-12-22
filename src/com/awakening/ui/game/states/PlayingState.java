@@ -59,7 +59,7 @@ class PlayingState extends GameState {
 
     @Override
     protected void keyPressed(int keyCode) {
-        switch(keyCode) {
+        switch (keyCode) {
             case KeyEvent.VK_W:
                 this.player.setUp(true);
                 break;
@@ -81,7 +81,7 @@ class PlayingState extends GameState {
 
     @Override
     protected void keyReleased(int keyCode) {
-        switch(keyCode) {
+        switch (keyCode) {
             case KeyEvent.VK_W:
                 this.player.setUp(false);
                 break;
@@ -96,9 +96,10 @@ class PlayingState extends GameState {
                 break;
         }
     }
+
     private void generateLevel() {
         this.generator.reset();
-        while(!this.generator.finished()) {
+        while (!this.generator.finished()) {
             this.generator.generate();
         }
         this.world = new World(this.generator.getRoomsData());
@@ -117,7 +118,7 @@ class PlayingState extends GameState {
     }
 
     private void spawnPlayer() {
-        if(this.world.getRoom(0, 0).getData().getTileAt(player.x / Tile.SIZE, player.y / Tile.SIZE).getID() != Resources.FLOOR) {
+        if (this.world.getRoom(0, 0).getData().getTileAt(player.x / Tile.SIZE, player.y / Tile.SIZE).getID() != Resources.FLOOR) {
             this.player.replaceRandomly();
             this.spawnPlayer();
         }
@@ -125,9 +126,9 @@ class PlayingState extends GameState {
 
     private void collisions() {
         RoomData roomIn = this.world.getRoom().getData();
-        for(int i=0;i<roomIn.getSizeX();i++) {
-            for(int j=0;j<roomIn.getSizeY();j++) {
-                //this.player.handleCollisionWith(roomIn.getTileAt(i, j));
+        for (int i = 0; i < roomIn.getSizeX(); i++) {
+            for (int j = 0; j < roomIn.getSizeY(); j++) {
+                this.player.handleCollisionWith(roomIn.getTileAt(i, j));
 //                for(Enemy enemy : this.world.getRoom().getEnemies()) {
 //                    enemy.handleCollisionWith(roomIn.getTileAt(i, j));
 //                }

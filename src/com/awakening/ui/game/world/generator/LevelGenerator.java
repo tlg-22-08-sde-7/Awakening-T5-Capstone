@@ -18,8 +18,8 @@ public class LevelGenerator {
     public void reset() {
         this.roomsData = new HashSet[WORLD_SIZE][WORLD_SIZE];
         this.generated = new boolean[WORLD_SIZE][WORLD_SIZE];
-        for(int i=0;i<this.roomsData.length;i++) {
-            for(int j=0;j<this.roomsData[i].length;j++) {
+        for (int i = 0; i < this.roomsData.length; i++) {
+            for (int j = 0; j < this.roomsData[i].length; j++) {
                 this.roomsData[i][j] = new HashSet<>();
                 this.generated[i][j] = false;
             }
@@ -29,16 +29,16 @@ public class LevelGenerator {
 
     public void generate() {
         MathHelper.Direction direction = MathHelper.randomDirection();
-        if(this.isValidPosition(posX + direction.dirX, posY + direction.dirY)) {
-            if(!this.generated[posX + direction.dirX][posY + direction.dirY]) {
+        // MathHelper.Direction direction = MathHelper.Direction.values()[0];
+        if (this.isValidPosition(posX + direction.dirX, posY + direction.dirY)) {
+            if (!this.generated[posX + direction.dirX][posY + direction.dirY]) {
                 this.roomsData[posX][posY].add(direction);
                 this.roomsData[posX + direction.dirX][posY + direction.dirY].add(direction.opposite);
             }
             this.posX += direction.dirX;
             this.posY += direction.dirY;
             this.generated[posX][posY] = true;
-        }
-        else {
+        } else {
             this.generate();
         }
     }
@@ -46,7 +46,7 @@ public class LevelGenerator {
     private void setRandomPosition() {
         this.posX = MathHelper.randomInt(WORLD_SIZE);
         this.posY = MathHelper.randomInt(WORLD_SIZE);
-        this.generated[posX][posY] = true;
+        this.generated[0][4] = true;  // this is the position of the world where the player will spawn
     }
 
     private boolean isValidPosition(int x, int y) {
@@ -54,9 +54,9 @@ public class LevelGenerator {
     }
 
     public boolean finished() {
-        for(int i=0;i<this.generated.length;i++) {
-            for(int j=0;j<this.generated[i].length;j++) {
-                if(!this.generated[i][j]) return false;
+        for (int i = 0; i < this.generated.length; i++) {
+            for (int j = 0; j < this.generated[i].length; j++) {
+                if (!this.generated[i][j]) return false;
             }
         }
         return true;
