@@ -74,6 +74,9 @@ class PlayingState extends GameState {
             case KeyEvent.VK_D:
                 this.player.setRight(true);
                 break;
+            case KeyEvent.VK_ESCAPE:
+                super.gameStateManager.stackState(new Options(gameStateManager));
+                break;
 //            case KeyEvent.VK_Q:
 //                this.player.attack();
 //                break;
@@ -95,6 +98,9 @@ class PlayingState extends GameState {
                 break;
             case KeyEvent.VK_D:
                 this.player.setRight(false);
+                break;
+            case KeyEvent.VK_ESCAPE:
+                super.gameStateManager.stackState(new Options(gameStateManager));
                 break;
         }
     }
@@ -141,6 +147,7 @@ class PlayingState extends GameState {
             }
         }
     }
+
 
 /*    private void givePlayerRandomLoot() {
         switch(MathHelper.randomInt(3)) {
