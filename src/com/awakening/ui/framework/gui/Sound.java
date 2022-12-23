@@ -106,9 +106,8 @@ public class Sound {
                 volumeMute();
             }
         });
+
         adjustSound.add(muteB);
-
-
         adjustSound.setVisible(true);
         return adjustSound;
     }
