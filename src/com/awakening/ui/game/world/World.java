@@ -27,7 +27,7 @@ public class World {
                 }
             }
         }
-        this.currentX = 0;
+        this.currentX = 1;
         this.currentY = 0;
     }
 
