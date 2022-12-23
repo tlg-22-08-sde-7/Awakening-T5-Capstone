@@ -12,54 +12,53 @@ public class LevelGenerator {
     private int posY;
 
     private HashSet<MathHelper.Direction>[][] roomsData;
-    private boolean generated[][];
 
     @SuppressWarnings("unchecked")
-    public void reset() {
+    public void intializeGridForRooms() {
         this.roomsData = new HashSet[WORLD_SIZE][WORLD_SIZE];
-        this.generated = new boolean[WORLD_SIZE][WORLD_SIZE];
         for (int i = 0; i < this.roomsData.length; i++) {
             for (int j = 0; j < this.roomsData[i].length; j++) {
                 this.roomsData[i][j] = new HashSet<>();
-                this.generated[i][j] = false;
             }
         }
-        this.setRandomPosition();
     }
 
     public void generate() {
-        MathHelper.Direction direction = MathHelper.randomDirection();
-        // MathHelper.Direction direction = MathHelper.Direction.values()[0];
-        if (this.isValidPosition(posX + direction.dirX, posY + direction.dirY)) {
-            if (!this.generated[posX + direction.dirX][posY + direction.dirY]) {
-                this.roomsData[posX][posY].add(direction);
-                this.roomsData[posX + direction.dirX][posY + direction.dirY].add(direction.opposite);
-            }
-            this.posX += direction.dirX;
-            this.posY += direction.dirY;
-            this.generated[posX][posY] = true;
-        } else {
-            this.generate();
-        }
+        //basement
+        this.roomsData[1][0].add(MathHelper.Direction.SOUTH);
+
+        //morgue
+        this.roomsData[1][1].add(MathHelper.Direction.NORTH);
+
+        //keypad room
+        this.roomsData[1][1].add(MathHelper.Direction.EAST);
+        this.roomsData[2][1].add(MathHelper.Direction.WEST);
+
+        //emergency room
+        this.roomsData[1][1].add(MathHelper.Direction.SOUTH);
+        this.roomsData[1][2].add(MathHelper.Direction.NORTH);
+
+        //office
+        this.roomsData[1][2].add(MathHelper.Direction.WEST);
+        this.roomsData[0][2].add(MathHelper.Direction.EAST);
+
+        //front desk
+        this.roomsData[1][2].add(MathHelper.Direction.SOUTH);
+        this.roomsData[1][3].add(MathHelper.Direction.NORTH);
+
+        //hallway
+        this.roomsData[1][2].add(MathHelper.Direction.EAST);
+        this.roomsData[2][2].add(MathHelper.Direction.WEST);
+
+        //patient room
+        this.roomsData[2][2].add(MathHelper.Direction.EAST);
+        this.roomsData[3][2].add(MathHelper.Direction.WEST);
+
     }
 
-    private void setRandomPosition() {
-        this.posX = MathHelper.randomInt(WORLD_SIZE);
-        this.posY = MathHelper.randomInt(WORLD_SIZE);
-        this.generated[0][4] = true;  // this is the position of the world where the player will spawn
-    }
 
     private boolean isValidPosition(int x, int y) {
         return x >= 0 && y >= 0 && x < WORLD_SIZE && y < WORLD_SIZE;
-    }
-
-    public boolean finished() {
-        for (int i = 0; i < this.generated.length; i++) {
-            for (int j = 0; j < this.generated[i].length; j++) {
-                if (!this.generated[i][j]) return false;
-            }
-        }
-        return true;
     }
 
     public HashSet<MathHelper.Direction>[][] getRoomsData() {

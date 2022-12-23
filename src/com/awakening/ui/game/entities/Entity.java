@@ -30,7 +30,7 @@ public class Entity extends Rectangle {
         down = false;
         left = false;
         right = false;
-        speed = 5;
+        speed = 7;
         facing = MathHelper.Direction.SOUTH;
     }
 

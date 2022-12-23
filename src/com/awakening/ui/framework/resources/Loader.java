@@ -25,7 +25,14 @@ public class Loader {
             Resources.TEXTURES.add(Resources.PLAYER_RIGHT_2, ImageIO.read(new File("resources/pictures/player2/p2walkright.png")));
             Resources.TEXTURES.add(Resources.PLAYER_BACK, ImageIO.read(new File("resources/pictures/player2/p2standup.png")));
             Resources.TEXTURES.add(Resources.PLAYER_BACK_2, ImageIO.read(new File("resources/pictures/player2/p2walkup.png")));
+            Resources.TEXTURES.add(Resources.STAIRS, ImageIO.read(new File("resources/pictures/textures/stairs.png")));
+            Resources.TEXTURES.add(Resources.CHEST, ImageIO.read(new File("resources/pictures/textures/chest.png")));
             Resources.TEXTURES.add(Resources.ENEMY, ImageIO.read(new File("resources/pictures.ghost/ghost.png")));
+            Resources.TEXTURES.add(Resources.ENEMY_2, ImageIO.read(new File("resources/pictures.ghost/ghost2.png")));
+            Resources.TEXTURES.add(Resources.ATTACK, ImageIO.read(new File("resources/pictures/textures/attack.png")));
+            Resources.TEXTURES.add(Resources.HEART, ImageIO.read(new File("resources/pictures/textures/heart.png")));
+            Resources.TEXTURES.add(Resources.ARMOR, ImageIO.read(new File("resources/pictures/textures/armor.png")));
+            Resources.TEXTURES.add(Resources.GOLD, ImageIO.read(new File("resources/pictures/textures/gold.png")));
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -7,11 +7,13 @@ import com.awakening.ui.framework.resources.Resources;
 import com.awakening.ui.framework.utils.MathHelper;
 import com.awakening.ui.game.entities.Enemy;
 import com.awakening.ui.game.entities.Player;
+import com.awakening.ui.game.world.Feature;
 import com.awakening.ui.game.world.Tile;
 import com.awakening.ui.game.world.World;
 import com.awakening.ui.game.world.generator.LevelGenerator;
 import com.awakening.ui.game.world.generator.RoomData;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
@@ -38,15 +40,15 @@ class PlayingState extends GameState {
         this.world.getRoom().featureInteraction(player);
 
 
-//        this.player.regenerateHealth();
-//        this.playerAttacks();
+        this.player.regenerateHealth();
+        this.playerAttacks();
     }
 
     @Override
     protected void render(Graphics graphics) {
         this.world.getRoom().render(graphics);
         this.player.render(graphics);
-        /*graphics.drawImage(Resources.TEXTURES.get(Resources.ATTACK), this.player.getAttackBox().x, this.player.getAttackBox().y, this.player.getAttackBox().width, this.player.getAttackBox().height, null);
+        graphics.drawImage(Resources.TEXTURES.get(Resources.ATTACK), this.player.getAttackBox().x, this.player.getAttackBox().y, this.player.getAttackBox().width, this.player.getAttackBox().height, null);
 
         graphics.setColor(Color.WHITE);
         graphics.setFont(new Font("arial", Font.PLAIN, 15));
@@ -55,7 +57,7 @@ class PlayingState extends GameState {
         graphics.drawImage(Resources.TEXTURES.get(Resources.ARMOR), 80, 0, Tile.SIZE*2/3, Tile.SIZE*2/3, null);
         graphics.drawString(this.player.getArmor()+"", Tile.SIZE*2/3+85, 20);
         graphics.drawImage(Resources.TEXTURES.get(Resources.GOLD), 160, 0, Tile.SIZE*2/3, Tile.SIZE*2/3, null);
-        graphics.drawString(this.player.getGold()+"", Tile.SIZE*2/3+165, 20);*/
+        graphics.drawString(this.player.getGold()+"", Tile.SIZE*2/3+165, 20);
 
     }
 
@@ -63,20 +65,25 @@ class PlayingState extends GameState {
     protected void keyPressed(int keyCode) {
         switch (keyCode) {
             case KeyEvent.VK_W:
+            case KeyEvent.VK_UP:
                 this.player.setUp(true);
                 break;
             case KeyEvent.VK_A:
+            case KeyEvent.VK_LEFT:
                 this.player.setLeft(true);
                 break;
             case KeyEvent.VK_S:
+            case KeyEvent.VK_DOWN:
                 this.player.setDown(true);
                 break;
             case KeyEvent.VK_D:
+            case KeyEvent.VK_RIGHT:
                 this.player.setRight(true);
                 break;
-//            case KeyEvent.VK_Q:
-//                this.player.attack();
-//                break;
+            case KeyEvent.VK_Q:
+            case KeyEvent.VK_SPACE:
+                this.player.attack();
+                break;
         }
 
     }
@@ -85,44 +92,55 @@ class PlayingState extends GameState {
     protected void keyReleased(int keyCode) {
         switch (keyCode) {
             case KeyEvent.VK_W:
+            case KeyEvent.VK_UP:
                 this.player.setUp(false);
                 break;
             case KeyEvent.VK_A:
+            case KeyEvent.VK_LEFT:
                 this.player.setLeft(false);
                 break;
             case KeyEvent.VK_S:
+            case KeyEvent.VK_DOWN:
                 this.player.setDown(false);
                 break;
             case KeyEvent.VK_D:
+            case KeyEvent.VK_RIGHT:
                 this.player.setRight(false);
                 break;
         }
     }
 
     private void generateLevel() {
-        this.generator.reset();
-        while (!this.generator.finished()) {
-            this.generator.generate();
-        }
+        this.generator.intializeGridForRooms();
+        this.generator.generate();
         this.world = new World(this.generator.getRoomsData());
 
+        // TODO: stairs to second floor
+        // this.world.getRoomRandom().placeFeature(new Feature(Resources.STAIRS, this::generateLevel));
 
-//       this.world.getRoomRandom().placeFeature(new Feature(Resources.STAIRS, this::generateLevel));
-//
-//        for(int i=0;i<12;i++) {
-//            this.world.getRoomRandom().placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
-//        }
+        //place items in the rooms per the requirement
+        this.world.getRoom(0,2).placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
+        this.world.getRoom(1,0).placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
+        this.world.getRoom(1,1).placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
+        this.world.getRoom(1,2).placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
+        this.world.getRoom(1,3).placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
+        this.world.getRoom(2,2).placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
+        this.world.getRoom(3,2).placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
 
-
-        for(int i=0;i<25;i++) {
-            this.world.getRoomRandom().spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
-        }
+        //place enemies in the room per the requirement
+        this.world.getRoom(0,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
+        this.world.getRoom(1,0).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
+        this.world.getRoom(1,1).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
+        this.world.getRoom(1,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
+        this.world.getRoom(1,3).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
+        this.world.getRoom(2,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
+        this.world.getRoom(3,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
 
         this.spawnPlayer();
     }
 
     private void spawnPlayer() {
-        if (this.world.getRoom(0, 0).getData().getTileAt(player.x / Tile.SIZE, player.y / Tile.SIZE).getID() != Resources.FLOOR) {
+        if (this.world.getRoom(1, 0).getData().getTileAt(player.x / Tile.SIZE, player.y / Tile.SIZE).getID() != Resources.FLOOR) {
             this.player.replaceRandomly();
             this.spawnPlayer();
         }
@@ -135,14 +153,14 @@ class PlayingState extends GameState {
             for (int j = 0; j < roomIn.getSizeY(); j++) {
                 this.player.handleCollisionWith(roomIn.getTileAt(i, j));
 
-//                for(Enemy enemy : this.world.getRoom().getEnemies()) {
-//                    enemy.handleCollisionWith(roomIn.getTileAt(i, j));
-//                }
+                for(Enemy enemy : this.world.getRoom().getEnemies()) {
+                    enemy.handleCollisionWith(roomIn.getTileAt(i, j));
+                }
             }
         }
     }
 
-/*    private void givePlayerRandomLoot() {
+    private void givePlayerRandomLoot() {
         switch(MathHelper.randomInt(3)) {
             case 0: this.player.addArmor(MathHelper.randomInt(3, 5)); break;
             case 1: this.player.giveGold(MathHelper.randomInt(3, 7)); break;
@@ -151,6 +169,17 @@ class PlayingState extends GameState {
     }
 
     private void playerAttacks() {
+
+        if (this.player.getHp() <=0 ){
+            JFrame window= new JFrame();
+            int resp = JOptionPane.showConfirmDialog( window, "You died. Restart the game?", "G  A  M  E  O  V  E  R", JOptionPane.YES_NO_OPTION);
+            if (resp == JOptionPane.YES_OPTION) {
+                super.gameStateManager.stackState(new MainMenu(gameStateManager));
+            } else {
+                System.exit(0);
+            }
+        }
+
         this.player.decreaseTime();
         for(int i=0;i<this.world.getRoom().getEnemies().size();i++) {
             this.world.getRoom().getEnemies().get(i).move();
@@ -167,6 +196,6 @@ class PlayingState extends GameState {
                 }
             }
         }
-    }*/
+    }
 
 }
