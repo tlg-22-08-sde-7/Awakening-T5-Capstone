@@ -33,6 +33,31 @@ public class Loader {
             Resources.TEXTURES.add(Resources.HEART, ImageIO.read(new File("resources/pictures/textures/heart.png")));
             Resources.TEXTURES.add(Resources.ARMOR, ImageIO.read(new File("resources/pictures/textures/armor.png")));
             Resources.TEXTURES.add(Resources.GOLD, ImageIO.read(new File("resources/pictures/textures/gold.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_1_STAND_DOWN, ImageIO.read(new File("resources/pictures/player1/down1.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_1_WALK_DOWN, ImageIO.read(new File("resources/pictures/player1/down2.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_1_STAND_LEFT, ImageIO.read(new File("resources/pictures/player1/left1.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_1_WALK_LEFT, ImageIO.read(new File("resources/pictures/player1/left2.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_1_STAND_RIGHT, ImageIO.read(new File("resources/pictures/player1/right1.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_1_WALK_RIGHT, ImageIO.read(new File("resources/pictures/player1/right2.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_1_STAND_UP, ImageIO.read(new File("resources/pictures/player1/up1.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_1_WALK_UP, ImageIO.read(new File("resources/pictures/player1/up2.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_3_STAND_DOWN, ImageIO.read(new File("resources/pictures/player3/p3standdown.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_3_WALK_DOWN, ImageIO.read(new File("resources/pictures/player3/p3walkdown.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_3_STAND_LEFT, ImageIO.read(new File("resources/pictures/player3/p3standleft.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_3_WALK_LEFT, ImageIO.read(new File("resources/pictures/player3/p3walkleft.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_3_STAND_RIGHT, ImageIO.read(new File("resources/pictures/player3/p3standright.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_3_WALK_RIGHT, ImageIO.read(new File("resources/pictures/player3/p3walkright.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_3_STAND_UP, ImageIO.read(new File("resources/pictures/player3/p3standup.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_3_WALK_UP, ImageIO.read(new File("resources/pictures/player3/p3walkup.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_4_STAND_DOWN, ImageIO.read(new File("resources/pictures/player4/p4standdown.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_4_WALK_DOWN, ImageIO.read(new File("resources/pictures/player4/p4walkdown.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_4_STAND_LEFT, ImageIO.read(new File("resources/pictures/player4/p4standleft.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_4_WALK_LEFT, ImageIO.read(new File("resources/pictures/player4/p4walkleft.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_4_STAND_RIGHT, ImageIO.read(new File("resources/pictures/player4/p4standright.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_4_WALK_RIGHT, ImageIO.read(new File("resources/pictures/player4/p4walkright.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_4_STAND_UP, ImageIO.read(new File("resources/pictures/player4/p4standup.png")));
+            Resources.TEXTURES.add(Resources.PLAYER_4_WALK_UP, ImageIO.read(new File("resources/pictures/player4/p4walkup.png")));
+
 
         } catch (IOException e) {
             e.printStackTrace();
