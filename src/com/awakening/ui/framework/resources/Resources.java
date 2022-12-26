@@ -27,7 +27,30 @@ public class Resources {
     public static final byte HEART = 18;
     public static final byte ARMOR = 19;
     public static final byte GOLD = 20;
-
+    public static final byte PLAYER_1_STAND_DOWN = 21;
+    public static final byte PLAYER_1_WALK_DOWN = 22;
+    public static final byte PLAYER_1_STAND_LEFT = 23;
+    public static final byte PLAYER_1_WALK_LEFT = 24;
+    public static final byte PLAYER_1_STAND_RIGHT = 25;
+    public static final byte PLAYER_1_WALK_RIGHT = 26;
+    public static final byte PLAYER_1_STAND_UP = 27;
+    public static final byte PLAYER_1_WALK_UP = 28;
+    public static final byte PLAYER_3_STAND_DOWN = 29;
+    public static final byte PLAYER_3_WALK_DOWN = 30;
+    public static final byte PLAYER_3_STAND_LEFT = 31;
+    public static final byte PLAYER_3_WALK_LEFT = 32;
+    public static final byte PLAYER_3_STAND_RIGHT = 33;
+    public static final byte PLAYER_3_WALK_RIGHT = 34;
+    public static final byte PLAYER_3_STAND_UP = 35;
+    public static final byte PLAYER_3_WALK_UP = 36;
+    public static final byte PLAYER_4_STAND_DOWN = 37;
+    public static final byte PLAYER_4_WALK_DOWN = 38;
+    public static final byte PLAYER_4_STAND_LEFT = 39;
+    public static final byte PLAYER_4_WALK_LEFT = 40;
+    public static final byte PLAYER_4_STAND_RIGHT = 41;
+    public static final byte PLAYER_4_WALK_RIGHT = 42;
+    public static final byte PLAYER_4_STAND_UP = 43;
+    public static final byte PLAYER_4_WALK_UP = 44;
 
     //public static final byte ENEMY = 13;
 

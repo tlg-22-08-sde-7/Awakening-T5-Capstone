@@ -82,9 +82,7 @@ public class MainMenu extends GameState {
             case KeyEvent.VK_ENTER:
                 switch(this.optionsMenu[selected]) {
                     case START_GAME:
-                        super.gameStateManager.stackState(new PlayingState(gameStateManager));
-                        Sound.stopMusic();
-                        Sound.playMusic(10);
+                        super.gameStateManager.stackState(new PlayerSelect(gameStateManager));
                         break;
                     case SHOW_INSTRUCTIONS:
                         JOptionPane.showMessageDialog(null, "These are your instructions",
