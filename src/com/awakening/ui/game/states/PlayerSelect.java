@@ -132,10 +132,22 @@ public class PlayerSelect extends GameState {
                         }
                         break;
                     case PLAYER1:
+                        super.gameStateManager.stackState(new PlayingState1(gameStateManager));
+                        Sound.stopMusic();
+                        Sound.playMusic(10);
+                        break;
                     case PLAYER2:
+                        super.gameStateManager.stackState(new PlayingState2(gameStateManager));
+                        Sound.stopMusic();
+                        Sound.playMusic(10);
+                        break;
                     case PLAYER3:
+                        super.gameStateManager.stackState(new PlayingState3(gameStateManager));
+                        Sound.stopMusic();
+                        Sound.playMusic(10);
+                        break;
                     case PLAYER4:
-                        super.gameStateManager.stackState(new PlayingState(gameStateManager));
+                        super.gameStateManager.stackState(new PlayingState4(gameStateManager));
                         Sound.stopMusic();
                         Sound.playMusic(10);
                         break;

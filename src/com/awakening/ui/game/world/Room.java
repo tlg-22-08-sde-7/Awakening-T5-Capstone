@@ -1,8 +1,7 @@
 package com.awakening.ui.game.world;
 
 import com.awakening.ui.framework.resources.Resources;
-import com.awakening.ui.game.entities.Enemy;
-import com.awakening.ui.game.entities.Player;
+import com.awakening.ui.game.entities.*;
 import com.awakening.ui.game.world.generator.RoomData;
 
 import java.awt.*;
@@ -35,23 +34,62 @@ public class Room {
             this.placeFeature(new Feature(feature));
     }
 
-    public void featureInteraction(Player player) {
+    public void featureInteraction1(Player1 player) {
         for (int i = 0; i < this.features.size(); i++) {
             if (this.features.get(i).intersects(player))
                 this.features.remove(i);
         }
     }
 
+    public void featureInteraction2(Player2 player) {
+        for (int i = 0; i < this.features.size(); i++) {
+            if (this.features.get(i).intersects(player))
+                this.features.remove(i);
+        }
+    }
+    public void featureInteraction3(Player3 player) {
+        for (int i = 0; i < this.features.size(); i++) {
+            if (this.features.get(i).intersects(player))
+                this.features.remove(i);
+        }
+    }
+    public void featureInteraction4(Player4 player) {
+        for (int i = 0; i < this.features.size(); i++) {
+            if (this.features.get(i).intersects(player))
+                this.features.remove(i);
+        }
+    }
+
+
     public ArrayList<Enemy> getEnemies() {
         return enemies;
     }
 
-    public void spawnEnemy(Enemy enemy) {
+    public void spawnEnemy(Enemy enemy, Player1 player) {
         if (data.getTileAt(enemy.x / Tile.SIZE, enemy.y / Tile.SIZE).getID() == Resources.FLOOR)
             this.enemies.add(enemy);
         else
-            this.spawnEnemy(new Enemy(enemy));
+            this.spawnEnemy(new Enemy(enemy, player), player);
     }
+    public void spawnEnemy(Enemy enemy, Player2 player) {
+        if (data.getTileAt(enemy.x / Tile.SIZE, enemy.y / Tile.SIZE).getID() == Resources.FLOOR)
+            this.enemies.add(enemy);
+        else
+            this.spawnEnemy(new Enemy(enemy, player), player);
+    }
+    public void spawnEnemy(Enemy enemy, Player3 player) {
+        if (data.getTileAt(enemy.x / Tile.SIZE, enemy.y / Tile.SIZE).getID() == Resources.FLOOR)
+            this.enemies.add(enemy);
+        else
+            this.spawnEnemy(new Enemy(enemy, player), player);
+    }
+    public void spawnEnemy(Enemy enemy, Player4 player) {
+        if (data.getTileAt(enemy.x / Tile.SIZE, enemy.y / Tile.SIZE).getID() == Resources.FLOOR)
+            this.enemies.add(enemy);
+        else
+            this.spawnEnemy(new Enemy(enemy, player), player);
+    }
+
 
     public void render(Graphics graphics) {
         this.data.render(graphics);
