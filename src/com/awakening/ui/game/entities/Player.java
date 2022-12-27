@@ -18,6 +18,8 @@ public class Player extends Entity {
 
     private byte attackTime;
     private byte damageTime;
+    // Player's current location
+    private String playerLoc;
 
     public Player() {
         super(Resources.PLAYER, MathHelper.randomInt(2, 14), MathHelper.randomInt(2, 7));
@@ -28,6 +30,7 @@ public class Player extends Entity {
         this.gold = 0;
         this.attackTime = 0;
         this.damageTime = 0;
+        this.playerLoc = "Basement";
     }
 
     public void replaceRandomly() {
@@ -132,5 +135,13 @@ public class Player extends Entity {
             this.hp -= amount;
             this.damageTime = 50;
         }
+    }
+
+    public String getPlayerLoc() {
+        return playerLoc;
+    }
+
+    public void setPlayerLoc(String playerLoc) {
+        this.playerLoc = playerLoc;
     }
 }
