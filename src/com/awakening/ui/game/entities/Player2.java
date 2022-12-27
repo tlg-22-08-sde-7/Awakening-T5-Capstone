@@ -143,4 +143,5 @@ public class Player2 extends Entity {
     public void setPlayerLoc(String playerLoc) {
         this.playerLoc = playerLoc;
     }
+
 }

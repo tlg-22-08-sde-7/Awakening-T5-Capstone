@@ -30,7 +30,6 @@ public class LevelGenerator {
         //basement
         this.roomsData[1][0].add(MathHelper.Direction.SOUTH);
         this.roomNames[1][0] = "Basement";
-
         //morgue
         this.roomsData[1][1].add(MathHelper.Direction.NORTH);
         this.roomNames[1][1] = "Morgue";
