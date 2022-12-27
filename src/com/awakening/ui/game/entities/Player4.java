@@ -6,8 +6,7 @@ import com.awakening.ui.game.world.Tile;
 
 import java.awt.*;
 
-public class Player extends Entity {
-
+public class Player4 extends Entity {
     private static final long serialVersionUID = 1L;
 
     private int hp;
@@ -21,8 +20,8 @@ public class Player extends Entity {
     // Player's current location
     private String playerLoc;
 
-    public Player() {
-        super(Resources.PLAYER, MathHelper.randomInt(2, 14), MathHelper.randomInt(2, 7));
+    public Player4() {
+        super(Resources.PLAYER_4_STAND_DOWN, MathHelper.randomInt(2, 14), MathHelper.randomInt(2, 7));
         this.hp = 20;
         this.maxHp = 20;
         this.regenDelay = 0; // regenerate player's health every 50 milisec
@@ -34,7 +33,7 @@ public class Player extends Entity {
     }
 
     public void replaceRandomly() {
-        super.x = MathHelper.randomInt(2, 14)*Tile.SIZE;
+        super.x = MathHelper.randomInt(2, 14)* Tile.SIZE;
         super.y = MathHelper.randomInt(2, 7)*Tile.SIZE;
     }
 
@@ -83,10 +82,10 @@ public class Player extends Entity {
         if(this.attackTime == 0) {
             super.move();
             switch(super.facing) {
-                case NORTH: super.id = Resources.PLAYER_BACK; break;
-                case SOUTH: super.id = Resources.PLAYER; break;
-                case WEST: super.id = Resources.PLAYER_LEFT; break;
-                case EAST: super.id = Resources.PLAYER_RIGHT; break;
+                case NORTH: super.id = Resources.PLAYER_4_STAND_UP; break;
+                case SOUTH: super.id = Resources.PLAYER_4_STAND_DOWN; break;
+                case WEST: super.id = Resources.PLAYER_4_STAND_LEFT; break;
+                case EAST: super.id = Resources.PLAYER_4_STAND_RIGHT; break;
             }
         }
     }
@@ -136,7 +135,6 @@ public class Player extends Entity {
             this.damageTime = 50;
         }
     }
-
     public String getPlayerLoc() {
         return playerLoc;
     }

@@ -2,11 +2,10 @@ package com.awakening.ui.game.states;
 
 import com.awakening.ui.framework.gamestates.GameState;
 import com.awakening.ui.framework.gamestates.GameStateManager;
-import com.awakening.ui.framework.gui.Sound;
 import com.awakening.ui.framework.resources.Resources;
 import com.awakening.ui.framework.utils.MathHelper;
 import com.awakening.ui.game.entities.Enemy;
-import com.awakening.ui.game.entities.Player;
+import com.awakening.ui.game.entities.Player3;
 import com.awakening.ui.game.world.Feature;
 import com.awakening.ui.game.world.Tile;
 import com.awakening.ui.game.world.World;
@@ -17,16 +16,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-class PlayingState extends GameState {
-
+class PlayingState3 extends GameState {
     private LevelGenerator generator;
     private World world;
-    private Player player;
+    private Player3 player;
 
-    public PlayingState(GameStateManager manager) {
+    public PlayingState3(GameStateManager manager) {
         super(manager);
         generator = new LevelGenerator();
-        player = new Player();
+        player = new Player3();
         generateLevel();
     }
 
@@ -39,7 +37,7 @@ class PlayingState extends GameState {
         this.player.setPlayerLoc(roomName);
         this.collisions();
 
-        this.world.getRoom().featureInteraction(player);
+        this.world.getRoom().featureInteraction3(player);
 
 
         this.player.regenerateHealth();
@@ -60,6 +58,7 @@ class PlayingState extends GameState {
         graphics.drawString(this.player.getArmor()+"", Tile.SIZE*2/3+85, 20);
         graphics.drawImage(Resources.TEXTURES.get(Resources.GOLD), 160, 0, Tile.SIZE*2/3, Tile.SIZE*2/3, null);
         graphics.drawString(this.player.getGold()+"", Tile.SIZE*2/3+165, 20);
+
         // render player's current location/ rooms name
         graphics.setFont(graphics.getFont().deriveFont(Font.BOLD, 20f));
         graphics.drawString(this.player.getPlayerLoc(), 5, Tile.SIZE + 10);
@@ -138,13 +137,13 @@ class PlayingState extends GameState {
         this.world.getRoom(3,2).placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
 
         //place enemies in the room per the requirement
-        this.world.getRoom(0,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
-        this.world.getRoom(1,0).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
-        this.world.getRoom(1,1).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
-        this.world.getRoom(1,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
-        this.world.getRoom(1,3).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
-        this.world.getRoom(2,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
-        this.world.getRoom(3,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
+        this.world.getRoom(0,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player), player);
+        this.world.getRoom(1,0).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player), player);
+        this.world.getRoom(1,1).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player), player);
+        this.world.getRoom(1,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player), player);
+        this.world.getRoom(1,3).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player), player);
+        this.world.getRoom(2,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player), player);
+        this.world.getRoom(3,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player), player);
 
         this.spawnPlayer();
     }
@@ -172,7 +171,7 @@ class PlayingState extends GameState {
 
 
     private void givePlayerRandomLoot() {
-    
+
         switch(MathHelper.randomInt(3)) {
             case 0: this.player.addArmor(MathHelper.randomInt(3, 5)); break;
             case 1: this.player.giveGold(MathHelper.randomInt(3, 7)); break;
@@ -194,7 +193,7 @@ class PlayingState extends GameState {
 
         this.player.decreaseTime();
         for(int i=0;i<this.world.getRoom().getEnemies().size();i++) {
-            this.world.getRoom().getEnemies().get(i).move();
+            this.world.getRoom().getEnemies().get(i).move3();
 
             if(this.world.getRoom().getEnemies().get(i).intersects(this.player)) {
                 this.player.damage(5 -  5*this.player.getArmor()/100);
@@ -209,5 +208,4 @@ class PlayingState extends GameState {
             }
         }
     }
-
 }

@@ -1,6 +1,5 @@
 package com.awakening.ui.game.states;
 
-import com.awakening.ui.framework.Engine;
 import com.awakening.ui.framework.gamestates.GameState;
 import com.awakening.ui.framework.gamestates.GameStateManager;
 import com.awakening.ui.framework.gui.Sound;
@@ -131,7 +130,7 @@ public class Options extends GameState {
                         resp = JOptionPane.showConfirmDialog( window, "Are you sure you want to restart?\n " +
                                 "You will lose all of your progress.", "Restart?", JOptionPane.YES_NO_OPTION);
                         if (resp == JOptionPane.YES_OPTION) {
-                            super.gameStateManager.stackState(new PlayingState(gameStateManager));
+                            super.gameStateManager.stackState(new PlayerSelect(gameStateManager));
                             Sound.stopMusic();
                             Sound.playMusic(10);
                         } else {
