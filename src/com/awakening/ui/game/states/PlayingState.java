@@ -34,7 +34,9 @@ class PlayingState extends GameState {
     protected void loop() {
         this.player.move();
         this.world.changeRoom(player);
-
+        // Room names set up
+        String roomName = this.generator.getRoomName(this.world.getCurrentX(), this.world.getCurrentY());
+        this.player.setPlayerLoc(roomName);
         this.collisions();
 
         this.world.getRoom().featureInteraction(player);
@@ -58,7 +60,9 @@ class PlayingState extends GameState {
         graphics.drawString(this.player.getArmor()+"", Tile.SIZE*2/3+85, 20);
         graphics.drawImage(Resources.TEXTURES.get(Resources.GOLD), 160, 0, Tile.SIZE*2/3, Tile.SIZE*2/3, null);
         graphics.drawString(this.player.getGold()+"", Tile.SIZE*2/3+165, 20);
-
+        // render player's current location/ rooms name
+        graphics.setFont(graphics.getFont().deriveFont(Font.BOLD, 20f));
+        graphics.drawString(this.player.getPlayerLoc(), 5, Tile.SIZE + 10);
     }
 
     @Override

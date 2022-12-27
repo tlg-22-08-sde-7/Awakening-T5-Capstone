@@ -61,6 +61,13 @@ public class World {
             player.setCenterY(0);
         }
     }
-        
+    // returns player's location on map/room
+    public int getCurrentX() {
+        return currentX;
+    }
+    public int getCurrentY() {
+        return currentY;
+    }
+
 
 }
