@@ -5,7 +5,7 @@ import com.awakening.ui.framework.gamestates.GameStateManager;
 import com.awakening.ui.framework.resources.Resources;
 import com.awakening.ui.framework.utils.MathHelper;
 import com.awakening.ui.game.entities.Enemy;
-import com.awakening.ui.game.entities.Player4;
+import com.awakening.ui.game.entities.Player;
 import com.awakening.ui.game.world.Feature;
 import com.awakening.ui.game.world.Tile;
 import com.awakening.ui.game.world.World;
@@ -16,15 +16,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-class PlayingState4 extends GameState {
+class PlayingState extends GameState {
     private LevelGenerator generator;
     private World world;
-    private Player4 player;
+    private Player player;
 
-    public PlayingState4(GameStateManager manager) {
+    public PlayingState(GameStateManager manager) {
         super(manager);
         generator = new LevelGenerator();
-        player = new Player4();
+        player = new Player();
         generateLevel();
     }
 
@@ -37,7 +37,7 @@ class PlayingState4 extends GameState {
         this.player.setPlayerLoc(roomName);
         this.collisions();
 
-        this.world.getRoom().featureInteraction4(player);
+        this.world.getRoom().featureInteraction1(player);
 
 
         this.player.regenerateHealth();
@@ -141,13 +141,13 @@ class PlayingState4 extends GameState {
         this.world.getRoom(3,2).placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
 
         //place enemies in the room per the requirement
-        this.world.getRoom(0,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player), player);
-        this.world.getRoom(1,0).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player), player);
-        this.world.getRoom(1,1).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player), player);
-        this.world.getRoom(1,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player), player);
-        this.world.getRoom(1,3).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player), player);
-        this.world.getRoom(2,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player), player);
-        this.world.getRoom(3,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player), player);
+        this.world.getRoom(0,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
+        this.world.getRoom(1,0).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
+        this.world.getRoom(1,1).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
+        this.world.getRoom(1,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
+        this.world.getRoom(1,3).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
+        this.world.getRoom(2,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
+        this.world.getRoom(3,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
 
         this.spawnPlayer();
     }
@@ -197,7 +197,7 @@ class PlayingState4 extends GameState {
 
         this.player.decreaseTime();
         for(int i=0;i<this.world.getRoom().getEnemies().size();i++) {
-            this.world.getRoom().getEnemies().get(i).move4();
+            this.world.getRoom().getEnemies().get(i).move();
 
             if(this.world.getRoom().getEnemies().get(i).intersects(this.player)) {
                 this.player.damage(5 -  5*this.player.getArmor()/100);
