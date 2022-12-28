@@ -25,7 +25,7 @@ class PlayingState extends GameState {
         super(manager);
         generator = new LevelGenerator();
         player = new Player();
-        generateLevel();
+        generateLevel(0);
     }
 
     @Override
@@ -52,12 +52,12 @@ class PlayingState extends GameState {
 
         graphics.setColor(Color.WHITE);
         graphics.setFont(new Font("arial", Font.PLAIN, 15));
-        graphics.drawImage(Resources.TEXTURES.get(Resources.HEART), 0, 0, Tile.SIZE*2/3, Tile.SIZE*2/3, null);
-        graphics.drawString(this.player.getHp()+"/"+this.player.getMaxHp(), Tile.SIZE*2/3+5, 20);
-        graphics.drawImage(Resources.TEXTURES.get(Resources.ARMOR), 80, 0, Tile.SIZE*2/3, Tile.SIZE*2/3, null);
-        graphics.drawString(this.player.getArmor()+"", Tile.SIZE*2/3+85, 20);
-        graphics.drawImage(Resources.TEXTURES.get(Resources.GOLD), 160, 0, Tile.SIZE*2/3, Tile.SIZE*2/3, null);
-        graphics.drawString(this.player.getGold()+"", Tile.SIZE*2/3+165, 20);
+        graphics.drawImage(Resources.TEXTURES.get(Resources.HEART), 0, 0, Tile.SIZE * 2 / 3, Tile.SIZE * 2 / 3, null);
+        graphics.drawString(this.player.getHp() + "/" + this.player.getMaxHp(), Tile.SIZE * 2 / 3 + 5, 20);
+        graphics.drawImage(Resources.TEXTURES.get(Resources.ARMOR), 80, 0, Tile.SIZE * 2 / 3, Tile.SIZE * 2 / 3, null);
+        graphics.drawString(this.player.getArmor() + "", Tile.SIZE * 2 / 3 + 85, 20);
+        graphics.drawImage(Resources.TEXTURES.get(Resources.GOLD), 160, 0, Tile.SIZE * 2 / 3, Tile.SIZE * 2 / 3, null);
+        graphics.drawString(this.player.getGold() + "", Tile.SIZE * 2 / 3 + 165, 20);
 
         // render player's current location/ rooms name
         graphics.setFont(graphics.getFont().deriveFont(Font.BOLD, 20f));
@@ -123,33 +123,72 @@ class PlayingState extends GameState {
         }
     }
 
-    private void generateLevel() {
+    private void generateLevel(int level) {
         this.generator.intializeGridForRooms();
-        this.generator.generate();
+        this.generator.generateFirstFloor();
         this.world = new World(this.generator.getRoomsData());
 
-        // TODO: stairs to second floor
-        // this.world.getRoomRandom().placeFeature(new Feature(Resources.STAIRS, this::generateLevel));
+        if (level != 0) {
+            this.world.setCurrentX(2);
+            this.world.setCurrentY(2);
+        }
+        //stairs to Second Floor
+        this.world.getRoom(2, 2).placeFeature(new Feature(Resources.STAIRS, this::generateSecondLevel));
 
         //place items in the rooms per the requirement
-        this.world.getRoom(0,2).placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
-        this.world.getRoom(1,0).placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
-        this.world.getRoom(1,1).placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
-        this.world.getRoom(1,2).placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
-        this.world.getRoom(1,3).placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
-        this.world.getRoom(2,2).placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
-        this.world.getRoom(3,2).placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
+        generateChestInRoom(1, 0);
+        generateChestInRoom(1, 2);
+        generateChestInRoom(0, 2);
+        generateChestInRoom(1, 2);
+        generateChestInRoom(2, 1);
+
 
         //place enemies in the room per the requirement
-        this.world.getRoom(0,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
-        this.world.getRoom(1,0).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
-        this.world.getRoom(1,1).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
-        this.world.getRoom(1,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
-        this.world.getRoom(1,3).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
-        this.world.getRoom(2,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
-        this.world.getRoom(3,2).spawnEnemy(new Enemy(Resources.ENEMY, 5, this.player));
+        generateEnemyInRoom(1, 0, 5);
+        generateEnemyInRoom(1, 2, 5);
+        generateEnemyInRoom(0, 2, 5);
+        generateEnemyInRoom(1, 2, 5);
+        generateEnemyInRoom(2, 2, 5);
+        generateEnemyInRoom(2, 1, 5);
 
         this.spawnPlayer();
+    }
+
+    private void generateSecondLevel() {
+        this.generator.intializeGridForRooms();
+        this.generator.generateSecondFloor();
+        this.world = new World(this.generator.getRoomsData());
+        this.world.setCurrentX(2);
+        this.world.setCurrentY(1);
+
+        // stairs to First Floor
+        this.world.getRoom(2, 1).placeFeature(new Feature(Resources.STAIRS, () -> generateLevel(1)));
+
+        //place items in the rooms per the requirement
+        generateChestInRoom(1, 0);
+        generateChestInRoom(0, 1);
+        generateChestInRoom(1, 1);
+        generateChestInRoom(2, 1);
+        generateChestInRoom(3, 1);
+        generateChestInRoom(1, 2);
+
+        //place enemies in the room per the requirement
+        generateEnemyInRoom(1, 0, 5);
+        generateEnemyInRoom(0, 1, 5);
+        generateEnemyInRoom(1, 1, 5);
+        generateEnemyInRoom(2, 1, 5);
+        generateEnemyInRoom(3, 1, 5);
+        generateEnemyInRoom(1, 2, 5);
+
+        this.spawnPlayer();
+    }
+
+    private void generateChestInRoom(int roomX, int roomY) {
+        this.world.getRoom(roomX, roomY).placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
+    }
+
+    private void generateEnemyInRoom(int roomX, int roomY, int enemyHp) {
+        this.world.getRoom(roomX, roomY).spawnEnemy(new Enemy(Resources.ENEMY, enemyHp, this.player));
     }
 
     private void spawnPlayer() {
@@ -166,28 +205,33 @@ class PlayingState extends GameState {
             for (int j = 0; j < roomIn.getSizeY(); j++) {
                 this.player.handleCollisionWith(roomIn.getTileAt(i, j));
 
-                for(Enemy enemy : this.world.getRoom().getEnemies()) {
+                for (Enemy enemy : this.world.getRoom().getEnemies()) {
                     enemy.handleCollisionWith(roomIn.getTileAt(i, j));
                 }
             }
         }
     }
 
-
     private void givePlayerRandomLoot() {
 
-        switch(MathHelper.randomInt(3)) {
-            case 0: this.player.addArmor(MathHelper.randomInt(3, 5)); break;
-            case 1: this.player.giveGold(MathHelper.randomInt(3, 7)); break;
-            case 2: this.player.instantHeal(MathHelper.randomInt(2, 5)); break;
+        switch (MathHelper.randomInt(3)) {
+            case 0:
+                this.player.addArmor(MathHelper.randomInt(3, 5));
+                break;
+            case 1:
+                this.player.giveGold(MathHelper.randomInt(3, 7));
+                break;
+            case 2:
+                this.player.instantHeal(MathHelper.randomInt(2, 5));
+                break;
         }
     }
 
     private void playerAttacks() {
 
-        if (this.player.getHp() <=0 ){
-            JFrame window= new JFrame();
-            int resp = JOptionPane.showConfirmDialog( window, "You died. Restart the game?", "G  A  M  E  O  V  E  R", JOptionPane.YES_NO_OPTION);
+        if (this.player.getHp() <= 0) {
+            JFrame window = new JFrame();
+            int resp = JOptionPane.showConfirmDialog(window, "You died. Restart the game?", "G  A  M  E  O  V  E  R", JOptionPane.YES_NO_OPTION);
             if (resp == JOptionPane.YES_OPTION) {
                 super.gameStateManager.stackState(new MainMenu(gameStateManager));
             } else {
@@ -196,16 +240,16 @@ class PlayingState extends GameState {
         }
 
         this.player.decreaseTime();
-        for(int i=0;i<this.world.getRoom().getEnemies().size();i++) {
+        for (int i = 0; i < this.world.getRoom().getEnemies().size(); i++) {
             this.world.getRoom().getEnemies().get(i).move();
 
-            if(this.world.getRoom().getEnemies().get(i).intersects(this.player)) {
-                this.player.damage(5 -  5*this.player.getArmor()/100);
+            if (this.world.getRoom().getEnemies().get(i).intersects(this.player)) {
+                this.player.damage(5 - 5 * this.player.getArmor() / 100);
             }
 
-            if(this.world.getRoom().getEnemies().get(i).intersects(this.player.getAttackBox())) {
+            if (this.world.getRoom().getEnemies().get(i).intersects(this.player.getAttackBox())) {
                 this.world.getRoom().getEnemies().get(i).damage(3, this.player.getFacing());
-                if(this.world.getRoom().getEnemies().get(i).getHp() <= 0) {
+                if (this.world.getRoom().getEnemies().get(i).getHp() <= 0) {
                     this.world.getRoom().getEnemies().remove(i);
                     this.player.giveGold(MathHelper.randomInt(2, 5));
                 }

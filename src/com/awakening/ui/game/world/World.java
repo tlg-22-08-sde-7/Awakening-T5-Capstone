@@ -69,6 +69,11 @@ public class World {
         return currentY;
     }
 
+    public static void setCurrentX(int currentX) {
+        World.currentX = currentX;
+    }
 
-
+    public static void setCurrentY(int currentY) {
+        World.currentY = currentY;
+    }
 }
