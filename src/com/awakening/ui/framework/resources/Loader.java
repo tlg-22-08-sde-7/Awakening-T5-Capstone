@@ -16,7 +16,7 @@ public class Loader {
             Resources.TEXTURES.add(Resources.STONE, ImageIO.read(new File("resources/pictures/textures/stone.png")));
             Resources.TEXTURES.add(Resources.WALL, ImageIO.read(new File("resources/pictures/textures/wall.png")));
             Resources.TEXTURES.add(Resources.TILE, ImageIO.read(new File("resources/pictures/textures/tile.png")));
-            Resources.TEXTURES.add(Resources.GRASS, ImageIO.read(new File("resources/pictures/textures/grass.png")));
+            Resources.TEXTURES.add(Resources.GRASS, ImageIO.read(new File("resources/pictures/textures/hole2.png")));
             Resources.TEXTURES.add(Resources.PLAYER, ImageIO.read(new File("resources/pictures/player2/p2standdown.png")));
             Resources.TEXTURES.add(Resources.PLAYER_2, ImageIO.read(new File("resources/pictures/player2/p2walkdown.png")));
             Resources.TEXTURES.add(Resources.PLAYER_LEFT, ImageIO.read(new File("resources/pictures/player2/p2standleft.png")));
