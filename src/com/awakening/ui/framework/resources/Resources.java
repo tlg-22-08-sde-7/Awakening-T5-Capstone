@@ -51,6 +51,23 @@ public class Resources {
     public static final byte PLAYER_4_WALK_RIGHT = 42;
     public static final byte PLAYER_4_STAND_UP = 43;
     public static final byte PLAYER_4_WALK_UP = 44;
+    public static final byte AXE = 45;
+    public static final byte BANDAGES = 46;
+    public static final byte BARBELL = 47;
+    public static final byte BATTERIES = 48;
+    public static final byte CAMERA = 49;
+    public static final byte CELLPHONE = 50;
+    public static final byte FIRE_EXTINGUISHER = 51;
+    public static final byte FIRST_AID_KIT = 52;
+    public static final byte FRONT_DOOR_KEY = 53;
+    public static final byte JOURNAL = 54;
+    public static final byte MASTER_KEY = 55;
+    public static final byte PAPER_CLIP = 56;
+    public static final byte PATIENT_FILE = 57;
+    public static final byte PICTURE = 58;
+    public static final byte PRESS_PASS = 59;
+    public static final byte TYLENOL = 60;
+    public static final byte WOOD_CANE = 61;
 
     //public static final byte ENEMY = 13;
 

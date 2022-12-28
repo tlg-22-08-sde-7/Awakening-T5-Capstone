@@ -4,6 +4,7 @@ import com.awakening.ui.framework.gamestates.GameState;
 import com.awakening.ui.framework.gamestates.GameStateManager;
 import com.awakening.ui.framework.gui.Sound;
 import com.awakening.ui.framework.gui.WindowManager;
+import com.awakening.ui.game.world.World;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,6 +34,7 @@ public class Options extends GameState {
     @Override
     public void render(Graphics graphics) {
 
+        World.getRoom().render(graphics);
         int frameX = WindowManager.WIDTH/4;
         int frameY = WindowManager.HEIGHT/6;
         int frameWidth = WindowManager.WIDTH/2;
@@ -130,9 +132,10 @@ public class Options extends GameState {
                         resp = JOptionPane.showConfirmDialog( window, "Are you sure you want to restart?\n " +
                                 "You will lose all of your progress.", "Restart?", JOptionPane.YES_NO_OPTION);
                         if (resp == JOptionPane.YES_OPTION) {
-                            super.gameStateManager.stackState(new PlayerSelect(gameStateManager));
+                            super.gameStateManager.backToPreviousState();
+                            super.gameStateManager.backToPreviousState();
                             Sound.stopMusic();
-                            Sound.playMusic(10);
+                            Sound.playMusic(0);
                         } else {
                             window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                         }

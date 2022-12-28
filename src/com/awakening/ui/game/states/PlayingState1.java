@@ -2,6 +2,7 @@ package com.awakening.ui.game.states;
 
 import com.awakening.ui.framework.gamestates.GameState;
 import com.awakening.ui.framework.gamestates.GameStateManager;
+import com.awakening.ui.framework.gui.WindowManager;
 import com.awakening.ui.framework.resources.Resources;
 import com.awakening.ui.framework.utils.MathHelper;
 import com.awakening.ui.game.entities.Enemy;
@@ -90,6 +91,9 @@ class PlayingState1 extends GameState {
             case KeyEvent.VK_ESCAPE:
                 super.gameStateManager.stackState(new Options(gameStateManager));
                 break;
+            case KeyEvent.VK_I:
+                super.gameStateManager.stackState(new Inventory(gameStateManager));
+                break;
         }
 
     }
@@ -114,7 +118,8 @@ class PlayingState1 extends GameState {
                 this.player.setRight(false);
                 break;
             case KeyEvent.VK_ESCAPE:
-                super.gameStateManager.stackState(new Options(gameStateManager));
+                break;
+            case KeyEvent.VK_I:
                 break;
         }
     }

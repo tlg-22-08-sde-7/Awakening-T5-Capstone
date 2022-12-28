@@ -91,6 +91,9 @@ class PlayingState2 extends GameState {
             case KeyEvent.VK_ESCAPE:
                 super.gameStateManager.stackState(new Options(gameStateManager));
                 break;
+            case KeyEvent.VK_I:
+                super.gameStateManager.stackState(new Inventory(gameStateManager));
+                break;
         }
 
     }
@@ -115,7 +118,8 @@ class PlayingState2 extends GameState {
                 this.player.setRight(false);
                 break;
             case KeyEvent.VK_ESCAPE:
-                super.gameStateManager.stackState(new Options(gameStateManager));
+                break;
+            case KeyEvent.VK_I:
                 break;
         }
     }

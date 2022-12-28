@@ -12,9 +12,9 @@ import java.util.HashSet;
 
 public class World {
 
-    private Room[][] rooms; // 2 Dimensional Array
-    private int currentX;
-    private int currentY;
+    private static Room[][] rooms; // 2 Dimensional Array
+    private static int currentX;
+    private static int currentY;
 
     public World(HashSet<MathHelper.Direction>[][] roomsData){
         rooms = new Room[roomsData.length][roomsData[0].length];
@@ -35,7 +35,7 @@ public class World {
         return rooms[x][y];
     }
 
-    public Room getRoom() {
+    public static Room getRoom() {
         return rooms[currentX][currentY];
     }
 
