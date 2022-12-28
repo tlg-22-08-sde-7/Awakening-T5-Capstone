@@ -5,6 +5,7 @@ import com.awakening.ui.framework.gamestates.GameStateManager;
 import com.awakening.ui.framework.gui.Sound;
 import com.awakening.ui.framework.gui.WindowManager;
 import com.awakening.ui.framework.resources.Resources;
+import com.awakening.ui.game.entities.Player;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -132,22 +133,34 @@ public class PlayerSelect extends GameState {
                         }
                         break;
                     case PLAYER1:
-                        super.gameStateManager.stackState(new PlayingState1(gameStateManager));
+                        super.gameStateManager.stackState(new PlayingState(gameStateManager));
                         Sound.stopMusic();
                         Sound.playMusic(10);
                         break;
                     case PLAYER2:
-                        super.gameStateManager.stackState(new PlayingState2(gameStateManager));
+                        super.gameStateManager.stackState(new PlayingState(gameStateManager));
+                        Player.playerStandDown = Resources.PLAYER_2;
+                        Player.playerStandUp = Resources.PLAYER_BACK;
+                        Player.playerStandLeft = Resources.PLAYER_LEFT;
+                        Player.playerStandRight = Resources.PLAYER_RIGHT;
                         Sound.stopMusic();
                         Sound.playMusic(10);
                         break;
                     case PLAYER3:
-                        super.gameStateManager.stackState(new PlayingState3(gameStateManager));
+                        super.gameStateManager.stackState(new PlayingState(gameStateManager));
+                        Player.playerStandDown = Resources.PLAYER_3_STAND_DOWN;
+                        Player.playerStandUp = Resources.PLAYER_3_STAND_UP;
+                        Player.playerStandLeft = Resources.PLAYER_3_STAND_LEFT;
+                        Player.playerStandRight = Resources.PLAYER_3_STAND_RIGHT;
                         Sound.stopMusic();
                         Sound.playMusic(10);
                         break;
                     case PLAYER4:
-                        super.gameStateManager.stackState(new PlayingState4(gameStateManager));
+                        super.gameStateManager.stackState(new PlayingState(gameStateManager));
+                        Player.playerStandDown = Resources.PLAYER_4_STAND_DOWN;
+                        Player.playerStandUp = Resources.PLAYER_4_STAND_UP;
+                        Player.playerStandLeft = Resources.PLAYER_4_STAND_LEFT;
+                        Player.playerStandRight = Resources.PLAYER_4_STAND_RIGHT;
                         Sound.stopMusic();
                         Sound.playMusic(10);
                         break;

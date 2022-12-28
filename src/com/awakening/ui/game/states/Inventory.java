@@ -60,18 +60,18 @@ public class Inventory extends GameState {
 
         for(int i = 0; i < playerInventory.length;i++) {
 
-            if(i == 0) { // continue
+            if(i == 0) {
                 graphics.drawImage(playerInventory[i], slotXstart + 5, slotYstart + 5, 60, 60, null);
             }
-            else if(i == 1){ // show instructions
+            else if(i == 1){
                 graphics.drawImage(playerInventory[i], slotXstart + 95, slotYstart + 5, 60, 60, null);
             }
-            else if(i == 2) { // settings game
+            else if(i == 2) {
                 graphics.drawImage(playerInventory[i], frameX + 50, frameY + 150, 50, 50, null);
             }
-            else if (i == 3) {  // restart game
+            else if (i == 3) {
                 graphics.drawImage(playerInventory[i], frameX + 50, frameY + 200, 50, 50, null);
-            } else {  // quit game
+            } else {
                 graphics.drawImage(playerInventory[i], frameX + 50, frameY + 250, 50, 50, null);
             }
         }

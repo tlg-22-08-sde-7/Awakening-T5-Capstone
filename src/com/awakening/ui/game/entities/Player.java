@@ -6,7 +6,8 @@ import com.awakening.ui.game.world.Tile;
 
 import java.awt.*;
 
-public class Player4 extends Entity {
+public class Player extends Entity {
+
     private static final long serialVersionUID = 1L;
 
     private int hp;
@@ -14,14 +15,17 @@ public class Player4 extends Entity {
     private byte regenDelay;
     private int armor;
     private int gold;
-
+    public static byte playerStandDown = Resources.PLAYER_1_STAND_DOWN;
+    public static byte playerStandUp = Resources.PLAYER_1_STAND_UP;
+    public static byte playerStandLeft = Resources.PLAYER_1_STAND_LEFT;
+    public static byte playerStandRight = Resources.PLAYER_1_STAND_RIGHT;
     private byte attackTime;
     private byte damageTime;
     // Player's current location
     private String playerLoc;
 
-    public Player4() {
-        super(Resources.PLAYER_4_STAND_DOWN, MathHelper.randomInt(2, 14), MathHelper.randomInt(2, 7));
+    public Player() {
+        super(playerStandDown, MathHelper.randomInt(2, 14), MathHelper.randomInt(2, 7));
         this.hp = 20;
         this.maxHp = 20;
         this.regenDelay = 0; // regenerate player's health every 50 milisec
@@ -82,10 +86,10 @@ public class Player4 extends Entity {
         if(this.attackTime == 0) {
             super.move();
             switch(super.facing) {
-                case NORTH: super.id = Resources.PLAYER_4_STAND_UP; break;
-                case SOUTH: super.id = Resources.PLAYER_4_STAND_DOWN; break;
-                case WEST: super.id = Resources.PLAYER_4_STAND_LEFT; break;
-                case EAST: super.id = Resources.PLAYER_4_STAND_RIGHT; break;
+                case NORTH: super.id = playerStandUp; break;
+                case SOUTH: super.id = playerStandDown; break;
+                case WEST: super.id = playerStandLeft; break;
+                case EAST: super.id = playerStandRight; break;
             }
         }
     }
