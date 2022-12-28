@@ -57,7 +57,23 @@ public class Loader {
             Resources.TEXTURES.add(Resources.PLAYER_4_WALK_RIGHT, ImageIO.read(new File("resources/pictures/player4/p4walkright.png")));
             Resources.TEXTURES.add(Resources.PLAYER_4_STAND_UP, ImageIO.read(new File("resources/pictures/player4/p4standup.png")));
             Resources.TEXTURES.add(Resources.PLAYER_4_WALK_UP, ImageIO.read(new File("resources/pictures/player4/p4walkup.png")));
-
+            Resources.TEXTURES.add(Resources.AXE, ImageIO.read(new File("resources/pictures/axe.png")));
+            Resources.TEXTURES.add(Resources.BANDAGES, ImageIO.read(new File("resources/pictures/bandages.png")));
+            Resources.TEXTURES.add(Resources.BARBELL, ImageIO.read(new File("resources/pictures/barbell.png")));
+            Resources.TEXTURES.add(Resources.BATTERIES, ImageIO.read(new File("resources/pictures/batteries.png")));
+            Resources.TEXTURES.add(Resources.CAMERA, ImageIO.read(new File("resources/pictures/camera.png")));
+            Resources.TEXTURES.add(Resources.CELLPHONE, ImageIO.read(new File("resources/pictures/cellphone.png")));
+            Resources.TEXTURES.add(Resources.FIRE_EXTINGUISHER, ImageIO.read(new File("resources/pictures/fireextinguisher.png")));
+            Resources.TEXTURES.add(Resources.FIRST_AID_KIT, ImageIO.read(new File("resources/pictures/firstaidkit.png")));
+            Resources.TEXTURES.add(Resources.FRONT_DOOR_KEY, ImageIO.read(new File("resources/pictures/frontdoorkey.png")));
+            Resources.TEXTURES.add(Resources.JOURNAL, ImageIO.read(new File("resources/pictures/journal.png")));
+            Resources.TEXTURES.add(Resources.MASTER_KEY, ImageIO.read(new File("resources/pictures/masterkey.png")));
+            Resources.TEXTURES.add(Resources.PAPER_CLIP, ImageIO.read(new File("resources/pictures/paperclip.png")));
+            Resources.TEXTURES.add(Resources.PATIENT_FILE, ImageIO.read(new File("resources/pictures/patientfile.png")));
+            Resources.TEXTURES.add(Resources.PICTURE, ImageIO.read(new File("resources/pictures/picture.png")));
+            Resources.TEXTURES.add(Resources.PRESS_PASS, ImageIO.read(new File("resources/pictures/presspass.png")));
+            Resources.TEXTURES.add(Resources.TYLENOL, ImageIO.read(new File("resources/pictures/tylenol.png")));
+            Resources.TEXTURES.add(Resources.WOOD_CANE, ImageIO.read(new File("resources/pictures/woodcane.png")));
 
         } catch (IOException e) {
             e.printStackTrace();
