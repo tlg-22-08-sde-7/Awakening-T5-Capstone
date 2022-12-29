@@ -6,7 +6,7 @@ import java.util.HashSet;
 
 public class LevelGenerator {
 
-    public static final int WORLD_SIZE = 5;
+    public static final int WORLD_SIZE = 9;
 
     private int posX;
     private int posY;
@@ -26,7 +26,7 @@ public class LevelGenerator {
         }
     }
 
-    public void generateFirstFloor() {
+    public void generateFloor() {
         //basement
         this.roomsData[1][0].add(MathHelper.Direction.SOUTH);
         this.roomNames[1][0] = "Basement";
@@ -64,37 +64,37 @@ public class LevelGenerator {
         this.roomsData[3][2].add(MathHelper.Direction.WEST);
         this.roomNames[3][2] = "Patient Room";
 
-    }
-
-    public void generateSecondFloor() {
+        //second floor rooms
         //pharmacy
-        this.roomsData[1][0].add(MathHelper.Direction.SOUTH);
-        this.roomNames[1][0] = "Pharmacy";
+        this.roomsData[6][1].add(MathHelper.Direction.SOUTH);
+        this.roomNames[6][1] = "Pharmacy";
 
         //fellowship room
-        this.roomsData[1][1].add(MathHelper.Direction.NORTH);
-        this.roomNames[1][1] = "Fellowship Room";
-
-        //janitor closet
-        this.roomsData[1][1].add(MathHelper.Direction.WEST);
-        this.roomsData[0][1].add(MathHelper.Direction.EAST);
-        this.roomNames[0][1] = "Janitor Closet";
+        this.roomsData[6][2].add(MathHelper.Direction.NORTH);
+        this.roomNames[6][2] = "Fellowship Room";
 
         //gym
-        this.roomsData[1][1].add(MathHelper.Direction.SOUTH);
-        this.roomsData[1][2].add(MathHelper.Direction.NORTH);
-        this.roomNames[1][2] = "Gym";
+        this.roomsData[6][2].add(MathHelper.Direction.SOUTH);
+        this.roomsData[6][3].add(MathHelper.Direction.NORTH);
+        this.roomNames[6][3] = "Gym";
+
+        //janitor closet
+        this.roomsData[6][2].add(MathHelper.Direction.WEST);
+        this.roomsData[5][2].add(MathHelper.Direction.EAST);
+        this.roomNames[5][2] = "Janitor Closet";
 
         //u. hallway
-        this.roomsData[1][1].add(MathHelper.Direction.EAST);
-        this.roomsData[2][1].add(MathHelper.Direction.WEST);
-        this.roomNames[2][1] = "U. Hallway";
+        this.roomsData[6][2].add(MathHelper.Direction.EAST);
+        this.roomsData[7][2].add(MathHelper.Direction.WEST);
+        this.roomNames[7][2] = "U. Hallway";
 
         //finance
-        this.roomsData[2][1].add(MathHelper.Direction.EAST);
-        this.roomsData[3][1].add(MathHelper.Direction.WEST);
-        this.roomNames[3][1] = "Finance";
+        this.roomsData[7][2].add(MathHelper.Direction.EAST);
+        this.roomsData[8][2].add(MathHelper.Direction.WEST);
+        this.roomNames[8][2] = "Finance";
+
     }
+
 
     private boolean isValidPosition(int x, int y) {
         return x >= 0 && y >= 0 && x < WORLD_SIZE && y < WORLD_SIZE;
