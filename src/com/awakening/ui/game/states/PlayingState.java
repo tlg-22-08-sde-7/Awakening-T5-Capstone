@@ -25,7 +25,13 @@ class PlayingState extends GameState {
         super(manager);
         generator = new LevelGenerator();
         player = new Player();
-        generateLevel(0);
+
+        this.generator.intializeGridForRooms();
+        this.generator.generateFloor();
+        this.world = new World(this.generator.getRoomsData());
+
+        generateLevel(1);
+        generateItemsAndEnemies();
     }
 
     @Override
@@ -123,26 +129,34 @@ class PlayingState extends GameState {
         }
     }
 
-    private void generateLevel(int level) {
-        this.generator.intializeGridForRooms();
-        this.generator.generateFirstFloor();
-        this.world = new World(this.generator.getRoomsData());
+    private void generateLevel(int floorNum) {
+        //stairs to Second Floor
+        //this.world.getRoom(2, 2).placeFeature(new Feature(Resources.STAIRS, this::generateLevel));
 
-        if (level != 0) {
+        if(floorNum == 2){ //second floor
+            this.world.setCurrentX(7);
+            this.world.setCurrentY(2);
+            // stairs to First Floor
+            this.world.getRoom(7, 2).placeFeature(new Feature(Resources.STAIRS, () -> generateLevel(3)));
+        } else if(floorNum == 1) { //first floor
+            this.world.getRoom(1, 0).placeFeature(new Feature(Resources.STAIRS, () -> generateLevel(2)));
+        } else {
             this.world.setCurrentX(2);
             this.world.setCurrentY(2);
+            this.world.getRoom(2, 2).placeFeature(new Feature(Resources.STAIRS, () -> generateLevel(2)));
         }
-        //stairs to Second Floor
-        this.world.getRoom(2, 2).placeFeature(new Feature(Resources.STAIRS, this::generateSecondLevel));
 
+        this.spawnPlayer();
+    }
+
+    private void generateItemsAndEnemies(){
+        //first floor
         //place items in the rooms per the requirement
         generateChestInRoom(1, 0);
         generateChestInRoom(1, 2);
         generateChestInRoom(0, 2);
         generateChestInRoom(1, 2);
         generateChestInRoom(2, 1);
-
-
         //place enemies in the room per the requirement
         generateEnemyInRoom(1, 0, 5);
         generateEnemyInRoom(1, 2, 5);
@@ -151,36 +165,21 @@ class PlayingState extends GameState {
         generateEnemyInRoom(2, 2, 5);
         generateEnemyInRoom(2, 1, 5);
 
-        this.spawnPlayer();
-    }
-
-    private void generateSecondLevel() {
-        this.generator.intializeGridForRooms();
-        this.generator.generateSecondFloor();
-        this.world = new World(this.generator.getRoomsData());
-        this.world.setCurrentX(2);
-        this.world.setCurrentY(1);
-
-        // stairs to First Floor
-        this.world.getRoom(2, 1).placeFeature(new Feature(Resources.STAIRS, () -> generateLevel(1)));
-
+        //second floor
         //place items in the rooms per the requirement
-        generateChestInRoom(1, 0);
-        generateChestInRoom(0, 1);
-        generateChestInRoom(1, 1);
-        generateChestInRoom(2, 1);
-        generateChestInRoom(3, 1);
-        generateChestInRoom(1, 2);
-
+        generateChestInRoom(6, 1); //pharmacy
+        generateChestInRoom(6, 2); //fellowship room
+        generateChestInRoom(6, 3);
+        generateChestInRoom(5, 2);
+        generateChestInRoom(7, 2);
+        generateChestInRoom(8, 2);
         //place enemies in the room per the requirement
-        generateEnemyInRoom(1, 0, 5);
-        generateEnemyInRoom(0, 1, 5);
-        generateEnemyInRoom(1, 1, 5);
-        generateEnemyInRoom(2, 1, 5);
-        generateEnemyInRoom(3, 1, 5);
-        generateEnemyInRoom(1, 2, 5);
-
-        this.spawnPlayer();
+        generateEnemyInRoom(6, 1, 5);
+        generateEnemyInRoom(6, 2, 5);
+        generateEnemyInRoom(6, 3, 5);
+        generateEnemyInRoom(5, 2, 5);
+        generateEnemyInRoom(7, 2, 5);
+        generateEnemyInRoom(8, 2, 5);
     }
 
     private void generateChestInRoom(int roomX, int roomY) {
