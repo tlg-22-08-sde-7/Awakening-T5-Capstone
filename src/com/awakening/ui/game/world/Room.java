@@ -34,9 +34,19 @@ public class Room {
         if (data.getTileAt(feature.x / Tile.SIZE, feature.y / Tile.SIZE).getID() == Resources.FLOOR ||
                 data.getTileAt(feature.x / Tile.SIZE, feature.y / Tile.SIZE).getID() == Resources.GRASS ||
                 data.getTileAt(feature.x / Tile.SIZE, feature.y / Tile.SIZE).getID() == Resources.TILE) {
+            //position of the stairs on first floor
+            if(feature.getID() == Resources.STAIRS){
+                feature.x = 800;
+                feature.y = 200;
+            }//position of the stairs on second floor
+            else if(feature.getID() == Resources.UPPER_STAIRS){
+                feature.x = 380;
+                feature.y = 530;
+            }
             this.features.add(feature);
         } else {
-            placeFeature(new Feature(feature));
+            this.placeFeature(new Feature(feature));
+
         }
     }
 

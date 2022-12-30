@@ -74,8 +74,12 @@ public class Loader {
             Resources.TEXTURES.add(Resources.PRESS_PASS, ImageIO.read(new File("resources/pictures/presspass.png")));
             Resources.TEXTURES.add(Resources.TYLENOL, ImageIO.read(new File("resources/pictures/tylenol.png")));
             Resources.TEXTURES.add(Resources.WOOD_CANE, ImageIO.read(new File("resources/pictures/woodcane.png")));
+            Resources.TEXTURES.add(Resources.UPPER_STAIRS, ImageIO.read(new File("resources/pictures/textures/stairs.png")));
             Resources.TEXTURES.add(Resources.DOOR, ImageIO.read(new File("resources/pictures/door.png")));
             Resources.TEXTURES.add(Resources.MASTER_DOOR, ImageIO.read(new File("resources/pictures/masterdoor.png")));
+
+            
+
 
         } catch (IOException e) {
             e.printStackTrace();

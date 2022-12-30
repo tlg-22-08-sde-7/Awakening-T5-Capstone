@@ -66,7 +66,7 @@ public class PlayingState extends GameState {
         graphics.setColor(Color.WHITE);
         graphics.setFont(new Font("arial", Font.PLAIN, 15));
         graphics.drawImage(Resources.TEXTURES.get(Resources.HEART), 0, 0, Tile.SIZE * 2 / 3, Tile.SIZE * 2 / 3, null);
-        graphics.drawString(this.player.getHp() + "/" + this.player.getMaxHp(), Tile.SIZE * 2 / 3 + 5, 20);
+        graphics.drawString(this.player.getHp() + "/" + this.player.getMaxHp(), Tile.SIZE * 2 / 3 + 1, 20);
         graphics.drawImage(Resources.TEXTURES.get(Resources.ARMOR), 80, 0, Tile.SIZE * 2 / 3, Tile.SIZE * 2 / 3, null);
         graphics.drawString(this.player.getArmor() + "", Tile.SIZE * 2 / 3 + 85, 20);
         graphics.drawImage(Resources.TEXTURES.get(Resources.GOLD), 160, 0, Tile.SIZE * 2 / 3, Tile.SIZE * 2 / 3, null);
@@ -169,16 +169,13 @@ public class PlayingState extends GameState {
     }
 
     private void generateLevel(int floorNum) {
-        //stairs to Second Floor
-        //this.world.getRoom(2, 2).placeFeature(new Feature(Resources.STAIRS, this::generateLevel));
-
         if(floorNum == 2){ //second floor
             this.world.setCurrentX(7);
             this.world.setCurrentY(2);
             // stairs to First Floor
-            this.world.getRoom(7, 2).placeFeature(new Feature(Resources.STAIRS, () -> generateLevel(3)));
+            this.world.getRoom(7, 2).placeFeature(new Feature(Resources.UPPER_STAIRS, () -> generateLevel(3)));
         } else if(floorNum == 1) { //first floor
-            this.world.getRoom(1, 0).placeFeature(new Feature(Resources.STAIRS, () -> generateLevel(2)));
+            this.world.getRoom(2, 2).placeFeature(new Feature(Resources.STAIRS, () -> generateLevel(2)));
         } else {
             this.world.setCurrentX(2);
             this.world.setCurrentY(2);
