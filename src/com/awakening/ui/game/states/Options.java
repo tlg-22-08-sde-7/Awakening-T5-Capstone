@@ -4,6 +4,7 @@ import com.awakening.ui.framework.gamestates.GameState;
 import com.awakening.ui.framework.gamestates.GameStateManager;
 import com.awakening.ui.framework.gui.Sound;
 import com.awakening.ui.framework.gui.WindowManager;
+import com.awakening.ui.game.entities.Player;
 import com.awakening.ui.game.world.World;
 
 import javax.swing.*;
@@ -132,6 +133,7 @@ public class Options extends GameState {
                         resp = JOptionPane.showConfirmDialog( window, "Are you sure you want to restart?\n " +
                                 "You will lose all of your progress.", "Restart?", JOptionPane.YES_NO_OPTION);
                         if (resp == JOptionPane.YES_OPTION) {
+                            Player.playerInventory.clear();
                             super.gameStateManager.backToPreviousState();
                             super.gameStateManager.backToPreviousState();
                             Sound.stopMusic();

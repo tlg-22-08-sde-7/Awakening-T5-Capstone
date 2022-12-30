@@ -5,16 +5,17 @@ import com.awakening.ui.framework.utils.MathHelper;
 import com.awakening.ui.game.world.Tile;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Player extends Entity {
 
     private static final long serialVersionUID = 1L;
 
-    private int hp;
+    private static int hp;
     private int maxHp;
     private byte regenDelay;
-    private int armor;
-    private int gold;
+    private static int armor;
+    private static int gold;
     public static byte playerStandDown = Resources.PLAYER_1_STAND_DOWN;
     public static byte playerStandUp = Resources.PLAYER_1_STAND_UP;
     public static byte playerStandLeft = Resources.PLAYER_1_STAND_LEFT;
@@ -23,6 +24,8 @@ public class Player extends Entity {
     private byte damageTime;
     // Player's current location
     private String playerLoc;
+    public static ArrayList<Image> playerInventory = new ArrayList<>();
+    public static final int inventorySize = 18;
 
     public Player() {
         super(playerStandDown, MathHelper.randomInt(2, 14), MathHelper.randomInt(2, 7));
@@ -41,7 +44,7 @@ public class Player extends Entity {
         super.y = MathHelper.randomInt(2, 7)*Tile.SIZE;
     }
 
-    public int getHp() {
+    public static int getHp() {
         return hp;
     }
 
@@ -64,7 +67,7 @@ public class Player extends Entity {
         }
     }
 
-    public int getArmor() {
+    public static int getArmor() {
         return armor;
     }
 
@@ -73,7 +76,7 @@ public class Player extends Entity {
         if(this.armor > 75) this.armor = 75;
     }
 
-    public int getGold() {
+    public static int getGold() {
         return gold;
     }
 
@@ -146,4 +149,5 @@ public class Player extends Entity {
     public void setPlayerLoc(String playerLoc) {
         this.playerLoc = playerLoc;
     }
+
 }
