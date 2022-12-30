@@ -2,11 +2,13 @@ package com.awakening.ui.game.states;
 
 import com.awakening.ui.framework.gamestates.GameState;
 import com.awakening.ui.framework.gamestates.GameStateManager;
+import com.awakening.ui.framework.gui.WindowManager;
 import com.awakening.ui.framework.resources.Resources;
 import com.awakening.ui.framework.utils.MathHelper;
 import com.awakening.ui.game.entities.Enemy;
 import com.awakening.ui.game.entities.Player;
 import com.awakening.ui.game.world.Feature;
+import com.awakening.ui.game.world.Room;
 import com.awakening.ui.game.world.Tile;
 import com.awakening.ui.game.world.World;
 import com.awakening.ui.game.world.generator.LevelGenerator;
@@ -15,11 +17,14 @@ import com.awakening.ui.game.world.generator.RoomData;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 class PlayingState extends GameState {
     private LevelGenerator generator;
     private World world;
     private Player player;
+    public static ArrayList<String> message = new ArrayList<>();
+    public static ArrayList<Integer> messageCounter = new ArrayList<>();
 
     public PlayingState(GameStateManager manager) {
         super(manager);
@@ -43,7 +48,9 @@ class PlayingState extends GameState {
         this.player.setPlayerLoc(roomName);
         this.collisions();
 
-        this.world.getRoom().featureInteraction1(player);
+        this.world.getRoom().featureInteraction(player);
+
+
 
 
         this.player.regenerateHealth();
@@ -68,6 +75,40 @@ class PlayingState extends GameState {
         // render player's current location/ rooms name
         graphics.setFont(graphics.getFont().deriveFont(Font.BOLD, 20f));
         graphics.drawString(this.player.getPlayerLoc(), 5, Tile.SIZE + 10);
+
+        if (Room.itemPickedUp) {
+            addMessage("You have picked up an item!");
+        }
+        drawMessage(graphics);
+    }
+
+    // adds a text to be displayed using the drawMessage method
+    public static void addMessage(String text) {
+        message.add(text);
+        messageCounter.add(0);
+    }
+
+    // draws a message. Always running in the background of the Playing State
+    public void drawMessage(Graphics graphics) {
+        int messageX = WindowManager.WIDTH-1100;
+        int messageY = WindowManager.HEIGHT-100;
+        graphics.setFont(graphics.getFont().deriveFont(Font.BOLD, 50f));
+
+        for (int i = 0; i < message.size(); i++) {
+            if (message.get(i) != null) {
+                graphics.setColor(Color.BLACK);
+                graphics.drawString(message.get(i), messageX+2, messageY+2);
+                graphics.setColor(Color.WHITE);
+                graphics.drawString(message.get(i), messageX, messageY);
+                int counter = messageCounter.get(i) + 1;
+                messageCounter.set(i, counter);
+                if (messageCounter.get(i) > 180) {
+                    message.remove(i);
+                    messageCounter.remove(i);
+                    Room.itemPickedUp = false;
+                }
+            }
+        }
     }
 
     @Override
@@ -153,10 +194,18 @@ class PlayingState extends GameState {
         //first floor
         //place items in the rooms per the requirement
         generateChestInRoom(1, 0);
+        generateItemInRoom(1, 0, Resources.CAMERA);
+        generateItemInRoom(1, 0, Resources.CELLPHONE);
         generateChestInRoom(1, 2);
         generateChestInRoom(0, 2);
+        generateItemInRoom(0, 2, Resources.PAPER_CLIP);
+        generateItemInRoom(0, 2, Resources.BATTERIES);
         generateChestInRoom(1, 2);
+        generateItemInRoom(1, 2, Resources.BANDAGES);
         generateChestInRoom(2, 1);
+        generateItemInRoom(1, 3, Resources.KEY);
+        generateItemInRoom(3, 2, Resources.PATIENT_FILE);
+
         //place enemies in the room per the requirement
         generateEnemyInRoom(1, 0, 5);
         generateEnemyInRoom(1, 2, 5);
@@ -168,11 +217,21 @@ class PlayingState extends GameState {
         //second floor
         //place items in the rooms per the requirement
         generateChestInRoom(6, 1); //pharmacy
+        generateItemInRoom(6, 1, Resources.FIRST_AID_KIT);
+        generateItemInRoom(6, 1, Resources.PRESS_PASS);
         generateChestInRoom(6, 2); //fellowship room
+        generateItemInRoom(6, 2, Resources.WOOD_CANE);
         generateChestInRoom(6, 3);
+        generateItemInRoom(6, 3, Resources.BARBELL);
         generateChestInRoom(5, 2);
+        generateItemInRoom(5, 2, Resources.MASTER_KEY);
         generateChestInRoom(7, 2);
+        generateItemInRoom(7, 2, Resources.AXE);
+        generateItemInRoom(7, 2, Resources.FIRE_EXTINGUISHER);
         generateChestInRoom(8, 2);
+        generateItemInRoom(8, 2, Resources.TYLENOL);
+        generateItemInRoom(8, 2, Resources.JOURNAL);
+
         //place enemies in the room per the requirement
         generateEnemyInRoom(6, 1, 5);
         generateEnemyInRoom(6, 2, 5);
@@ -184,6 +243,9 @@ class PlayingState extends GameState {
 
     private void generateChestInRoom(int roomX, int roomY) {
         this.world.getRoom(roomX, roomY).placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
+    }
+    private void generateItemInRoom(int roomX, int roomY, byte resource) {
+        this.world.getRoom(roomX, roomY).placeFeature(new Feature(resource, this::pickUpItem));
     }
 
     private void generateEnemyInRoom(int roomX, int roomY, int enemyHp) {
@@ -226,12 +288,22 @@ class PlayingState extends GameState {
         }
     }
 
+    private void pickUpItem() {
+        String text;
+        if (Player.playerInventory.size() != Player.inventorySize) {
+            text = "You have picked up an item!";
+        }else {
+            text = "You cannot carry any more items!";
+        }
+    }
+
     private void playerAttacks() {
 
         if (this.player.getHp() <= 0) {
             JFrame window = new JFrame();
             int resp = JOptionPane.showConfirmDialog(window, "You died. Restart the game?", "G  A  M  E  O  V  E  R", JOptionPane.YES_NO_OPTION);
             if (resp == JOptionPane.YES_OPTION) {
+                Player.playerInventory.clear();
                 super.gameStateManager.stackState(new MainMenu(gameStateManager));
             } else {
                 System.exit(0);

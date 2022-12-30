@@ -59,7 +59,7 @@ public class Resources {
     public static final byte CELLPHONE = 50;
     public static final byte FIRE_EXTINGUISHER = 51;
     public static final byte FIRST_AID_KIT = 52;
-    public static final byte FRONT_DOOR_KEY = 53;
+    public static final byte KEY = 53;
     public static final byte JOURNAL = 54;
     public static final byte MASTER_KEY = 55;
     public static final byte PAPER_CLIP = 56;

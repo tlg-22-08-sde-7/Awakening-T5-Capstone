@@ -4,22 +4,25 @@ import com.awakening.ui.framework.gamestates.GameState;
 import com.awakening.ui.framework.gamestates.GameStateManager;
 import com.awakening.ui.framework.gui.WindowManager;
 import com.awakening.ui.framework.resources.Resources;
+import com.awakening.ui.game.entities.Player;
 import com.awakening.ui.game.world.World;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 public class Inventory extends GameState {
-    public static Image currentPlayerSprite;
-    public static Image[] playerInventory;
+    public static Image currentSpriteImage;
     private int selected;
     private int slotCol = 0;
     private int slotRow = 0;
 
     protected Inventory(GameStateManager manager) {
         super(manager);
-        playerInventory = new Image[]{Resources.TEXTURES.get(Resources.AXE), Resources.TEXTURES.get(Resources.BANDAGES)};
         this.selected = 0;
     }
 
@@ -31,7 +34,11 @@ public class Inventory extends GameState {
     @Override
     protected void render(Graphics graphics) {
         World.getRoom().render(graphics);
+        String currentHP = String.valueOf(Player.getHp());
+        String currentArmor = String.valueOf(Player.getArmor());
+        String currentGold = String.valueOf(Player.getGold());
 
+        // Inventory Window
         int frameX = WindowManager.WIDTH/4;
         int frameY = WindowManager.HEIGHT/3;
         int frameWidth = WindowManager.WIDTH/2 - 43;
@@ -45,36 +52,36 @@ public class Inventory extends GameState {
         graphics.setColor(c);
         graphics.drawRoundRect(frameX + 5, frameY + 5, frameWidth - 10, frameHeight - 10, 25, 25);
 
+        // Cursor to select items
         final int slotXstart = frameX + 20;
         final int slotYstart = frameY + 20;
-        int slotX = slotXstart;
-        int slotY = slotYstart;
 
         int cursorX = slotXstart + (90 * slotCol);
         int cursorY = slotYstart + (90 * slotRow);
         int cursorWidth = 70;
         int cursorHeight = 70;
 
+        // slots for the items
+        int slotX = slotXstart;
+        int slotY = slotYstart;
+
         graphics.setColor(Color.WHITE);
         graphics.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
 
-        for(int i = 0; i < playerInventory.length;i++) {
+        for(int i = 0; i < Player.playerInventory.size(); i++) {
+            graphics.drawImage(Player.playerInventory.get(i), slotX + 5, slotY + 5, 60, 60, null);
 
-            if(i == 0) {
-                graphics.drawImage(playerInventory[i], slotXstart + 5, slotYstart + 5, 60, 60, null);
-            }
-            else if(i == 1){
-                graphics.drawImage(playerInventory[i], slotXstart + 95, slotYstart + 5, 60, 60, null);
-            }
-            else if(i == 2) {
-                graphics.drawImage(playerInventory[i], frameX + 50, frameY + 150, 50, 50, null);
-            }
-            else if (i == 3) {
-                graphics.drawImage(playerInventory[i], frameX + 50, frameY + 200, 50, 50, null);
-            } else {
-                graphics.drawImage(playerInventory[i], frameX + 50, frameY + 250, 50, 50, null);
+            slotX += cursorWidth + 20;
+
+            if (i == 5 || i == 11) {
+                slotX = slotXstart;
+                slotY += cursorHeight + 20;
             }
         }
+        int itemIndex = getItemIndexInSlot();
+
+
+        // Upper Window to display Player Info
         frameX = WindowManager.WIDTH/4;
         frameY = WindowManager.HEIGHT-625;
         frameWidth = WindowManager.WIDTH/2 - 43;
@@ -86,7 +93,16 @@ public class Inventory extends GameState {
 
         c = new Color(255, 255, 255, 220);
         graphics.setColor(c);
+        graphics.setFont(graphics.getFont().deriveFont(40F));
         graphics.drawRoundRect(frameX + 5, frameY + 5, frameWidth - 10, frameHeight - 10, 25, 25);
+        graphics.drawImage(Resources.TEXTURES.get(Player.playerStandDown), frameX + 20, frameY + 40, 75, 75, null);
+        graphics.drawImage(Resources.TEXTURES.get(Resources.HEART), frameX + 100, frameY + 40, 50, 50, null);
+        graphics.drawString(currentHP, frameX + 180, frameY + 80);
+        graphics.drawImage(Resources.TEXTURES.get(Resources.ARMOR), frameX + 250, frameY + 40, 50, 50, null);
+        graphics.drawString(currentArmor, frameX + 330, frameY + 80);
+        graphics.drawImage(Resources.TEXTURES.get(Resources.GOLD), frameX + 400, frameY + 40, 50, 50, null);
+        graphics.drawString(currentGold, frameX + 480, frameY + 80);
+
     }
 
     @Override
@@ -128,4 +144,9 @@ public class Inventory extends GameState {
                 break;
         }
     }
+    public int getItemIndexInSlot() {
+        int itemIndex = slotCol + (slotRow*5);
+        return itemIndex;
+    }
+
 }

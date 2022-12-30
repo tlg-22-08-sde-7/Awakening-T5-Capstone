@@ -65,7 +65,7 @@ public class Loader {
             Resources.TEXTURES.add(Resources.CELLPHONE, ImageIO.read(new File("resources/pictures/cellphone.png")));
             Resources.TEXTURES.add(Resources.FIRE_EXTINGUISHER, ImageIO.read(new File("resources/pictures/fireextinguisher.png")));
             Resources.TEXTURES.add(Resources.FIRST_AID_KIT, ImageIO.read(new File("resources/pictures/firstaidkit.png")));
-            Resources.TEXTURES.add(Resources.FRONT_DOOR_KEY, ImageIO.read(new File("resources/pictures/frontdoorkey.png")));
+            Resources.TEXTURES.add(Resources.KEY, ImageIO.read(new File("resources/pictures/key.png")));
             Resources.TEXTURES.add(Resources.JOURNAL, ImageIO.read(new File("resources/pictures/journal.png")));
             Resources.TEXTURES.add(Resources.MASTER_KEY, ImageIO.read(new File("resources/pictures/masterkey.png")));
             Resources.TEXTURES.add(Resources.PAPER_CLIP, ImageIO.read(new File("resources/pictures/paperclip.png")));
