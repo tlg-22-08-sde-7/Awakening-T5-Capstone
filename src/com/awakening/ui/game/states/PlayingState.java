@@ -19,7 +19,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-class PlayingState extends GameState {
+public class PlayingState extends GameState {
     private LevelGenerator generator;
     private World world;
     private Player player;
@@ -76,9 +76,7 @@ class PlayingState extends GameState {
         graphics.setFont(graphics.getFont().deriveFont(Font.BOLD, 20f));
         graphics.drawString(this.player.getPlayerLoc(), 5, Tile.SIZE + 10);
 
-        if (Room.itemPickedUp) {
-            addMessage("You have picked up an item!");
-        }
+
         drawMessage(graphics);
     }
 

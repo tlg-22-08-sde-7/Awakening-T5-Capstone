@@ -4,6 +4,7 @@ import com.awakening.ui.framework.gamestates.GameState;
 import com.awakening.ui.framework.gamestates.GameStateManager;
 import com.awakening.ui.framework.gui.WindowManager;
 import com.awakening.ui.framework.resources.Resources;
+import com.awakening.ui.game.entities.Entity;
 import com.awakening.ui.game.entities.Player;
 import com.awakening.ui.game.world.World;
 
@@ -40,7 +41,7 @@ public class Inventory extends GameState {
 
         // Inventory Window
         int frameX = WindowManager.WIDTH/4;
-        int frameY = WindowManager.HEIGHT/3;
+        int frameY = WindowManager.HEIGHT/3 -30;
         int frameWidth = WindowManager.WIDTH/2 - 43;
         int frameHeight = WindowManager.HEIGHT/2 - 50;
 
@@ -69,7 +70,12 @@ public class Inventory extends GameState {
         graphics.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
 
         for(int i = 0; i < Player.playerInventory.size(); i++) {
-            graphics.drawImage(Player.playerInventory.get(i), slotX + 5, slotY + 5, 60, 60, null);
+            if (Player.playerInventory.get(i) == Player.currentWeapon) {
+                graphics.setColor(new Color(240, 190, 90));
+                graphics.fillRoundRect(slotX, slotY, 70, 70, 10, 10);
+            }
+
+            graphics.drawImage(Resources.TEXTURES.get(Player.playerInventory.get(i).getID()), slotX + 5, slotY + 5, 60, 60, null);
 
             slotX += cursorWidth + 20;
 
@@ -78,12 +84,11 @@ public class Inventory extends GameState {
                 slotY += cursorHeight + 20;
             }
         }
-        int itemIndex = getItemIndexInSlot();
 
 
         // Upper Window to display Player Info
         frameX = WindowManager.WIDTH/4;
-        frameY = WindowManager.HEIGHT-625;
+        frameY = WindowManager.HEIGHT-655;
         frameWidth = WindowManager.WIDTH/2 - 43;
         frameHeight = WindowManager.HEIGHT/4;
 
@@ -103,6 +108,32 @@ public class Inventory extends GameState {
         graphics.drawImage(Resources.TEXTURES.get(Resources.GOLD), frameX + 400, frameY + 40, 50, 50, null);
         graphics.drawString(currentGold, frameX + 480, frameY + 80);
 
+        // Lower Window to display item information
+        frameX = WindowManager.WIDTH/4;
+        frameY = WindowManager.HEIGHT-187;
+        frameWidth = WindowManager.WIDTH/2 - 43;
+        frameHeight = WindowManager.HEIGHT/4;
+
+        c = new Color(0,0,0, 220);
+        graphics.setColor(c);
+        graphics.fillRoundRect(frameX, frameY, frameWidth, frameHeight, 35, 35);
+
+        c = new Color(255, 255, 255, 220);
+        graphics.setColor(c);
+        graphics.setFont(graphics.getFont().deriveFont(40F));
+        graphics.drawRoundRect(frameX + 5, frameY + 5, frameWidth - 10, frameHeight - 10, 25, 25);
+        // text for descriptions of items
+        int textX = frameX + 10;
+        int textY = frameY + 40;
+        graphics.setFont(graphics.getFont().deriveFont(28F));
+        int itemIndex = getItemIndexInSlot();
+
+        if (itemIndex < Player.playerInventory.size()) {
+            for (String line: Player.playerInventory.get(itemIndex).getDescription().split("\n", 4)) {
+                graphics.drawString(line, textX, textY);
+                textY += 32;
+            }
+        }
     }
 
     @Override
@@ -145,8 +176,21 @@ public class Inventory extends GameState {
         }
     }
     public int getItemIndexInSlot() {
-        int itemIndex = slotCol + (slotRow*5);
+        int itemIndex = slotCol + (slotRow*6);
         return itemIndex;
+    }
+
+    public void selectItem() {
+
+        int itemIndex = getItemIndexInSlot();
+        if (itemIndex < Player.playerInventory.size()) {
+            Entity selectedItem = Player.playerInventory.get(itemIndex);
+
+//            if (selectedItem.type == type_weapon) {
+//                Player.currentWeapon = selectedItem;
+//                Player.setAttackPoints(Player.currentWeapon.getAttackPoints() + Player.getAttackPoints());
+//            }
+        }
     }
 
 }

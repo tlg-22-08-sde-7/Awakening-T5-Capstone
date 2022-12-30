@@ -8,6 +8,10 @@ import java.awt.*;
 
 public class Entity extends Rectangle {
     private static final long serialVersionUID = 1L; // serialization for threading
+    protected String name;
+    protected String description;
+    protected int healPoints;
+    protected int attackPoints;
 
     protected byte id;
 
@@ -112,5 +116,21 @@ public class Entity extends Rectangle {
 
     public MathHelper.Direction getFacing() {
         return facing;
+    }
+
+    public int getHealPoints() {
+        return healPoints;
+    }
+
+    public void setHealPoints(int healPoints) {
+        this.healPoints = healPoints;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
