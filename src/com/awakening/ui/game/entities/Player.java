@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class Player extends Entity {
 
     private static final long serialVersionUID = 1L;
+    public static Entity currentWeapon;
 
     private static int hp;
     private int maxHp;
@@ -24,7 +25,8 @@ public class Player extends Entity {
     private byte damageTime;
     // Player's current location
     private String playerLoc;
-    public static ArrayList<Image> playerInventory = new ArrayList<>();
+    public static ArrayList<Entity> playerInventory = new ArrayList<>();
+
     public static final int inventorySize = 18;
 
     public Player() {
@@ -35,6 +37,7 @@ public class Player extends Entity {
         this.armor = 0;
         this.gold = 0;
         this.attackTime = 0;
+        this.attackPoints = 5;
         this.damageTime = 0;
         this.playerLoc = "Basement";
     }

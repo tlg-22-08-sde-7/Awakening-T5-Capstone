@@ -69,6 +69,9 @@ public class Resources {
     public static final byte TYLENOL = 60;
     public static final byte WOOD_CANE = 61;
 
+    public static final byte DOOR = 62;
+    public static final byte MASTER_DOOR = 63;
+
     //public static final byte ENEMY = 13;
 
     public static final HashMap<String, BufferedImage> ROOMS = new HashMap<>();

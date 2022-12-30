@@ -1,8 +1,11 @@
 package com.awakening.ui.game.world;
 
+import com.awakening.app.game.Item;
 import com.awakening.ui.framework.gui.WindowManager;
 import com.awakening.ui.framework.resources.Resources;
 import com.awakening.ui.game.entities.*;
+import com.awakening.ui.game.entities.items.*;
+import com.awakening.ui.game.states.PlayingState;
 import com.awakening.ui.game.world.generator.RoomData;
 
 import java.awt.*;
@@ -33,64 +36,93 @@ public class Room {
                 data.getTileAt(feature.x / Tile.SIZE, feature.y / Tile.SIZE).getID() == Resources.TILE) {
             this.features.add(feature);
         } else {
-            this.features.add(new Feature(feature));
+            placeFeature(new Feature(feature));
         }
     }
 
     public void featureInteraction(Player player) {
         for (int i = 0; i < this.features.size(); i++) {
-            if (this.features.get(i).intersects(player) && Player.playerInventory.size() <= Player.inventorySize) {
+            if (this.features.get(i).intersects(player)) {
                 if (this.features.get(i).getID() == Resources.AXE) {
-                    Player.playerInventory.add(Resources.TEXTURES.get(45));
+                    Obj_Axe axe = new Obj_Axe(0,0);
+                    Player.playerInventory.add(axe);
                     itemPickedUp = true;
+                    PlayingState.addMessage("You have picked up an " + axe.getName() + "!");
                 }else if (this.features.get(i).getID() == Resources.CAMERA) {
-                    Player.playerInventory.add(Resources.TEXTURES.get(49));
+                    Obj_Camera camera = new Obj_Camera(0,0);
+                    Player.playerInventory.add(camera);
                     itemPickedUp = true;
+                    PlayingState.addMessage("You have picked up a " + camera.getName() + "!");
                 }else if (this.features.get(i).getID() == Resources.BANDAGES) {
-                    Player.playerInventory.add(Resources.TEXTURES.get(46));
+                    Obj_Bandages bandages = new Obj_Bandages(0,0);
+                    Player.playerInventory.add(bandages);
                     itemPickedUp = true;
+                    PlayingState.addMessage("You have picked up some " + bandages.getName() + "!");
                 }else if (this.features.get(i).getID() == Resources.BARBELL) {
-                    Player.playerInventory.add(Resources.TEXTURES.get(47));
+                    Obj_Barbell barbell = new Obj_Barbell(0,0);
+                    Player.playerInventory.add(barbell);
                     itemPickedUp = true;
+                    PlayingState.addMessage("You have picked up a " + barbell.getName() + "!");
                 }else if (this.features.get(i).getID() == Resources.BATTERIES) {
-                    Player.playerInventory.add(Resources.TEXTURES.get(48));
+                    Obj_Batteries batteries = new Obj_Batteries(0,0);
+                    Player.playerInventory.add(batteries);
                     itemPickedUp = true;
+                    PlayingState.addMessage("You have picked up some " + batteries.getName() + "!");
                 }else if (this.features.get(i).getID() == Resources.CELLPHONE) {
-                    Player.playerInventory.add(Resources.TEXTURES.get(50));
+                    Obj_Cellphone cellphone = new Obj_Cellphone(0,0);
+                    Player.playerInventory.add(cellphone);
                     itemPickedUp = true;
+                    PlayingState.addMessage("You have picked up a " + cellphone.getName() + "!");
                 }else if (this.features.get(i).getID() == Resources.FIRE_EXTINGUISHER) {
-                    Player.playerInventory.add(Resources.TEXTURES.get(51));
+                    Obj_FireExtinguisher fireExtinguisher = new Obj_FireExtinguisher(0,0);
+                    Player.playerInventory.add(fireExtinguisher);
                     itemPickedUp = true;
+                    PlayingState.addMessage("You have picked up a " + fireExtinguisher.getName() + "!");
                 }else if (this.features.get(i).getID() == Resources.FIRST_AID_KIT) {
-                    Player.playerInventory.add(Resources.TEXTURES.get(52));
+                    Obj_FirstAidKit firstAidKit = new Obj_FirstAidKit(0,0);
+                    Player.playerInventory.add(firstAidKit);
                     itemPickedUp = true;
+                    PlayingState.addMessage("You have picked up a " + firstAidKit.getName() + "!");
                 }else if (this.features.get(i).getID() == Resources.KEY) {
-                    Player.playerInventory.add(Resources.TEXTURES.get(53));
+                    Obj_Key key = new Obj_Key(0,0);
+                    Player.playerInventory.add(key);
                     itemPickedUp = true;
+                    PlayingState.addMessage("You have picked up a " + key.getName() + "!");
                 }else if (this.features.get(i).getID() == Resources.JOURNAL) {
-                    Player.playerInventory.add(Resources.TEXTURES.get(54));
+                    Obj_Journal journal = new Obj_Journal(0,0);
+                    Player.playerInventory.add(journal);
                     itemPickedUp = true;
+                    PlayingState.addMessage("You have picked up a " + journal.getName() + "!");
                 }else if (this.features.get(i).getID() == Resources.MASTER_KEY) {
-                    Player.playerInventory.add(Resources.TEXTURES.get(55));
+                    Obj_MasterKey masterKey = new Obj_MasterKey(0,0);
+                    Player.playerInventory.add(masterKey);
                     itemPickedUp = true;
+                    PlayingState.addMessage("You have picked up a " + masterKey.getName() + "!");
                 }else if (this.features.get(i).getID() == Resources.PAPER_CLIP) {
-                    Player.playerInventory.add(Resources.TEXTURES.get(56));
+                    Obj_PaperClip paperClip = new Obj_PaperClip(0,0);
+                    Player.playerInventory.add(paperClip);
                     itemPickedUp = true;
+                    PlayingState.addMessage("You have picked up a " + paperClip.getName() + "!");
                 }else if (this.features.get(i).getID() == Resources.PATIENT_FILE) {
-                    Player.playerInventory.add(Resources.TEXTURES.get(57));
+                    Obj_PatientFile patientFile = new Obj_PatientFile(0,0);
+                    Player.playerInventory.add(patientFile);
                     itemPickedUp = true;
-                }else if (this.features.get(i).getID() == Resources.PICTURE) {
-                    Player.playerInventory.add(Resources.TEXTURES.get(58));
-                    itemPickedUp = true;
+                    PlayingState.addMessage("You have picked up a " + patientFile.getName() + "!");
                 }else if (this.features.get(i).getID() == Resources.PRESS_PASS) {
-                    Player.playerInventory.add(Resources.TEXTURES.get(59));
+                    Obj_PressPass pressPass = new Obj_PressPass(0,0);
+                    Player.playerInventory.add(pressPass);
                     itemPickedUp = true;
+                    PlayingState.addMessage("You have picked up a " + pressPass.getName() + "!");
                 }else if (this.features.get(i).getID() == Resources.TYLENOL) {
-                    Player.playerInventory.add(Resources.TEXTURES.get(60));
+                    Obj_Tylenol tylenol = new Obj_Tylenol(0,0);
+                    Player.playerInventory.add(tylenol);
                     itemPickedUp = true;
+                    PlayingState.addMessage("You have picked up some " + tylenol.getName() + "!");
                 }else if (this.features.get(i).getID() == Resources.WOOD_CANE) {
-                    Player.playerInventory.add(Resources.TEXTURES.get(61));
+                    Obj_WoodCane woodCane = new Obj_WoodCane(0,0);
+                    Player.playerInventory.add(woodCane);
                     itemPickedUp = true;
+                    PlayingState.addMessage("You have picked up a " + woodCane.getName() + "!");
                 }
                 this.features.remove(i);
             }
