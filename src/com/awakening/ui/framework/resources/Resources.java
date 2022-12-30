@@ -69,9 +69,8 @@ public class Resources {
     public static final byte TYLENOL = 60;
     public static final byte WOOD_CANE = 61;
     public static final byte UPPER_STAIRS = 62;
-
-    public static final byte DOOR = 62;
-    public static final byte MASTER_DOOR = 63;
+    public static final byte DOOR = 63;
+    public static final byte MASTER_DOOR = 64;
 
     //public static final byte ENEMY = 13;
 
