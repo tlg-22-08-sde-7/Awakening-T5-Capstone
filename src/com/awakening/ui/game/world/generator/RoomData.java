@@ -17,7 +17,7 @@ public class RoomData {
         this.tilesData = new Tile[tilesData.length][tilesData[0].length];
         for(int i=0;i<this.tilesData.length;i++) {
             for(int j=0;j<this.tilesData[i].length;j++) {
-                this.tilesData[i][j] = new Tile(tilesData[i][j], j, i, tilesData[i][j] == 1 || tilesData[i][j] == 2);
+                this.tilesData[i][j] = new Tile(tilesData[i][j], j, i, tilesData[i][j] == 1 || tilesData[i][j] == 2 || tilesData[i][j] == 4);
             }
         }
         this.exits = new HashSet<>();
