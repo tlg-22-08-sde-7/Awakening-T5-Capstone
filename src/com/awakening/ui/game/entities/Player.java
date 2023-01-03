@@ -157,6 +157,11 @@ public class Player extends Entity {
         this.playerLoc = playerLoc;
     }
 
+
+    public static ArrayList<Entity> getPlayerInventory() {
+        return playerInventory;
+    }
+
     public static void setHp(int hp) {
         Player.hp = hp;
     }
