@@ -10,7 +10,7 @@ public class LevelGenerator {
 
     private int posX;
     private int posY;
-    private String[][] roomNames;
+    private static String[][] roomNames;
 
     private HashSet<MathHelper.Direction>[][] roomsData;
 
@@ -104,7 +104,7 @@ public class LevelGenerator {
         return roomsData;
     }
 
-    public String getRoomName(int x, int y){
+    public static String getRoomName(int x, int y){
         return roomNames[x][y];
     }
 }

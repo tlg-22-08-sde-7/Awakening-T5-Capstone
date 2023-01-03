@@ -24,4 +24,16 @@ public class Tile extends Rectangle {
     public boolean isWall() {
         return wall;
     }
+
+    public void setWall(boolean wall) {
+        this.wall = wall;
+    }
+
+    public byte getId() {
+        return id;
+    }
+
+    public void setId(byte id) {
+        this.id = id;
+    }
 }

@@ -3,19 +3,25 @@ package com.awakening.ui.game.states;
 import com.awakening.ui.framework.gamestates.GameState;
 import com.awakening.ui.framework.gamestates.GameStateManager;
 import com.awakening.ui.framework.gui.WindowManager;
+import com.awakening.ui.framework.resources.Resources;
 import com.awakening.ui.game.entities.Entity;
 import com.awakening.ui.game.entities.Player;
+import com.awakening.ui.game.entities.items.Obj_MasterKey;
+import com.awakening.ui.game.world.Room;
 import com.awakening.ui.game.world.World;
+import com.awakening.ui.game.world.generator.LevelGenerator;
+import com.awakening.ui.game.world.generator.RoomData;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.Objects;
 
 public class UseItem extends GameState {
 
     private int selected;
     private Inventory inventory = new Inventory(gameStateManager);
     private String[] useItemMenu;
-    private static final String QUESTION = "Would you like to use this item?";
+    private static final String QUESTION = "Unlock the Door?";
     private static final String YES = "YES";
     private static final String NO = "NO";
 
@@ -48,7 +54,7 @@ public class UseItem extends GameState {
 
         graphics.setFont(graphics.getFont().deriveFont(40F));
         graphics.setColor(Color.WHITE);
-        graphics.drawString(QUESTION, frameX + 20, frameY + 50);
+        graphics.drawString(QUESTION, frameX + 40, frameY + 50);
         for(int i = 0; i < this.useItemMenu.length;i++) {
             if (i == this.selected) {
                 graphics.setColor(Color.GREEN);
@@ -81,13 +87,29 @@ public class UseItem extends GameState {
             case KeyEvent.VK_ENTER:
                 switch(this.useItemMenu[selected]) {
                     case YES:
-                        int itemIndex = Inventory.getItemIndexInSlot();
-                        if (itemIndex < Player.playerInventory.size()) {
-                            Entity selectedItem = Player.playerInventory.get(itemIndex);
-                            Player.setHp(selectedItem.getHealPoints() + Player.getHp());
-                            Player.playerInventory.remove(selectedItem);
-                            gameStateManager.backToPreviousState();
+                        RoomData roomIn = World.getRoom().getData();
+                        for(int i = 0; i < Player.playerInventory.size(); i++) {
+                            if (Player.playerInventory.get(i).getID() == Resources.KEY &&
+                                    Objects.equals(LevelGenerator.getRoomName(World.getCurrentX(),
+                                            World.getCurrentY()), "Fellowship Room")) {
+                                Player.playerInventory.remove(i);
+                                roomIn.getTileAt(0, 3).setWall(false);
+                                roomIn.getTileAt(0, 4).setWall(false);
+                                roomIn.getTileAt(0, 5).setWall(false);
+                            }
+                            else if (Player.playerInventory.get(i).getID() == Resources.MASTER_KEY &&
+                                    Objects.equals(LevelGenerator.getRoomName(World.getCurrentX(),
+                                            World.getCurrentY()), "Hallway")) {
+                                Player.playerInventory.remove(i);
+                                roomIn.getTileAt(15,3).setId(Resources.TILE);
+                                roomIn.getTileAt(15,4).setId(Resources.TILE);
+                                roomIn.getTileAt(15,5).setId(Resources.TILE);
+                                roomIn.getTileAt(15, 3).setWall(false);
+                                roomIn.getTileAt(15, 4).setWall(false);
+                                roomIn.getTileAt(15, 5).setWall(false);
+                            }
                         }
+                        gameStateManager.backToPreviousState();
                         break;
                     case NO:
                         gameStateManager.backToPreviousState();
