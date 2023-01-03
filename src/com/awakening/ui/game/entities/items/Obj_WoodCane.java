@@ -7,8 +7,9 @@ public class Obj_WoodCane extends Entity {
 
     public Obj_WoodCane(int posXinRoom, int posYinRoom) {
         super(Resources.WOOD_CANE, posXinRoom, posYinRoom);
+        type = type_weapon;
         this.name = "Wood Cane";
         this.description = "(" + this.name + ")\nThis is very well built and easy to \nswing around.";
-        this.attackPoints = 7;
+        attackPoints = 7;
     }
 }

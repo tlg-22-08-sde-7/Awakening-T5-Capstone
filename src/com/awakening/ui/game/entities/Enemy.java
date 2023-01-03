@@ -11,6 +11,7 @@ public class Enemy extends Entity{
 
     public Enemy(byte id, int health, Player target) {
         super(id, MathHelper.randomInt(2, 14), MathHelper.randomInt(2, 7));
+        type = type_ghost;
         this.target = target;
         super.speed = 2;
         this.hp = health;

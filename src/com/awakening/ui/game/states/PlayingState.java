@@ -91,7 +91,17 @@ public class PlayingState extends GameState {
     protected void render(Graphics graphics) {
         this.world.getRoom().render(graphics);
         this.player.render(graphics);
-        graphics.drawImage(Resources.TEXTURES.get(Resources.ATTACK), this.player.getAttackBox().x, this.player.getAttackBox().y, this.player.getAttackBox().width, this.player.getAttackBox().height, null);
+        if (Player.currentWeapon != null) {
+            graphics.drawImage(Resources.TEXTURES.get(Player.currentWeapon.getID()),
+                    this.player.getAttackBox().x, this.player.getAttackBox().y,
+                    this.player.getAttackBox().width, this.player.getAttackBox().height, null);
+        } else {
+            graphics.drawImage(Resources.TEXTURES.get(Resources.ATTACK),
+                    this.player.getAttackBox().x, this.player.getAttackBox().y,
+                    this.player.getAttackBox().width, this.player.getAttackBox().height, null);
+        }
+
+
 
         graphics.setColor(Color.WHITE);
         graphics.setFont(new Font("arial", Font.PLAIN, 15));
@@ -117,9 +127,10 @@ public class PlayingState extends GameState {
 
     // draws a message. Always running in the background of the Playing State
     public void drawMessage(Graphics graphics) {
+
         int messageX = WindowManager.WIDTH - 1100;
         int messageY = WindowManager.HEIGHT - 100;
-        graphics.setFont(graphics.getFont().deriveFont(Font.BOLD, 50f));
+        graphics.setFont(graphics.getFont().deriveFont(Font.BOLD, 38f));
 
         for (int i = 0; i < message.size(); i++) {
             if (message.get(i) != null) {
@@ -231,12 +242,12 @@ public class PlayingState extends GameState {
         generateItemInRoom(3, 2, Resources.PATIENT_FILE);
 
         //place enemies in the room per the requirement
-        generateEnemyInRoom(1, 0, 5);
-        generateEnemyInRoom(1, 2, 5);
-        generateEnemyInRoom(0, 2, 5);
-        generateEnemyInRoom(1, 2, 5);
-        generateEnemyInRoom(2, 2, 5);
-        generateEnemyInRoom(2, 1, 5);
+        generateEnemyInRoom(1, 0, 10);
+        generateEnemyInRoom(1, 2, 10);
+        generateEnemyInRoom(0, 2, 10);
+        generateEnemyInRoom(1, 2, 10);
+        generateEnemyInRoom(2, 2, 10);
+        generateEnemyInRoom(2, 1, 10);
 
         //second floor
         //place items in the rooms per the requirement
@@ -257,12 +268,12 @@ public class PlayingState extends GameState {
         generateItemInRoom(8, 2, Resources.JOURNAL);
 
         //place enemies in the room per the requirement
-        generateEnemyInRoom(6, 1, 5);
-        generateEnemyInRoom(6, 2, 5);
-        generateEnemyInRoom(6, 3, 5);
-        generateEnemyInRoom(5, 2, 5);
-        generateEnemyInRoom(7, 2, 5);
-        generateEnemyInRoom(8, 2, 5);
+        generateEnemyInRoom(6, 1, 10);
+        generateEnemyInRoom(6, 2, 10);
+        generateEnemyInRoom(6, 3, 10);
+        generateEnemyInRoom(5, 2, 10);
+        generateEnemyInRoom(7, 2, 10);
+        generateEnemyInRoom(8, 2, 10);
     }
 
     private void generateChestInRoom(int roomX, int roomY) {
@@ -332,7 +343,14 @@ public class PlayingState extends GameState {
             }
 
             if (this.world.getRoom().getEnemies().get(i).intersects(this.player.getAttackBox())) {
-                this.world.getRoom().getEnemies().get(i).damage(3, this.player.getFacing());
+
+
+                if (Player.currentWeapon != null) {
+                    this.world.getRoom().getEnemies().get(i).damage(this.player.currentWeapon.getAttackPoints(), this.player.getFacing());
+                } else {
+                    this.world.getRoom().getEnemies().get(i).damage(Player.getAttackPoints(), this.player.getFacing());
+                }
+                System.out.println(Player.getAttackPoints());
                 if (this.world.getRoom().getEnemies().get(i).getHp() <= 0) {
                     this.world.getRoom().getEnemies().remove(i);
                     this.player.giveGold(MathHelper.randomInt(2, 5));

@@ -10,9 +10,11 @@ import java.util.ArrayList;
 public class Player extends Entity {
 
     private static final long serialVersionUID = 1L;
-    public static Entity currentWeapon;
+    public static Entity currentWeapon = null;
+    public static Entity currentItem;
 
     private static int hp;
+    private static int attackPoints;
     private int maxHp;
     private byte regenDelay;
     private static int armor;
@@ -31,15 +33,17 @@ public class Player extends Entity {
 
     public Player() {
         super(playerStandDown, MathHelper.randomInt(2, 14), MathHelper.randomInt(2, 7));
-        this.hp = 20;
-        this.maxHp = 20;
+        type = type_player;
+        hp = 30;
+        this.maxHp = 30;
         this.regenDelay = 0; // regenerate player's health every 50 milisec
         this.armor = 0;
         this.gold = 0;
         this.attackTime = 0;
-        this.attackPoints = 5;
+        attackPoints = 3;
         this.damageTime = 0;
         this.playerLoc = "Basement";
+
     }
 
     public void replaceRandomly() {
@@ -153,9 +157,20 @@ public class Player extends Entity {
         this.playerLoc = playerLoc;
     }
 
+
     public static ArrayList<Entity> getPlayerInventory() {
         return playerInventory;
     }
 
+    public static void setHp(int hp) {
+        Player.hp = hp;
+    }
 
+    public static int getAttackPoints() {
+        return attackPoints;
+    }
+
+    public static void setAttackPoints(int attackPoints) {
+        Player.attackPoints = attackPoints;
+    }
 }
