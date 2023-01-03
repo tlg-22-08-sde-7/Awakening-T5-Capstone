@@ -72,6 +72,8 @@ public class Resources {
     public static final byte DOOR = 63;
     public static final byte MASTER_DOOR = 64;
 
+    public static final byte HOSPITAL_BED = 65;
+
     //public static final byte ENEMY = 13;
 
     public static final HashMap<String, BufferedImage> ROOMS = new HashMap<>();

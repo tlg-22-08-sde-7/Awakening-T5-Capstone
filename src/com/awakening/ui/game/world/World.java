@@ -62,10 +62,10 @@ public class World {
         }
     }
     // returns player's location on map/room
-    public int getCurrentX() {
+    public static int getCurrentX() {
         return currentX;
     }
-    public int getCurrentY() {
+    public static int getCurrentY() {
         return currentY;
     }
 
