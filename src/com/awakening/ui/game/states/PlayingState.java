@@ -6,6 +6,7 @@ import com.awakening.ui.framework.gui.WindowManager;
 import com.awakening.ui.framework.resources.Resources;
 import com.awakening.ui.framework.utils.MathHelper;
 import com.awakening.ui.game.entities.Enemy;
+import com.awakening.ui.game.entities.Entity;
 import com.awakening.ui.game.entities.Player;
 import com.awakening.ui.game.world.Feature;
 import com.awakening.ui.game.world.Room;
@@ -48,13 +49,42 @@ public class PlayingState extends GameState {
         this.player.setPlayerLoc(roomName);
         this.collisions();
 
+        checkWinLose();
+
         this.world.getRoom().featureInteraction(player);
-
-
-
 
         this.player.regenerateHealth();
         this.playerAttacks();
+    }
+
+    /*
+        If the player has a master key & patient file, and located in Front Desk, the player escapes and wins the game
+     */
+    private void checkWinLose() {
+        //Game Lose Scenario -> if the player's hp is < 0, the player loses
+        if (this.player.getHp() <= 0) {
+            super.gameStateManager.stackState(new GameLoseState(gameStateManager));
+        }
+        //Game Win Scenario -> check if the master key && patient file is already in the inventory
+        boolean masteryKeyFound = false;
+        boolean patientFileFound = false;
+
+        for (int i = 0; i < this.player.getPlayerInventory().size(); i++) {
+            //if( this.player.getPlayerInventory().contains())
+            Entity e = this.player.getPlayerInventory().get(i);
+            if (!patientFileFound && this.player.getPlayerInventory().get(i).getID() == Resources.PATIENT_FILE) {
+                patientFileFound = true;
+            }
+            if (!masteryKeyFound && this.player.getPlayerInventory().get(i).getID() == Resources.MASTER_KEY) {
+                masteryKeyFound = true;
+            }
+            if (masteryKeyFound
+                    && patientFileFound
+                    && this.player.getPlayerLoc().equalsIgnoreCase("Front Desk")) {
+                super.gameStateManager.stackState(new GameWinState(gameStateManager));
+                break;
+            }
+        }
     }
 
     @Override
@@ -76,7 +106,6 @@ public class PlayingState extends GameState {
         graphics.setFont(graphics.getFont().deriveFont(Font.BOLD, 20f));
         graphics.drawString(this.player.getPlayerLoc(), 5, Tile.SIZE + 10);
 
-
         drawMessage(graphics);
     }
 
@@ -88,14 +117,14 @@ public class PlayingState extends GameState {
 
     // draws a message. Always running in the background of the Playing State
     public void drawMessage(Graphics graphics) {
-        int messageX = WindowManager.WIDTH-1100;
-        int messageY = WindowManager.HEIGHT-100;
+        int messageX = WindowManager.WIDTH - 1100;
+        int messageY = WindowManager.HEIGHT - 100;
         graphics.setFont(graphics.getFont().deriveFont(Font.BOLD, 50f));
 
         for (int i = 0; i < message.size(); i++) {
             if (message.get(i) != null) {
                 graphics.setColor(Color.BLACK);
-                graphics.drawString(message.get(i), messageX+2, messageY+2);
+                graphics.drawString(message.get(i), messageX + 2, messageY + 2);
                 graphics.setColor(Color.WHITE);
                 graphics.drawString(message.get(i), messageX, messageY);
                 int counter = messageCounter.get(i) + 1;
@@ -169,12 +198,12 @@ public class PlayingState extends GameState {
     }
 
     private void generateLevel(int floorNum) {
-        if(floorNum == 2){ //second floor
+        if (floorNum == 2) { //second floor
             this.world.setCurrentX(7);
             this.world.setCurrentY(2);
             // stairs to First Floor
             this.world.getRoom(7, 2).placeFeature(new Feature(Resources.UPPER_STAIRS, () -> generateLevel(3)));
-        } else if(floorNum == 1) { //first floor
+        } else if (floorNum == 1) { //first floor
             this.world.getRoom(2, 2).placeFeature(new Feature(Resources.STAIRS, () -> generateLevel(2)));
         } else {
             this.world.setCurrentX(2);
@@ -185,7 +214,7 @@ public class PlayingState extends GameState {
         this.spawnPlayer();
     }
 
-    private void generateItemsAndEnemies(){
+    private void generateItemsAndEnemies() {
         //first floor
         //place items in the rooms per the requirement
         generateChestInRoom(1, 0);
@@ -239,6 +268,7 @@ public class PlayingState extends GameState {
     private void generateChestInRoom(int roomX, int roomY) {
         this.world.getRoom(roomX, roomY).placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
     }
+
     private void generateItemInRoom(int roomX, int roomY, byte resource) {
         this.world.getRoom(roomX, roomY).placeFeature(new Feature(resource, this::pickUpItem));
     }
@@ -287,24 +317,12 @@ public class PlayingState extends GameState {
         String text;
         if (Player.playerInventory.size() != Player.inventorySize) {
             text = "You have picked up an item!";
-        }else {
+        } else {
             text = "You cannot carry any more items!";
         }
     }
 
     private void playerAttacks() {
-
-        if (this.player.getHp() <= 0) {
-            JFrame window = new JFrame();
-            int resp = JOptionPane.showConfirmDialog(window, "You died. Restart the game?", "G  A  M  E  O  V  E  R", JOptionPane.YES_NO_OPTION);
-            if (resp == JOptionPane.YES_OPTION) {
-                Player.playerInventory.clear();
-                super.gameStateManager.stackState(new MainMenu(gameStateManager));
-            } else {
-                System.exit(0);
-            }
-        }
-
         this.player.decreaseTime();
         for (int i = 0; i < this.world.getRoom().getEnemies().size(); i++) {
             this.world.getRoom().getEnemies().get(i).move();
