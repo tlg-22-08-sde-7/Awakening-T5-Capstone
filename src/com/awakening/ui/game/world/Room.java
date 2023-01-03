@@ -16,6 +16,8 @@ public class Room {
     private ArrayList<Feature> features;
     private ArrayList<Enemy> enemies;
     public static boolean itemPickedUp = false;
+    public static Obj_MasterKey masterKey;
+    public static Obj_Key key;
 
     public Room(RoomData data) {
         this.data = data;
@@ -42,6 +44,14 @@ public class Room {
             else if(feature.getID() == Resources.UPPER_STAIRS){
                 feature.x = 380;
                 feature.y = 530;
+            } else if (feature.getID() == Resources.MASTER_DOOR) {
+                feature.x = WindowManager.WIDTH - Tile.SIZE;
+                feature.y = WindowManager.HEIGHT - 450;
+                feature.height = Tile.SIZE * 3;
+            } else if (feature.getId() == Resources.DOOR) {
+                feature.x = 0;
+                feature.y = WindowManager.HEIGHT - 450;
+                feature.height = Tile.SIZE * 3;
             }
             this.features.add(feature);
         } else {
@@ -94,7 +104,7 @@ public class Room {
                     itemPickedUp = true;
                     PlayingState.addMessage("You have picked up a " + firstAidKit.getName() + "!");
                 }else if (this.features.get(i).getID() == Resources.KEY) {
-                    Obj_Key key = new Obj_Key(0,0);
+                    key = new Obj_Key(0,0);
                     Player.playerInventory.add(key);
                     itemPickedUp = true;
                     PlayingState.addMessage("You have picked up a " + key.getName() + "!");
@@ -104,7 +114,7 @@ public class Room {
                     itemPickedUp = true;
                     PlayingState.addMessage("You have picked up a " + journal.getName() + "!");
                 }else if (this.features.get(i).getID() == Resources.MASTER_KEY) {
-                    Obj_MasterKey masterKey = new Obj_MasterKey(0,0);
+                    masterKey = new Obj_MasterKey(0,0);
                     Player.playerInventory.add(masterKey);
                     itemPickedUp = true;
                     PlayingState.addMessage("You have picked up a " + masterKey.getName() + "!");

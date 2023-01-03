@@ -19,6 +19,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PlayingState extends GameState {
     private LevelGenerator generator;
@@ -117,6 +118,7 @@ public class PlayingState extends GameState {
         graphics.drawString(this.player.getPlayerLoc(), 5, Tile.SIZE + 10);
 
         drawMessage(graphics);
+
     }
 
     // adds a text to be displayed using the drawMessage method
@@ -178,6 +180,10 @@ public class PlayingState extends GameState {
             case KeyEvent.VK_I:
                 super.gameStateManager.stackState(new Inventory(gameStateManager));
                 break;
+            case KeyEvent.VK_ENTER:
+                openMasterDoor();
+                openDoor();
+                break;
         }
 
     }
@@ -214,8 +220,17 @@ public class PlayingState extends GameState {
             this.world.setCurrentY(2);
             // stairs to First Floor
             this.world.getRoom(7, 2).placeFeature(new Feature(Resources.UPPER_STAIRS, () -> generateLevel(3)));
+            this.world.getRoom(6,2).getData().getTileAt(0, 3).setWall(true);
+            this.world.getRoom(6,2).getData().getTileAt(0, 4).setWall(true);
+            this.world.getRoom(6,2).getData().getTileAt(0, 5).setWall(true);
+            
         } else if (floorNum == 1) { //first floor
+
             this.world.getRoom(2, 2).placeFeature(new Feature(Resources.STAIRS, () -> generateLevel(2)));
+//            this.world.getRoom(2,2).getData().getTileAt(15, 3).setWall(true);
+//            this.world.getRoom(2,2).getData().getTileAt(15, 4).setWall(true);
+//            this.world.getRoom(2,2).getData().getTileAt(15, 5).setWall(true);
+
         } else {
             this.world.setCurrentX(2);
             this.world.setCurrentY(2);
@@ -238,6 +253,7 @@ public class PlayingState extends GameState {
         generateChestInRoom(1, 2);
         generateItemInRoom(1, 2, Resources.BANDAGES);
         generateChestInRoom(2, 1);
+        generateItemInRoom(2, 2, Resources.MASTER_DOOR);
         generateItemInRoom(1, 3, Resources.KEY);
         generateItemInRoom(3, 2, Resources.PATIENT_FILE);
 
@@ -260,6 +276,7 @@ public class PlayingState extends GameState {
         generateItemInRoom(6, 3, Resources.BARBELL);
         generateChestInRoom(5, 2);
         generateItemInRoom(5, 2, Resources.MASTER_KEY);
+        generateItemInRoom(6, 2, Resources.DOOR);
         generateChestInRoom(7, 2);
         generateItemInRoom(7, 2, Resources.AXE);
         generateItemInRoom(7, 2, Resources.FIRE_EXTINGUISHER);
@@ -350,10 +367,46 @@ public class PlayingState extends GameState {
                 } else {
                     this.world.getRoom().getEnemies().get(i).damage(Player.getAttackPoints(), this.player.getFacing());
                 }
-                System.out.println(Player.getAttackPoints());
                 if (this.world.getRoom().getEnemies().get(i).getHp() <= 0) {
                     this.world.getRoom().getEnemies().remove(i);
                     this.player.giveGold(MathHelper.randomInt(2, 5));
+                }
+            }
+        }
+    }
+
+    private void openMasterDoor() {
+        if (Objects.equals(this.generator.getRoomName(this.world.getCurrentX(), this.world.getCurrentY()), "Hallway")) {
+            RoomData roomIn = this.world.getRoom().getData();
+
+            for(int i = 0; i < Player.playerInventory.size(); i++) {
+                if (Player.playerInventory.get(i).getID() == Resources.MASTER_KEY &&
+                        player.intersects(roomIn.getTileAt(14, 3))) {
+                    gameStateManager.stackState(new UseItem(gameStateManager));
+                } else if (Player.playerInventory.get(i).getID() == Resources.MASTER_KEY &&
+                        player.intersects(roomIn.getTileAt(14, 4))) {
+                    gameStateManager.stackState(new UseItem(gameStateManager));
+                } else if (Player.playerInventory.get(i).getID() == Resources.MASTER_KEY &&
+                        player.intersects(roomIn.getTileAt(14, 5))) {
+                    gameStateManager.stackState(new UseItem(gameStateManager));
+                }
+            }
+        }
+    }
+    private void openDoor() {
+        if (Objects.equals(this.generator.getRoomName(this.world.getCurrentX(), this.world.getCurrentY()), "Fellowship Room")) {
+            RoomData roomIn = this.world.getRoom().getData();
+
+            for(int i = 0; i < Player.playerInventory.size(); i++) {
+                if (Player.playerInventory.get(i).getID() == Resources.KEY &&
+                        player.intersects(roomIn.getTileAt(1, 3))) {
+                    gameStateManager.stackState(new UseItem(gameStateManager));
+                } else if (Player.playerInventory.get(i).getID() == Resources.KEY &&
+                        player.intersects(roomIn.getTileAt(1, 4))) {
+                    gameStateManager.stackState(new UseItem(gameStateManager));
+                } else if (Player.playerInventory.get(i).getID() == Resources.KEY &&
+                        player.intersects(roomIn.getTileAt(1, 5))) {
+                    gameStateManager.stackState(new UseItem(gameStateManager));
                 }
             }
         }
