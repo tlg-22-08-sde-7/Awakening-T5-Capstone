@@ -2,6 +2,7 @@ package com.awakening.ui.game.states;
 
 import com.awakening.ui.framework.gamestates.GameState;
 import com.awakening.ui.framework.gamestates.GameStateManager;
+import com.awakening.ui.framework.gui.Sound;
 import com.awakening.ui.framework.gui.WindowManager;
 import com.awakening.ui.framework.resources.Resources;
 import com.awakening.ui.game.entities.Entity;
@@ -93,6 +94,7 @@ public class UseItem extends GameState {
                                     Objects.equals(LevelGenerator.getRoomName(World.getCurrentX(),
                                             World.getCurrentY()), "Fellowship Room")) {
                                 Player.playerInventory.remove(i);
+                                Sound.playSE(8);
                                 roomIn.getTileAt(0, 3).setWall(false);
                                 roomIn.getTileAt(0, 4).setWall(false);
                                 roomIn.getTileAt(0, 5).setWall(false);
@@ -100,7 +102,8 @@ public class UseItem extends GameState {
                             else if (Player.playerInventory.get(i).getID() == Resources.MASTER_KEY &&
                                     Objects.equals(LevelGenerator.getRoomName(World.getCurrentX(),
                                             World.getCurrentY()), "Hallway")) {
-                                Player.playerInventory.remove(i);
+//                                Player.playerInventory.remove(i);
+                                Sound.playSE(8);
                                 roomIn.getTileAt(15,3).setId(Resources.TILE);
                                 roomIn.getTileAt(15,4).setId(Resources.TILE);
                                 roomIn.getTileAt(15,5).setId(Resources.TILE);

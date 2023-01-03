@@ -2,6 +2,7 @@ package com.awakening.ui.game.states;
 
 import com.awakening.ui.framework.gamestates.GameState;
 import com.awakening.ui.framework.gamestates.GameStateManager;
+import com.awakening.ui.framework.gui.Sound;
 import com.awakening.ui.framework.gui.WindowManager;
 import com.awakening.ui.framework.resources.Resources;
 import com.awakening.ui.game.entities.Entity;
@@ -198,11 +199,13 @@ public class Inventory extends GameState {
                 Player.currentWeapon = selectedItem;
                 Player.setAttackPoints(Entity.getAttackPoints());
             }
-            if (Objects.equals(selectedItem.getName(), "First Aid Kit")
+            else if (Objects.equals(selectedItem.getName(), "First Aid Kit")
                     ||Objects.equals(selectedItem.getName(), "Bandages")
                     ||Objects.equals(selectedItem.getName(), "Tylenol")) {
                 selectedItem.use(selectedItem);
                 Player.playerInventory.remove(itemIndex);
+            } else {
+                Sound.playSE(2);
             }
 //            if (selectedItem.getType() == Entity.type_charge) {
 //                Player.currentItem = selectedItem;

@@ -11,7 +11,7 @@ public class Obj_Tylenol extends Entity {
     public Obj_Tylenol(int posXinRoom, int posYinRoom) {
         super(Resources.TYLENOL, posXinRoom, posYinRoom);
         type = type_heal;
-        this.name = "Bandages";
+        this.name = "Tylenol";
         this.description = "(" + this.name + ")\nThis will help me feel better if I get \ninjured.";
         this.healPoints = 20;
     }
