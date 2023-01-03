@@ -178,6 +178,9 @@ public class PlayingState extends GameState {
             case KeyEvent.VK_I:
                 super.gameStateManager.stackState(new Inventory(gameStateManager));
                 break;
+            case KeyEvent.VK_M:
+                super.gameStateManager.stackState(new Map(gameStateManager));
+                break;
         }
 
     }
@@ -204,6 +207,8 @@ public class PlayingState extends GameState {
             case KeyEvent.VK_ESCAPE:
                 break;
             case KeyEvent.VK_I:
+                break;
+            case KeyEvent.VK_M:
                 break;
         }
     }
