@@ -7,8 +7,9 @@ public class Obj_Camera extends Entity {
 
     public Obj_Camera(int posXinRoom, int posYinRoom) {
         super(Resources.CAMERA, posXinRoom, posYinRoom);
+        type = type_weapon;
         this.name = "Camera";
         this.description = "(" + this.name + ")\nMy camera. No pictures on it. \nI use its light to see around me.";
-        this.attackPoints = 5;
+        attackPoints = 5;
     }
 }
