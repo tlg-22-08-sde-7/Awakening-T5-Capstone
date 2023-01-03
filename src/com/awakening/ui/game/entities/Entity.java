@@ -6,12 +6,22 @@ import com.awakening.ui.game.world.Tile;
 
 import java.awt.*;
 
+import static com.awakening.ui.game.states.PlayingState.addMessage;
+
 public class Entity extends Rectangle {
     private static final long serialVersionUID = 1L; // serialization for threading
     protected String name;
     protected String description;
     protected int healPoints;
-    protected int attackPoints;
+    protected static int attackPoints;
+    protected static int chargePoints;
+    public static int type;
+    public static final int type_player = 0;
+    public static final int type_npc = 1;
+    public static final int type_ghost = 2;
+    public static final int type_weapon = 3;
+    public static final int type_heal = 4;
+    public static final int type_charge = 5;
 
     protected byte id;
 
@@ -86,6 +96,9 @@ public class Entity extends Rectangle {
         }
     }
 
+    public void use(Entity entity) {
+    }
+
     public byte getID() {
         return id;
     }
@@ -133,4 +146,21 @@ public class Entity extends Rectangle {
     public String getDescription() {
         return description;
     }
+
+    public static int getAttackPoints() {
+        return attackPoints;
+    }
+
+    public static void setAttackPoints(int attackPoints) {
+        Entity.attackPoints = attackPoints;
+    }
+
+    public static int getType() {
+        return type;
+    }
+
+    public static void setType(int type) {
+        Entity.type = type;
+    }
+
 }

@@ -15,12 +15,13 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Inventory extends GameState {
     public static Image currentSpriteImage;
-    private int selected;
-    private int slotCol = 0;
-    private int slotRow = 0;
+    private final int selected;
+    private static int slotCol = 0;
+    private static int slotRow = 0;
 
     protected Inventory(GameStateManager manager) {
         super(manager);
@@ -140,28 +141,31 @@ public class Inventory extends GameState {
     protected void keyPressed(int keyCode) {
         switch (keyCode) {
             case KeyEvent.VK_UP:
-                if (this.slotRow != 0) {
-                    this.slotRow--;
+                if (slotRow != 0) {
+                    slotRow--;
                 }
                 break;
             case KeyEvent.VK_DOWN:
-                if (this.slotRow != 2) {
-                    this.slotRow++;
+                if (slotRow != 2) {
+                    slotRow++;
                 }
                 break;
             case KeyEvent.VK_LEFT:
-                if (this.slotCol != 0) {
-                    this.slotCol--;
+                if (slotCol != 0) {
+                    slotCol--;
                 }
                 break;
             case KeyEvent.VK_RIGHT:
-                if (this.slotCol != 5) {
-                    this.slotCol++;
+                if (slotCol != 5) {
+                    slotCol++;
                 }
                 break;
             case KeyEvent.VK_I:
             case KeyEvent.VK_ESCAPE:
                 gameStateManager.backToPreviousState();
+                break;
+            case KeyEvent.VK_ENTER:
+                selectItem();
                 break;
         }
     }
@@ -175,20 +179,34 @@ public class Inventory extends GameState {
                 break;
         }
     }
-    public int getItemIndexInSlot() {
-        int itemIndex = slotCol + (slotRow*6);
-        return itemIndex;
+    public static int getItemIndexInSlot() {
+        return slotCol + (slotRow*6);
     }
 
     public void selectItem() {
 
         int itemIndex = getItemIndexInSlot();
+
         if (itemIndex < Player.playerInventory.size()) {
             Entity selectedItem = Player.playerInventory.get(itemIndex);
 
-//            if (selectedItem.type == type_weapon) {
-//                Player.currentWeapon = selectedItem;
-//                Player.setAttackPoints(Player.currentWeapon.getAttackPoints() + Player.getAttackPoints());
+            if (Objects.equals(selectedItem.getName(), "Axe")||Objects.equals(selectedItem.getName(), "Barbell")
+                    ||Objects.equals(selectedItem.getName(), "Wood Cane")
+                    ||Objects.equals(selectedItem.getName(), "Fire Extinguisher")
+                    ||Objects.equals(selectedItem.getName(), "Camera")
+                    ||Objects.equals(selectedItem.getName(), "Cellphone")) {
+                Player.currentWeapon = selectedItem;
+                Player.setAttackPoints(Entity.getAttackPoints());
+            }
+            if (Objects.equals(selectedItem.getName(), "First Aid Kit")
+                    ||Objects.equals(selectedItem.getName(), "Bandages")
+                    ||Objects.equals(selectedItem.getName(), "Tylenol")) {
+                selectedItem.use(selectedItem);
+                Player.playerInventory.remove(itemIndex);
+            }
+//            if (selectedItem.getType() == Entity.type_charge) {
+//                Player.currentItem = selectedItem;
+//                super.gameStateManager.stackState(new UseItem(gameStateManager));
 //            }
         }
     }
