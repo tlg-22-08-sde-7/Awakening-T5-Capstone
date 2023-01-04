@@ -68,7 +68,7 @@ public class Player extends Entity {
         if(this.hp < this.maxHp) this.regenDelay++;
         else this.regenDelay = 0;
 
-        if(this.regenDelay == 50) {
+        if(this.regenDelay == 100) {
             this.hp++;
             this.regenDelay = 0;
         }
@@ -110,11 +110,11 @@ public class Player extends Entity {
     }
 
     public void attack() {
-        if(this.attackTime == 0) this.attackTime = 30;
+        if(this.attackTime == 0) this.attackTime = 25;
     }
 
     public Rectangle getAttackBox() {
-        if(this.attackTime == 20) {
+        if(this.attackTime <= 20 && this.attackTime >= 15) {
             switch(super.facing) {
                 case NORTH:
                     return new Rectangle(super.x, super.y - super.height, super.width, super.height);

@@ -205,7 +205,7 @@ public class Inventory extends GameState {
                 selectedItem.use(selectedItem);
                 Player.playerInventory.remove(itemIndex);
             } else {
-                Sound.playSE(2);
+                PlayingState.se.playSE(2);
             }
 //            if (selectedItem.getType() == Entity.type_charge) {
 //                Player.currentItem = selectedItem;

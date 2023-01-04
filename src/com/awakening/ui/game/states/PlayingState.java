@@ -28,6 +28,8 @@ public class PlayingState extends GameState {
     private Player player;
     public static ArrayList<String> message = new ArrayList<>();
     public static ArrayList<Integer> messageCounter = new ArrayList<>();
+    public static Sound music = new Sound();
+    public static Sound se = new Sound();
 
     public PlayingState(GameStateManager manager) {
         super(manager);
@@ -65,7 +67,7 @@ public class PlayingState extends GameState {
     private void checkWinLose() {
         //Game Lose Scenario -> if the player's hp is < 0, the player loses
         if (this.player.getHp() <= 0) {
-            Sound.playSE(7);
+            se.playSE(7);
             super.gameStateManager.stackState(new GameLoseState(gameStateManager));
         }
         //Game Win Scenario -> check if the master key && patient file is already in the inventory
@@ -84,7 +86,7 @@ public class PlayingState extends GameState {
             if (masteryKeyFound
                     && patientFileFound
                     && this.player.getPlayerLoc().equalsIgnoreCase("Front Desk")) {
-                Sound.playSE(12);
+                se.playSE(12);
                 super.gameStateManager.stackState(new GameWinState(gameStateManager));
                 break;
             }
@@ -334,15 +336,15 @@ public class PlayingState extends GameState {
         switch (MathHelper.randomInt(3)) {
             case 0:
                 this.player.addArmor(MathHelper.randomInt(3, 5));
-                Sound.playSE(6);
+                se.playSE(6);
                 break;
             case 1:
                 this.player.giveGold(MathHelper.randomInt(3, 7));
-                Sound.playSE(6);
+                se.playSE(6);
                 break;
             case 2:
                 this.player.instantHeal(MathHelper.randomInt(2, 5));
-                Sound.playSE(6);
+                se.playSE(6);
                 break;
         }
     }
@@ -362,12 +364,12 @@ public class PlayingState extends GameState {
             this.world.getRoom().getEnemies().get(i).move();
 
             if (this.world.getRoom().getEnemies().get(i).intersects(this.player)) {
-                Sound.playSE(5);
+                se.playSE(5);
                 this.player.damage(5 - 5 * this.player.getArmor() / 100);
             }
 
             if (this.world.getRoom().getEnemies().get(i).intersects(this.player.getAttackBox())) {
-                Sound.playSE(1);
+                se.playSE(1);
                 if (Player.currentWeapon != null) {
                     this.world.getRoom().getEnemies().get(i).damage(this.player.currentWeapon.getAttackPoints(), this.player.getFacing());
                 } else {

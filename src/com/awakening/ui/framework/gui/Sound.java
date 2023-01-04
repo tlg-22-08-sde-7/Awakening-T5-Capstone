@@ -12,14 +12,16 @@ import java.net.URL;
 
 public class Sound {
 
-    static Clip clip;
-    static URL[] soundURL = new URL[30];
-    static float previousVolume = 0;
-    static float currentVolume = 0;
-    static FloatControl fc;
-    static boolean mute = false;
+    Clip clip;
+    URL[] soundURL = new URL[30];
+    float previousVolume = 0;
+    float currentVolume = 0;
+    FloatControl fc;
+    boolean mute = false;
+    public int volumeScale = 3;
+    float volume;
 
-    static{
+    public Sound() {
         soundURL[0] = Sound.class.getResource("/sound/titlescreen.wav");
         soundURL[1] = Sound.class.getResource("/sound/attack.wav");
         soundURL[2] = Sound.class.getResource("/sound/badcommand.wav");
@@ -35,107 +37,56 @@ public class Sound {
         soundURL[12] = Sound.class.getResource("/sound/wingame.wav");
     }
 
-    public static void setFile(int i) {
+    public void setFile(int i) {
         try {
 
             AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
             clip = AudioSystem.getClip();
             clip.open(ais);
             fc = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
+            checkVolume();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static void play() {
+    public void play() {
         clip.start();
     }
 
-    public static void loop() {
+    public void loop() {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
-    public static void stop() {
+    public void stop() {
         clip.stop();
     }
 
-    public static void playMusic(int i) {
+    public void playMusic(int i) {
 
         setFile(i);
         play();
         loop();
     }
 
-    public static void stopMusic() {
+    public void stopMusic() {
         stop();
     }
 
-    public static void playSE(int i) {
+    public void playSE(int i) {
         setFile(i);
         play();
     }
-
-    // Volume Control
-    public static JPanel volumeControl() {
-        JPanel adjustSound = new JPanel();
-        adjustSound.setLayout(new GridLayout(1, 3));
-
-        JButton volumeUpB = new JButton("Volume Up");
-        volumeUpB.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                volumeUp();
-            }
-        });
-        adjustSound.add(volumeUpB);
-
-        JButton volumeDownB = new JButton("Volume Down");
-        volumeDownB.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                volumeDown();
-            }
-        });
-        adjustSound.add(volumeDownB);
-
-        JButton muteB = new JButton("Mute");
-        muteB.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                volumeMute();
-            }
-        });
-
-        adjustSound.add(muteB);
-        adjustSound.setVisible(true);
-        return adjustSound;
-    }
-    public static void volumeUp() {
-        currentVolume += 1.0f;
-        if (currentVolume > 6.0f) {
-            currentVolume = 6.0f;
+    public void checkVolume() {
+        switch (volumeScale) {
+            case 0: volume = -80f; break;
+            case 1: volume = -20f; break;
+            case 2: volume = -12f; break;
+            case 3: volume = -5f; break;
+            case 4: volume = 1f; break;
+            case 5: volume = 6f; break;
         }
-        fc.setValue(currentVolume);
-    }
-    public static void volumeDown() {
-        currentVolume -= 1.0f;
-        if (currentVolume < -80.0f) {
-            currentVolume = -80.0f;
-        }
-        fc.setValue(currentVolume);
-    }
-    public static void volumeMute() {
-        if (!mute) {
-            previousVolume = currentVolume;
-            currentVolume = -80.0f;
-            fc.setValue(currentVolume);
-            mute = true;
-        }
-        else {
-            currentVolume = previousVolume;
-            fc.setValue(currentVolume);
-            mute = false;
-        }
+        fc.setValue(volume);
     }
 }

@@ -16,13 +16,14 @@ public class Options extends GameState {
     private static final String CONTINUE_GAME = "Back To The Game";
     private static final String QUIT_GAME = "Quit";
     private static final String SHOW_INSTRUCTIONS = "Instructions";
-    private static final String SETTINGS = "Settings";
+    private static final String MUSIC = "Music";
+    private static final String SE = "SE";
     private static final String RESTART_GAME = "Restart Game";
     private int selected;
 
     public Options(GameStateManager manager) {
         super(manager);
-        this.optionsMenu = new String[]{CONTINUE_GAME, SHOW_INSTRUCTIONS, SETTINGS, RESTART_GAME, QUIT_GAME};
+        this.optionsMenu = new String[]{CONTINUE_GAME, SHOW_INSTRUCTIONS, MUSIC, SE , RESTART_GAME, QUIT_GAME};
         this.selected = 0;
     }
 
@@ -64,24 +65,36 @@ public class Options extends GameState {
             else if(i == 1){ // show instructions
                 graphics.drawString(this.optionsMenu[i], frameX + 50, frameY + 100);
             }
-            else if(i == 2) { // settings game
+            else if(i == 2) { // Music
                 graphics.drawString(this.optionsMenu[i], frameX + 50, frameY + 150);
             }
-            else if (i == 3) {  // restart game
+            else if(i == 3) { // SE
                 graphics.drawString(this.optionsMenu[i], frameX + 50, frameY + 200);
-            } else {  // quit game
+            }
+            else if (i == 4) {  // restart game
                 graphics.drawString(this.optionsMenu[i], frameX + 50, frameY + 250);
+            } else if (i == 5) {  // quit game
+                graphics.drawString(this.optionsMenu[i], frameX + 50, frameY + 300);
+                graphics.setColor(Color.WHITE);
             }
         }
+        // Music Bar
+        int textX = frameX + 400;
+        int textY = frameY + 120;
+        graphics.drawRect(textX, textY, 120, 30);
+        int volumeWidth = 24 * PlayingState.music.volumeScale;
+        graphics.fillRect(textX, textY, volumeWidth, 30);
+
+        //SE Bar
+        textY = frameY + 173;
+        graphics.drawRect(textX, textY, 120, 30);
+        volumeWidth = 24 * PlayingState.se.volumeScale;
+        graphics.fillRect(textX, textY, volumeWidth, 30);
+
     }
 
     @Override
     protected void keyPressed(int keyCode) {
-
-    }
-
-    @Override
-    protected void keyReleased(int keyCode) {
         switch (keyCode) {
             case KeyEvent.VK_UP:
                 if (this.selected > 0) {
@@ -93,6 +106,30 @@ public class Options extends GameState {
                     this.selected++;
                 } else {
                     this.selected = 0;
+                }
+                break;
+            case KeyEvent.VK_RIGHT:
+                if (this.selected == 2 && PlayingState.music.volumeScale < 5) {
+                    PlayingState.music.volumeScale++;
+                    PlayingState.music.checkVolume();
+                    PlayingState.se.playSE(2);
+                    break;
+                } else if (this.selected == 3 && PlayingState.se.volumeScale < 5) {
+                    PlayingState.se.volumeScale++;
+                    PlayingState.se.playSE(2);
+                    break;
+                }
+                break;
+            case KeyEvent.VK_LEFT:
+                if (this.selected == 2 && PlayingState.music.volumeScale > 0) {
+                    PlayingState.music.volumeScale--;
+                    PlayingState.music.checkVolume();
+                    PlayingState.se.playSE(2);
+                    break;
+                } else if (this.selected == 3 && PlayingState.se.volumeScale > 0) {
+                    PlayingState.se.volumeScale--;
+                    PlayingState.se.playSE(2);
+                    break;
                 }
                 break;
             case KeyEvent.VK_ENTER:
@@ -114,19 +151,8 @@ public class Options extends GameState {
                             window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                         }
                         break;
-                    case SETTINGS:
-                        window = new JFrame();
-                        JPanel settingsWindow = new JPanel();
-                        settingsWindow.add(Sound.volumeControl());
-                        settingsWindow.setVisible(true);
-                        int optionPane = JOptionPane.showConfirmDialog
-                                (window, settingsWindow, "Settings", JOptionPane.OK_CANCEL_OPTION);
-
-                        if (optionPane == JOptionPane.OK_OPTION) {
-                            window.setDefaultCloseOperation(window.DO_NOTHING_ON_CLOSE);
-                        } else {
-                            window.setDefaultCloseOperation(window.DISPOSE_ON_CLOSE);
-                        }
+                    case MUSIC:
+                    case SE:
                         break;
                     case RESTART_GAME:
                         window= new JFrame();
@@ -136,8 +162,8 @@ public class Options extends GameState {
                             Player.playerInventory.clear();
                             super.gameStateManager.backToPreviousState();
                             super.gameStateManager.backToPreviousState();
-                            Sound.stopMusic();
-                            Sound.playMusic(0);
+                            PlayingState.music.stopMusic();
+                            PlayingState.music.playMusic(0);
                         } else {
                             window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                         }
@@ -146,5 +172,10 @@ public class Options extends GameState {
                 break;
 
         }
+    }
+
+    @Override
+    protected void keyReleased(int keyCode) {
+
     }
 }

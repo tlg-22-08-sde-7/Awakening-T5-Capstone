@@ -4,6 +4,7 @@ import com.awakening.ui.framework.gamestates.GameStateManager;
 import com.awakening.ui.framework.gui.Sound;
 import com.awakening.ui.framework.gui.WindowManager;
 import com.awakening.ui.game.states.MainMenu;
+import com.awakening.ui.game.states.PlayingState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +27,7 @@ public class Engine {
     }
 
     public static void start() {
-        Sound.playMusic(0);
+        PlayingState.music.playMusic(0);
         gameStateManager.stackState(new MainMenu(gameStateManager));
         windowManager.addPanel(new GameScreen());
         windowManager.addKeyListener(new Keyboard());
