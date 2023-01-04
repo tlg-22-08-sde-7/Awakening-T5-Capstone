@@ -3,8 +3,12 @@ package com.awakening.ui.game.states;
 import com.awakening.ui.framework.gamestates.GameState;
 import com.awakening.ui.framework.gamestates.GameStateManager;
 import com.awakening.ui.framework.gui.WindowManager;
+import com.awakening.ui.game.entities.Player;
+import com.awakening.ui.game.world.World;
+import com.sun.source.tree.ReturnTree;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -15,12 +19,12 @@ public class Settings extends GameState {
     private String[] settingsMenu;
     private static final String MUSIC = "Music";
     private static final String SE = "SE";
-    private static final String BACK = "Back";
+    private static final String RETURN = "Return";
     private int selected;
 
     public Settings (GameStateManager manager) {
         super(manager);
-        this.settingsMenu = new String[]{BACK, MUSIC, SE};
+        this.settingsMenu = new String[]{RETURN, MUSIC, SE};
         this.selected = 0;
     }
 
@@ -128,7 +132,7 @@ public class Settings extends GameState {
                 break;
             case KeyEvent.VK_ENTER:
                 switch(this.settingsMenu[selected]) {
-                    case BACK:
+                    case RETURN:
                         this.gameStateManager.backToPreviousState();
                         break;
                     case MUSIC:

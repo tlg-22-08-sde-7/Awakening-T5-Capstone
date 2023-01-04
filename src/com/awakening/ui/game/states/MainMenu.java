@@ -90,9 +90,8 @@ public class MainMenu extends GameState {
                         super.gameStateManager.stackState(new PlayerSelect(gameStateManager));
                         break;
                     case SHOW_INSTRUCTIONS:
-                        super.gameStateManager.stackState(new Instructions(gameStateManager));
-                        /*JOptionPane.showMessageDialog(null,  INSTRUCTIONS,
-                                "Instructions", JOptionPane.PLAIN_MESSAGE);*/
+                        JOptionPane.showMessageDialog(null,  INSTRUCTIONS,
+                                "Instructions", JOptionPane.PLAIN_MESSAGE);
                         break;
                     case QUIT_GAME:
                         JFrame window= new JFrame();
