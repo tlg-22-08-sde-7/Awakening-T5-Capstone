@@ -30,7 +30,7 @@ public class Entity extends Rectangle {
     protected boolean left;
     protected boolean right;
 
-    protected int speed; // How fast we want player or enemie to move
+    protected int speed; // How fast we want player or enemy to move
 
     protected MathHelper.Direction facing;
 
