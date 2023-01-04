@@ -21,11 +21,6 @@ public class PlayerTest {
     }
 
     @Test
-    public void getArmor(){
-        Assert.assertEquals(0, player.getArmor());
-    }
-
-    @Test
     public void getArmorValue(){
         Assert.assertEquals(0, player.getArmor());
     }
