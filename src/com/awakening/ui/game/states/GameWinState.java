@@ -101,7 +101,11 @@ public class GameWinState extends GameState {
                         }
                         break;
                     case RESTART_GAME:
-                        super.gameStateManager.stackState(new PlayerSelect(gameStateManager));
+                        Player.playerInventory.clear();
+                        gameStateManager.backToPreviousState();
+                        gameStateManager.backToPreviousState();
+                        PlayingState.music.stopMusic();
+                        PlayingState.music.playMusic(0);
                         break;
                 }
                 break;

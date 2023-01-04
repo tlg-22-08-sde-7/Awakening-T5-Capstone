@@ -3,6 +3,7 @@ package com.awakening.ui.game.states;
 import com.awakening.ui.framework.gamestates.GameState;
 import com.awakening.ui.framework.gamestates.GameStateManager;
 import com.awakening.ui.framework.gui.WindowManager;
+import com.awakening.ui.game.entities.Player;
 import com.awakening.ui.game.world.World;
 
 import javax.swing.*;
@@ -99,7 +100,11 @@ public class GameLoseState extends GameState {
                         }
                         break;
                     case RESTART_GAME:
-                        super.gameStateManager.stackState(new PlayerSelect(gameStateManager));
+                        Player.playerInventory.clear();
+                        gameStateManager.backToPreviousState();
+                        gameStateManager.backToPreviousState();
+                        PlayingState.music.stopMusic();
+                        PlayingState.music.playMusic(0);
                         break;
                 }
                 break;

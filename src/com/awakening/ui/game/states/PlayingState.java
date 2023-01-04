@@ -16,7 +16,6 @@ import com.awakening.ui.game.world.World;
 import com.awakening.ui.game.world.generator.LevelGenerator;
 import com.awakening.ui.game.world.generator.RoomData;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -230,16 +229,10 @@ public class PlayingState extends GameState {
             this.world.setCurrentY(2);
             // stairs to First Floor
             this.world.getRoom(7, 2).placeFeature(new Feature(Resources.UPPER_STAIRS, () -> generateLevel(3)));
-            this.world.getRoom(6,2).getData().getTileAt(0, 3).setWall(true);
-            this.world.getRoom(6,2).getData().getTileAt(0, 4).setWall(true);
-            this.world.getRoom(6,2).getData().getTileAt(0, 5).setWall(true);
             
         } else if (floorNum == 1) { //first floor
 
             this.world.getRoom(2, 2).placeFeature(new Feature(Resources.STAIRS, () -> generateLevel(2)));
-//            this.world.getRoom(2,2).getData().getTileAt(15, 3).setWall(true);
-//            this.world.getRoom(2,2).getData().getTileAt(15, 4).setWall(true);
-//            this.world.getRoom(2,2).getData().getTileAt(15, 5).setWall(true);
 
         } else {
             this.world.setCurrentX(2);
@@ -395,13 +388,13 @@ public class PlayingState extends GameState {
             for(int i = 0; i < Player.playerInventory.size(); i++) {
                 if (Player.playerInventory.get(i).getID() == Resources.MASTER_KEY &&
                         player.intersects(roomIn.getTileAt(14, 3))) {
-                    gameStateManager.stackState(new UseItem(gameStateManager));
+                    gameStateManager.stackState(new UseKey(gameStateManager));
                 } else if (Player.playerInventory.get(i).getID() == Resources.MASTER_KEY &&
                         player.intersects(roomIn.getTileAt(14, 4))) {
-                    gameStateManager.stackState(new UseItem(gameStateManager));
+                    gameStateManager.stackState(new UseKey(gameStateManager));
                 } else if (Player.playerInventory.get(i).getID() == Resources.MASTER_KEY &&
                         player.intersects(roomIn.getTileAt(14, 5))) {
-                    gameStateManager.stackState(new UseItem(gameStateManager));
+                    gameStateManager.stackState(new UseKey(gameStateManager));
                 }
             }
         }
@@ -413,13 +406,13 @@ public class PlayingState extends GameState {
             for(int i = 0; i < Player.playerInventory.size(); i++) {
                 if (Player.playerInventory.get(i).getID() == Resources.KEY &&
                         player.intersects(roomIn.getTileAt(1, 3))) {
-                    gameStateManager.stackState(new UseItem(gameStateManager));
+                    gameStateManager.stackState(new UseKey(gameStateManager));
                 } else if (Player.playerInventory.get(i).getID() == Resources.KEY &&
                         player.intersects(roomIn.getTileAt(1, 4))) {
-                    gameStateManager.stackState(new UseItem(gameStateManager));
+                    gameStateManager.stackState(new UseKey(gameStateManager));
                 } else if (Player.playerInventory.get(i).getID() == Resources.KEY &&
                         player.intersects(roomIn.getTileAt(1, 5))) {
-                    gameStateManager.stackState(new UseItem(gameStateManager));
+                    gameStateManager.stackState(new UseKey(gameStateManager));
                 }
             }
         }
