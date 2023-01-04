@@ -1,5 +1,6 @@
 package com.awakening.ui.game.entities;
 
+import com.awakening.ui.framework.resources.Resources;
 import com.awakening.ui.framework.utils.MathHelper;
 
 public class Enemy extends Entity{
@@ -15,6 +16,9 @@ public class Enemy extends Entity{
         this.target = target;
         super.speed = 2;
         this.hp = health;
+        if (id == Resources.GHOST_MAIN1){
+            super.speed = 3;
+        }
     }
 
     public Enemy(Enemy copy) {
