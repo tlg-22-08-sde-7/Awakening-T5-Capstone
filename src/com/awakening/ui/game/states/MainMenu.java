@@ -28,7 +28,7 @@ public class MainMenu extends GameState {
             "While searching for items you can press the \"M\" key to view the map.\n" +
             "You can also press the \"I\" key to view your inventory.\n" +
             "The \"ESC\" key will bring up the pause menu where you can change the music volume, SFX volume, restart, or quit the game \n" +
-            "In order to win you must grab the Master Key, Patient file, journal and ESCAPE!";
+            "In order to win you must grab the Master Key, Patient file, Journal and Find your way back to the Front Desk!";
     private int selected;
 
     public MainMenu(GameStateManager manager) {
