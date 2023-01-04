@@ -1,5 +1,7 @@
 package com.awakening.ui.game.world;
 
+import com.awakening.ui.framework.resources.Resources;
+
 import java.awt.*;
 
 public class Tile extends Rectangle {
@@ -13,9 +15,11 @@ public class Tile extends Rectangle {
 
     public Tile(byte id, int posXinRoom, int posYinRoom, boolean isWall){
         super(posXinRoom * SIZE, posYinRoom * SIZE, SIZE, SIZE);
+
         this.id = id;
         wall = isWall;
     }
+
 
     public byte getID() {
         return id;

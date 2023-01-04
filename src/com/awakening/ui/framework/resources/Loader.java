@@ -78,9 +78,10 @@ public class Loader {
             Resources.TEXTURES.add(Resources.DOOR, ImageIO.read(new File("resources/pictures/door.png")));
             Resources.TEXTURES.add(Resources.MASTER_DOOR, ImageIO.read(new File("resources/pictures/masterdoor.png")));
             Resources.TEXTURES.add(Resources.HOSPITAL_BED, ImageIO.read(new File("resources/pictures/textures/bed.png")));
-
-            
-
+            Resources.TEXTURES.add(Resources.BAT, ImageIO.read(new File("resources/pictures/textures/enemy.png")));
+            Resources.TEXTURES.add(Resources.BAT_2, ImageIO.read(new File("resources/pictures/textures/enemy_2.png")));
+            Resources.TEXTURES.add(Resources.GHOST_MAIN1, ImageIO.read(new File("resources/pictures.ghost/ghostMain1.png")));
+            Resources.TEXTURES.add(Resources.GHOST_MAIN2, ImageIO.read(new File("resources/pictures.ghost/ghostMain2.png")));
 
         } catch (IOException e) {
             e.printStackTrace();

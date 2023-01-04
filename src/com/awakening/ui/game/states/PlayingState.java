@@ -106,7 +106,6 @@ public class PlayingState extends GameState {
         }
 
 
-
         graphics.setColor(Color.WHITE);
         graphics.setFont(new Font("arial", Font.PLAIN, 15));
         graphics.drawImage(Resources.TEXTURES.get(Resources.HEART), 0, 0, Tile.SIZE * 2 / 3, Tile.SIZE * 2 / 3, null);
@@ -228,10 +227,10 @@ public class PlayingState extends GameState {
             this.world.setCurrentY(2);
             // stairs to First Floor
             this.world.getRoom(7, 2).placeFeature(new Feature(Resources.UPPER_STAIRS, () -> generateLevel(3)));
-            this.world.getRoom(6,2).getData().getTileAt(0, 3).setWall(true);
-            this.world.getRoom(6,2).getData().getTileAt(0, 4).setWall(true);
-            this.world.getRoom(6,2).getData().getTileAt(0, 5).setWall(true);
-            
+            this.world.getRoom(6, 2).getData().getTileAt(0, 3).setWall(true);
+            this.world.getRoom(6, 2).getData().getTileAt(0, 4).setWall(true);
+            this.world.getRoom(6, 2).getData().getTileAt(0, 5).setWall(true);
+
         } else if (floorNum == 1) { //first floor
 
             this.world.getRoom(2, 2).placeFeature(new Feature(Resources.STAIRS, () -> generateLevel(2)));
@@ -272,6 +271,14 @@ public class PlayingState extends GameState {
         generateEnemyInRoom(1, 2, 10);
         generateEnemyInRoom(2, 2, 10);
         generateEnemyInRoom(2, 1, 10);
+        generateMainGhostInRoom(5, 2, 10);
+        generateEnemyInRoom(5, 2, 10);
+        generateEnemyInRoom(5, 2, 10);
+        generateBatsInRoom(3, 2, 5);
+        generateBatsInRoom(3, 2, 5);
+        generateBatsInRoom(3, 2, 5);
+        generateBatsInRoom(3, 2, 5);
+        generateBatsInRoom(3, 2, 5);
 
         //second floor
         //place items in the rooms per the requirement
@@ -299,6 +306,7 @@ public class PlayingState extends GameState {
         generateEnemyInRoom(5, 2, 10);
         generateEnemyInRoom(7, 2, 10);
         generateEnemyInRoom(8, 2, 10);
+
     }
 
     private void generateChestInRoom(int roomX, int roomY) {
@@ -311,6 +319,14 @@ public class PlayingState extends GameState {
 
     private void generateEnemyInRoom(int roomX, int roomY, int enemyHp) {
         this.world.getRoom(roomX, roomY).spawnEnemy(new Enemy(Resources.ENEMY, enemyHp, this.player));
+    }
+
+    private void generateBatsInRoom(int roomX, int roomY, int enemyHp) {
+        this.world.getRoom(roomX, roomY).spawnEnemy(new Enemy(Resources.BAT, enemyHp, this.player));
+    }
+
+    private void generateMainGhostInRoom(int roomX, int roomY, int enemyHp) {
+        this.world.getRoom(roomX, roomY).spawnEnemy(new Enemy(Resources.GHOST_MAIN1, enemyHp, this.player));
     }
 
     private void spawnPlayer() {
@@ -390,7 +406,7 @@ public class PlayingState extends GameState {
         if (Objects.equals(this.generator.getRoomName(this.world.getCurrentX(), this.world.getCurrentY()), "Hallway")) {
             RoomData roomIn = this.world.getRoom().getData();
 
-            for(int i = 0; i < Player.playerInventory.size(); i++) {
+            for (int i = 0; i < Player.playerInventory.size(); i++) {
                 if (Player.playerInventory.get(i).getID() == Resources.MASTER_KEY &&
                         player.intersects(roomIn.getTileAt(14, 3))) {
                     gameStateManager.stackState(new UseItem(gameStateManager));
@@ -404,11 +420,12 @@ public class PlayingState extends GameState {
             }
         }
     }
+
     private void openDoor() {
         if (Objects.equals(this.generator.getRoomName(this.world.getCurrentX(), this.world.getCurrentY()), "Fellowship Room")) {
             RoomData roomIn = this.world.getRoom().getData();
 
-            for(int i = 0; i < Player.playerInventory.size(); i++) {
+            for (int i = 0; i < Player.playerInventory.size(); i++) {
                 if (Player.playerInventory.get(i).getID() == Resources.KEY &&
                         player.intersects(roomIn.getTileAt(1, 3))) {
                     gameStateManager.stackState(new UseItem(gameStateManager));
