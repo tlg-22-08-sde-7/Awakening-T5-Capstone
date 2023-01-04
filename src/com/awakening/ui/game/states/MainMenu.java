@@ -104,18 +104,8 @@ public class MainMenu extends GameState {
                         }
                         break;
                     case SETTINGS:
-                        window = new JFrame();
-                        JPanel settingsWindow = new JPanel();
-                        settingsWindow.add(Sound.volumeControl());
-                        settingsWindow.setVisible(true);
-                        int optionPane = JOptionPane.showConfirmDialog
-                                (window, settingsWindow, "Settings", JOptionPane.OK_CANCEL_OPTION);
-
-                        if (optionPane == JOptionPane.OK_OPTION) {
-                            window.setDefaultCloseOperation(window.DO_NOTHING_ON_CLOSE);
-                        } else {
-                            window.setDefaultCloseOperation(window.DISPOSE_ON_CLOSE);
-                        }
+                        super.gameStateManager.stackState(new Settings(gameStateManager));
+                        break;
                 }
                 break;
         }

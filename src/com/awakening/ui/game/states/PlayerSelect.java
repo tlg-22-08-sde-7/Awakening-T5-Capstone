@@ -119,23 +119,12 @@ public class PlayerSelect extends GameState {
                         }
                         break;
                     case SETTINGS:
-                        window = new JFrame();
-                        JPanel settingsWindow = new JPanel();
-                        settingsWindow.add(Sound.volumeControl());
-                        settingsWindow.setVisible(true);
-                        int optionPane = JOptionPane.showConfirmDialog
-                                (window, settingsWindow, "Settings", JOptionPane.OK_CANCEL_OPTION);
-
-                        if (optionPane == JOptionPane.OK_OPTION) {
-                            window.setDefaultCloseOperation(window.DO_NOTHING_ON_CLOSE);
-                        } else {
-                            window.setDefaultCloseOperation(window.DISPOSE_ON_CLOSE);
-                        }
+                        super.gameStateManager.stackState(new Settings(gameStateManager));
                         break;
                     case PLAYER1:
                         super.gameStateManager.stackState(new PlayingState(gameStateManager));
-                        Sound.stopMusic();
-                        Sound.playMusic(10);
+                        PlayingState.music.stopMusic();
+                        PlayingState.music.playMusic(10);
                         break;
                     case PLAYER2:
                         super.gameStateManager.stackState(new PlayingState(gameStateManager));
@@ -143,8 +132,8 @@ public class PlayerSelect extends GameState {
                         Player.playerStandUp = Resources.PLAYER_BACK;
                         Player.playerStandLeft = Resources.PLAYER_LEFT;
                         Player.playerStandRight = Resources.PLAYER_RIGHT;
-                        Sound.stopMusic();
-                        Sound.playMusic(10);
+                        PlayingState.music.stopMusic();
+                        PlayingState.music.playMusic(10);
                         break;
                     case PLAYER3:
                         super.gameStateManager.stackState(new PlayingState(gameStateManager));
@@ -152,8 +141,8 @@ public class PlayerSelect extends GameState {
                         Player.playerStandUp = Resources.PLAYER_3_STAND_UP;
                         Player.playerStandLeft = Resources.PLAYER_3_STAND_LEFT;
                         Player.playerStandRight = Resources.PLAYER_3_STAND_RIGHT;
-                        Sound.stopMusic();
-                        Sound.playMusic(10);
+                        PlayingState.music.stopMusic();
+                        PlayingState.music.playMusic(10);
                         break;
                     case PLAYER4:
                         super.gameStateManager.stackState(new PlayingState(gameStateManager));
@@ -161,8 +150,8 @@ public class PlayerSelect extends GameState {
                         Player.playerStandUp = Resources.PLAYER_4_STAND_UP;
                         Player.playerStandLeft = Resources.PLAYER_4_STAND_LEFT;
                         Player.playerStandRight = Resources.PLAYER_4_STAND_RIGHT;
-                        Sound.stopMusic();
-                        Sound.playMusic(10);
+                        PlayingState.music.stopMusic();
+                        PlayingState.music.playMusic(10);
                         break;
                 }
                 break;

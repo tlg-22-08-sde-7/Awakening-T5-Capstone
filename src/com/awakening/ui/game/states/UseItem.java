@@ -94,7 +94,7 @@ public class UseItem extends GameState {
                                     Objects.equals(LevelGenerator.getRoomName(World.getCurrentX(),
                                             World.getCurrentY()), "Fellowship Room")) {
                                 Player.playerInventory.remove(i);
-                                Sound.playSE(8);
+                                PlayingState.se.playSE(8);
                                 roomIn.getTileAt(0, 3).setWall(false);
                                 roomIn.getTileAt(0, 4).setWall(false);
                                 roomIn.getTileAt(0, 5).setWall(false);
@@ -103,7 +103,7 @@ public class UseItem extends GameState {
                                     Objects.equals(LevelGenerator.getRoomName(World.getCurrentX(),
                                             World.getCurrentY()), "Hallway")) {
 //                                Player.playerInventory.remove(i);
-                                Sound.playSE(8);
+                                PlayingState.se.playSE(8);
                                 roomIn.getTileAt(15,3).setId(Resources.TILE);
                                 roomIn.getTileAt(15,4).setId(Resources.TILE);
                                 roomIn.getTileAt(15,5).setId(Resources.TILE);
