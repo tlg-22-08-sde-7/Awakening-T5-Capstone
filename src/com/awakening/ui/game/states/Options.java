@@ -138,8 +138,9 @@ public class Options extends GameState {
                         this.gameStateManager.backToPreviousState();
                         break;
                     case SHOW_INSTRUCTIONS:
-                        JOptionPane.showMessageDialog(null, "These are your instructions",
-                                "Instructions", JOptionPane.PLAIN_MESSAGE);
+                        super.gameStateManager.stackState(new Instructions(gameStateManager));
+                        /*JOptionPane.showMessageDialog(null, "These are your instructions",
+                                "Instructions", JOptionPane.PLAIN_MESSAGE);*/
                         break;
                     case QUIT_GAME:
                         JFrame window= new JFrame();
