@@ -73,6 +73,7 @@ public class PlayingState extends GameState {
         //Game Win Scenario -> check if the master key && patient file is already in the inventory
         boolean masteryKeyFound = false;
         boolean patientFileFound = false;
+        boolean journalFound = false;
 
         for (int i = 0; i < this.player.getPlayerInventory().size(); i++) {
             //if( this.player.getPlayerInventory().contains())
@@ -83,8 +84,12 @@ public class PlayingState extends GameState {
             if (!masteryKeyFound && this.player.getPlayerInventory().get(i).getID() == Resources.MASTER_KEY) {
                 masteryKeyFound = true;
             }
+            if (!journalFound && this.player.getPlayerInventory().get(i).getID() == Resources.JOURNAL) {
+                journalFound = true;
+            }
             if (masteryKeyFound
                     && patientFileFound
+                    && journalFound
                     && this.player.getPlayerLoc().equalsIgnoreCase("Front Desk")) {
                 se.playSE(12);
                 super.gameStateManager.stackState(new GameWinState(gameStateManager));
