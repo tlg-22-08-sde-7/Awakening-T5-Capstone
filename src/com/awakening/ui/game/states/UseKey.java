@@ -17,7 +17,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Objects;
 
-public class UseItem extends GameState {
+public class UseKey extends GameState {
 
     private int selected;
     private Inventory inventory = new Inventory(gameStateManager);
@@ -26,7 +26,7 @@ public class UseItem extends GameState {
     private static final String YES = "YES";
     private static final String NO = "NO";
 
-    protected UseItem(GameStateManager manager) {
+    protected UseKey(GameStateManager manager) {
         super(manager);
         this.useItemMenu = new String[]{YES, NO};
         this.selected = 0;
@@ -95,6 +95,9 @@ public class UseItem extends GameState {
                                             World.getCurrentY()), "Fellowship Room")) {
                                 Player.playerInventory.remove(i);
                                 PlayingState.se.playSE(8);
+                                roomIn.getTileAt(0, 3).setId(Resources.TILE);
+                                roomIn.getTileAt(0, 4).setId(Resources.TILE);
+                                roomIn.getTileAt(0, 5).setId(Resources.TILE);
                                 roomIn.getTileAt(0, 3).setWall(false);
                                 roomIn.getTileAt(0, 4).setWall(false);
                                 roomIn.getTileAt(0, 5).setWall(false);
