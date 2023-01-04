@@ -25,7 +25,7 @@ public class MainMenu extends GameState {
             "As you navigate you will encounter ghosts in each room, each room has items that you will need in\n" +
             "order to defeat the ghost and gain access to other rooms.\n" +
             "To attack you can use the Space Bar and/or the \"Q\" key.\n" +
-            "While searching for items you can press the \"M\" key to view the map.\n" +
+            "You can press the \"M\" key to view the map.\n" +
             "You can also press the \"I\" key to view your inventory.\n" +
             "The \"ESC\" key will bring up the pause menu where you can change the music volume, SFX volume, restart, or quit the game \n" +
             "In order to win you must grab the Master Key, Patient file, Journal and Find your way back to the Front Desk!";
