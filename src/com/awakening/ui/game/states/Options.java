@@ -36,7 +36,10 @@ public class Options extends GameState {
     @Override
     public void render(Graphics graphics) {
 
+        // Background of the current state
         World.getRoom().render(graphics);
+
+        // Window to be displayed
         int frameX = WindowManager.WIDTH/4;
         int frameY = WindowManager.HEIGHT/6;
         int frameWidth = WindowManager.WIDTH/2;
@@ -46,12 +49,13 @@ public class Options extends GameState {
         graphics.setColor(c);
         graphics.fillRoundRect(frameX, frameY, frameWidth, frameHeight, 35, 35);
 
+        // Border of the window
         c = new Color(255, 255, 255, 220);
         graphics.setColor(c);
         graphics.drawRoundRect(frameX + 5, frameY + 5, frameWidth - 10, frameHeight - 10, 25, 25);
+
+        // Font for the window
         graphics.setFont(graphics.getFont().deriveFont(32F));
-
-
         for(int i = 0; i < this.optionsMenu.length;i++) {
             if(i == this.selected){
                 graphics.setColor(Color.GREEN);
@@ -93,6 +97,7 @@ public class Options extends GameState {
 
     }
 
+    // Keys to be used in the current State
     @Override
     protected void keyPressed(int keyCode) {
         switch (keyCode) {
@@ -139,14 +144,12 @@ public class Options extends GameState {
                         break;
                     case SHOW_INSTRUCTIONS:
                         super.gameStateManager.stackState(new Instructions(gameStateManager));
-                        /*JOptionPane.showMessageDialog(null, "These are your instructions",
-                                "Instructions", JOptionPane.PLAIN_MESSAGE);*/
                         break;
                     case QUIT_GAME:
+                        // Pop up frame to ensure you want to quit
                         JFrame window= new JFrame();
                         int resp = JOptionPane.showConfirmDialog( window, "Are you sure you want to quit?", "Quit?", JOptionPane.YES_NO_OPTION);
                         if (resp == JOptionPane.YES_OPTION) {
-                            //window.dispose();
                             System.exit(0);
                         } else {
                             window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -156,6 +159,7 @@ public class Options extends GameState {
                     case SE:
                         break;
                     case RESTART_GAME:
+                        // Pop up to ensure you want to restart the game
                         window= new JFrame();
                         resp = JOptionPane.showConfirmDialog( window, "Are you sure you want to restart?\n " +
                                 "You will lose all of your progress.", "Restart?", JOptionPane.YES_NO_OPTION);

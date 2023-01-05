@@ -23,6 +23,8 @@ import java.util.HashSet;
 import java.util.Objects;
 
 public class PlayingState extends GameState {
+
+    // creates instances of different classes and arrays to be used
     private final LevelGenerator generator;
     private final World world;
     public static Player player;
@@ -31,6 +33,7 @@ public class PlayingState extends GameState {
     public static Sound music = new Sound();
     public static Sound se = new Sound();
 
+    // Constructor
     public PlayingState(GameStateManager manager) {
         super(manager);
         generator = new LevelGenerator();
@@ -45,6 +48,7 @@ public class PlayingState extends GameState {
         generateItemsAndEnemies();
     }
 
+    // loops the frames in the current state
     @Override
     protected void loop() {
         player.move();
@@ -101,8 +105,12 @@ public class PlayingState extends GameState {
 
     @Override
     protected void render(Graphics graphics) {
+
+        // displays current state
         World.getRoom().render(graphics);
         player.render(graphics);
+
+        // displays current player and weapon
         if (Player.currentWeapon != null) {
             graphics.drawImage(Resources.TEXTURES.get(Player.currentWeapon.getID()),
                     player.getAttackBox().x, player.getAttackBox().y,
@@ -164,6 +172,7 @@ public class PlayingState extends GameState {
         }
     }
 
+    // Keys to be used in the current State
     @Override
     protected void keyPressed(int keyCode) {
         switch (keyCode) {
@@ -204,6 +213,7 @@ public class PlayingState extends GameState {
 
     }
 
+    // Makes the player stop moving when the keys are released
     @Override
     protected void keyReleased(int keyCode) {
         switch (keyCode) {
@@ -321,6 +331,7 @@ public class PlayingState extends GameState {
 
     }
 
+    // these methods generate the different Entities in the rooms
     private void generateChestInRoom(int roomX, int roomY) {
         this.world.getRoom(roomX, roomY).placeFeature(new Feature(Resources.CHEST, this::givePlayerRandomLoot));
     }
@@ -348,6 +359,7 @@ public class PlayingState extends GameState {
         }
     }
 
+    // used to handle collisions in the rooms
     private void collisions() {
         RoomData roomIn = World.getRoom().getData();
 
@@ -362,6 +374,7 @@ public class PlayingState extends GameState {
         }
     }
 
+    // randomly gives the player different items from the chests
     private void givePlayerRandomLoot() {
 
         switch (MathHelper.randomInt(3)) {
@@ -380,6 +393,7 @@ public class PlayingState extends GameState {
         }
     }
 
+    // used as a place holder for the generate items
     private void pickUpItem() {
         String text;
         if (Player.playerInventory.size() != Player.inventorySize) {
@@ -389,11 +403,13 @@ public class PlayingState extends GameState {
         }
     }
 
+    // used to attack the enemies and for the enemies to attack the player
     private void playerAttacks() {
         player.decreaseTime();
         for (int i = 0; i < World.getRoom().getEnemies().size(); i++) {
             World.getRoom().getEnemies().get(i).move();
 
+            // when the enemy attacks the player
             if (World.getRoom().getEnemies().get(i).intersects(player)) {
                 if (World.getRoom().getEnemies().get(i).getID() == Resources.BAT_2 ||
                         World.getRoom().getEnemies().get(i).getID() == Resources.BAT) {
@@ -404,6 +420,7 @@ public class PlayingState extends GameState {
                 player.damage(5 - 5 * Player.getArmor() / 100);
             }
 
+            // when the player attacks the enemy
             if (World.getRoom().getEnemies().get(i).intersects(player.getAttackBox())) {
                 se.playSE(1);
                 if (Player.currentWeapon != null) {
@@ -419,6 +436,7 @@ public class PlayingState extends GameState {
         }
     }
 
+    // for opening the master door
     private void openMasterDoor() {
         if (Objects.equals(LevelGenerator.getRoomName(World.getCurrentX(), World.getCurrentY()), "Hallway")) {
             RoomData roomIn = World.getRoom().getData();
@@ -438,6 +456,7 @@ public class PlayingState extends GameState {
         }
     }
 
+    // for opening the regular door
     private void openDoor() {
         if (Objects.equals(LevelGenerator.getRoomName(World.getCurrentX(), World.getCurrentY()), "Fellowship Room")) {
             RoomData roomIn = World.getRoom().getData();
@@ -457,6 +476,7 @@ public class PlayingState extends GameState {
         }
     }
 
+    // regenerates blocks when the player restarts the game. Used to replace the blocks when doors are opened.
     private void regenerateBlocks() {
         RoomData roomFellowship = World.getFellowshipRoom().getData();
         RoomData roomHallway = World.getHallwayRoom().getData();
