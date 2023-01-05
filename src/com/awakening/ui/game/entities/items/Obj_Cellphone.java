@@ -9,7 +9,7 @@ public class Obj_Cellphone extends Entity {
         super(Resources.CELLPHONE, posXinRoom, posYinRoom);
         type = type_weapon;
         this.name = "Cellphone";
-        this.description = "(" + this.name + ")\nDead phone, needs charge.";
-        attackPoints = 5;
+        this.attackPoints = 5;
+        this.description = "(" + this.name + ")" + " Damage: " + this.attackPoints +  "\nDead phone, needs charge.";
     }
 }

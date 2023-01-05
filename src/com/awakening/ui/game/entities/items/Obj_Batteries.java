@@ -3,6 +3,7 @@ package com.awakening.ui.game.entities.items;
 import com.awakening.ui.framework.resources.Resources;
 import com.awakening.ui.game.entities.Entity;
 import com.awakening.ui.game.entities.Player;
+import com.awakening.ui.game.states.PlayingState;
 
 import static com.awakening.ui.game.states.PlayingState.addMessage;
 
@@ -18,7 +19,7 @@ public class Obj_Batteries extends Entity {
     public void use(Entity entity) {
         addMessage("You use the " + getName() + "!\nYour camera is charged by " + getHealPoints() + "!");
         Player.setHp(Player.getHp() + getHealPoints());
-        if (Player.getAttackPoints() > 20) {
+        if (PlayingState.player.getAttackPoints() > 20) {
             Player.setHp(20);
         }
     }

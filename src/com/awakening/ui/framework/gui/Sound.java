@@ -35,6 +35,7 @@ public class Sound {
         soundURL[10] = Sound.class.getResource("/sound/room2.wav");
         soundURL[11] = Sound.class.getResource("/sound/room3.wav");
         soundURL[12] = Sound.class.getResource("/sound/wingame.wav");
+        soundURL[13] = Sound.class.getResource("/sound/bat.wav");
     }
 
     public void setFile(int i) {

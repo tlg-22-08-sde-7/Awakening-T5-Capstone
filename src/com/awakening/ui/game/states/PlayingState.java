@@ -22,9 +22,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class PlayingState extends GameState {
-    private LevelGenerator generator;
-    private World world;
-    private Player player;
+    private final LevelGenerator generator;
+    private final World world;
+    public static Player player;
     public static ArrayList<String> message = new ArrayList<>();
     public static ArrayList<Integer> messageCounter = new ArrayList<>();
     public static Sound music = new Sound();
@@ -45,18 +45,18 @@ public class PlayingState extends GameState {
 
     @Override
     protected void loop() {
-        this.player.move();
+        player.move();
         this.world.changeRoom(player);
         // Room names set up
-        String roomName = this.generator.getRoomName(this.world.getCurrentX(), this.world.getCurrentY());
-        this.player.setPlayerLoc(roomName);
+        String roomName = LevelGenerator.getRoomName(World.getCurrentX(), World.getCurrentY());
+        player.setPlayerLoc(roomName);
         this.collisions();
 
         checkWinLose();
 
-        this.world.getRoom().featureInteraction(player);
+        World.getRoom().featureInteraction(player);
 
-        this.player.regenerateHealth();
+        player.regenerateHealth();
         this.playerAttacks();
     }
 
@@ -74,22 +74,22 @@ public class PlayingState extends GameState {
         boolean patientFileFound = false;
         boolean journalFound = false;
 
-        for (int i = 0; i < this.player.getPlayerInventory().size(); i++) {
+        for (int i = 0; i < Player.getPlayerInventory().size(); i++) {
             //if( this.player.getPlayerInventory().contains())
-            Entity e = this.player.getPlayerInventory().get(i);
-            if (!patientFileFound && this.player.getPlayerInventory().get(i).getID() == Resources.PATIENT_FILE) {
+            Entity e = Player.getPlayerInventory().get(i);
+            if (!patientFileFound && Player.getPlayerInventory().get(i).getID() == Resources.PATIENT_FILE) {
                 patientFileFound = true;
             }
-            if (!masteryKeyFound && this.player.getPlayerInventory().get(i).getID() == Resources.MASTER_KEY) {
+            if (!masteryKeyFound && Player.getPlayerInventory().get(i).getID() == Resources.MASTER_KEY) {
                 masteryKeyFound = true;
             }
-            if (!journalFound && this.player.getPlayerInventory().get(i).getID() == Resources.JOURNAL) {
+            if (!journalFound && Player.getPlayerInventory().get(i).getID() == Resources.JOURNAL) {
                 journalFound = true;
             }
             if (masteryKeyFound
                     && patientFileFound
                     && journalFound
-                    && this.player.getPlayerLoc().equalsIgnoreCase("Front Desk")) {
+                    && player.getPlayerLoc().equalsIgnoreCase("Front Desk")) {
                 se.playSE(12);
                 super.gameStateManager.stackState(new GameWinState(gameStateManager));
                 break;
@@ -99,16 +99,16 @@ public class PlayingState extends GameState {
 
     @Override
     protected void render(Graphics graphics) {
-        this.world.getRoom().render(graphics);
-        this.player.render(graphics);
+        World.getRoom().render(graphics);
+        player.render(graphics);
         if (Player.currentWeapon != null) {
             graphics.drawImage(Resources.TEXTURES.get(Player.currentWeapon.getID()),
-                    this.player.getAttackBox().x, this.player.getAttackBox().y,
-                    this.player.getAttackBox().width, this.player.getAttackBox().height, null);
+                    player.getAttackBox().x, player.getAttackBox().y,
+                    player.getAttackBox().width, player.getAttackBox().height, null);
         } else {
             graphics.drawImage(Resources.TEXTURES.get(Resources.ATTACK),
-                    this.player.getAttackBox().x, this.player.getAttackBox().y,
-                    this.player.getAttackBox().width, this.player.getAttackBox().height, null);
+                    player.getAttackBox().x, player.getAttackBox().y,
+                    player.getAttackBox().width, player.getAttackBox().height, null);
         }
         // Display position of player's health, armour and gold throughout the game
         graphics.setColor(Color.WHITE);
@@ -122,7 +122,7 @@ public class PlayingState extends GameState {
 
         // render player's current location/ rooms name
         graphics.setFont(graphics.getFont().deriveFont(Font.BOLD, 20f));
-        graphics.drawString(this.player.getPlayerLoc(), 5, Tile.SIZE + 10);
+        graphics.drawString(player.getPlayerLoc(), 5, Tile.SIZE + 10);
 
         drawMessage(graphics);
 
@@ -163,23 +163,23 @@ public class PlayingState extends GameState {
         switch (keyCode) {
             case KeyEvent.VK_W:
             case KeyEvent.VK_UP:
-                this.player.setUp(true);
+                player.setUp(true);
                 break;
             case KeyEvent.VK_A:
             case KeyEvent.VK_LEFT:
-                this.player.setLeft(true);
+                player.setLeft(true);
                 break;
             case KeyEvent.VK_S:
             case KeyEvent.VK_DOWN:
-                this.player.setDown(true);
+                player.setDown(true);
                 break;
             case KeyEvent.VK_D:
             case KeyEvent.VK_RIGHT:
-                this.player.setRight(true);
+                player.setRight(true);
                 break;
             case KeyEvent.VK_Q:
             case KeyEvent.VK_SPACE:
-                this.player.attack();
+                player.attack();
                 break;
             case KeyEvent.VK_ESCAPE:
                 super.gameStateManager.stackState(new Options(gameStateManager));
@@ -203,19 +203,19 @@ public class PlayingState extends GameState {
         switch (keyCode) {
             case KeyEvent.VK_W:
             case KeyEvent.VK_UP:
-                this.player.setUp(false);
+                player.setUp(false);
                 break;
             case KeyEvent.VK_A:
             case KeyEvent.VK_LEFT:
-                this.player.setLeft(false);
+                player.setLeft(false);
                 break;
             case KeyEvent.VK_S:
             case KeyEvent.VK_DOWN:
-                this.player.setDown(false);
+                player.setDown(false);
                 break;
             case KeyEvent.VK_D:
             case KeyEvent.VK_RIGHT:
-                this.player.setRight(false);
+                player.setRight(false);
                 break;
             case KeyEvent.VK_ESCAPE:
                 break;
@@ -228,8 +228,8 @@ public class PlayingState extends GameState {
 
     private void generateLevel(int floorNum) {
         if (floorNum == 2) { //second floor
-            this.world.setCurrentX(7);
-            this.world.setCurrentY(2);
+            World.setCurrentX(7);
+            World.setCurrentY(2);
             // stairs to First Floor
             this.world.getRoom(7, 2).placeFeature(new Feature(Resources.UPPER_STAIRS, () -> generateLevel(3)));
 
@@ -238,8 +238,8 @@ public class PlayingState extends GameState {
             this.world.getRoom(2, 2).placeFeature(new Feature(Resources.STAIRS, () -> generateLevel(2)));
 
         } else {
-            this.world.setCurrentX(2);
-            this.world.setCurrentY(2);
+            World.setCurrentX(2);
+            World.setCurrentY(2);
             this.world.getRoom(2, 2).placeFeature(new Feature(Resources.STAIRS, () -> generateLevel(2)));
         }
 
@@ -251,7 +251,6 @@ public class PlayingState extends GameState {
         //place items in the rooms per the requirement
         generateChestInRoom(1, 0);
         generateItemInRoom(1, 0, Resources.CAMERA);
-        generateItemInRoom(1, 0, Resources.CELLPHONE);
         generateChestInRoom(1, 2);
         generateChestInRoom(0, 2);
         generateItemInRoom(0, 2, Resources.PAPER_CLIP);
@@ -259,7 +258,9 @@ public class PlayingState extends GameState {
         generateChestInRoom(1, 2);
         generateItemInRoom(1, 2, Resources.BANDAGES);
         generateChestInRoom(2, 1);
+        generateItemInRoom(2, 1, Resources.CELLPHONE);
         generateItemInRoom(2, 2, Resources.MASTER_DOOR);
+        generateItemInRoom(2, 2, Resources.AXE);
         generateItemInRoom(1, 3, Resources.KEY);
         generateItemInRoom(3, 2, Resources.PATIENT_FILE);
 
@@ -292,7 +293,6 @@ public class PlayingState extends GameState {
         generateItemInRoom(5, 2, Resources.MASTER_KEY);
         generateItemInRoom(6, 2, Resources.DOOR);
         generateChestInRoom(7, 2);
-        generateItemInRoom(7, 2, Resources.AXE);
         generateItemInRoom(7, 2, Resources.FIRE_EXTINGUISHER);
         generateChestInRoom(8, 2);
         generateItemInRoom(8, 2, Resources.TYLENOL);
@@ -317,32 +317,32 @@ public class PlayingState extends GameState {
     }
 
     private void generateEnemyInRoom(int roomX, int roomY, int enemyHp) {
-        this.world.getRoom(roomX, roomY).spawnEnemy(new Enemy(Resources.ENEMY, enemyHp, this.player));
+        this.world.getRoom(roomX, roomY).spawnEnemy(new Enemy(Resources.ENEMY, enemyHp, player));
     }
 
     private void generateBatsInRoom(int roomX, int roomY, int enemyHp) {
-        this.world.getRoom(roomX, roomY).spawnEnemy(new Enemy(Resources.BAT, enemyHp, this.player));
+        this.world.getRoom(roomX, roomY).spawnEnemy(new Enemy(Resources.BAT, enemyHp, player));
     }
 
     private void generateMainGhostInRoom(int roomX, int roomY, int enemyHp) {
-        this.world.getRoom(roomX, roomY).spawnEnemy(new Enemy(Resources.GHOST_MAIN1, enemyHp, this.player));
+        this.world.getRoom(roomX, roomY).spawnEnemy(new Enemy(Resources.GHOST_MAIN1, enemyHp, player));
     }
 
     private void spawnPlayer() {
         if (this.world.getRoom(1, 0).getData().getTileAt(player.x / Tile.SIZE, player.y / Tile.SIZE).getID() != Resources.FLOOR) {
-            this.player.replaceRandomly();
+            player.replaceRandomly();
             this.spawnPlayer();
         }
     }
 
     private void collisions() {
-        RoomData roomIn = this.world.getRoom().getData();
+        RoomData roomIn = World.getRoom().getData();
 
         for (int i = 0; i < roomIn.getSizeX(); i++) {
             for (int j = 0; j < roomIn.getSizeY(); j++) {
-                this.player.handleCollisionWith(roomIn.getTileAt(i, j));
+                player.handleCollisionWith(roomIn.getTileAt(i, j));
 
-                for (Enemy enemy : this.world.getRoom().getEnemies()) {
+                for (Enemy enemy : World.getRoom().getEnemies()) {
                     enemy.handleCollisionWith(roomIn.getTileAt(i, j));
                 }
             }
@@ -353,15 +353,15 @@ public class PlayingState extends GameState {
 
         switch (MathHelper.randomInt(3)) {
             case 0:
-                this.player.addArmor(MathHelper.randomInt(3, 5));
+                player.addArmor(MathHelper.randomInt(3, 5));
                 se.playSE(6);
                 break;
             case 1:
-                this.player.giveGold(MathHelper.randomInt(3, 7));
+                player.giveGold(MathHelper.randomInt(3, 7));
                 se.playSE(6);
                 break;
             case 2:
-                this.player.instantHeal(MathHelper.randomInt(2, 5));
+                player.instantHeal(MathHelper.randomInt(2, 5));
                 se.playSE(6);
                 break;
         }
@@ -377,33 +377,38 @@ public class PlayingState extends GameState {
     }
 
     private void playerAttacks() {
-        this.player.decreaseTime();
-        for (int i = 0; i < this.world.getRoom().getEnemies().size(); i++) {
-            this.world.getRoom().getEnemies().get(i).move();
+        player.decreaseTime();
+        for (int i = 0; i < World.getRoom().getEnemies().size(); i++) {
+            World.getRoom().getEnemies().get(i).move();
 
-            if (this.world.getRoom().getEnemies().get(i).intersects(this.player)) {
-                se.playSE(5);
-                this.player.damage(5 - 5 * this.player.getArmor() / 100);
+            if (World.getRoom().getEnemies().get(i).intersects(player)) {
+                if (World.getRoom().getEnemies().get(i).getID() == Resources.BAT_2 ||
+                        World.getRoom().getEnemies().get(i).getID() == Resources.BAT) {
+                    se.playSE(13);
+                } else {
+                    se.playSE(5);
+                }
+                player.damage(5 - 5 * Player.getArmor() / 100);
             }
 
-            if (this.world.getRoom().getEnemies().get(i).intersects(this.player.getAttackBox())) {
+            if (World.getRoom().getEnemies().get(i).intersects(player.getAttackBox())) {
                 se.playSE(1);
                 if (Player.currentWeapon != null) {
-                    this.world.getRoom().getEnemies().get(i).damage(this.player.currentWeapon.getAttackPoints(), this.player.getFacing());
+                    World.getRoom().getEnemies().get(i).damage(Player.currentWeapon.getAttackPoints(), player.getFacing());
                 } else {
-                    this.world.getRoom().getEnemies().get(i).damage(Player.getAttackPoints(), this.player.getFacing());
+                    World.getRoom().getEnemies().get(i).damage(player.getAttackPoints(), player.getFacing());
                 }
-                if (this.world.getRoom().getEnemies().get(i).getHp() <= 0) {
-                    this.world.getRoom().getEnemies().remove(i);
-                    this.player.giveGold(MathHelper.randomInt(2, 5));
+                if (World.getRoom().getEnemies().get(i).getHp() <= 0) {
+                    World.getRoom().getEnemies().remove(i);
+                    player.giveGold(MathHelper.randomInt(2, 5));
                 }
             }
         }
     }
 
     private void openMasterDoor() {
-        if (Objects.equals(this.generator.getRoomName(this.world.getCurrentX(), this.world.getCurrentY()), "Hallway")) {
-            RoomData roomIn = this.world.getRoom().getData();
+        if (Objects.equals(LevelGenerator.getRoomName(World.getCurrentX(), World.getCurrentY()), "Hallway")) {
+            RoomData roomIn = World.getRoom().getData();
 
             for (int i = 0; i < Player.playerInventory.size(); i++) {
                 if (Player.playerInventory.get(i).getID() == Resources.MASTER_KEY &&
@@ -421,8 +426,8 @@ public class PlayingState extends GameState {
     }
 
     private void openDoor() {
-        if (Objects.equals(this.generator.getRoomName(this.world.getCurrentX(), this.world.getCurrentY()), "Fellowship Room")) {
-            RoomData roomIn = this.world.getRoom().getData();
+        if (Objects.equals(LevelGenerator.getRoomName(World.getCurrentX(), World.getCurrentY()), "Fellowship Room")) {
+            RoomData roomIn = World.getRoom().getData();
 
             for (int i = 0; i < Player.playerInventory.size(); i++) {
                 if (Player.playerInventory.get(i).getID() == Resources.KEY &&
