@@ -19,6 +19,7 @@ import com.awakening.ui.game.world.generator.RoomData;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
 
 public class PlayingState extends GameState {
@@ -40,6 +41,7 @@ public class PlayingState extends GameState {
         this.world = new World(this.generator.getRoomsData());
 
         generateLevel(1);
+        regenerateBlocks();
         generateItemsAndEnemies();
     }
 
@@ -442,6 +444,26 @@ public class PlayingState extends GameState {
                     gameStateManager.stackState(new UseKey(gameStateManager));
                 }
             }
+        }
+    }
+
+    private void regenerateBlocks() {
+        RoomData roomFellowship = World.getFellowshipRoom().getData();
+        RoomData roomHallway = World.getHallwayRoom().getData();
+        if (roomFellowship.getTileAt(0, 3).getID() == Resources.TILE) {
+            roomFellowship.getTileAt(0, 3).setId(Resources.WALL);
+            roomFellowship.getTileAt(0, 4).setId(Resources.WALL);
+            roomFellowship.getTileAt(0, 5).setId(Resources.WALL);
+            roomFellowship.getTileAt(0, 3).setWall(true);
+            roomFellowship.getTileAt(0, 4).setWall(true);
+            roomFellowship.getTileAt(0, 5).setWall(true);
+        } if (roomHallway.getTileAt(15, 3).getID() == Resources.TILE) {
+            roomHallway.getTileAt(15,3).setId(Resources.STONE);
+            roomHallway.getTileAt(15,4).setId(Resources.STONE);
+            roomHallway.getTileAt(15,5).setId(Resources.STONE);
+            roomHallway.getTileAt(15, 3).setWall(true);
+            roomHallway.getTileAt(15, 4).setWall(true);
+            roomHallway.getTileAt(15, 5).setWall(true);
         }
     }
 }

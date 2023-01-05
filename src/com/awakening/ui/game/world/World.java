@@ -12,7 +12,7 @@ import java.util.HashSet;
 
 public class World {
 
-    private static Room[][] rooms; // 2 Dimensional Array
+    public static Room[][] rooms; // 2 Dimensional Array
     private static int currentX;
     private static int currentY;
 
@@ -37,6 +37,13 @@ public class World {
 
     public static Room getRoom() {
         return rooms[currentX][currentY];
+    }
+
+    public static Room getFellowshipRoom() {
+        return rooms[6][2];
+    }
+    public static Room getHallwayRoom() {
+        return rooms[2][2];
     }
 
     public Room getRoomRandom() {
