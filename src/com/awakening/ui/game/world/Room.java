@@ -13,12 +13,12 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Room {
-    private RoomData data;
-    private ArrayList<Feature> features;
-    private ArrayList<Enemy> enemies;
-    public static boolean itemPickedUp = false;
-    public static Obj_MasterKey masterKey;
-    public static Obj_Key key;
+    private RoomData data; // RoomData object
+    private ArrayList<Feature> features; // ArrayList of features
+    private ArrayList<Enemy> enemies; // ArrayList of enemies
+    public static boolean itemPickedUp = false; // Boolean to check if an item has been picked up
+    public static Obj_MasterKey masterKey; // Master key object
+    public static Obj_Key key; // Key object
 
     public Room(RoomData data) {
         this.data = data;
@@ -31,6 +31,13 @@ public class Room {
         return data;
     }
 
+    // placeFeature method Takes in a Feature object
+    // Adds the feature to the features ArrayList
+    // Sets the feature's room to this room
+    // Sets the feature's x and y position to the feature's x and y position in the room
+    // Sets the feature's bounds to the feature's x and y position and the feature's width and height
+    // Returns the feature
+    // This method is used to place a feature in the room
     public void placeFeature(Feature feature) {
         // x =  The X coordinate of the upper-left corner of the Rectangle.
         // y = The Y coordinate of the upper-left corner of the Rectangle.
@@ -61,15 +68,20 @@ public class Room {
         }
     }
 
+    // featureInteraction method
+    // takes in a player object
+    // for each feature in the features ArrayList
+    // if the player's bounds intersects the feature's bounds
+    // player interacts with the feature and adds the feature to their inventory
     public void featureInteraction(Player player) {
         for (int i = 0; i < this.features.size(); i++) {
             if (this.features.get(i).intersects(player)) {
                 if (this.features.get(i).getID() == Resources.AXE) {
                     Obj_Axe axe = new Obj_Axe(0,0);
-                    Player.playerInventory.add(axe);
-                    itemPickedUp = true;
+                    Player.playerInventory.add(axe); // add axe to player's inventory
+                    itemPickedUp = true; // itemPickedUp is set to true
                     PlayingState.se.playSE(6);
-                    PlayingState.addMessage("You have picked up an " + axe.getName() + "!");
+                    PlayingState.addMessage("You have picked up an " + axe.getName() + "!");// add message to the message log
                 }else if (this.features.get(i).getID() == Resources.CAMERA) {
                     Obj_Camera camera = new Obj_Camera(0,0);
                     Player.playerInventory.add(camera);
