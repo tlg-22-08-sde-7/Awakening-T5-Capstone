@@ -11,7 +11,7 @@ class Main {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                // load images, data from json files
+                // load images and data
                 Loader.load();
                 Engine.init();
                 Engine.start();

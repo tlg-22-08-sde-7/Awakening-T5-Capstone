@@ -27,6 +27,7 @@ public class World {
                 }
             }
         }
+        // player's location is set default to the basement using field currentX and currentY
         this.currentX = 1;
         this.currentY = 0;
     }
@@ -44,10 +45,6 @@ public class World {
     }
     public static Room getHallwayRoom() {
         return rooms[2][2];
-    }
-
-    public Room getRoomRandom() {
-        return rooms[MathHelper.randomInt(LevelGenerator.WORLD_SIZE)][MathHelper.randomInt(LevelGenerator.WORLD_SIZE)];
     }
 
     public void changeRoom(Entity player) {

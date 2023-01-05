@@ -13,10 +13,6 @@ public class MathHelper {
         return rand.nextInt((upperBound - lowerBound) + 1) + lowerBound;
     }
 
-    public static Direction randomDirection() {
-        return Direction.values()[rand.nextInt(Direction.values().length)];
-    }
-
     public enum Direction {
         NORTH(0, -1),
         SOUTH(0, 1),
