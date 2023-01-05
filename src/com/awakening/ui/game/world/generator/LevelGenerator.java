@@ -8,11 +8,7 @@ public class LevelGenerator {
 
     public static final int WORLD_SIZE = 9;
     //To display names of each room
-    private static String[][] roomNames;
-
     private static String[][] roomNames; // 2D array of room names
-
-
     private HashSet<MathHelper.Direction>[][] roomsData; // 2D array of MathHelper.Directions
 
     @SuppressWarnings("unchecked")
