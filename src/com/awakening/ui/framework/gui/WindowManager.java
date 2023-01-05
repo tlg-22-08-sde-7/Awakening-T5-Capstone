@@ -17,6 +17,8 @@ public class WindowManager {
         frame.setBounds(70, 70, 0, 0);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
+        ImageIcon img = new ImageIcon("resources/pictures.ghost/ghost4.png");
+        frame.setIconImage(img.getImage());
     }
 
     public void addPanel(JPanel panel) {
