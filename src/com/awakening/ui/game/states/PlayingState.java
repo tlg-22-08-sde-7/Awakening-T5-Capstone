@@ -61,7 +61,7 @@ public class PlayingState extends GameState {
     }
 
     /*
-        If the player has a master key, patient file, journal and make a way back to  the Front Desk, the player wins the game
+        If the player has a master key, patient file, journal and make their way back to the Front Desk, the player wins the game
      */
     private void checkWinLose() {
         //Game Lose Scenario -> if the player's hp is less than or equal to 0, the player loses the game
