@@ -267,20 +267,24 @@ public class PlayingState extends GameState {
         generateItemInRoom(3, 2, Resources.PATIENT_FILE);
 
         //place enemies in the room per the requirement
-        generateEnemyInRoom(1, 0, 10);
-        generateEnemyInRoom(1, 2, 10);
-        generateEnemyInRoom(0, 2, 10);
-        generateEnemyInRoom(1, 2, 10);
-        generateEnemyInRoom(2, 2, 10);
-        generateEnemyInRoom(2, 1, 10);
-        generateMainGhostInRoom(5, 2, 20);
-        generateEnemyInRoom(5, 2, 10);
-        generateEnemyInRoom(5, 2, 10);
-        generateBatsInRoom(3, 2, 5);
-        generateBatsInRoom(3, 2, 5);
-        generateBatsInRoom(3, 2, 5);
-        generateBatsInRoom(3, 2, 5);
-        generateBatsInRoom(3, 2, 5);
+        generateEnemyInRoom(1, 0, 10); // Basement
+        generateEnemyInRoom(1, 2, 10); // Emergency Room
+        generateEnemyInRoom(1, 2, 10); // Emergency Room
+        generateEnemyInRoom(0, 2, 10); // Office
+        generateEnemyInRoom(2, 2, 10); // Hallway
+        generateEnemyInRoom(2, 1, 10); // Keypad Room
+        generateBatsInRoom(3, 2, 5); // Patient Room
+        generateBatsInRoom(3, 2, 5); // Patient Room
+        generateBatsInRoom(3, 2, 5); // Patient Room
+        generateBatsInRoom(3, 2, 5); // Patient Room
+        generateBatsInRoom(3, 2, 5); // Patient Room
+        generateBatsInRoom(1, 1, 5); // Morgue
+        generateBatsInRoom(1, 1, 5); // Morgue
+        generateBatsInRoom(1, 3, 5); // Front Desk
+        generateBatsInRoom(1, 3, 5); // Front Desk
+        generateBatsInRoom(1, 3, 5); // Front Desk
+        generateBatsInRoom(1, 3, 5); // Front Desk
+        generateBatsInRoom(1, 3, 5); // Front Desk
 
         //second floor
         //place items in the rooms per the requirement
@@ -301,12 +305,15 @@ public class PlayingState extends GameState {
         generateItemInRoom(8, 2, Resources.JOURNAL);
 
         //place enemies in the room per the requirement
-        generateEnemyInRoom(6, 1, 10);
-        generateEnemyInRoom(6, 2, 10);
-        generateEnemyInRoom(6, 3, 10);
-        generateEnemyInRoom(5, 2, 10);
-        generateEnemyInRoom(7, 2, 10);
-        generateEnemyInRoom(8, 2, 10);
+        generateEnemyInRoom(6, 1, 10); // Pharmacy
+        generateEnemyInRoom(6, 2, 10); // Fellowship Room
+        generateEnemyInRoom(6, 3, 10); // Gym
+        generateMainGhostInRoom(5, 2, 20); // Janitor Closet
+        generateEnemyInRoom(5, 2, 10); // Janitor Closet
+        generateEnemyInRoom(5, 2, 10); // Janitor Closet
+        generateEnemyInRoom(5, 2, 10); // Janitor Closet
+        generateEnemyInRoom(7, 2, 10); // U. Hallway
+        generateEnemyInRoom(8, 2, 10); // Finance
 
     }
 
