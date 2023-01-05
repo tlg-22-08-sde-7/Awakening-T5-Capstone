@@ -124,6 +124,7 @@ public class Inventory extends GameState {
         graphics.setColor(c);
         graphics.setFont(graphics.getFont().deriveFont(40F));
         graphics.drawRoundRect(frameX + 5, frameY + 5, frameWidth - 10, frameHeight - 10, 25, 25);
+
         // text for descriptions of items
         int textX = frameX + 10;
         int textY = frameY + 40;
@@ -131,7 +132,7 @@ public class Inventory extends GameState {
         int itemIndex = getItemIndexInSlot();
 
         if (itemIndex < Player.playerInventory.size()) {
-            for (String line: Player.playerInventory.get(itemIndex).getDescription().split("\n", 4)) {
+            for (String line: Player.playerInventory.get(itemIndex).getDescription().split("\n")) {
                 graphics.drawString(line, textX, textY);
                 textY += 32;
             }
@@ -197,13 +198,14 @@ public class Inventory extends GameState {
                     ||Objects.equals(selectedItem.getName(), "Camera")
                     ||Objects.equals(selectedItem.getName(), "Cellphone")) {
                 Player.currentWeapon = selectedItem;
-                Player.setAttackPoints(Entity.getAttackPoints());
+                PlayingState.player.setAttackPoints(selectedItem.getAttackPoints());
             }
             else if (Objects.equals(selectedItem.getName(), "First Aid Kit")
                     ||Objects.equals(selectedItem.getName(), "Bandages")
                     ||Objects.equals(selectedItem.getName(), "Tylenol")) {
                 selectedItem.use(selectedItem);
                 Player.playerInventory.remove(itemIndex);
+                gameStateManager.backToPreviousState();
             } else {
                 PlayingState.se.playSE(2);
             }

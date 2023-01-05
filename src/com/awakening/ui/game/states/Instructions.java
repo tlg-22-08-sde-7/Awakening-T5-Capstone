@@ -17,15 +17,16 @@ public class Instructions extends GameState {
     private String[] instructionButton;
     private static final String INSTRUCTIONS_PARAGRAPH =
             "Choose between 4 different characters and try to survive as long as possible.\n" +
-                    "          * You must navigate through the psych ward utilizing the\n          'W A S D' Keys or the arrow keys.\n"+
-                    "          * As you navigate you will encounter ghosts in each room,\n          each room has items that you will need in order to\n" +
-                    "          defeat the ghost and gain access to other rooms.\n" +
+                    "          * You must navigate through the psych ward utilizing the\n               'W A S D' Keys or the arrow keys.\n"+
+                    "          * As you navigate you will encounter ghosts in each room,\n               each room has items that you will need in order to\n" +
+                    "               defeat the ghost and gain access to other rooms.\n" +
                     "          * To attack you can use the Space Bar and/or the \"Q\" key.\n" +
                     "          * You can press the \"M\" key to view the map.\n" +
                     "          * You can also press the \"I\" key to view your inventory.\n" +
-                    "          * The \"ESC\" key will bring up the pause menu, where you can change:\n          the music volume, SFX volume, restart, or quit the game \n" +
+                    "          * Hit \"ENTER\" in the inventory to equip weapons or use items to heal\n" +
+                    "          * The \"ESC\" key will bring up the pause menu, where you can change:\n               the music volume, SFX volume, restart, or quit the game \n" +
                     "          * The \"ENTER\" key will open doors if you have the right key.\n" +
-                    "          * In order to win you must grab the Master Key,\n          Patient file, Journal and Find your way back to the Front Desk!";;
+                    "          * In order to win you must grab the Master Key, Patient file,\n               Journal and find your way back to the Front Desk!";;
     private static final String BACK = "Back";
 
     protected Instructions(GameStateManager manager) {
@@ -65,7 +66,7 @@ public class Instructions extends GameState {
         int textY = frameY + 100;
         for (String line : INSTRUCTIONS_PARAGRAPH.split("\n")) {
             graphics.drawString(line, frameX + 35, textY);
-            textY += 32;
+            textY += 30;
 
         }
 

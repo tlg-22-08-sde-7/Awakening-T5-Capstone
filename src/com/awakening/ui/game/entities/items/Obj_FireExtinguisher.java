@@ -9,7 +9,7 @@ public class Obj_FireExtinguisher extends Entity {
         super(Resources.FIRE_EXTINGUISHER, posXinRoom, posYinRoom);
         type = type_weapon;
         this.name = "Fire Extinguisher";
-        this.description = "(" + this.name + ")\nThis is heavy, but also has a \ncharge so it might come in handy.";
-        attackPoints = 10;
+        this.attackPoints = 10;
+        this.description = "(" + this.name + ")" + " Damage: " + this.attackPoints +  "\nThis is heavy, but also has a \ncharge so it might come in handy.";
     }
 }

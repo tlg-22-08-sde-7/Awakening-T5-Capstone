@@ -115,6 +115,7 @@ public class UseKey extends GameState {
                                 roomIn.getTileAt(15, 5).setWall(false);
                             }
                         }
+                        PlayingState.addMessage("A room has been revealed on the opposite level!");
                         gameStateManager.backToPreviousState();
                         break;
                     case NO:

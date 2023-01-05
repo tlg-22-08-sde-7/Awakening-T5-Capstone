@@ -68,22 +68,18 @@ public class Enemy extends Entity{
 
     @Override
     public void setUp(boolean up) {
-        return;
     }
 
     @Override
     public void setDown(boolean down) {
-        return;
     }
 
     @Override
     public void setLeft(boolean left) {
-        return;
     }
 
     @Override
     public void setRight(boolean right) {
-        return;
     }
 
     public int getHp() {

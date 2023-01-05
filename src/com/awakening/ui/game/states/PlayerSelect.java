@@ -128,7 +128,7 @@ public class PlayerSelect extends GameState {
                         break;
                     case PLAYER2:
                         super.gameStateManager.stackState(new PlayingState(gameStateManager));
-                        Player.playerStandDown = Resources.PLAYER_2;
+                        Player.playerStandDown = Resources.PLAYER;
                         Player.playerStandUp = Resources.PLAYER_BACK;
                         Player.playerStandLeft = Resources.PLAYER_LEFT;
                         Player.playerStandRight = Resources.PLAYER_RIGHT;

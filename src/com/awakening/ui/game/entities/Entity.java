@@ -13,7 +13,7 @@ public class Entity extends Rectangle {
     protected String name;
     protected String description;
     protected int healPoints;
-    protected static int attackPoints;
+    protected int attackPoints;
     protected static int chargePoints;
     public static int type;
     public static final int type_player = 0;
@@ -147,12 +147,12 @@ public class Entity extends Rectangle {
         return description;
     }
 
-    public static int getAttackPoints() {
+    public int getAttackPoints() {
         return attackPoints;
     }
 
-    public static void setAttackPoints(int attackPoints) {
-        Entity.attackPoints = attackPoints;
+    public void setAttackPoints(int attackPoints) {
+        this.attackPoints = attackPoints;
     }
 
     public static int getType() {
