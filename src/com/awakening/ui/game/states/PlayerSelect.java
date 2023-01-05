@@ -16,6 +16,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class PlayerSelect extends GameState {
+
+    // selections that can be made
     private String[] playerSelectMenu;
     private static final String SETTINGS = "Settings";
     private static final String QUIT_GAME = "Quit";
@@ -25,11 +27,13 @@ public class PlayerSelect extends GameState {
     private static final String PLAYER4 = "Cassidy";
     private int selected;
 
+    // Constructor
     public PlayerSelect(GameStateManager manager) {
         super(manager);
         this.playerSelectMenu = new String[]{ PLAYER1, PLAYER2, PLAYER3, PLAYER4, SETTINGS, QUIT_GAME};
         this.selected = 0;
     }
+
     @Override
     protected void loop() {
 
@@ -37,6 +41,7 @@ public class PlayerSelect extends GameState {
 
     @Override
     protected void render(Graphics graphics) {
+        // Background of the current State
         try {
             BufferedImage image = ImageIO.read(new File("resources/pictures/titlescreen.jpg"));
             graphics.drawImage(image, 0, 0, WindowManager.WIDTH, WindowManager.HEIGHT,  null);
@@ -44,6 +49,7 @@ public class PlayerSelect extends GameState {
             e.printStackTrace();
         }
 
+        // Window of the current State
         int frameX = WindowManager.WIDTH/6;
         int frameY = WindowManager.HEIGHT/6;
         int frameWidth = WindowManager.WIDTH-400;
@@ -53,16 +59,21 @@ public class PlayerSelect extends GameState {
         graphics.setColor(c);
         graphics.fillRoundRect(frameX, frameY, frameWidth, frameHeight, 35, 35);
 
+        // Border of the window
         c = new Color(255, 255, 255, 220);
         graphics.setColor(c);
         graphics.drawRoundRect(frameX + 5, frameY + 5, frameWidth - 10, frameHeight - 10, 25, 25);
+
+        // Font to be used
         graphics.setFont(graphics.getFont().deriveFont(32F));
+
+        // Images of the different players
         graphics.drawImage(Resources.TEXTURES.get(21), frameX + 65, frameHeight -140, 100, 125, null);
         graphics.drawImage(Resources.TEXTURES.get(5), frameX + 245, frameHeight -150, 100, 125, null);
         graphics.drawImage(Resources.TEXTURES.get(29), frameX + 425, frameHeight -150, 100, 125, null);
         graphics.drawImage(Resources.TEXTURES.get(37), frameX + 615, frameHeight -150, 100, 125, null);
 
-
+        // Selection graphics
         for(int i = 0; i < this.playerSelectMenu.length;i++) {
             if(i == this.selected){
                 graphics.setColor(Color.GREEN);
@@ -91,6 +102,7 @@ public class PlayerSelect extends GameState {
         }
     }
 
+    // Keys to be used in the current State
     @Override
     protected void keyPressed(int keyCode) {
         switch (keyCode) {
@@ -109,10 +121,10 @@ public class PlayerSelect extends GameState {
             case KeyEvent.VK_ENTER:
                 switch(this.playerSelectMenu[selected]) {
                     case QUIT_GAME:
+                        // pop up to ensure player wants to quit the game
                         JFrame window= new JFrame();
                         int resp = JOptionPane.showConfirmDialog( window, "Are you sure you want to quit?", "Quit?", JOptionPane.YES_NO_OPTION);
                         if (resp == JOptionPane.YES_OPTION) {
-                            //window.dispose();
                             System.exit(0);
                         } else {
                             window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -126,6 +138,8 @@ public class PlayerSelect extends GameState {
                         PlayingState.music.stopMusic();
                         PlayingState.music.playMusic(10);
                         break;
+
+                    // When different players are selected, changes are made to the Player images
                     case PLAYER2:
                         super.gameStateManager.stackState(new PlayingState(gameStateManager));
                         Player.playerStandDown = Resources.PLAYER;

@@ -166,6 +166,8 @@ public class Game {
         try{
             endText = Files.readString(Path.of("resources/ASCII/gameEnd.txt"));
             System.out.println(endText);
+            System.out.println("Thanks for Playing!");
+            System.exit(0);
         }catch (IOException e){
             e.printStackTrace();
         }

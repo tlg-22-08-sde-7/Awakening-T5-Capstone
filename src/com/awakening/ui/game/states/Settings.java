@@ -12,12 +12,15 @@ import java.io.File;
 import java.io.IOException;
 
 public class Settings extends GameState {
+
+    // selections for the Settings state
     private String[] settingsMenu;
     private static final String MUSIC = "Music";
     private static final String SE = "SE";
     private static final String BACK = "Back";
     private int selected;
 
+    // Constructor
     public Settings (GameStateManager manager) {
         super(manager);
         this.settingsMenu = new String[]{BACK, MUSIC, SE};
@@ -33,12 +36,15 @@ public class Settings extends GameState {
     @Override
     public void render(Graphics graphics) {
 
+        // Background for the current state
         try {
             BufferedImage image = ImageIO.read(new File("resources/pictures/titlescreen.jpg"));
             graphics.drawImage(image, 0, 0, WindowManager.WIDTH, WindowManager.HEIGHT,  null);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        // Window
         int frameX = WindowManager.WIDTH/4;
         int frameY = WindowManager.HEIGHT/6;
         int frameWidth = WindowManager.WIDTH/2;
@@ -48,12 +54,13 @@ public class Settings extends GameState {
         graphics.setColor(c);
         graphics.fillRoundRect(frameX, frameY, frameWidth, frameHeight, 35, 35);
 
+        // Border for the window
         c = new Color(255, 255, 255, 220);
         graphics.setColor(c);
         graphics.drawRoundRect(frameX + 5, frameY + 5, frameWidth - 10, frameHeight - 10, 25, 25);
+
+        // Font for the window
         graphics.setFont(graphics.getFont().deriveFont(32F));
-
-
         for(int i = 0; i < this.settingsMenu.length; i++) {
             if(i == this.selected){
                 graphics.setColor(Color.GREEN);
@@ -87,6 +94,7 @@ public class Settings extends GameState {
 
     }
 
+    // Keys to be used in the current State
     @Override
     protected void keyPressed(int keyCode) {
         switch (keyCode) {

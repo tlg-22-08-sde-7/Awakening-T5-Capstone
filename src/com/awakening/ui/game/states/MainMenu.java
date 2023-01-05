@@ -14,23 +14,16 @@ import java.io.File;
 import java.io.IOException;
 
 public class MainMenu extends GameState {
+
+    // Different selections for the Main Menu
     private String[] optionsMenu;
     private static final String START_GAME = "Start";
     private static final String QUIT_GAME = "Quit";
     private static final String SHOW_INSTRUCTIONS = "Instructions";
     private static final String SETTINGS = "Settings";
-    public static final String INSTRUCTIONS =
-            "Choose between 4 different characters and try to survive as long as possible.\n " +
-            "You must navigate through the psych ward utilizing the 'W A S D' Keys or the arrow keys.\n"+
-            "As you navigate you will encounter ghosts in each room, each room has items that you will need in\n" +
-            "order to defeat the ghost and gain access to other rooms.\n" +
-            "To attack you can use the Space Bar and/or the \"Q\" key.\n" +
-            "You can press the \"M\" key to view the map.\n" +
-            "You can also press the \"I\" key to view your inventory.\n" +
-            "The \"ESC\" key will bring up the pause menu where you can change the music volume, SFX volume, restart, or quit the game \n" +
-            "In order to win you must grab the Master Key, Patient file, Journal and Find your way back to the Front Desk!";
     private int selected;
 
+    // Constructor
     public MainMenu(GameStateManager manager) {
         super(manager);
         this.optionsMenu = new String[] {START_GAME, SHOW_INSTRUCTIONS, QUIT_GAME, SETTINGS};
@@ -43,6 +36,8 @@ public class MainMenu extends GameState {
 
     @Override
     protected void render(Graphics graphics) {
+
+        // Background image for the current state
         try {
             BufferedImage image = ImageIO.read(new File("resources/pictures/titlescreen.jpg"));
             graphics.drawImage(image, 0, 0, WindowManager.WIDTH, WindowManager.HEIGHT,  null);
@@ -50,6 +45,7 @@ public class MainMenu extends GameState {
             e.printStackTrace();
         }
 
+        // Font for the different selections
         graphics.setFont(new Font("Araial", Font.PLAIN, 25));
 
         for(int i = 0; i < this.optionsMenu.length;i++) {
@@ -73,6 +69,7 @@ public class MainMenu extends GameState {
         }
     }
 
+    // Keys to be used in the current State
     @Override
     protected void keyPressed(int keyCode) {
 
@@ -96,9 +93,8 @@ public class MainMenu extends GameState {
                         break;
                     case SHOW_INSTRUCTIONS:
                         super.gameStateManager.stackState(new Instructions(gameStateManager));
-                        /*JOptionPane.showMessageDialog(null,  INSTRUCTIONS,
-                                "Instructions", JOptionPane.PLAIN_MESSAGE);*/
                         break;
+                    // pops up a window to ask if you want to quit the game
                     case QUIT_GAME:
                         JFrame window= new JFrame();
                         int resp = JOptionPane.showConfirmDialog( window, "Are you sure you want to quit?", "Quit?", JOptionPane.YES_NO_OPTION);

@@ -12,11 +12,14 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class GameWinState extends GameState {
+
+    // Quit and Restart Game selections to move between
     private String[] optionsMenu;
     private static final String QUIT_GAME = "Quit";
     private static final String RESTART_GAME = "Restart Game";
     private int selected;
 
+    // Constructor
     public GameWinState(GameStateManager manager) {
         super(manager);
         this.optionsMenu = new String[]{ RESTART_GAME, QUIT_GAME};
@@ -32,7 +35,10 @@ public class GameWinState extends GameState {
     @Override
     public void render(Graphics graphics) {
 
+        // Render the current room in the background
         World.getRoom().render(graphics);
+
+        // set the size of the selection window
         int frameX = WindowManager.WIDTH/4;
         int frameY = WindowManager.HEIGHT/6;
         int frameWidth = WindowManager.WIDTH/2;
@@ -42,16 +48,18 @@ public class GameWinState extends GameState {
         graphics.setColor(c);
         graphics.fillRoundRect(frameX, frameY, frameWidth, frameHeight, 35, 35);
 
+        // set the border of the selection window
         c = new Color(255, 255, 255, 220);
         graphics.setColor(c);
         graphics.drawRoundRect(frameX + 5, frameY + 5, frameWidth - 10, frameHeight - 10, 25, 25);
 
+        // Font for losing the game
         graphics.setFont(graphics.getFont().deriveFont(40F));
         graphics.drawString("You Win!", frameX + 225, frameY + 100);
 
         graphics.setFont(graphics.getFont().deriveFont(32F));
 
-
+        // Font for the selections that can be made
         for(int i = 0; i < this.optionsMenu.length;i++) {
             if(i == this.selected){
                 graphics.setColor(Color.GREEN);
@@ -73,6 +81,7 @@ public class GameWinState extends GameState {
 
     }
 
+    // Keys that are utilized in the current State
     @Override
     protected void keyReleased(int keyCode) {
         switch (keyCode) {

@@ -19,6 +19,7 @@ import java.util.Objects;
 
 public class UseKey extends GameState {
 
+    // Selections to be used in UseKey
     private int selected;
     private Inventory inventory = new Inventory(gameStateManager);
     private String[] useItemMenu;
@@ -26,6 +27,7 @@ public class UseKey extends GameState {
     private static final String YES = "YES";
     private static final String NO = "NO";
 
+    // Constructor
     protected UseKey(GameStateManager manager) {
         super(manager);
         this.useItemMenu = new String[]{YES, NO};
@@ -39,7 +41,11 @@ public class UseKey extends GameState {
 
     @Override
     protected void render(Graphics graphics) {
+
+        // Background of the current State
         World.getRoom().render(graphics);
+
+        // Window
         int frameX = WindowManager.WIDTH/4 -50;
         int frameY = WindowManager.HEIGHT/3 -30;
         int frameWidth = WindowManager.WIDTH/2;
@@ -49,10 +55,12 @@ public class UseKey extends GameState {
         graphics.setColor(c);
         graphics.fillRoundRect(frameX, frameY, frameWidth, frameHeight, 35, 35);
 
+        // Border for the window
         c = new Color(255, 255, 255, 220);
         graphics.setColor(c);
         graphics.drawRoundRect(frameX + 5, frameY + 5, frameWidth - 10, frameHeight - 10, 25, 25);
 
+        // Font for the window
         graphics.setFont(graphics.getFont().deriveFont(40F));
         graphics.setColor(Color.WHITE);
         graphics.drawString(QUESTION, frameX + 40, frameY + 50);
@@ -70,6 +78,7 @@ public class UseKey extends GameState {
         }
     }
 
+    // Keys to be used in the current State
     @Override
     protected void keyPressed(int keyCode) {
         switch (keyCode) {
@@ -88,6 +97,8 @@ public class UseKey extends GameState {
             case KeyEvent.VK_ENTER:
                 switch(this.useItemMenu[selected]) {
                     case YES:
+                        // changes the blocks inside of the rooms to reveal passages for the player
+                        // when opening the doors
                         RoomData roomIn = World.getRoom().getData();
                         for(int i = 0; i < Player.playerInventory.size(); i++) {
                             if (Player.playerInventory.get(i).getID() == Resources.KEY &&

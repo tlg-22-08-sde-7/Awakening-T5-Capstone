@@ -19,11 +19,14 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Inventory extends GameState {
+
+    // int and image used in the Inventory State
     public static Image currentSpriteImage;
     private final int selected;
     private static int slotCol = 0;
     private static int slotRow = 0;
 
+    // Constructor
     protected Inventory(GameStateManager manager) {
         super(manager);
         this.selected = 0;
@@ -31,12 +34,14 @@ public class Inventory extends GameState {
 
     @Override
     protected void loop() {
-
     }
 
     @Override
     protected void render(Graphics graphics) {
+
+        // Render the current room in the background
         World.getRoom().render(graphics);
+
         String currentHP = String.valueOf(Player.getHp());
         String currentArmor = String.valueOf(Player.getArmor());
         String currentGold = String.valueOf(Player.getGold());
@@ -71,16 +76,19 @@ public class Inventory extends GameState {
         graphics.setColor(Color.WHITE);
         graphics.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
 
+        // changes the color of the item slot when a weapon is selected
         for(int i = 0; i < Player.playerInventory.size(); i++) {
             if (Player.playerInventory.get(i) == Player.currentWeapon) {
                 graphics.setColor(new Color(240, 190, 90));
                 graphics.fillRoundRect(slotX, slotY, 70, 70, 10, 10);
             }
 
+            // draws the image of the items in slots
             graphics.drawImage(Resources.TEXTURES.get(Player.playerInventory.get(i).getID()), slotX + 5, slotY + 5, 60, 60, null);
 
             slotX += cursorWidth + 20;
 
+            // makes the items move to a different slot when the size in the slot is more than 6
             if (i == 5 || i == 11) {
                 slotX = slotXstart;
                 slotY += cursorHeight + 20;
@@ -139,6 +147,7 @@ public class Inventory extends GameState {
         }
     }
 
+    // Keys to be used in the current State
     @Override
     protected void keyPressed(int keyCode) {
         switch (keyCode) {
@@ -174,17 +183,14 @@ public class Inventory extends GameState {
 
     @Override
     protected void keyReleased(int keyCode) {
-        switch (keyCode) {
-            case KeyEvent.VK_I:
-            case KeyEvent.VK_ESCAPE:
-
-                break;
-        }
     }
+
+    //gets the current item that is in the slot
     public static int getItemIndexInSlot() {
         return slotCol + (slotRow*6);
     }
 
+    // used to select the items that are in each slot.
     public void selectItem() {
 
         int itemIndex = getItemIndexInSlot();
@@ -192,6 +198,7 @@ public class Inventory extends GameState {
         if (itemIndex < Player.playerInventory.size()) {
             Entity selectedItem = Player.playerInventory.get(itemIndex);
 
+            // ensures that you can only select weapons to use
             if (Objects.equals(selectedItem.getName(), "Axe")||Objects.equals(selectedItem.getName(), "Barbell")
                     ||Objects.equals(selectedItem.getName(), "Wood Cane")
                     ||Objects.equals(selectedItem.getName(), "Fire Extinguisher")
@@ -200,6 +207,7 @@ public class Inventory extends GameState {
                 Player.currentWeapon = selectedItem;
                 PlayingState.player.setAttackPoints(selectedItem.getAttackPoints());
             }
+            // ensures that you can only use healing items to heal the player
             else if (Objects.equals(selectedItem.getName(), "First Aid Kit")
                     ||Objects.equals(selectedItem.getName(), "Bandages")
                     ||Objects.equals(selectedItem.getName(), "Tylenol")) {
@@ -207,12 +215,10 @@ public class Inventory extends GameState {
                 Player.playerInventory.remove(itemIndex);
                 gameStateManager.backToPreviousState();
             } else {
+
+                // if selection is not a healing item or a weapon, gives an error sound
                 PlayingState.se.playSE(2);
             }
-//            if (selectedItem.getType() == Entity.type_charge) {
-//                Player.currentItem = selectedItem;
-//                super.gameStateManager.stackState(new UseItem(gameStateManager));
-//            }
         }
     }
 

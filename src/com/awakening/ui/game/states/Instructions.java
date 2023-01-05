@@ -13,6 +13,7 @@ import java.io.IOException;
 
 public class Instructions extends GameState {
 
+    // String for the Paragraph and the Back selection
     private int selected;
     private String[] instructionButton;
     private static final String INSTRUCTIONS_PARAGRAPH =
@@ -40,14 +41,19 @@ public class Instructions extends GameState {
 
     }
 
+
     @Override
     protected void render(Graphics graphics) {
+
+        // Render the titlescreen image in the background
         try {
             BufferedImage image = ImageIO.read(new File("resources/pictures/titlescreen.jpg"));
             graphics.drawImage(image, 0, 0, WindowManager.WIDTH, WindowManager.HEIGHT,  null);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        // set the size, location, and color of the window
         int frameX = 50;
         int frameY = 50;
         int frameWidth = WindowManager.WIDTH-100;
@@ -57,19 +63,22 @@ public class Instructions extends GameState {
         graphics.setColor(c);
         graphics.fillRoundRect(frameX, frameY, frameWidth, frameHeight, 35, 35);
 
+        // set the border of the current window
         c = new Color(255, 255, 255, 220);
         graphics.setColor(c);
         graphics.drawRoundRect(frameX + 5, frameY + 5, frameWidth - 10, frameHeight - 10, 25, 25);
 
+        // Font for the Instructions
         graphics.setFont(graphics.getFont().deriveFont(25F));
         graphics.setColor(Color.WHITE);
         int textY = frameY + 100;
-        for (String line : INSTRUCTIONS_PARAGRAPH.split("\n")) {
+        for (String line : INSTRUCTIONS_PARAGRAPH.split("\n")) { // split the lines after each "/n"
             graphics.drawString(line, frameX + 35, textY);
             textY += 30;
 
         }
 
+        // Font for the Back selection
         for(int i = 0; i < this.instructionButton.length; i++) {
             if (i == this.selected) {
                 graphics.setColor(Color.GREEN);
@@ -82,6 +91,7 @@ public class Instructions extends GameState {
         }
     }
 
+    // Keys to be used in the current State
     @Override
     protected void keyPressed(int keyCode) {
         switch (keyCode) {
