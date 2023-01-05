@@ -123,8 +123,12 @@ public class PlayingState extends GameState {
         graphics.drawString(this.player.getGold() + "", Tile.SIZE * 2 / 3 + 173, 20);
 
         // render player's current location/ rooms name
-        graphics.setFont(graphics.getFont().deriveFont(Font.BOLD, 20f));
-        graphics.drawString(player.getPlayerLoc(), 5, Tile.SIZE + 10);
+        graphics.setColor(Color.BLACK);
+        graphics.setFont(graphics.getFont().deriveFont(Font.BOLD, 23f));
+        graphics.drawString(player.getPlayerLoc(), 7, Tile.SIZE);
+        graphics.setColor(Color.WHITE);
+        graphics.setFont(graphics.getFont().deriveFont(Font.BOLD, 23f));
+        graphics.drawString(player.getPlayerLoc(), 5, Tile.SIZE-2);
 
         drawMessage(graphics);
 
