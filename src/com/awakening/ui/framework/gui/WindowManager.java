@@ -9,14 +9,16 @@ public class WindowManager {
     private JFrame frame;
     private JPanel panel;
 
-    public static final int WIDTH = 1200;
-    public static final int HEIGHT = 675;
+    public static int WIDTH = 1200;
+    public static int HEIGHT = 675;
 
     public WindowManager() {
         frame = new JFrame("Awakening");
         frame.setBounds(70, 70, 0, 0);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
+        ImageIcon img = new ImageIcon("resources/pictures.ghost/ghost4.png");
+        frame.setIconImage(img.getImage());
     }
 
     public void addPanel(JPanel panel) {

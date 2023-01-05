@@ -3,10 +3,10 @@
               |          |                       *
               +--+----+--+      FIRST FLOOR      *     SECOND FLOOR
                  |    |                          *
-             +---+----+--+                       *               +---+----+--+
-             |  MORGUE   |                       *               | PHARMACY  |
-             |           |     STAIRS            *               |           |
-         +---+-----------+--+   |  |             *            +---+-----------+--+
+             +---+----+--|---+---+               *               +---+----+--+
+             |  MORGUE    KEYPAD |               *               | PHARMACY  |
+             |           |---+---+               *               |           |
+         +---+-----------+--+  STAIRS            *            +---+-----------+--+
 +--------+                  |   |  |   +-------+ *   +--------+                  |          +-------+
 | OFFICE |     EMERGENCY    +----------+PATIENT| *   | JANITOR|   FELLOWSHIP     +----------+FINANCE|
 |        |       ROOM       | HALLWAY  |  ROOM | *   | CLOSET |      ROOM        | U.HALLWAY|       |

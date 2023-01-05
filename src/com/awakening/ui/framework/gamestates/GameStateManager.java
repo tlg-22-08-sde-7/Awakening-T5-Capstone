@@ -1,5 +1,7 @@
 package com.awakening.ui.framework.gamestates;
 
+import com.awakening.ui.game.states.NoKey;
+
 import java.awt.*;
 import java.util.EmptyStackException;
 import java.util.Stack;

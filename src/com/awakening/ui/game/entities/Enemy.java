@@ -1,5 +1,6 @@
 package com.awakening.ui.game.entities;
 
+import com.awakening.ui.framework.resources.Resources;
 import com.awakening.ui.framework.utils.MathHelper;
 
 public class Enemy extends Entity{
@@ -11,9 +12,14 @@ public class Enemy extends Entity{
 
     public Enemy(byte id, int health, Player target) {
         super(id, MathHelper.randomInt(2, 14), MathHelper.randomInt(2, 7));
+        type = type_ghost;
         this.target = target;
-        super.speed = 2;
         this.hp = health;
+        // Main Ghost has speed of 3 and all other ghosts have speed of 2
+        super.speed = 2;
+        if (id == Resources.GHOST_MAIN1){
+            super.speed = 3;
+        }
     }
 
     public Enemy(Enemy copy) {
@@ -63,22 +69,18 @@ public class Enemy extends Entity{
 
     @Override
     public void setUp(boolean up) {
-        return;
     }
 
     @Override
     public void setDown(boolean down) {
-        return;
     }
 
     @Override
     public void setLeft(boolean left) {
-        return;
     }
 
     @Override
     public void setRight(boolean right) {
-        return;
     }
 
     public int getHp() {

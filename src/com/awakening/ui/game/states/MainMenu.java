@@ -14,6 +14,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class MainMenu extends GameState {
+
+    // Different selections for the Main Menu
     private String[] optionsMenu;
     private static final String START_GAME = "Start";
     private static final String QUIT_GAME = "Quit";
@@ -21,6 +23,7 @@ public class MainMenu extends GameState {
     private static final String SETTINGS = "Settings";
     private int selected;
 
+    // Constructor
     public MainMenu(GameStateManager manager) {
         super(manager);
         this.optionsMenu = new String[] {START_GAME, SHOW_INSTRUCTIONS, QUIT_GAME, SETTINGS};
@@ -33,6 +36,8 @@ public class MainMenu extends GameState {
 
     @Override
     protected void render(Graphics graphics) {
+
+        // Background image for the current state
         try {
             BufferedImage image = ImageIO.read(new File("resources/pictures/titlescreen.jpg"));
             graphics.drawImage(image, 0, 0, WindowManager.WIDTH, WindowManager.HEIGHT,  null);
@@ -40,6 +45,7 @@ public class MainMenu extends GameState {
             e.printStackTrace();
         }
 
+        // Font for the different selections
         graphics.setFont(new Font("Araial", Font.PLAIN, 25));
 
         for(int i = 0; i < this.optionsMenu.length;i++) {
@@ -63,6 +69,7 @@ public class MainMenu extends GameState {
         }
     }
 
+    // Keys to be used in the current State
     @Override
     protected void keyPressed(int keyCode) {
 
@@ -82,35 +89,24 @@ public class MainMenu extends GameState {
             case KeyEvent.VK_ENTER:
                 switch(this.optionsMenu[selected]) {
                     case START_GAME:
-                        super.gameStateManager.stackState(new PlayingState(gameStateManager));
-                        Sound.stopMusic();
-                        Sound.playMusic(10);
+                        super.gameStateManager.stackState(new PlayerSelect(gameStateManager));
                         break;
                     case SHOW_INSTRUCTIONS:
-                        JOptionPane.showMessageDialog(null, "These are your instructions",
-                                "Instructions", JOptionPane.PLAIN_MESSAGE);
+                        super.gameStateManager.stackState(new Instructions(gameStateManager));
                         break;
+                    // pops up a window to ask if you want to quit the game
                     case QUIT_GAME:
                         JFrame window= new JFrame();
                         int resp = JOptionPane.showConfirmDialog( window, "Are you sure you want to quit?", "Quit?", JOptionPane.YES_NO_OPTION);
                         if (resp == JOptionPane.YES_OPTION) {
-                            //window.dispose();
                             System.exit(0);
                         } else {
                             window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                         }
                         break;
                     case SETTINGS:
-                        window = new JFrame();
-                        int optionPane = JOptionPane.showConfirmDialog
-                                (window, Sound.volumeControl(), "Sound", JOptionPane.OK_CANCEL_OPTION);
-
-                        JPanel settingsWindow = new JPanel();
-                        if (optionPane == JOptionPane.OK_OPTION) {
-                            window.setDefaultCloseOperation(window.DO_NOTHING_ON_CLOSE);
-                        } else {
-                            window.setDefaultCloseOperation(window.DISPOSE_ON_CLOSE);
-                        }
+                        super.gameStateManager.stackState(new Settings(gameStateManager));
+                        break;
                 }
                 break;
         }

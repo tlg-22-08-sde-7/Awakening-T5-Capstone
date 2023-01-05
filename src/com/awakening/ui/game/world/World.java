@@ -12,10 +12,14 @@ import java.util.HashSet;
 
 public class World {
 
-    private Room[][] rooms; // 2 Dimensional Array
-    private int currentX;
-    private int currentY;
+    public static Room[][] rooms; // 2 Dimensional Array
+    private static int currentX; // Current X Position
+    private static int currentY; // Current Y Position
 
+    // Constructor
+    // Takes in a 2D array of MathHelper.Directions
+    // This is used to generate the rooms.
+    // Rooms are generated using the LevelGenerator class
     public World(HashSet<MathHelper.Direction>[][] roomsData){
         rooms = new Room[roomsData.length][roomsData[0].length];
 
@@ -27,7 +31,8 @@ public class World {
                 }
             }
         }
-        this.currentX = 0;
+        // player's location is set default to the basement using field currentX and currentY
+        this.currentX = 1;
         this.currentY = 0;
     }
 
@@ -35,12 +40,15 @@ public class World {
         return rooms[x][y];
     }
 
-    public Room getRoom() {
+    public static Room getRoom() {
         return rooms[currentX][currentY];
     }
 
-    public Room getRoomRandom() {
-        return rooms[MathHelper.randomInt(LevelGenerator.WORLD_SIZE)][MathHelper.randomInt(LevelGenerator.WORLD_SIZE)];
+    public static Room getFellowshipRoom() {
+        return rooms[6][2];
+    }
+    public static Room getHallwayRoom() {
+        return rooms[2][2];
     }
 
     public void changeRoom(Entity player) {
@@ -61,6 +69,19 @@ public class World {
             player.setCenterY(0);
         }
     }
-        
+    // returns player's location on map/room
+    public static int getCurrentX() {
+        return currentX;
+    }
+    public static int getCurrentY() {
+        return currentY;
+    }
 
+    public static void setCurrentX(int currentX) {
+        World.currentX = currentX;
+    }
+
+    public static void setCurrentY(int currentY) {
+        World.currentY = currentY;
+    }
 }
