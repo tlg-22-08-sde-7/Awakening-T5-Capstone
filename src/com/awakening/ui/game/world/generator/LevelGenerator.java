@@ -10,7 +10,9 @@ public class LevelGenerator {
 
     private int posX;
     private int posY;
+
     private static String[][] roomNames; // 2D array of room names
+
 
     private HashSet<MathHelper.Direction>[][] roomsData; // 2D array of MathHelper.Directions
 
