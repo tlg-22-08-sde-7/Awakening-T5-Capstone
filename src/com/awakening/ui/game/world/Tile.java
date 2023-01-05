@@ -13,6 +13,14 @@ public class Tile extends Rectangle {
     private byte id;
     private boolean wall;
 
+
+    // Tile class constructor
+    // Takes in a byte id and an x and y position
+    // Sets the tile's id and x and y position
+    // Sets the tile's width and height to the SIZE constant
+    // Sets the tile's wall boolean to true if the id is a wall
+    // Sets the tile's wall boolean to false if the id is not a wall
+    // Sets the tile's bounds to the tile's x and y position and the tile's width and height
     public Tile(byte id, int posXinRoom, int posYinRoom, boolean isWall){
         super(posXinRoom * SIZE, posYinRoom * SIZE, SIZE, SIZE);
 

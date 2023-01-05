@@ -6,6 +6,9 @@ import com.awakening.ui.game.world.generator.RoomData;
 
 public class Init {
 
+	// Init class for all the static variables
+	// that are used throughout the game
+	// such as the rooms
 	public static final RoomData[] ROOMS = new RoomData[] {
 			new RoomData(new byte[][] {{1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1},
 									   {1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1},

@@ -64,6 +64,7 @@ public class Player extends Entity {
         if(this.hp > this.maxHp) this.hp = this.maxHp;
     }
 
+    // Regenerate player's health every 120 miliseconds
     public void regenerateHealth() {
         if(this.hp < this.maxHp) this.regenDelay++;
         else this.regenDelay = 0;
@@ -131,6 +132,7 @@ public class Player extends Entity {
         return new Rectangle(0, 0, 0, 0);
     }
 
+    // Render player on screen
     @Override
     public void render(Graphics graphics) {
         if((up || down || left || right) && this.attackTime == 0) {

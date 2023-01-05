@@ -13,9 +13,13 @@ import java.util.HashSet;
 public class World {
 
     public static Room[][] rooms; // 2 Dimensional Array
-    private static int currentX;
-    private static int currentY;
+    private static int currentX; // Current X Position
+    private static int currentY; // Current Y Position
 
+    // Constructor
+    // Takes in a 2D array of MathHelper.Directions
+    // This is used to generate the rooms.
+    // Rooms are generated using the LevelGenerator class
     public World(HashSet<MathHelper.Direction>[][] roomsData){
         rooms = new Room[roomsData.length][roomsData[0].length];
 
@@ -50,6 +54,9 @@ public class World {
         return rooms[MathHelper.randomInt(LevelGenerator.WORLD_SIZE)][MathHelper.randomInt(LevelGenerator.WORLD_SIZE)];
     }
 
+    // changeRoom() is called in the Player class
+    // This method is used to change the current room
+    // when the player moves to the edge of the screen
     public void changeRoom(Entity player) {
         if(player.getCenterX() < 0) {
             this.currentX--;

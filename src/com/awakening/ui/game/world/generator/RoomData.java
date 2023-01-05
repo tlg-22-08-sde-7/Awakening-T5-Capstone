@@ -13,6 +13,13 @@ public class RoomData {
 
     private HashSet<MathHelper.Direction> exits;
 
+
+    // roomData is a 2D array of bytes, where each byte represents a tile type.
+    // The tile types are defined in the Tile class.
+    // RoomData also contains a HashSet of the exits of the room.
+    // The exits are used to determine which room to generate next.
+    // The exits are also used to determine which doors to draw on the room.
+    // The exits are also used to determine which rooms are adjacent to each other.
     public RoomData(byte[][] tilesData, MathHelper.Direction... exits) {
         this.tilesData = new Tile[tilesData.length][tilesData[0].length];
         for(int i=0;i<this.tilesData.length;i++) {

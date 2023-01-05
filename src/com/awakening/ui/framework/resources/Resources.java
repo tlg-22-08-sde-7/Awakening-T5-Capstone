@@ -6,6 +6,11 @@ import java.util.HashMap;
 
 public class Resources {
 
+    // Resources class
+    // Stores all the images and data from json files
+
+
+
     public static final byte FLOOR = 0;
     public static final byte STONE = 1;
     public static final byte WALL = 2;
@@ -80,6 +85,7 @@ public class Resources {
     public static final byte GHOST_MAIN2 = 69;
     //public static final byte ENEMY = 13;
 
+    // Stores the images in a HashMap with the image's name as the key
     public static final HashMap<String, BufferedImage> ROOMS = new HashMap<>();
     public static final ArrayList<BufferedImage> TEXTURES = new ArrayList<>();
 }

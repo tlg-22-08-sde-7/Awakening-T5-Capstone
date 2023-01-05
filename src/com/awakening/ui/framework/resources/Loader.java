@@ -12,6 +12,7 @@ public class Loader {
             for(File imgFile : texturesFolder.listFiles()) {
                 Resources.ROOMS.put(imgFile.getName(), ImageIO.read(imgFile));
             }
+            //Loading images to be used in the game using ImageIO
             Resources.TEXTURES.add(Resources.FLOOR, ImageIO.read(new File("resources/pictures/textures/floor.png")));
             Resources.TEXTURES.add(Resources.STONE, ImageIO.read(new File("resources/pictures/textures/stone.png")));
             Resources.TEXTURES.add(Resources.WALL, ImageIO.read(new File("resources/pictures/textures/wall.png")));
