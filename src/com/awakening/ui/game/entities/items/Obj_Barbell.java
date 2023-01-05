@@ -9,7 +9,7 @@ public class Obj_Barbell extends Entity {
         super(Resources.BARBELL, posXinRoom, posYinRoom);
         type = type_weapon;
         this.name = "Barbell";
-        this.description = "(" + this.name + ")\nIt's a good thing I am pretty strong. \nI could probably throw this at something.";
-        attackPoints = 5;
+        this.attackPoints = 6;
+        this.description = "(" + this.name + ")" + " Damage: " + attackPoints +  "\nIt's a good thing I am pretty strong. \nI could probably throw this at something.";
     }
 }

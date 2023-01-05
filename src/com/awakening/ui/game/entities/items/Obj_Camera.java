@@ -9,7 +9,7 @@ public class Obj_Camera extends Entity {
         super(Resources.CAMERA, posXinRoom, posYinRoom);
         type = type_weapon;
         this.name = "Camera";
-        this.description = "(" + this.name + ")\nMy camera. No pictures on it. \nI use its light to see around me.";
-        attackPoints = 5;
+        this.attackPoints = 4;
+        this.description = "(" + this.name + ")" + " Damage: " + this.attackPoints +  "\nMy camera. No pictures on it. \nI use its light to see around me.";
     }
 }

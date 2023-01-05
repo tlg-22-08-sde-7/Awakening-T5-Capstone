@@ -12,8 +12,8 @@ public class Obj_FirstAidKit extends Entity {
         super(Resources.FIRST_AID_KIT, posXinRoom, posYinRoom);
         type = type_heal;
         this.name = "First Aid Kit";
-        this.description = "(" + this.name + ")\nThis has everything I need \nto ensure I can fix up any wounds.";
         this.healPoints = 30;
+        this.description = "(" + this.name + ")" + " HP: " + this.healPoints +  "\nThis has everything I need \nto ensure I can fix up any wounds.";
     }
     public void use(Entity entity) {
         addMessage("You use the " + getName() + "!\nYour health has recovered " + getHealPoints() + "!");

@@ -12,8 +12,8 @@ public class Obj_Bandages extends Entity {
         super(Resources.BANDAGES, posXinRoom, posYinRoom);
         type = type_heal;
         this.name = "Bandages";
-        this.description = "(" + this.name + ")\nOld Bandages... \nHope I won't have to use these.";
         this.healPoints = 20;
+        this.description = "(" + this.name + ")" + " HP: " + this.healPoints +  "\nOld Bandages... \nHope I won't have to use these.";
     }
 
     public void use(Entity entity) {

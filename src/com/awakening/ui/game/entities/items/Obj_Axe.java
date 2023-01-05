@@ -9,7 +9,9 @@ public class Obj_Axe extends Entity {
         super(Resources.AXE, posXinRoom, posYinRoom);
         type = type_weapon;
         this.name = "Axe";
-        this.description = "(" + this.name + ")\nThe blade is dull, \nbut it can generate a lot of force.";
-        attackPoints = 10;
+        this.attackPoints = 10;
+        this.description = "(" + this.name + ")" + " Damage: " + this.attackPoints +  "\nThe blade is dull, \nbut it can generate a lot of force.";
+
     }
+
 }

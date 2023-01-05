@@ -12,8 +12,8 @@ public class Obj_Tylenol extends Entity {
         super(Resources.TYLENOL, posXinRoom, posYinRoom);
         type = type_heal;
         this.name = "Tylenol";
-        this.description = "(" + this.name + ")\nThis will help me feel better if I get \ninjured.";
         this.healPoints = 20;
+        this.description = "(" + this.name + ")" + " HP: " + this.healPoints +  "\n\nThis will help me feel better if I get \ninjured.";
     }
     public void use(Entity entity) {
         addMessage("You use the " + getName() + "!\nYour health has recovered " + getHealPoints() + "!");

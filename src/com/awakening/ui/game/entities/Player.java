@@ -14,7 +14,7 @@ public class Player extends Entity {
     public static Entity currentItem;
 
     private static int hp;
-    private static int attackPoints;
+    private int attackPoints;
     private int maxHp;
     private byte regenDelay;
     private static int armor;
@@ -36,11 +36,11 @@ public class Player extends Entity {
         type = type_player;
         hp = 30;
         this.maxHp = 30;
-        this.regenDelay = 0; // regenerate player's health every 50 milisec
+        this.regenDelay = 0; // regenerate player's health every 120 milisec
         this.armor = 0;
         this.gold = 0;
         this.attackTime = 0;
-        attackPoints = 3;
+        this.attackPoints = 3;
         this.damageTime = 0;
         this.playerLoc = "Basement";
 
@@ -68,7 +68,7 @@ public class Player extends Entity {
         if(this.hp < this.maxHp) this.regenDelay++;
         else this.regenDelay = 0;
 
-        if(this.regenDelay == 100) {
+        if(this.regenDelay == 120) {
             this.hp++;
             this.regenDelay = 0;
         }
@@ -166,11 +166,11 @@ public class Player extends Entity {
         Player.hp = hp;
     }
 
-    public static int getAttackPoints() {
+    public int getAttackPoints() {
         return attackPoints;
     }
 
-    public static void setAttackPoints(int attackPoints) {
-        Player.attackPoints = attackPoints;
+    public void setAttackPoints(int attackPoints) {
+        this.attackPoints = attackPoints;
     }
 }
