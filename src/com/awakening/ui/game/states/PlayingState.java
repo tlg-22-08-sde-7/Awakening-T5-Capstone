@@ -61,15 +61,15 @@ public class PlayingState extends GameState {
     }
 
     /*
-        If the player has a master key & patient file, and located in Front Desk, the player escapes and wins the game
+        If the player has a master key, patient file, journal and make their way back to the Front Desk, the player wins the game
      */
     private void checkWinLose() {
-        //Game Lose Scenario -> if the player's hp is < 0, the player loses
-        if (Player.getHp() <= 0) {
+        //Game Lose Scenario -> if the player's hp is less than or equal to 0, the player loses the game
+        if (this.player.getHp() <= 0) {
             se.playSE(7);
             super.gameStateManager.stackState(new GameLoseState(gameStateManager));
         }
-        //Game Win Scenario -> check if the master key && patient file is already in the inventory
+        //Game Win Scenario -> check if the master key, patient file and journal are already in the inventory
         boolean masteryKeyFound = false;
         boolean patientFileFound = false;
         boolean journalFound = false;
@@ -110,16 +110,15 @@ public class PlayingState extends GameState {
                     player.getAttackBox().x, player.getAttackBox().y,
                     player.getAttackBox().width, player.getAttackBox().height, null);
         }
-
-
+        // Display position of player's health, armour and gold throughout the game
         graphics.setColor(Color.WHITE);
-        graphics.setFont(new Font("arial", Font.PLAIN, 15));
+        graphics.setFont(new Font("arial", Font.BOLD, 17));
         graphics.drawImage(Resources.TEXTURES.get(Resources.HEART), 0, 0, Tile.SIZE * 2 / 3, Tile.SIZE * 2 / 3, null);
-        graphics.drawString(Player.getHp() + "/" + player.getMaxHp(), Tile.SIZE * 2 / 3 + 1, 20);
-        graphics.drawImage(Resources.TEXTURES.get(Resources.ARMOR), 80, 0, Tile.SIZE * 2 / 3, Tile.SIZE * 2 / 3, null);
-        graphics.drawString(Player.getArmor() + "", Tile.SIZE * 2 / 3 + 85, 20);
-        graphics.drawImage(Resources.TEXTURES.get(Resources.GOLD), 160, 0, Tile.SIZE * 2 / 3, Tile.SIZE * 2 / 3, null);
-        graphics.drawString(Player.getGold() + "", Tile.SIZE * 2 / 3 + 165, 20);
+        graphics.drawString(this.player.getHp() + "/" + this.player.getMaxHp(), Tile.SIZE * 2 / 3 + 4, 20);
+        graphics.drawImage(Resources.TEXTURES.get(Resources.ARMOR), 92, 0, Tile.SIZE * 2 / 3, Tile.SIZE * 2 / 3, null);
+        graphics.drawString(this.player.getArmor() + "", Tile.SIZE * 2 / 3 + 96, 20);
+        graphics.drawImage(Resources.TEXTURES.get(Resources.GOLD), 168, 0, Tile.SIZE * 2 / 3, Tile.SIZE * 2 / 3, null);
+        graphics.drawString(this.player.getGold() + "", Tile.SIZE * 2 / 3 + 173, 20);
 
         // render player's current location/ rooms name
         graphics.setFont(graphics.getFont().deriveFont(Font.BOLD, 20f));
@@ -272,7 +271,7 @@ public class PlayingState extends GameState {
         generateEnemyInRoom(1, 2, 10);
         generateEnemyInRoom(2, 2, 10);
         generateEnemyInRoom(2, 1, 10);
-        generateMainGhostInRoom(5, 2, 10);
+        generateMainGhostInRoom(5, 2, 20);
         generateEnemyInRoom(5, 2, 10);
         generateEnemyInRoom(5, 2, 10);
         generateBatsInRoom(3, 2, 5);
