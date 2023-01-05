@@ -28,6 +28,8 @@ public class Engine {
 
     public static void start() {
         PlayingState.music.playMusic(0);
+        PlayingState.se.volumeScale = 1;
+        PlayingState.music.volumeScale = 1;
         gameStateManager.stackState(new MainMenu(gameStateManager));
         windowManager.addPanel(new GameScreen());
         windowManager.addKeyListener(new Keyboard());

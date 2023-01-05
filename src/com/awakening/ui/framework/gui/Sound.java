@@ -18,7 +18,7 @@ public class Sound {
     float currentVolume = 0;
     FloatControl fc;
     boolean mute = false;
-    public int volumeScale = 3;
+    public int volumeScale = 2;
     float volume;
 
     public Sound() {
