@@ -7,9 +7,8 @@ import java.util.HashSet;
 public class LevelGenerator {
 
     public static final int WORLD_SIZE = 9;
-
-    private int posX;
-    private int posY;
+    //To display names of each room
+    private static String[][] roomNames;
 
     private static String[][] roomNames; // 2D array of room names
 
@@ -97,11 +96,6 @@ public class LevelGenerator {
         this.roomsData[8][2].add(MathHelper.Direction.WEST);
         this.roomNames[8][2] = "Finance";
 
-    }
-
-
-    private boolean isValidPosition(int x, int y) {
-        return x >= 0 && y >= 0 && x < WORLD_SIZE && y < WORLD_SIZE;
     }
 
     public HashSet<MathHelper.Direction>[][] getRoomsData() {

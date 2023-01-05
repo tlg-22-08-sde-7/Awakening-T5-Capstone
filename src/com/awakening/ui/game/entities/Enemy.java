@@ -14,8 +14,9 @@ public class Enemy extends Entity{
         super(id, MathHelper.randomInt(2, 14), MathHelper.randomInt(2, 7));
         type = type_ghost;
         this.target = target;
-        super.speed = 2;
         this.hp = health;
+        // Main Ghost has speed of 3 and all other ghosts have speed of 2
+        super.speed = 2;
         if (id == Resources.GHOST_MAIN1){
             super.speed = 3;
         }

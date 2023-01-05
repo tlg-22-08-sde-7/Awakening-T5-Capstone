@@ -15,13 +15,6 @@ public class MathHelper {
         return rand.nextInt((upperBound - lowerBound) + 1) + lowerBound;
     }
 
-    // Returns a random double between 0 and the given max
-    public static Direction randomDirection() {
-        return Direction.values()[rand.nextInt(Direction.values().length)];
-    }
-
-    // enum for directions
-    // used for room generation
     public enum Direction {
         NORTH(0, -1),
         SOUTH(0, 1),

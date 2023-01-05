@@ -103,7 +103,6 @@ public class MainMenu extends GameState {
                         JFrame window= new JFrame();
                         int resp = JOptionPane.showConfirmDialog( window, "Are you sure you want to quit?", "Quit?", JOptionPane.YES_NO_OPTION);
                         if (resp == JOptionPane.YES_OPTION) {
-                            //window.dispose();
                             System.exit(0);
                         } else {
                             window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
