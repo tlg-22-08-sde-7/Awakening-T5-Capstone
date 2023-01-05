@@ -13,9 +13,13 @@ import java.util.HashSet;
 public class World {
 
     public static Room[][] rooms; // 2 Dimensional Array
-    private static int currentX;
-    private static int currentY;
+    private static int currentX; // Current X Position
+    private static int currentY; // Current Y Position
 
+    // Constructor
+    // Takes in a 2D array of MathHelper.Directions
+    // This is used to generate the rooms.
+    // Rooms are generated using the LevelGenerator class
     public World(HashSet<MathHelper.Direction>[][] roomsData){
         rooms = new Room[roomsData.length][roomsData[0].length];
 

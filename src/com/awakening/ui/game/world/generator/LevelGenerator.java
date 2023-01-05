@@ -10,24 +10,29 @@ public class LevelGenerator {
     //To display names of each room
     private static String[][] roomNames;
 
-    private HashSet<MathHelper.Direction>[][] roomsData;
+    private static String[][] roomNames; // 2D array of room names
+
+
+    private HashSet<MathHelper.Direction>[][] roomsData; // 2D array of MathHelper.Directions
 
     @SuppressWarnings("unchecked")
     public void intializeGridForRooms() {
-        this.roomsData = new HashSet[WORLD_SIZE][WORLD_SIZE];
-        this.roomNames = new String[WORLD_SIZE][WORLD_SIZE];
+        this.roomsData = new HashSet[WORLD_SIZE][WORLD_SIZE];// 2D array of MathHelper.Directions
+        this.roomNames = new String[WORLD_SIZE][WORLD_SIZE];// 2D array of room names
         for (int i = 0; i < this.roomsData.length; i++) {
             for (int j = 0; j < this.roomsData[i].length; j++) {
-                this.roomsData[i][j] = new HashSet<>();
-                this.roomNames[i][j] = "";
+                this.roomsData[i][j] = new HashSet<>();// 2D array of MathHelper.Directions
+                this.roomNames[i][j] = "";// 2D array of room names
             }
         }
     }
 
+    // generateFloor() is called from the constructor of World.java
+    // sets the room name and exits for each room
     public void generateFloor() {
         //basement
-        this.roomsData[1][0].add(MathHelper.Direction.SOUTH);
-        this.roomNames[1][0] = "Basement";
+        this.roomsData[1][0].add(MathHelper.Direction.SOUTH);// 2D array of MathHelper.Directions
+        this.roomNames[1][0] = "Basement"; // 2D array of room names
         //morgue
         this.roomsData[1][1].add(MathHelper.Direction.NORTH);
         this.roomNames[1][1] = "Morgue";
