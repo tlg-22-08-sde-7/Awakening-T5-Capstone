@@ -109,6 +109,7 @@ public class GameLoseState extends GameState {
                         break;
                     case RESTART_GAME:
                         Player.playerInventory.clear();
+                        Player.currentWeapon = null;
                         gameStateManager.backToPreviousState();
                         gameStateManager.backToPreviousState();
                         PlayingState.music.stopMusic();

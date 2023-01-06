@@ -172,6 +172,7 @@ public class Options extends GameState {
                                 "You will lose all of your progress.", "Restart?", JOptionPane.YES_NO_OPTION);
                         if (resp == JOptionPane.YES_OPTION) {
                             Player.playerInventory.clear();
+                            Player.currentWeapon = null;
                             super.gameStateManager.backToPreviousState();
                             super.gameStateManager.backToPreviousState();
                             PlayingState.music.stopMusic();

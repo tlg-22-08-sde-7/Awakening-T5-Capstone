@@ -68,6 +68,7 @@ public class Map extends GameState {
         switch (keyCode) {
             case KeyEvent.VK_M:
             case KeyEvent.VK_ENTER:
+            case KeyEvent.VK_ESCAPE:
                 gameStateManager.backToPreviousState();
                 break;
         }
