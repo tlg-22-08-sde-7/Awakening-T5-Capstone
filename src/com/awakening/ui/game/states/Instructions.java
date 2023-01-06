@@ -22,7 +22,7 @@ public class Instructions extends GameState {
                     "          * As you navigate you will encounter ghosts in each room,\n               each room has items that you will need in order to\n" +
                     "               defeat the ghost and gain access to other rooms.\n" +
                     "          * To attack you can use the Space Bar and/or the \"Q\" key.\n" +
-                    "          * You can press the \"M\" key to view the map.\n" +
+                    "          * You can press the \"M\" key to view the map, \"P\" to pause.\n" +
                     "          * You can also press the \"I\" key to view your inventory.\n" +
                     "          * Hit \"ENTER\" in the inventory to equip weapons or use items to heal\n" +
                     "          * The \"ESC\" key will bring up the pause menu, where you can change:\n               the music volume, SFX volume, restart, or quit the game \n" +
