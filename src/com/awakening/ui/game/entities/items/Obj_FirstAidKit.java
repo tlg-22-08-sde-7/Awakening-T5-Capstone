@@ -12,14 +12,14 @@ public class Obj_FirstAidKit extends Entity {
         super(Resources.FIRST_AID_KIT, posXinRoom, posYinRoom);
         type = type_heal;
         this.name = "First Aid Kit";
-        this.healPoints = 30;
+        this.healPoints = 15;
         this.description = "(" + this.name + ")" + " HP: " + this.healPoints +  "\nThis has everything I need \nto ensure I can fix up any wounds.";
     }
     public void use(Entity entity) {
         addMessage("You use the " + getName() + "!\nYour health has recovered " + getHealPoints() + "!");
         Player.setHp(Player.getHp() + getHealPoints());
-        if (Player.getHp() > 30) {
-            Player.setHp(30);
+        if (Player.getHp() > 20) {
+            Player.setHp(20);
         }
     }
 }

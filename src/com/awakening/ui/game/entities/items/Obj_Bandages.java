@@ -12,15 +12,15 @@ public class Obj_Bandages extends Entity {
         super(Resources.BANDAGES, posXinRoom, posYinRoom);
         type = type_heal;
         this.name = "Bandages";
-        this.healPoints = 20;
+        this.healPoints = 10;
         this.description = "(" + this.name + ")" + " HP: " + this.healPoints +  "\nOld Bandages... \nHope I won't have to use these.";
     }
 
     public void use(Entity entity) {
         addMessage("You use the " + getName() + "!\nYour health has recovered " + getHealPoints() + "!");
         Player.setHp(Player.getHp() + getHealPoints());
-        if (Player.getHp() > 30) {
-            Player.setHp(30);
+        if (Player.getHp() > 20) {
+            Player.setHp(20);
         }
     }
 }

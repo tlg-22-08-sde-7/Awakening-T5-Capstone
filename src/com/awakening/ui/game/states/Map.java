@@ -48,6 +48,7 @@ public class Map extends GameState {
     protected void keyPressed(int keyCode) {
         switch (keyCode) {
             case KeyEvent.VK_M:
+            case KeyEvent.VK_ESCAPE:
                 gameStateManager.backToPreviousState();
                 break;
         }
