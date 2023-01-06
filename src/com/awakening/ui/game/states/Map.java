@@ -38,17 +38,18 @@ public class Map extends GameState {
 
         // window for the map
         int frameX = WindowManager.WIDTH / 8;
-        int frameY = WindowManager.HEIGHT / 8;
+        int frameY = 25;
 
         // displaying the map image in the frame
         try {
             BufferedImage image = ImageIO.read(new File("resources/pictures/map.png"));
-            graphics.drawImage(image, frameX - 25, frameY + 25, 944, 450, null);
+            graphics.drawImage(image, frameX - 25, frameY, 944, WindowManager.HEIGHT-50, null);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         // Font for the Back selection
+        graphics.setFont(graphics.getFont().deriveFont(30F));
         for(int i = 0; i < this.backButton.length; i++) {
             if (i == this.selected) {
                 graphics.setColor(Color.GREEN);

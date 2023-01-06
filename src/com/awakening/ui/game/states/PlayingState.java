@@ -205,6 +205,9 @@ public class PlayingState extends GameState {
             case KeyEvent.VK_M:
                 super.gameStateManager.stackState(new Map(gameStateManager));
                 break;
+            case KeyEvent.VK_P:
+                super.gameStateManager.stackState(new PauseState(gameStateManager));
+                break;
             case KeyEvent.VK_ENTER:
                 openMasterDoor();
                 openDoor();
