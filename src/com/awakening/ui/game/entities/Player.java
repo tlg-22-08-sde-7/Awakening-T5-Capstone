@@ -34,8 +34,8 @@ public class Player extends Entity {
     public Player() {
         super(playerStandDown, MathHelper.randomInt(2, 14), MathHelper.randomInt(2, 7));
         type = type_player;
-        hp = 30;
-        this.maxHp = 30;
+        hp = 20;
+        this.maxHp = 20;
         this.regenDelay = 0; // regenerate player's health every 120 milisec
         this.armor = 0;
         this.gold = 0;

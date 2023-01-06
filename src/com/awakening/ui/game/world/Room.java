@@ -46,12 +46,10 @@ public class Room {
                 data.getTileAt(feature.x / Tile.SIZE, feature.y / Tile.SIZE).getID() == Resources.TILE) {
             //position of the stairs on first floor
             if(feature.getID() == Resources.STAIRS){
-                feature.x = 800;
-                feature.y = 200;
+                itemLocation(feature, 800, 200);
             }//position of the stairs on second floor
             else if(feature.getID() == Resources.UPPER_STAIRS){
-                feature.x = 380;
-                feature.y = 530;
+                itemLocation(feature, 380, 530);
             } else if (feature.getID() == Resources.MASTER_DOOR) {
                 feature.x = WindowManager.WIDTH - Tile.SIZE;
                 feature.y = WindowManager.HEIGHT - 450;
@@ -60,12 +58,49 @@ public class Room {
                 feature.x = 0;
                 feature.y = WindowManager.HEIGHT - 450;
                 feature.height = Tile.SIZE * 3;
+            } else if (feature.getId() == Resources.KEY) {
+                itemLocation(feature, 400, WindowManager.HEIGHT - (Tile.SIZE*3));
+            } else if (feature.getId() == Resources.MASTER_KEY) {
+                itemLocation(feature, Tile.SIZE, Tile.SIZE);
+            } else if (feature.getId() == Resources.TYLENOL) {
+                itemLocation(feature, WindowManager.WIDTH -(Tile.SIZE*2), Tile.SIZE);
+            } else if (feature.getId() == Resources.WOOD_CANE) {
+                itemLocation(feature, WindowManager.WIDTH/2, WindowManager.HEIGHT-(Tile.SIZE*4));
+            } else if (feature.getId() == Resources.PRESS_PASS) {
+                itemLocation(feature, Tile.SIZE*4, Tile.SIZE*3);
+            } else if (feature.getId() == Resources.PATIENT_FILE) {
+                itemLocation(feature, WindowManager.WIDTH -(Tile.SIZE*2), 400);
+            } else if (feature.getId() == Resources.PAPER_CLIP) {
+                itemLocation(feature, Tile.SIZE, Tile.SIZE);
+            } else if (feature.getId() == Resources.JOURNAL) {
+                itemLocation(feature, WindowManager.WIDTH -(Tile.SIZE*2), WindowManager.HEIGHT-(Tile.SIZE*2));
+            } else if (feature.getId() == Resources.FIRST_AID_KIT) {
+                itemLocation(feature, Tile.SIZE*12, WindowManager.HEIGHT -(Tile.SIZE*3));
+            } else if (feature.getId() == Resources.BATTERIES) {
+                itemLocation(feature, Tile.SIZE, WindowManager.HEIGHT-(Tile.SIZE*2));
+            } else if (feature.getId() == Resources.FIRE_EXTINGUISHER) {
+                itemLocation(feature, 600, 400);
+            } else if (feature.getId() == Resources.BARBELL) {
+                itemLocation(feature, 400, WindowManager.HEIGHT - (Tile.SIZE*3));
+            } else if (feature.getId() == Resources.CELLPHONE) {
+                itemLocation(feature, WindowManager.WIDTH -(Tile.SIZE*2), 400);
+            } else if (feature.getId() == Resources.CAMERA) {
+                itemLocation(feature, 300, Tile.SIZE*3);
+            } else if (feature.getId() == Resources.AXE) {
+                itemLocation(feature, 900, 350);
+            } else if (feature.getId() == Resources.BANDAGES) {
+                itemLocation(feature, WindowManager.WIDTH/2, WindowManager.HEIGHT-(Tile.SIZE*4));
             }
             this.features.add(feature);
         } else {
             this.placeFeature(new Feature(feature));
 
         }
+    }
+
+    private void itemLocation(Feature feature, int x, int y) {
+        feature.x = x;
+        feature.y = y;
     }
 
     // featureInteraction method
