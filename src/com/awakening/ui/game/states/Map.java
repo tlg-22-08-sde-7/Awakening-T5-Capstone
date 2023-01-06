@@ -13,10 +13,16 @@ import java.io.File;
 import java.io.IOException;
 
 public class Map extends GameState {
+    private int selected;
+    // back selection
+    private String[] backButton;
+    private static final String BACK = "Back";
 
     // Constructor
     public Map(GameStateManager manager) {
         super(manager);
+        this.backButton = new String[]{BACK};
+        this.selected = 0;
     }
 
     @Override
@@ -41,13 +47,27 @@ public class Map extends GameState {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        // Font for the Back selection
+        for(int i = 0; i < this.backButton.length; i++) {
+            if (i == this.selected) {
+                graphics.setColor(Color.GREEN);
+            } else {
+                graphics.setColor(Color.WHITE);
+            }
+            if (i == 0) { // BACK
+                graphics.drawString(this.backButton[i], frameX + 10, frameY + 50);
+            }
+        }
     }
+
 
     // Keys to be used in the current State
     @Override
     protected void keyPressed(int keyCode) {
         switch (keyCode) {
             case KeyEvent.VK_M:
+            case KeyEvent.VK_ENTER:
                 gameStateManager.backToPreviousState();
                 break;
         }
