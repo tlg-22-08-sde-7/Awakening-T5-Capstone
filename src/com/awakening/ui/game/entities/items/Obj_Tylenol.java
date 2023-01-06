@@ -12,14 +12,14 @@ public class Obj_Tylenol extends Entity {
         super(Resources.TYLENOL, posXinRoom, posYinRoom);
         type = type_heal;
         this.name = "Tylenol";
-        this.healPoints = 20;
+        this.healPoints = 10;
         this.description = "(" + this.name + ")" + " HP: " + this.healPoints +  "\n\nThis will help me feel better if I get \ninjured.";
     }
     public void use(Entity entity) {
         addMessage("You use the " + getName() + "!\nYour health has recovered " + getHealPoints() + "!");
         Player.setHp(Player.getHp() + getHealPoints());
-        if (Player.getHp() > 30) {
-            Player.setHp(30);
+        if (Player.getHp() > 20) {
+            Player.setHp(20);
         }
     }
 }
